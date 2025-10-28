@@ -55,10 +55,24 @@ class IgnitionLanguageServer(LanguageServer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.diagnostics_enabled = True
+        self.api_loader = None
         logger.info("Ignition LSP Server initialized")
+
+    def initialize_api_loader(self, version: str = "8.1"):
+        """Initialize the API loader with Ignition API definitions."""
+        try:
+            from ignition_lsp.api_loader import IgnitionAPILoader
+            self.api_loader = IgnitionAPILoader(version=version)
+            logger.info(f"API loader initialized with {len(self.api_loader.api_db)} functions")
+        except Exception as e:
+            logger.error(f"Failed to initialize API loader: {e}", exc_info=True)
+            self.api_loader = None
 
 
 server = IgnitionLanguageServer("ignition-lsp", "v0.1.0")
+
+# Initialize API loader on server creation
+server.initialize_api_loader()
 
 
 # Document Synchronization Handlers
@@ -142,26 +156,25 @@ async def run_diagnostics(ls: IgnitionLanguageServer, uri: str):
 # LSP Feature Handlers
 
 @server.feature(TEXT_DOCUMENT_COMPLETION)
-def completion(params: CompletionParams) -> Optional[CompletionList]:
+def completion(ls: IgnitionLanguageServer, params: CompletionParams) -> Optional[CompletionList]:
     """Provide completion items for Ignition APIs."""
     logger.info(f"Completion requested at {params.position}")
 
-    # TODO: Implement Ignition API completion with api_loader
+    # Use API loader if available
+    if ls.api_loader:
+        try:
+            from ignition_lsp.completion import get_completions
+            doc = ls.workspace.get_text_document(params.text_document.uri)
+            return get_completions(doc, params.position, ls.api_loader)
+        except Exception as e:
+            logger.error(f"Error getting completions: {e}", exc_info=True)
+
+    # Fallback to basic completions
     items = [
         CompletionItem(
-            label="system.tag.read",
-            detail="Read a tag value",
-            documentation="Reads the value of a tag from the tag provider.",
-        ),
-        CompletionItem(
-            label="system.tag.write",
-            detail="Write a tag value",
-            documentation="Writes a value to a tag in the tag provider.",
-        ),
-        CompletionItem(
-            label="system.db.runQuery",
-            detail="Execute a database query",
-            documentation="Executes a SQL query against a database connection.",
+            label="system",
+            detail="Ignition system functions",
+            documentation="Ignition platform system functions",
         ),
     ]
 
@@ -169,15 +182,24 @@ def completion(params: CompletionParams) -> Optional[CompletionList]:
 
 
 @server.feature(TEXT_DOCUMENT_HOVER)
-def hover(params: HoverParams) -> Optional[Hover]:
+def hover(ls: IgnitionLanguageServer, params: HoverParams) -> Optional[Hover]:
     """Provide hover information for Ignition functions."""
     logger.info(f"Hover requested at {params.position}")
 
-    # TODO: Implement hover documentation lookup
+    # Use API loader if available
+    if ls.api_loader:
+        try:
+            from ignition_lsp.hover import get_hover_info
+            doc = ls.workspace.get_text_document(params.text_document.uri)
+            return get_hover_info(doc, params.position, ls.api_loader)
+        except Exception as e:
+            logger.error(f"Error getting hover info: {e}", exc_info=True)
+
+    # Fallback
     return Hover(
         contents=MarkupContent(
             kind=MarkupKind.Markdown,
-            value="**Ignition Function**\n\nHover documentation coming soon!",
+            value="**Ignition Function**\n\nAPI database not loaded.",
         )
     )
 

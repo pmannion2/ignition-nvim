@@ -20,6 +20,12 @@ def get_diagnostics(document: TextDocument) -> List[Diagnostic]:
     """Get diagnostics for a document using ignition-lint."""
     diagnostics = []
 
+    # Only run Python diagnostics on Python files or virtual Python buffers
+    # Skip JSON files (Ignition resource files)
+    if document.uri.endswith('.json') and not '[Ignition:' in document.uri:
+        logger.debug(f"Skipping Python diagnostics for JSON file: {document.uri}")
+        return []
+
     try:
         # Import JythonValidator from ignition-lint
         from ignition_lint.validators.jython import JythonValidator

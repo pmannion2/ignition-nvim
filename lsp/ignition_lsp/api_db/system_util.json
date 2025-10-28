@@ -1,0 +1,256 @@
+{
+  "module": "system.util",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "getLogger",
+      "signature": "getLogger(name)",
+      "params": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Logger name"
+        }
+      ],
+      "returns": {
+        "type": "Logger",
+        "description": "Logger object with info(), warn(), error(), debug() methods"
+      },
+      "description": "Returns a Logger object for the specified name. Use for structured logging.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-getLogger"
+    },
+    {
+      "name": "jsonDecode",
+      "signature": "jsonDecode(jsonString)",
+      "params": [
+        {
+          "name": "jsonString",
+          "type": "String",
+          "description": "JSON string to parse"
+        }
+      ],
+      "returns": {
+        "type": "Object",
+        "description": "Parsed Python object (dict, list, etc.)"
+      },
+      "description": "Parses a JSON string into a Python object.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-jsonDecode"
+    },
+    {
+      "name": "jsonEncode",
+      "signature": "jsonEncode(pyObject, indentFactor=4)",
+      "params": [
+        {
+          "name": "pyObject",
+          "type": "Object",
+          "description": "Python object to encode"
+        },
+        {
+          "name": "indentFactor",
+          "type": "int",
+          "description": "Number of spaces for indentation",
+          "optional": true,
+          "default": "4"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "JSON string"
+      },
+      "description": "Encodes a Python object as a JSON string.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-jsonEncode"
+    },
+    {
+      "name": "sendMessage",
+      "signature": "sendMessage(project, messageHandler, payload, scope='G', clientSessionId='', user='', hasRole='', hostName='', remoteServers=None)",
+      "params": [
+        {
+          "name": "project",
+          "type": "String",
+          "description": "Target project name"
+        },
+        {
+          "name": "messageHandler",
+          "type": "String",
+          "description": "Name of message handler to invoke"
+        },
+        {
+          "name": "payload",
+          "type": "Dictionary",
+          "description": "Parameters to pass to handler"
+        },
+        {
+          "name": "scope",
+          "type": "String",
+          "description": "Scope: 'G'=Gateway, 'C'=Client",
+          "optional": true,
+          "default": "G"
+        }
+      ],
+      "returns": {
+        "type": "List",
+        "description": "Results from message handler"
+      },
+      "description": "Sends a message to a project's message handler.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-sendMessage"
+    },
+    {
+      "name": "invokeAsynchronous",
+      "signature": "invokeAsynchronous(function, args=None, kwargs=None, description='')",
+      "params": [
+        {
+          "name": "function",
+          "type": "Function",
+          "description": "Function to invoke asynchronously"
+        },
+        {
+          "name": "args",
+          "type": "List",
+          "description": "Positional arguments",
+          "optional": true
+        },
+        {
+          "name": "kwargs",
+          "type": "Dictionary",
+          "description": "Keyword arguments",
+          "optional": true
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "description": "Description for the thread",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Thread",
+        "description": "Thread object"
+      },
+      "description": "Invokes a function asynchronously on a separate thread.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-invokeAsynchronous"
+    },
+    {
+      "name": "invokeLater",
+      "signature": "invokeLater(function, delay=0)",
+      "params": [
+        {
+          "name": "function",
+          "type": "Function",
+          "description": "Function to invoke"
+        },
+        {
+          "name": "delay",
+          "type": "int",
+          "description": "Delay in milliseconds",
+          "optional": true,
+          "default": "0"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Invokes a function after a delay on the GUI thread (Vision/Perspective).",
+      "scope": ["Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-invokeLater"
+    },
+    {
+      "name": "execute",
+      "signature": "execute(commands, args=None, timeoutSec=60)",
+      "params": [
+        {
+          "name": "commands",
+          "type": "List[String]",
+          "description": "System commands to execute"
+        },
+        {
+          "name": "args",
+          "type": "List[String]",
+          "description": "Command arguments",
+          "optional": true
+        },
+        {
+          "name": "timeoutSec",
+          "type": "int",
+          "description": "Timeout in seconds",
+          "optional": true,
+          "default": "60"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "Command output"
+      },
+      "description": "Executes a system command and returns output.",
+      "scope": ["Gateway"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-execute"
+    },
+    {
+      "name": "getSystemFlags",
+      "signature": "getSystemFlags()",
+      "params": [],
+      "returns": {
+        "type": "int",
+        "description": "Bitwise flags indicating system state"
+      },
+      "description": "Returns system flags indicating various states (mobile, workstation, etc.).",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-getSystemFlags"
+    },
+    {
+      "name": "getGlobals",
+      "signature": "getGlobals()",
+      "params": [],
+      "returns": {
+        "type": "Dictionary",
+        "description": "Global scripting variables"
+      },
+      "description": "Returns the global scripting namespace dictionary.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-getGlobals"
+    },
+    {
+      "name": "setGlobals",
+      "signature": "setGlobals(dictionary)",
+      "params": [
+        {
+          "name": "dictionary",
+          "type": "Dictionary",
+          "description": "Dictionary of global variables to set"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Sets global scripting variables from a dictionary.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-util/system-util-setGlobals"
+    }
+  ]
+}

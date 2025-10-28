@@ -22,7 +22,8 @@
       "Read(//private/tmp/**)",
       "Read(//Users/pmannion/.local/state/nvim/**)",
       "Bash(chmod:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:www.docs.inductiveautomation.com)"
     ],
     "deny": [],
     "ask": []

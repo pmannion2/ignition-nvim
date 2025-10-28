@@ -1,0 +1,601 @@
+{
+  "module": "system.tag",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "readBlocking",
+      "signature": "readBlocking(tagPaths, timeout=45000)",
+      "params": [
+        {
+          "name": "tagPaths",
+          "type": "String | List[String]",
+          "description": "Single tag path or list of tag paths to read"
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Timeout in milliseconds",
+          "optional": true,
+          "default": "45000"
+        }
+      ],
+      "returns": {
+        "type": "List[QualifiedValue]",
+        "description": "List of QualifiedValue objects with .value, .quality, and .timestamp"
+      },
+      "description": "Reads the value of tags at the given paths. Blocks until complete or timeout.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-readBlocking"
+    },
+    {
+      "name": "readAsync",
+      "signature": "readAsync(tagPaths, callback)",
+      "params": [
+        {
+          "name": "tagPaths",
+          "type": "List[String]",
+          "description": "List of tag paths to read"
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "description": "Callback function to execute when read completes"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Callback receives List[QualifiedValue]"
+      },
+      "description": "Asynchronously reads tag values. Callback is invoked when complete.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-readAsync"
+    },
+    {
+      "name": "writeBlocking",
+      "signature": "writeBlocking(tagPaths, values, timeout=45000)",
+      "params": [
+        {
+          "name": "tagPaths",
+          "type": "List[String]",
+          "description": "List of tag paths to write to"
+        },
+        {
+          "name": "values",
+          "type": "List[Any]",
+          "description": "Values to write, corresponding to tagPaths"
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Timeout in milliseconds",
+          "optional": true,
+          "default": "45000"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "List of QualityCode objects indicating write success"
+      },
+      "description": "Writes values to tags at specified paths. Blocks until complete or timeout.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-writeBlocking"
+    },
+    {
+      "name": "writeAsync",
+      "signature": "writeAsync(tagPaths, values, callback)",
+      "params": [
+        {
+          "name": "tagPaths",
+          "type": "List[String]",
+          "description": "List of tag paths to write to"
+        },
+        {
+          "name": "values",
+          "type": "List[Any]",
+          "description": "Values to write"
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "description": "Callback function invoked when write completes",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Callback receives List[QualityCode]"
+      },
+      "description": "Asynchronously writes values to tags. Non-blocking operation.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-writeAsync"
+    },
+    {
+      "name": "exists",
+      "signature": "exists(tagPath)",
+      "params": [
+        {
+          "name": "tagPath",
+          "type": "String",
+          "description": "Path to the tag to check"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if tag exists, False otherwise"
+      },
+      "description": "Checks whether a tag with the given path exists.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-exists"
+    },
+    {
+      "name": "queryTagHistory",
+      "signature": "queryTagHistory(paths, startDate, endDate, returnSize=-1, aggregationMode='Average', returnFormat='Wide', columnNames=None, intervalHours=None, intervalMinutes=None, rangeHours=None, rangeMinutes=None, aggregationModes=None, includeBoundingValues=True, validateSCExec=True, noInterpolation=False, ignoreBadQuality=False, timeout=60000)",
+      "params": [
+        {
+          "name": "paths",
+          "type": "List[String]",
+          "description": "List of tag paths to query"
+        },
+        {
+          "name": "startDate",
+          "type": "Date",
+          "description": "Start of time range"
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "description": "End of time range"
+        },
+        {
+          "name": "returnSize",
+          "type": "int",
+          "description": "Number of rows to return",
+          "optional": true,
+          "default": "-1"
+        },
+        {
+          "name": "aggregationMode",
+          "type": "String",
+          "description": "Aggregation mode (Average, MinMax, etc.)",
+          "optional": true,
+          "default": "Average"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Historical tag data as Dataset"
+      },
+      "description": "Issues a query to the Tag Historian. Returns historical data for specified tags.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-queryTagHistory"
+    },
+    {
+      "name": "browse",
+      "signature": "browse(path, filter=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "Tag path to browse"
+        },
+        {
+          "name": "filter",
+          "type": "Dictionary",
+          "description": "Filter criteria for browsing",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "List[BrowseTag]",
+        "description": "List of tag nodes at the specified path"
+      },
+      "description": "Returns a list of nodes found at the specified path.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-browse"
+    },
+    {
+      "name": "configure",
+      "signature": "configure(basePath, tags, collisionPolicy='o')",
+      "params": [
+        {
+          "name": "basePath",
+          "type": "String",
+          "description": "Base path where tags will be configured"
+        },
+        {
+          "name": "tags",
+          "type": "List[Dict] | String",
+          "description": "List of tag dictionaries or JSON string"
+        },
+        {
+          "name": "collisionPolicy",
+          "type": "String",
+          "description": "Policy for tag conflicts: 'o'=overwrite, 'a'=abort, 'i'=ignore",
+          "optional": true,
+          "default": "o"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Quality codes indicating success/failure for each tag"
+      },
+      "description": "Creates or modifies tags from Python dictionaries or JSON. Most flexible way to create tags programmatically.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-configure"
+    },
+    {
+      "name": "getConfiguration",
+      "signature": "getConfiguration(basePath, recursive=False)",
+      "params": [
+        {
+          "name": "basePath",
+          "type": "String",
+          "description": "Tag path to retrieve configuration from"
+        },
+        {
+          "name": "recursive",
+          "type": "Boolean",
+          "description": "Include child tags recursively",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "List[Dict]",
+        "description": "List of tag configuration dictionaries"
+      },
+      "description": "Retrieves tag configurations as Python dictionaries that can be modified and re-applied with configure().",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-getConfiguration"
+    },
+    {
+      "name": "deleteTags",
+      "signature": "deleteTags(tagPaths)",
+      "params": [
+        {
+          "name": "tagPaths",
+          "type": "List[String]",
+          "description": "List of tag paths to delete"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Quality codes indicating deletion result for each path"
+      },
+      "description": "Deletes multiple tags or tag folders. Use with caution.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-deleteTags"
+    },
+    {
+      "name": "copy",
+      "signature": "copy(tags, destination, collisionPolicy='o')",
+      "params": [
+        {
+          "name": "tags",
+          "type": "List[String]",
+          "description": "List of tag paths to copy"
+        },
+        {
+          "name": "destination",
+          "type": "String",
+          "description": "Destination folder path"
+        },
+        {
+          "name": "collisionPolicy",
+          "type": "String",
+          "description": "How to handle collisions: 'o'=overwrite, 'a'=abort, 'i'=ignore",
+          "optional": true,
+          "default": "o"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Quality codes for copy operation"
+      },
+      "description": "Copies tags from one folder to another.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-copy"
+    },
+    {
+      "name": "move",
+      "signature": "move(tags, destination, collisionPolicy='a')",
+      "params": [
+        {
+          "name": "tags",
+          "type": "List[String]",
+          "description": "List of tag paths to move"
+        },
+        {
+          "name": "destination",
+          "type": "String",
+          "description": "Destination folder path"
+        },
+        {
+          "name": "collisionPolicy",
+          "type": "String",
+          "description": "How to handle collisions: 'o'=overwrite, 'a'=abort, 'i'=ignore",
+          "optional": true,
+          "default": "a"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Quality codes for move operation"
+      },
+      "description": "Moves tags or folders to a new destination.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-move"
+    },
+    {
+      "name": "rename",
+      "signature": "rename(tagPath, newName, collisionPolicy='a')",
+      "params": [
+        {
+          "name": "tagPath",
+          "type": "String",
+          "description": "Path to the tag or folder to rename"
+        },
+        {
+          "name": "newName",
+          "type": "String",
+          "description": "New name for the tag or folder"
+        },
+        {
+          "name": "collisionPolicy",
+          "type": "String",
+          "description": "Collision policy",
+          "optional": true,
+          "default": "a"
+        }
+      ],
+      "returns": {
+        "type": "QualityCode",
+        "description": "Quality code for rename operation"
+      },
+      "description": "Renames a single tag or folder.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-rename"
+    },
+    {
+      "name": "exportTags",
+      "signature": "exportTags(filePath, tagPaths, recursive=True)",
+      "params": [
+        {
+          "name": "filePath",
+          "type": "String",
+          "description": "File path where to export tags (JSON format)"
+        },
+        {
+          "name": "tagPaths",
+          "type": "List[String]",
+          "description": "List of tag paths to export"
+        },
+        {
+          "name": "recursive",
+          "type": "Boolean",
+          "description": "Include child tags recursively",
+          "optional": true,
+          "default": "True"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Writes to file system"
+      },
+      "description": "Exports tags to a JSON file on the local file system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-exportTags"
+    },
+    {
+      "name": "importTags",
+      "signature": "importTags(filePath, basePath, collisionPolicy='o')",
+      "params": [
+        {
+          "name": "filePath",
+          "type": "String",
+          "description": "Path to JSON tag export file"
+        },
+        {
+          "name": "basePath",
+          "type": "String",
+          "description": "Base path where tags will be imported"
+        },
+        {
+          "name": "collisionPolicy",
+          "type": "String",
+          "description": "Collision policy",
+          "optional": true,
+          "default": "o"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Quality codes for import operation"
+      },
+      "description": "Imports tags from a JSON file into the tag system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-importTags"
+    },
+    {
+      "name": "query",
+      "signature": "query(path, params=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "Tag provider path to query"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary",
+          "description": "Query parameters and filters",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Dataset with matching tags"
+      },
+      "description": "Queries a Tag Provider to find tags matching specified criteria.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-query"
+    },
+    {
+      "name": "browseHistoricalTags",
+      "signature": "browseHistoricalTags(path)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "Historical tag path to browse"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Dataset with historical tag information"
+      },
+      "description": "Browses for historical tags at the provided historical path.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-browseHistoricalTags"
+    },
+    {
+      "name": "queryTagCalculations",
+      "signature": "queryTagCalculations(paths, calculations, startDate, endDate, rangeHours=None, rangeMinutes=None, aliases=None, includeBoundingValues=True, validateSCExec=True, noInterpolation=False, ignoreBadQuality=False, timeout=60000)",
+      "params": [
+        {
+          "name": "paths",
+          "type": "List[String]",
+          "description": "Tag paths to query"
+        },
+        {
+          "name": "calculations",
+          "type": "List[String]",
+          "description": "Calculation types (Average, Minimum, Maximum, etc.)"
+        },
+        {
+          "name": "startDate",
+          "type": "Date",
+          "description": "Start date"
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "description": "End date"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Dataset with calculated aggregations"
+      },
+      "description": "Queries various calculations (aggregations) for tags over a time range.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-queryTagCalculations"
+    },
+    {
+      "name": "storeTagHistory",
+      "signature": "storeTagHistory(historicalProvider, tagProvider, paths, values, qualities, timestamps)",
+      "params": [
+        {
+          "name": "historicalProvider",
+          "type": "String",
+          "description": "Name of the historical tag provider"
+        },
+        {
+          "name": "tagProvider",
+          "type": "String",
+          "description": "Name of the realtime tag provider"
+        },
+        {
+          "name": "paths",
+          "type": "List[String]",
+          "description": "List of tag paths"
+        },
+        {
+          "name": "values",
+          "type": "List[Any]",
+          "description": "Values to store"
+        },
+        {
+          "name": "qualities",
+          "type": "List[QualityCode]",
+          "description": "Quality codes for each value"
+        },
+        {
+          "name": "timestamps",
+          "type": "List[Date]",
+          "description": "Timestamps for each value"
+        }
+      ],
+      "returns": {
+        "type": "List[QualityCode]",
+        "description": "Results of store operation"
+      },
+      "description": "Inserts data into the tag history system. Allows storing tag history via scripting.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-storeTagHistory"
+    },
+    {
+      "name": "requestGroupExecution",
+      "signature": "requestGroupExecution(provider, tagGroup)",
+      "params": [
+        {
+          "name": "provider",
+          "type": "String",
+          "description": "Tag provider name"
+        },
+        {
+          "name": "tagGroup",
+          "type": "String",
+          "description": "Tag group name to execute"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Sends a request to the specified tag group to execute immediately.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-tag/system-tag-requestGroupExecution"
+    }
+  ]
+}

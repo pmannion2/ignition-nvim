@@ -1,0 +1,296 @@
+{
+  "module": "system.db",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "runQuery",
+      "signature": "runQuery(query, database='', tx=None)",
+      "params": [
+        {
+          "name": "query",
+          "type": "String",
+          "description": "SQL query to execute"
+        },
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection name (uses project default if empty)",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID for transactional queries",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Query results as a Dataset"
+      },
+      "description": "Executes a SQL SELECT query and returns results as a Dataset.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-runQuery"
+    },
+    {
+      "name": "runPrepQuery",
+      "signature": "runPrepQuery(query, args, database='', tx=None)",
+      "params": [
+        {
+          "name": "query",
+          "type": "String",
+          "description": "SQL query with ? placeholders"
+        },
+        {
+          "name": "args",
+          "type": "List",
+          "description": "Values to substitute for placeholders"
+        },
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection name",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Query results"
+      },
+      "description": "Executes a prepared statement with parameters. Prevents SQL injection.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-runPrepQuery"
+    },
+    {
+      "name": "runUpdateQuery",
+      "signature": "runUpdateQuery(query, database='', tx=None, getKey=False, skipAudit=False)",
+      "params": [
+        {
+          "name": "query",
+          "type": "String",
+          "description": "SQL UPDATE, INSERT, or DELETE query"
+        },
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection name",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID",
+          "optional": true
+        },
+        {
+          "name": "getKey",
+          "type": "Boolean",
+          "description": "Return generated key for INSERT",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "skipAudit",
+          "type": "Boolean",
+          "description": "Skip audit trail",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Number of rows affected, or generated key if getKey=True"
+      },
+      "description": "Executes UPDATE, INSERT, or DELETE queries.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-runUpdateQuery"
+    },
+    {
+      "name": "runPrepUpdate",
+      "signature": "runPrepUpdate(query, args, database='', tx=None, getKey=False, skipAudit=False)",
+      "params": [
+        {
+          "name": "query",
+          "type": "String",
+          "description": "SQL query with ? placeholders"
+        },
+        {
+          "name": "args",
+          "type": "List",
+          "description": "Parameter values"
+        },
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection",
+          "optional": true
+        },
+        {
+          "name": "getKey",
+          "type": "Boolean",
+          "description": "Return generated key",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Rows affected or generated key"
+      },
+      "description": "Executes prepared UPDATE/INSERT/DELETE with parameters.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-runPrepUpdate"
+    },
+    {
+      "name": "beginTransaction",
+      "signature": "beginTransaction(database='', timeout=5000)",
+      "params": [
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection name",
+          "optional": true
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Transaction timeout in milliseconds",
+          "optional": true,
+          "default": "5000"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "Transaction ID to pass to queries"
+      },
+      "description": "Begins a new database transaction. Returns transaction ID for use in queries.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-beginTransaction"
+    },
+    {
+      "name": "commitTransaction",
+      "signature": "commitTransaction(tx)",
+      "params": [
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID from beginTransaction()"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Commits a transaction, making all changes permanent.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-commitTransaction"
+    },
+    {
+      "name": "rollbackTransaction",
+      "signature": "rollbackTransaction(tx)",
+      "params": [
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID to rollback"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Rolls back a transaction, discarding all changes.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-rollbackTransaction"
+    },
+    {
+      "name": "closeTransaction",
+      "signature": "closeTransaction(tx)",
+      "params": [
+        {
+          "name": "tx",
+          "type": "String",
+          "description": "Transaction ID to close"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes a transaction, releasing database resources.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-closeTransaction"
+    },
+    {
+      "name": "createSProcCall",
+      "signature": "createSProcCall(procedureName, database='', tx=None, skipAudit=False)",
+      "params": [
+        {
+          "name": "procedureName",
+          "type": "String",
+          "description": "Name of stored procedure"
+        },
+        {
+          "name": "database",
+          "type": "String",
+          "description": "Database connection",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "SProcCall",
+        "description": "Stored procedure call object"
+      },
+      "description": "Creates a stored procedure call object that can be configured and executed.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-createSProcCall"
+    },
+    {
+      "name": "execSProcCall",
+      "signature": "execSProcCall(callObject)",
+      "params": [
+        {
+          "name": "callObject",
+          "type": "SProcCall",
+          "description": "Stored procedure call from createSProcCall()"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "Results from stored procedure"
+      },
+      "description": "Executes a stored procedure call.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-db/system-db-execSProcCall"
+    }
+  ]
+}

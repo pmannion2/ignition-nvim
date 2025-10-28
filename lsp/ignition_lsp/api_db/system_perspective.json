@@ -1,0 +1,565 @@
+{
+  "module": "system.perspective",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "sendMessage",
+      "signature": "sendMessage(messageType, payload, scope='page', sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "messageType",
+          "type": "String",
+          "description": "Message type that handlers will respond to"
+        },
+        {
+          "name": "payload",
+          "type": "Dictionary",
+          "description": "Dictionary with parameters for the message handler"
+        },
+        {
+          "name": "scope",
+          "type": "String",
+          "description": "Delivery scope: 'session', 'page', or 'view'",
+          "optional": true,
+          "default": "page"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session ID (uses current if omitted)",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page ID (uses current if omitted)",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void - handlers execute asynchronously"
+      },
+      "description": "Sends a message to component message handlers within a session. Handlers execute asynchronously.",
+      "long_description": "Cannot interact with Session Message Handlers in Session Events. From Gateway scope, requires sessionId and pageId.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-sendMessage"
+    },
+    {
+      "name": "print",
+      "signature": "print(message, sessionId=None, pageId=None, destination='client')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "Message to print"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Session ID (optional in session scope)",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Page ID (optional in session scope)",
+          "optional": true
+        },
+        {
+          "name": "destination",
+          "type": "String",
+          "description": "'client' or 'gateway' - where to log",
+          "optional": true,
+          "default": "client"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Prints message to browser console or gateway logs.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-print"
+    },
+    {
+      "name": "navigate",
+      "signature": "navigate(page, url=None, view=None, params=None, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "page",
+          "type": "String",
+          "description": "Page ID to navigate to, or empty string for same page"
+        },
+        {
+          "name": "url",
+          "type": "String",
+          "description": "External URL to navigate to",
+          "optional": true
+        },
+        {
+          "name": "view",
+          "type": "String",
+          "description": "View path to load on the page",
+          "optional": true
+        },
+        {
+          "name": "params",
+          "type": "Dictionary",
+          "description": "Parameters to pass to the view",
+          "optional": true
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session (current if omitted)",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Source page (current if omitted)",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigates a session to a specified view or page.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-navigate"
+    },
+    {
+      "name": "openPopup",
+      "signature": "openPopup(id, view, params=None, title='', position=None, showCloseIcon=True, draggable=True, resizable=False, modal=False, overlayDismiss=False, sessionId=None, pageId=None, viewportBound=False)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "Unique identifier for the popup"
+        },
+        {
+          "name": "view",
+          "type": "String",
+          "description": "Path to the view to display"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary",
+          "description": "Parameters to pass to the view",
+          "optional": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "Popup title",
+          "optional": true
+        },
+        {
+          "name": "position",
+          "type": "Dictionary",
+          "description": "Position coordinates {x, y, width, height}",
+          "optional": true
+        },
+        {
+          "name": "showCloseIcon",
+          "type": "Boolean",
+          "description": "Show close button",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "draggable",
+          "type": "Boolean",
+          "description": "Allow dragging",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "modal",
+          "type": "Boolean",
+          "description": "Modal popup (blocks background)",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Opens a popup view over the current page.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-openPopup"
+    },
+    {
+      "name": "closePopup",
+      "signature": "closePopup(id, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "ID of the popup to close"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes a popup with the specified ID.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-closePopup"
+    },
+    {
+      "name": "togglePopup",
+      "signature": "togglePopup(id, view, params=None, title='', position=None, showCloseIcon=True, draggable=True, modal=False, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "Popup identifier"
+        },
+        {
+          "name": "view",
+          "type": "String",
+          "description": "View path"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary",
+          "description": "View parameters",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Opens a popup if closed, closes it if open.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-togglePopup"
+    },
+    {
+      "name": "getSessionInfo",
+      "signature": "getSessionInfo(sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Session ID to query (current if omitted)",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Page ID",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dictionary",
+        "description": "Session information dictionary"
+      },
+      "description": "Returns information about a Perspective session.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-getSessionInfo"
+    },
+    {
+      "name": "getProjectInfo",
+      "signature": "getProjectInfo()",
+      "params": [],
+      "returns": {
+        "type": "Dictionary",
+        "description": "Project information"
+      },
+      "description": "Returns information about the current Perspective project.",
+      "scope": ["Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-getProjectInfo"
+    },
+    {
+      "name": "openDock",
+      "signature": "openDock(id, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "Dock ID to open"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Opens a docked view.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-openDock"
+    },
+    {
+      "name": "closeDock",
+      "signature": "closeDock(id, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "Dock ID to close"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes a docked view.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-closeDock"
+    },
+    {
+      "name": "toggleDock",
+      "signature": "toggleDock(id, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "id",
+          "type": "String",
+          "description": "Dock ID to toggle"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Toggles a docked view open or closed.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-toggleDock"
+    },
+    {
+      "name": "refresh",
+      "signature": "refresh(sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Triggers a refresh of the page.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-refresh"
+    },
+    {
+      "name": "setTheme",
+      "signature": "setTheme(name, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "Theme name to apply"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Changes the theme in a page to the specified theme.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-setTheme"
+    },
+    {
+      "name": "vibrate",
+      "signature": "vibrate(duration=100, sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "duration",
+          "type": "int",
+          "description": "Vibration duration in milliseconds",
+          "optional": true,
+          "default": "100"
+        },
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Causes device running Perspective Mobile App to vibrate.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-vibrate"
+    },
+    {
+      "name": "navigateForward",
+      "signature": "navigateForward(sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigate forward in session history (like browser forward button).",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-navigateForward"
+    },
+    {
+      "name": "navigateBack",
+      "signature": "navigateBack(sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "sessionId",
+          "type": "String",
+          "description": "Target session",
+          "optional": true
+        },
+        {
+          "name": "pageId",
+          "type": "String",
+          "description": "Target page",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigate back in session history (like browser back button).",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-navigateBack"
+    },
+    {
+      "name": "download",
+      "signature": "download(filename, data, contentType='text/plain', sessionId=None, pageId=None)",
+      "params": [
+        {
+          "name": "filename",
+          "type": "String",
+          "description": "Name for downloaded file"
+        },
+        {
+          "name": "data",
+          "type": "String | bytes",
+          "description": "Data to download"
+        },
+        {
+          "name": "contentType",
+          "type": "String",
+          "description": "MIME type",
+          "optional": true,
+          "default": "text/plain"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Triggers a download in the user's browser.",
+      "scope": ["Gateway", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-perspective/system-perspective-download"
+    }
+  ]
+}
