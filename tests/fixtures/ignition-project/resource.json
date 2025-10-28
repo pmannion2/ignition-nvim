@@ -1,0 +1,16 @@
+{
+  "scope": "A",
+  "version": 1,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "data.json",
+    "thumbnail.png"
+  ],
+  "attributes": {
+    "lastModified": {
+      "actor": "admin",
+      "timestamp": "2024-01-15T10:30:00Z"
+    }
+  }
+}

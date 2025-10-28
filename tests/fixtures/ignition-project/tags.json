@@ -1,0 +1,12 @@
+{
+  "name": "SampleTag",
+  "tagType": "AtomicTag",
+  "dataType": "Int4",
+  "value": 0,
+  "eventScripts": {
+    "valueChanged": {
+      "eventScript": "# Tag value changed handler\\nlogger \u003d system.util.getLogger(\\"TagEvents\\")\\nlogger.info(\\"Tag value changed to: \\" + str(newValue.value))\\n\\nif newValue.value \u003e 100:\\n    logger.warn(\\"Value exceeds threshold!\\")",
+      "enabled": true
+    }
+  }
+}

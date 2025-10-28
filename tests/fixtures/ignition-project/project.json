@@ -1,0 +1,6 @@
+{
+  "title": "Sample Ignition Project",
+  "description": "A test project for ignition.nvim",
+  "enabled": true,
+  "ignition-version": "8.1.33"
+}

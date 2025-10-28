@@ -1,0 +1,15 @@
+{
+  "type": "ia.input.button",
+  "version": 0,
+  "props": {
+    "text": "Click Me"
+  },
+  "events": {
+    "onActionPerformed": {
+      "script": "# Sample button click handler\nlogger \u003d system.util.getLogger(\"ButtonHandler\")\nlogger.info(\"Button was clicked!\")\n\n# Get current value\nvalue \u003d self.getSibling(\"TextField1\").props.text\n\nif value:\n    system.perspective.sendMessage(\"success\", {\"message\": value})\nelse:\n    system.perspective.sendMessage(\"error\", {\"message\": \"No value entered\"})"
+    }
+  },
+  "meta": {
+    "name": "Button_0"
+  }
+}

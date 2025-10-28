@@ -1,0 +1,210 @@
+# ignition.nvim
+
+A comprehensive Neovim plugin providing development support for **Ignition by Inductive Automation** projects.
+
+## Features
+
+- **Automatic Script Decoding/Encoding**: Seamlessly work with Python scripts embedded in JSON configurations
+- **LSP Integration**: Code intelligence with autocompletion, diagnostics, and navigation for Ignition APIs
+- **Gateway Backup Management**: Direct integration with Kindling for `.gwbk` file handling
+- **Project Navigation**: Efficient navigation through Ignition project hierarchies
+- **File Type Detection**: Automatic recognition of Ignition file formats
+
+## Architecture
+
+This plugin uses a hybrid approach:
+- **Lua Plugin**: Core functionality, file handlers, commands, and UI integration
+- **Python LSP Server**: Advanced code intelligence and project analysis
+
+## Installation
+
+### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
+
+```lua
+{
+  'whiskeyhouse/ignition-nvim',
+  dependencies = {
+    'neovim/nvim-lspconfig', -- Required for LSP features
+  },
+  config = function()
+    require('ignition').setup({
+      lsp = {
+        enabled = true,
+        auto_start = true,
+        settings = {
+          ignition = {
+            version = "8.1", -- Your Ignition version
+          },
+        },
+      },
+      kindling = {
+        enabled = true,
+        -- path = '/path/to/kindling', -- Optional: specify Kindling path
+      },
+      decoder = {
+        auto_decode = true,
+        auto_encode = true,
+      },
+    })
+  end,
+}
+```
+
+### Using [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+```lua
+use {
+  'whiskeyhouse/ignition-nvim',
+  requires = { 'neovim/nvim-lspconfig' },
+  config = function()
+    require('ignition').setup()
+  end,
+}
+```
+
+## LSP Server Installation
+
+The Python LSP server provides advanced code intelligence features:
+
+```bash
+# Install from PyPI (once published)
+pip install ignition-lsp
+
+# Or install from source
+cd lsp
+pip install -e .
+```
+
+## Commands
+
+### Script Management
+- `:IgnitionDecode` - Decode embedded Python scripts (interactive selection if multiple)
+- `:IgnitionDecodeAll` - Decode all scripts in current buffer
+- `:IgnitionEncode` - Encode scripts back to JSON format (from virtual buffer)
+- `:IgnitionListScripts` - Show all scripts in current buffer in floating window
+
+### Integration
+- `:IgnitionOpenKindling [file]` - Open `.gwbk` file with Kindling
+- `:IgnitionInfo` - Show plugin information and status
+
+### Default Keymaps (in Ignition files)
+- `<localleader>id` - Decode scripts
+- `<localleader>ia` - Decode all scripts
+- `<localleader>il` - List all scripts
+- `<localleader>ie` - Encode scripts back to JSON
+- `<localleader>ii` - Show plugin info
+- `<localleader>ik` - Open in Kindling (`.gwbk` files only)
+
+## Usage
+
+### Decoding Scripts
+
+When you open an Ignition JSON file containing embedded Python scripts, the plugin will automatically detect them and notify you.
+
+**Single Script:**
+```
+:IgnitionDecode
+```
+or press `<localleader>id` to decode the script into a new split window with full Python syntax highlighting and editing capabilities.
+
+**Multiple Scripts:**
+If the file contains multiple scripts, you'll be presented with an interactive selection menu showing a preview of each script.
+
+**All Scripts:**
+```
+:IgnitionDecodeAll
+```
+or press `<localleader>ia` to decode all scripts at once.
+
+### Editing and Saving
+
+1. Edit the decoded Python script in the virtual buffer with full LSP support
+2. Save the buffer (`:w` or `<leader>w`) to automatically encode and update the original JSON file
+3. The source JSON file will be marked as modified - save it to persist changes
+
+### Script Encoding Method
+
+The plugin uses the same encoding method as Ignition Flint:
+- Standard JSON string escaping (`\"`, `\\n`, `\\t`, etc.)
+- Unicode escapes for special characters (`<` → `\u003c`, `>` → `\u003e`, `&` → `\u0026`, `=` → `\u003d`, `'` → `\u0027`)
+- **Not base64** - scripts remain partially human-readable in JSON
+
+Reference: [ignition-flint encoding](https://github.com/keith-gamble/ignition-flint/blob/master/src/utils/textEncoding.ts)
+
+## Configuration
+
+Default configuration:
+
+```lua
+{
+  lsp = {
+    enabled = true,
+    auto_start = true,
+    cmd = nil, -- Auto-detected
+    settings = {
+      ignition = {
+        version = "8.1",
+        sdk_path = nil,
+      },
+    },
+  },
+  kindling = {
+    enabled = true,
+    path = nil, -- Auto-detected
+  },
+  decoder = {
+    auto_decode = true,
+    auto_encode = true,
+    create_scratch_buffer = true,
+  },
+  ui = {
+    show_notifications = true,
+    show_statusline = true,
+  },
+}
+```
+
+## Supported File Types
+
+- `.gwbk` - Gateway Backup files
+- `.proj` - Ignition Project files
+- `resource.json` - Resource definitions with embedded scripts
+- `tags.json` - Tag configurations
+- `data.json` - Data structures
+
+## Requirements
+
+- Neovim >= 0.8.0
+- Python >= 3.8 (for LSP server)
+- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) (optional, for LSP features)
+- [Kindling](https://github.com/ia-eknorr/kindling) (optional, for `.gwbk` support)
+
+## Development Status
+
+This plugin is under active development. See our [Linear project](https://linear.app/whiskey-house-eandt/project/ignition-neovim-plugin-8b7522ece7b1) for current progress.
+
+### Roadmap
+
+- [x] Basic project structure
+- [x] File type detection for Ignition files
+- [x] Script decoder/encoder implementation
+- [x] Virtual document system for editing scripts
+- [x] Auto-detection of embedded scripts
+- [x] Interactive script selection
+- [ ] LSP server with Ignition API completion
+- [ ] Project indexing and navigation
+- [ ] Comprehensive testing suite
+- [ ] Full documentation and examples
+- [ ] Integration with existing linting tools
+
+## Contributing
+
+Contributions are welcome! Please see the Linear project for current tasks and priorities.
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Acknowledgments
+
+Inspired by [Ignition Flint](https://marketplace.visualstudio.com/items?itemName=Keith-gamble.ignition-flint) for VS Code.

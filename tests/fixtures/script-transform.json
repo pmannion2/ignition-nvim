@@ -1,0 +1,14 @@
+{
+  "binding": {
+    "type": "property",
+    "config": {
+      "path": "some.property.path",
+      "transforms": [
+        {
+          "type": "script",
+          "code": "# Script transform\\n# Transforms the input value\\n\\nvalue \u003d value * 2\\n\\nif value \u003e 100:\\n    return 100\\nelse:\\n    return value"
+        }
+      ]
+    }
+  }
+}

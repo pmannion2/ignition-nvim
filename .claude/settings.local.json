@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:marketplace.visualstudio.com)",
+      "mcp__linear-server__create_project",
+      "mcp__linear-server__create_issue",
+      "Bash(mkdir:*)",
+      "mcp__linear-server__update_issue",
+      "mcp__linear-server__list_issues",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)",
+      "mcp__linear-server__create_comment",
+      "Read(//Users/pmannion/Documents/whiskeyhouse/ignition-lint/**)",
+      "Bash(pip install:*)",
+      "Bash(/opt/homebrew/bin/pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(source venv/bin/activate)",
+      "Bash(python:*)",
+      "Bash(source lsp/venv/bin/activate)",
+      "Read(//private/tmp/**)",
+      "Read(//Users/pmannion/.local/state/nvim/**)",
+      "Bash(chmod:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "linear-server",
+    "playwright"
+  ]
+}

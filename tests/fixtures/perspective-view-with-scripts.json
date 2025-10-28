@@ -1,0 +1,38 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 600,
+      "width": 800
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "events": {
+          "onActionPerformed": {
+            "script": "# Button click handler\\nprint(\\"Hello from Perspective!\\")\\nx \u003d 5\\nif x \u003c 10:\\n    print(\\"x is less than 10\\")"
+          }
+        },
+        "meta": {
+          "name": "Button_1"
+        },
+        "props": {
+          "text": "Test Button"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "events": {
+      "onStartup": {
+        "script": "# View startup script\\nlogger \u003d system.util.getLogger(\\"ViewStartup\\")\\nlogger.info(\\"View is starting up\\")\\n\\n# Initialize some values\\nself.custom.counter \u003d 0\\nself.custom.initialized \u003d True"
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {},
+    "type": "ia.container.flex"
+  }
+}
