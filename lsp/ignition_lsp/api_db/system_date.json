@@ -1,0 +1,968 @@
+{
+  "module": "system.date",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "now",
+      "signature": "now()",
+      "params": [],
+      "returns": {
+        "type": "Date",
+        "description": "A java.util.Date representing the current time"
+      },
+      "description": "Returns the current date and time.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-now"
+    },
+    {
+      "name": "parse",
+      "signature": "parse(dateString, formatString='yyyy-MM-dd HH:mm:ss', locale=None)",
+      "params": [
+        {
+          "name": "dateString",
+          "type": "String",
+          "description": "The string to parse into a Date"
+        },
+        {
+          "name": "formatString",
+          "type": "String",
+          "description": "Format pattern (Java SimpleDateFormat). Common: yyyy-MM-dd HH:mm:ss",
+          "optional": true,
+          "default": "yyyy-MM-dd HH:mm:ss"
+        },
+        {
+          "name": "locale",
+          "type": "String",
+          "description": "Locale for parsing (e.g., 'en' or 'fr')",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "The parsed Date object"
+      },
+      "description": "Parses a string into a Date using the given format pattern.",
+      "long_description": "Attempts to parse the dateString using the given formatString. Throws ParseException if the string doesn't match the format. Uses Java SimpleDateFormat patterns.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-parse",
+      "examples": [
+        "d = system.date.parse('2024-01-15 14:30:00')",
+        "d = system.date.parse('01/15/2024', 'MM/dd/yyyy')"
+      ]
+    },
+    {
+      "name": "format",
+      "signature": "format(date, formatString='yyyy-MM-dd HH:mm:ss', locale=None)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to format"
+        },
+        {
+          "name": "formatString",
+          "type": "String",
+          "description": "Format pattern (Java SimpleDateFormat). Common: yyyy-MM-dd HH:mm:ss",
+          "optional": true,
+          "default": "yyyy-MM-dd HH:mm:ss"
+        },
+        {
+          "name": "locale",
+          "type": "String",
+          "description": "Locale for formatting",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "Formatted date string"
+      },
+      "description": "Formats a Date as a string using the given format pattern.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-format",
+      "examples": [
+        "s = system.date.format(system.date.now(), 'yyyy-MM-dd')",
+        "s = system.date.format(myDate, 'EEEE, MMMM d, yyyy h:mm a')"
+      ]
+    },
+    {
+      "name": "midnight",
+      "signature": "midnight(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to set to midnight"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date with the same date but time set to 00:00:00"
+      },
+      "description": "Returns a copy of the date with the time set to midnight (00:00:00).",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-midnight"
+    },
+    {
+      "name": "setTime",
+      "signature": "setTime(date, hour, minute, second)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to modify"
+        },
+        {
+          "name": "hour",
+          "type": "int",
+          "description": "Hour of day (0-23)"
+        },
+        {
+          "name": "minute",
+          "type": "int",
+          "description": "Minute (0-59)"
+        },
+        {
+          "name": "second",
+          "type": "int",
+          "description": "Second (0-59)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date with the time fields set as specified"
+      },
+      "description": "Returns a copy of the date with the time fields set to the given values.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-setTime",
+      "examples": [
+        "shiftStart = system.date.setTime(system.date.now(), 6, 0, 0)"
+      ]
+    },
+    {
+      "name": "addHours",
+      "signature": "addHours(date, hours)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "hours",
+          "type": "int",
+          "description": "Number of hours to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given hours"
+      },
+      "description": "Adds (or subtracts) hours to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addMinutes",
+      "signature": "addMinutes(date, minutes)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "minutes",
+          "type": "int",
+          "description": "Number of minutes to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given minutes"
+      },
+      "description": "Adds (or subtracts) minutes to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addSeconds",
+      "signature": "addSeconds(date, seconds)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "seconds",
+          "type": "int",
+          "description": "Number of seconds to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given seconds"
+      },
+      "description": "Adds (or subtracts) seconds to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addMillis",
+      "signature": "addMillis(date, millis)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "millis",
+          "type": "int",
+          "description": "Number of milliseconds to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given milliseconds"
+      },
+      "description": "Adds (or subtracts) milliseconds to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addDays",
+      "signature": "addDays(date, days)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "days",
+          "type": "int",
+          "description": "Number of days to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given days"
+      },
+      "description": "Adds (or subtracts) days to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addWeeks",
+      "signature": "addWeeks(date, weeks)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "weeks",
+          "type": "int",
+          "description": "Number of weeks to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given weeks"
+      },
+      "description": "Adds (or subtracts) weeks to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addMonths",
+      "signature": "addMonths(date, months)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "months",
+          "type": "int",
+          "description": "Number of months to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given months"
+      },
+      "description": "Adds (or subtracts) months to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "addYears",
+      "signature": "addYears(date, years)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The starting Date"
+        },
+        {
+          "name": "years",
+          "type": "int",
+          "description": "Number of years to add (negative to subtract)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date adjusted by the given years"
+      },
+      "description": "Adds (or subtracts) years to a date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-add"
+    },
+    {
+      "name": "getHour12",
+      "signature": "getHour12(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the hour from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Hour in 12-hour format (1-12)"
+      },
+      "description": "Returns the hour (12-hour clock) from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getHour24",
+      "signature": "getHour24(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the hour from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Hour in 24-hour format (0-23)"
+      },
+      "description": "Returns the hour (24-hour clock) from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getMinute",
+      "signature": "getMinute(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the minute from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Minute (0-59)"
+      },
+      "description": "Returns the minute from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getSecond",
+      "signature": "getSecond(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the second from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Second (0-59)"
+      },
+      "description": "Returns the second from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getMillis",
+      "signature": "getMillis(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract milliseconds from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Milliseconds (0-999)"
+      },
+      "description": "Returns the millisecond portion from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getYear",
+      "signature": "getYear(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the year from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "The year (e.g., 2024)"
+      },
+      "description": "Returns the year from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getMonth",
+      "signature": "getMonth(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the month from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Month (0-11, where 0=January)"
+      },
+      "description": "Returns the month from the given date. January is 0.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getDayOfMonth",
+      "signature": "getDayOfMonth(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the day from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Day of month (1-31)"
+      },
+      "description": "Returns the day of the month from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getDayOfWeek",
+      "signature": "getDayOfWeek(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the day of week from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Day of week (1=Sunday, 7=Saturday)"
+      },
+      "description": "Returns the day of the week from the given date. Sunday is 1.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getDayOfYear",
+      "signature": "getDayOfYear(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to extract the day of year from"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Day of year (1-366)"
+      },
+      "description": "Returns the day of the year from the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getAMorPM",
+      "signature": "getAMorPM(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to check"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "0 for AM, 1 for PM"
+      },
+      "description": "Returns 0 for AM, 1 for PM for the given date.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-get"
+    },
+    {
+      "name": "getDate",
+      "signature": "getDate(year, month, day)",
+      "params": [
+        {
+          "name": "year",
+          "type": "int",
+          "description": "The year"
+        },
+        {
+          "name": "month",
+          "type": "int",
+          "description": "The month (0-11, where 0=January)"
+        },
+        {
+          "name": "day",
+          "type": "int",
+          "description": "The day of the month"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A new Date with the given year, month, day and time set to midnight"
+      },
+      "description": "Creates a new Date from year, month, and day with time at midnight.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-getDate"
+    },
+    {
+      "name": "getTimezone",
+      "signature": "getTimezone()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The timezone ID (e.g., 'America/Chicago')"
+      },
+      "description": "Returns the ID of the current timezone.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-getTimezone"
+    },
+    {
+      "name": "getTimezoneOffset",
+      "signature": "getTimezoneOffset(date=None)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "Optional date to calculate the offset for (accounts for DST)",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "float",
+        "description": "Timezone offset from UTC in hours"
+      },
+      "description": "Returns the timezone offset from UTC in hours, accounting for DST.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-getTimezoneOffset"
+    },
+    {
+      "name": "getTimezoneRawOffset",
+      "signature": "getTimezoneRawOffset()",
+      "params": [],
+      "returns": {
+        "type": "float",
+        "description": "Raw timezone offset from UTC in hours (ignores DST)"
+      },
+      "description": "Returns the raw timezone offset from UTC in hours, ignoring DST.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-getTimezoneRawOffset"
+    },
+    {
+      "name": "hoursBetween",
+      "signature": "hoursBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole hours between the two dates (negative if date2 is before date1)"
+      },
+      "description": "Returns the number of whole hours between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "minutesBetween",
+      "signature": "minutesBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole minutes between the two dates"
+      },
+      "description": "Returns the number of whole minutes between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "secondsBetween",
+      "signature": "secondsBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole seconds between the two dates"
+      },
+      "description": "Returns the number of whole seconds between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "millisBetween",
+      "signature": "millisBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "long",
+        "description": "Milliseconds between the two dates"
+      },
+      "description": "Returns the number of milliseconds between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "daysBetween",
+      "signature": "daysBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole days between the two dates"
+      },
+      "description": "Returns the number of whole days between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "monthsBetween",
+      "signature": "monthsBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole months between the two dates"
+      },
+      "description": "Returns the number of whole months between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "yearsBetween",
+      "signature": "yearsBetween(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "Whole years between the two dates"
+      },
+      "description": "Returns the number of whole years between two dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-between"
+    },
+    {
+      "name": "toMillis",
+      "signature": "toMillis(date)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The Date to convert"
+        }
+      ],
+      "returns": {
+        "type": "long",
+        "description": "Milliseconds since epoch (Jan 1, 1970 00:00:00 UTC)"
+      },
+      "description": "Converts a Date to milliseconds since the Unix epoch.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-toMillis"
+    },
+    {
+      "name": "fromMillis",
+      "signature": "fromMillis(millis)",
+      "params": [
+        {
+          "name": "millis",
+          "type": "long",
+          "description": "Milliseconds since epoch (Jan 1, 1970 00:00:00 UTC)"
+        }
+      ],
+      "returns": {
+        "type": "Date",
+        "description": "A Date representing the given milliseconds"
+      },
+      "description": "Creates a Date from milliseconds since the Unix epoch.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-fromMillis"
+    },
+    {
+      "name": "isAfter",
+      "signature": "isAfter(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if date1 is after date2"
+      },
+      "description": "Returns True if date1 is after date2.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-isAfter"
+    },
+    {
+      "name": "isBefore",
+      "signature": "isBefore(date1, date2)",
+      "params": [
+        {
+          "name": "date1",
+          "type": "Date",
+          "description": "The first date"
+        },
+        {
+          "name": "date2",
+          "type": "Date",
+          "description": "The second date"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if date1 is before date2"
+      },
+      "description": "Returns True if date1 is before date2.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-isBefore"
+    },
+    {
+      "name": "isBetween",
+      "signature": "isBetween(targetDate, startDate, endDate)",
+      "params": [
+        {
+          "name": "targetDate",
+          "type": "Date",
+          "description": "The date to test"
+        },
+        {
+          "name": "startDate",
+          "type": "Date",
+          "description": "Start of the range"
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "description": "End of the range"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if targetDate is between startDate and endDate (inclusive)"
+      },
+      "description": "Returns True if the target date falls between the start and end dates.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-isBetween"
+    },
+    {
+      "name": "isDaylightTime",
+      "signature": "isDaylightTime(date=None)",
+      "params": [
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The date to check (defaults to now)",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the date is in daylight saving time"
+      },
+      "description": "Returns True if the given date is in daylight saving time.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-date/system-date-isDaylightTime"
+    }
+  ]
+}

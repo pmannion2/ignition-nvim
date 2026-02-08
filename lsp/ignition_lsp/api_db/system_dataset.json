@@ -1,0 +1,746 @@
+{
+  "module": "system.dataset",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "addColumn",
+      "signature": "addColumn(dataset, colIndex=None, col, colName, colType)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "colIndex",
+          "type": "int",
+          "description": "The index (0-based) at which to insert the new column. If omitted, the column is appended to the end",
+          "optional": true
+        },
+        {
+          "name": "col",
+          "type": "List[Any]",
+          "description": "A Python list containing the new column data. Length must match the dataset row count"
+        },
+        {
+          "name": "colName",
+          "type": "String",
+          "description": "The name for the new column"
+        },
+        {
+          "name": "colType",
+          "type": "Type",
+          "description": "The data type of the column (e.g., str, int, float, java.util.Date)"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the added column"
+      },
+      "description": "Returns a new dataset with a new column added or inserted.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-addColumn",
+      "examples": [
+        "columnData = [i * 10 for i in range(ds.getRowCount())]\nnewDs = system.dataset.addColumn(ds, columnData, 'Score', int)"
+      ]
+    },
+    {
+      "name": "addRow",
+      "signature": "addRow(dataset, rowIndex=None, row)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndex",
+          "type": "int",
+          "description": "The index (0-based) at which to insert the new row. Throws IndexError if out of range. If omitted, the row is appended",
+          "optional": true
+        },
+        {
+          "name": "row",
+          "type": "List[Any]",
+          "description": "A Python list representing the new row data. Length must equal the number of columns"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the added row"
+      },
+      "description": "Returns a new dataset with a new row added or inserted.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-addRow",
+      "examples": [
+        "newRow = [5, 'New Option']\nnewDs = system.dataset.addRow(dropdown.data, newRow)",
+        "# Insert at beginning\nnewDs = system.dataset.addRow(dropdown.data, 0, [0, 'First'])"
+      ]
+    },
+    {
+      "name": "addRows",
+      "signature": "addRows(dataset, rowIndex=None, rows)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndex",
+          "type": "int",
+          "description": "The index (0-based) at which to insert the new rows. If omitted, the rows are appended",
+          "optional": true
+        },
+        {
+          "name": "rows",
+          "type": "List[List[Any]]",
+          "description": "A list of lists, where each inner list is a row. Each row length must equal the number of columns"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the added rows"
+      },
+      "description": "Returns a new dataset with multiple new rows added or inserted.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-addRows",
+      "examples": [
+        "newRows = [[1, 'Alice'], [2, 'Bob'], [3, 'Charlie']]\nnewDs = system.dataset.addRows(ds, newRows)"
+      ]
+    },
+    {
+      "name": "appendDataset",
+      "signature": "appendDataset(dataset1, dataset2)",
+      "params": [
+        {
+          "name": "dataset1",
+          "type": "Dataset",
+          "description": "The first dataset. The returned dataset will have the same columns as this dataset"
+        },
+        {
+          "name": "dataset2",
+          "type": "Dataset",
+          "description": "The second dataset. Its rows will be appended to the first dataset. Column count must match"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with all rows from both datasets combined"
+      },
+      "description": "Returns a new dataset with the second dataset's rows appended to the first.",
+      "long_description": "Combines two datasets by appending all rows from the second to the first. The column structure is taken from the first dataset. Both datasets must have the same number of columns.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-appendDataset",
+      "examples": [
+        "combined = system.dataset.appendDataset(dataset1, dataset2)"
+      ]
+    },
+    {
+      "name": "clearDataset",
+      "signature": "clearDataset(dataset)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to clear"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the same column names and types but no rows"
+      },
+      "description": "Returns a new dataset with the same columns but all rows removed.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-clearDataset",
+      "examples": [
+        "emptyDs = system.dataset.clearDataset(table.data)"
+      ]
+    },
+    {
+      "name": "dataSetToHTML",
+      "signature": "dataSetToHTML(showHeaders, dataset, title)",
+      "params": [
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, the HTML table will include a header row"
+        },
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to format as HTML"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the HTML page"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "A string containing an HTML page with the dataset in a table"
+      },
+      "description": "Formats the contents of a dataset as an HTML page and returns the result as a string.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-dataSetToHTML",
+      "examples": [
+        "html = system.dataset.dataSetToHTML(True, results, 'Query Results')"
+      ]
+    },
+    {
+      "name": "deleteRow",
+      "signature": "deleteRow(dataset, rowIndex)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndex",
+          "type": "int",
+          "description": "The index (0-based) of the row to delete"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the specified row removed"
+      },
+      "description": "Returns a new dataset with a single row removed.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-deleteRow",
+      "examples": [
+        "newDs = system.dataset.deleteRow(table.data, selectedRow)"
+      ]
+    },
+    {
+      "name": "deleteRows",
+      "signature": "deleteRows(dataset, rowIndices)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndices",
+          "type": "List[int]",
+          "description": "A list of row indices (0-based) to delete"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the specified rows removed"
+      },
+      "description": "Returns a new dataset with one or more rows removed.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-deleteRows",
+      "examples": [
+        "newDs = system.dataset.deleteRows(table.data, [0, 2, 4])"
+      ]
+    },
+    {
+      "name": "exportCSV",
+      "signature": "exportCSV(filename, showHeaders, dataset, forceQualifiedPath=True)",
+      "params": [
+        {
+          "name": "filename",
+          "type": "String",
+          "description": "A suggested filename for the CSV file"
+        },
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, the CSV file will include a header row"
+        },
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to export"
+        },
+        {
+          "name": "forceQualifiedPath",
+          "type": "Boolean",
+          "description": "If True, the filename must be an absolute path",
+          "optional": true,
+          "default": "True"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The path to the saved file"
+      },
+      "description": "Exports the contents of a dataset as a CSV file, prompting the user to save.",
+      "scope": ["Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-exportCSV",
+      "examples": [
+        "system.dataset.exportCSV('report.csv', True, table.data)"
+      ]
+    },
+    {
+      "name": "exportExcel",
+      "signature": "exportExcel(filename, showHeaders, dataset, nullsEmpty=False)",
+      "params": [
+        {
+          "name": "filename",
+          "type": "String",
+          "description": "A suggested filename for the Excel file"
+        },
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, the spreadsheet will include a header row"
+        },
+        {
+          "name": "dataset",
+          "type": "List[Dataset]",
+          "description": "A sequence of one or more datasets, one for each sheet in the workbook"
+        },
+        {
+          "name": "nullsEmpty",
+          "type": "Boolean",
+          "description": "If True, cells with NULL values are left empty instead of showing a default",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The path to the saved file"
+      },
+      "description": "Exports the contents of a dataset as an Excel spreadsheet, prompting the user to save.",
+      "scope": ["Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-exportExcel",
+      "examples": [
+        "system.dataset.exportExcel('report.xlsx', True, [table.data])"
+      ]
+    },
+    {
+      "name": "exportHTML",
+      "signature": "exportHTML(filename, showHeaders, dataset, title)",
+      "params": [
+        {
+          "name": "filename",
+          "type": "String",
+          "description": "A suggested filename for the HTML file"
+        },
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, the HTML table will include a header row"
+        },
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to export"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the HTML page"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The path to the saved file"
+      },
+      "description": "Exports the contents of a dataset to an HTML page, prompting the user to save.",
+      "scope": ["Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-exportHTML",
+      "examples": [
+        "system.dataset.exportHTML('report.html', True, table.data, 'My Report')"
+      ]
+    },
+    {
+      "name": "filterColumns",
+      "signature": "filterColumns(dataset, columns)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset to filter"
+        },
+        {
+          "name": "columns",
+          "type": "List[int] | List[String]",
+          "description": "A list of column indices (0-based) or column names to retain. Column order in the result matches this list"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset containing only the specified columns"
+      },
+      "description": "Returns a new dataset containing only the specified columns.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-filterColumns",
+      "examples": [
+        "filtered = system.dataset.filterColumns(ds, ['Name', 'Value'])",
+        "filtered = system.dataset.filterColumns(ds, [0, 2, 3])"
+      ]
+    },
+    {
+      "name": "formatDates",
+      "signature": "formatDates(dataset, dateFormat, locale=None)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset containing Date columns"
+        },
+        {
+          "name": "dateFormat",
+          "type": "String",
+          "description": "A date format pattern (e.g., 'yyyy-MM-dd HH:mm:ss')"
+        },
+        {
+          "name": "locale",
+          "type": "String",
+          "description": "A locale string (e.g., 'en_US'). If omitted, uses the default locale",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset where Date columns are replaced with formatted String columns"
+      },
+      "description": "Returns a new dataset with Date columns converted to formatted strings.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-formatDates",
+      "examples": [
+        "formatted = system.dataset.formatDates(ds, 'yyyy-MM-dd HH:mm:ss')"
+      ]
+    },
+    {
+      "name": "fromCSV",
+      "signature": "fromCSV(csv)",
+      "params": [
+        {
+          "name": "csv",
+          "type": "String",
+          "description": "A string holding a CSV dataset in the Ignition CSV format (#NAMES, #TYPES, #ROWS headers followed by data)"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset created from the CSV string"
+      },
+      "description": "Converts a dataset stored in Ignition's CSV format string to a Dataset.",
+      "long_description": "Parses a CSV string in Ignition's special format into a Dataset. The CSV must include #NAMES (column names), #TYPES (type aliases like i, str, d, f, b, date), and #ROWS headers. This is the inverse of system.dataset.toCSV().",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-fromCSV",
+      "examples": [
+        "csvStr = system.file.readFileAsString('C:\\\\data.csv')\nds = system.dataset.fromCSV(csvStr)"
+      ]
+    },
+    {
+      "name": "getColumnHeaders",
+      "signature": "getColumnHeaders(dataset)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to get headers from"
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "A Python list of column header names"
+      },
+      "description": "Returns the column headers of a dataset as a Python list.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-getColumnHeaders",
+      "examples": [
+        "headers = system.dataset.getColumnHeaders(table.data)\nfor h in headers:\n    print h"
+      ]
+    },
+    {
+      "name": "setValue",
+      "signature": "setValue(dataset, rowIndex, colIndex, value)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndex",
+          "type": "int",
+          "description": "The row index (0-based) of the cell to modify"
+        },
+        {
+          "name": "colIndex",
+          "type": "int | String",
+          "description": "The column index (0-based) or column name of the cell to modify"
+        },
+        {
+          "name": "value",
+          "type": "Any",
+          "description": "The new value for the cell"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the specified cell value changed"
+      },
+      "description": "Returns a new dataset with one cell value changed.",
+      "long_description": "Creates a new dataset with a single cell value altered. Since datasets are immutable, calling this in a loop creates many intermediate datasets. For bulk modifications, convert to PyDataSet or Python lists first, modify, then convert back with toDataSet().",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-setValue",
+      "examples": [
+        "newDs = system.dataset.setValue(ds, 0, 'Status', 'Active')",
+        "newDs = system.dataset.setValue(ds, 2, 1, 42)"
+      ]
+    },
+    {
+      "name": "sort",
+      "signature": "sort(dataset, keyColumn, ascending=True, naturalOrdering=True)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to sort"
+        },
+        {
+          "name": "keyColumn",
+          "type": "int | String",
+          "description": "The column index (0-based) or column name to sort by"
+        },
+        {
+          "name": "ascending",
+          "type": "Boolean",
+          "description": "If True, sorts in ascending order. If False, descending",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "naturalOrdering",
+          "type": "Boolean",
+          "description": "If True, uses natural ordering where contiguous numbers are treated as a single number (e.g., a2 before a11)",
+          "optional": true,
+          "default": "True"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new sorted dataset"
+      },
+      "description": "Sorts a dataset by a specified column and returns the sorted result.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-sort",
+      "examples": [
+        "sorted = system.dataset.sort(table.data, 'Name')",
+        "sorted = system.dataset.sort(table.data, 1, ascending=False)"
+      ]
+    },
+    {
+      "name": "toCSV",
+      "signature": "toCSV(dataset, showHeaders=True, forExport=False, localized=False)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to format as CSV"
+        },
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, includes column headers in the CSV output",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "forExport",
+          "type": "Boolean",
+          "description": "If True, uses Ignition's special CSV format with #NAMES, #TYPES, and #ROWS headers compatible with fromCSV()",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "localized",
+          "type": "Boolean",
+          "description": "If True, formats numbers and dates according to the client's locale",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "A string containing the dataset in CSV format"
+      },
+      "description": "Formats the contents of a dataset as a CSV string.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-toCSV",
+      "examples": [
+        "csv = system.dataset.toCSV(table.data)",
+        "# Export format compatible with fromCSV()\ncsv = system.dataset.toCSV(ds, forExport=True)"
+      ]
+    },
+    {
+      "name": "toDataSet",
+      "signature": "toDataSet(headers, data)",
+      "params": [
+        {
+          "name": "headers",
+          "type": "List[String] | PyDataset",
+          "description": "Either a list of column name strings for creating a new dataset, or a PyDataset to convert"
+        },
+        {
+          "name": "data",
+          "type": "List[List[Any]]",
+          "description": "A list of rows for the new dataset. Each row must match the headers length. Not used when converting a PyDataset",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new Dataset object"
+      },
+      "description": "Creates a new Dataset from column headers and row data, or converts a PyDataset to a Dataset.",
+      "long_description": "Has two overloads: (1) Pass a PyDataset to convert it to a standard Dataset. (2) Pass a list of header strings and a list of row lists to create a new Dataset from scratch. This is the standard way to create datasets programmatically in Ignition scripts.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-toDataSet",
+      "examples": [
+        "headers = ['Name', 'Value']\nrows = [['Temperature', 72.5], ['Pressure', 14.7]]\nds = system.dataset.toDataSet(headers, rows)",
+        "# Convert PyDataset back to Dataset\npyDs = system.db.runQuery('SELECT * FROM table1')\nds = system.dataset.toDataSet(pyDs)"
+      ]
+    },
+    {
+      "name": "toExcel",
+      "signature": "toExcel(showHeaders, dataset, nullsEmpty=False, sheetNames=None)",
+      "params": [
+        {
+          "name": "showHeaders",
+          "type": "Boolean",
+          "description": "If True, the spreadsheet will include a header row"
+        },
+        {
+          "name": "dataset",
+          "type": "List[Dataset]",
+          "description": "A list of one or more datasets, one for each sheet in the workbook"
+        },
+        {
+          "name": "nullsEmpty",
+          "type": "Boolean",
+          "description": "If True, cells with NULL values are left empty instead of showing a default",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "sheetNames",
+          "type": "List[String]",
+          "description": "A list of sheet names, one per dataset. Must match the number of datasets",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "bytes",
+        "description": "A byte array representing an Excel workbook"
+      },
+      "description": "Formats one or more datasets as an Excel spreadsheet and returns the result as a byte array.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-toExcel",
+      "examples": [
+        "excelBytes = system.dataset.toExcel(True, [results])\nsystem.file.writeFile('C:\\\\report.xlsx', excelBytes)",
+        "# Multiple sheets\nexcel = system.dataset.toExcel(True, [sheet1, sheet2], sheetNames=['Sales', 'Inventory'])"
+      ]
+    },
+    {
+      "name": "toPyDataSet",
+      "signature": "toPyDataSet(dataset)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The dataset to convert"
+        }
+      ],
+      "returns": {
+        "type": "PyDataset",
+        "description": "A PyDataset wrapper providing Pythonic iteration and indexing over the dataset"
+      },
+      "description": "Converts a Dataset to a PyDataset for more Pythonic access (iteration, indexing).",
+      "long_description": "Wraps a standard Dataset in a PyDataset object that supports Python-style iteration and dictionary-style column access (e.g., row['ColumnName']). More convenient for scripting than the raw Java Dataset interface. Use toDataSet() to convert back when needed.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-toPyDataSet",
+      "examples": [
+        "pyDs = system.dataset.toPyDataSet(table.data)\nfor row in pyDs:\n    print row['Name'], row['Value']"
+      ]
+    },
+    {
+      "name": "updateRow",
+      "signature": "updateRow(dataset, rowIndex, changes)",
+      "params": [
+        {
+          "name": "dataset",
+          "type": "Dataset",
+          "description": "The starting dataset. Datasets are immutable so a new dataset is returned"
+        },
+        {
+          "name": "rowIndex",
+          "type": "int",
+          "description": "The row index (0-based) of the row to update"
+        },
+        {
+          "name": "changes",
+          "type": "Dictionary[String, Any]",
+          "description": "A dictionary mapping column names to new values for the specified row"
+        }
+      ],
+      "returns": {
+        "type": "Dataset",
+        "description": "A new dataset with the specified row updated"
+      },
+      "description": "Returns a new dataset with one row altered based on the provided column-value mappings.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-dataset/system-dataset-updateRow",
+      "examples": [
+        "newDs = system.dataset.updateRow(ds, 0, {'Status': 'Complete', 'Timestamp': system.date.now()})"
+      ]
+    }
+  ]
+}

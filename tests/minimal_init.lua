@@ -7,11 +7,20 @@ vim.opt.runtimepath:append('.')
 -- Add plenary if available (for testing)
 local plenary_ok, _ = pcall(require, 'plenary')
 if not plenary_ok then
-  local plenary_dir = vim.fn.stdpath('data') .. '/site/pack/vendor/start/plenary.nvim'
-  if vim.fn.isdirectory(plenary_dir) == 0 then
+  local search_paths = {
+    vim.fn.stdpath('data') .. '/site/pack/vendor/start/plenary.nvim',
+    vim.fn.stdpath('data') .. '/lazy/plenary.nvim',
+  }
+  local found = false
+  for _, plenary_dir in ipairs(search_paths) do
+    if vim.fn.isdirectory(plenary_dir) == 1 then
+      vim.opt.runtimepath:append(plenary_dir)
+      found = true
+      break
+    end
+  end
+  if not found then
     vim.notify('plenary.nvim not found. Install it for running tests.', vim.log.levels.WARN)
-  else
-    vim.opt.runtimepath:append(plenary_dir)
   end
 end
 

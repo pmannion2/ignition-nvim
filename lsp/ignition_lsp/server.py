@@ -3,7 +3,8 @@
 import logging
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
+from urllib.parse import unquote, urlparse
 
 import lsprotocol.types
 from lsprotocol.types import (
@@ -15,6 +16,7 @@ from lsprotocol.types import (
     TEXT_DOCUMENT_DID_SAVE,
     TEXT_DOCUMENT_DID_CLOSE,
     TEXT_DOCUMENT_PUBLISH_DIAGNOSTICS,
+    WORKSPACE_SYMBOL,
     CompletionItem,
     CompletionList,
     CompletionParams,
@@ -33,6 +35,8 @@ from lsprotocol.types import (
     Position,
     Range,
     DiagnosticSeverity,
+    SymbolInformation,
+    WorkspaceSymbolParams,
 )
 from pygls.lsp.server import LanguageServer
 from pygls.workspace import TextDocument
@@ -56,6 +60,7 @@ class IgnitionLanguageServer(LanguageServer):
         super().__init__(*args, **kwargs)
         self.diagnostics_enabled = True
         self.api_loader = None
+        self.project_index = None
         logger.info("Ignition LSP Server initialized")
 
     def initialize_api_loader(self, version: str = "8.1"):
@@ -67,6 +72,40 @@ class IgnitionLanguageServer(LanguageServer):
         except Exception as e:
             logger.error(f"Failed to initialize API loader: {e}", exc_info=True)
             self.api_loader = None
+
+    def scan_project(self, root_path: str) -> None:
+        """Scan an Ignition project directory and build the script index."""
+        try:
+            from ignition_lsp.project_scanner import ProjectScanner
+            scanner = ProjectScanner(root_path)
+            if scanner.is_ignition_project():
+                self.project_index = scanner.scan()
+                logger.info(
+                    f"Project index built: {self.project_index.script_count} scripts"
+                )
+            else:
+                logger.debug(f"Not an Ignition project: {root_path}")
+        except Exception as e:
+            logger.error(f"Failed to scan project: {e}", exc_info=True)
+            self.project_index = None
+
+    def ensure_project_index(self, uri: str) -> None:
+        """Build project index lazily from a document URI if not yet built."""
+        if self.project_index is not None:
+            return
+
+        try:
+            from ignition_lsp.project_scanner import ProjectScanner
+            # Derive project root by walking up from the file to find project.json
+            file_path = unquote(urlparse(uri).path)
+            current = Path(file_path).parent
+            while current != current.parent:
+                if (current / "project.json").is_file():
+                    self.scan_project(str(current))
+                    return
+                current = current.parent
+        except Exception as e:
+            logger.debug(f"Could not find project root from {uri}: {e}")
 
 
 server = IgnitionLanguageServer("ignition-lsp", "v0.1.0")
@@ -81,6 +120,9 @@ server.initialize_api_loader()
 async def did_open(ls: IgnitionLanguageServer, params: DidOpenTextDocumentParams):
     """Handle document open event."""
     logger.info(f"Document opened: {params.text_document.uri}")
+
+    # Lazily build the project index on first document open
+    ls.ensure_project_index(params.text_document.uri)
 
     # Run diagnostics on open
     if ls.diagnostics_enabled:
@@ -100,11 +142,20 @@ async def did_change(ls: IgnitionLanguageServer, params: DidChangeTextDocumentPa
 @server.feature(TEXT_DOCUMENT_DID_SAVE)
 async def did_save(ls: IgnitionLanguageServer, params: DidSaveTextDocumentParams):
     """Handle document save event."""
-    logger.info(f"Document saved: {params.text_document.uri}")
+    uri = params.text_document.uri
+    logger.info(f"Document saved: {uri}")
+
+    # Re-index project when resource/view JSON files change
+    file_path = unquote(urlparse(uri).path)
+    basename = Path(file_path).name
+    if basename in ("resource.json", "view.json", "tags.json", "data.json"):
+        if ls.project_index is not None:
+            logger.info(f"Re-scanning project after {basename} save")
+            ls.scan_project(ls.project_index.root_path)
 
     # Run diagnostics on save
     if ls.diagnostics_enabled:
-        await run_diagnostics(ls, params.text_document.uri)
+        await run_diagnostics(ls, uri)
 
 
 @server.feature(TEXT_DOCUMENT_DID_CLOSE)
@@ -165,7 +216,7 @@ def completion(ls: IgnitionLanguageServer, params: CompletionParams) -> Optional
         try:
             from ignition_lsp.completion import get_completions
             doc = ls.workspace.get_text_document(params.text_document.uri)
-            return get_completions(doc, params.position, ls.api_loader)
+            return get_completions(doc, params.position, ls.api_loader, ls.project_index)
         except Exception as e:
             logger.error(f"Error getting completions: {e}", exc_info=True)
 
@@ -205,12 +256,32 @@ def hover(ls: IgnitionLanguageServer, params: HoverParams) -> Optional[Hover]:
 
 
 @server.feature(TEXT_DOCUMENT_DEFINITION)
-def definition(params: DefinitionParams) -> Optional[Location]:
+def definition(ls: IgnitionLanguageServer, params: DefinitionParams) -> Optional[Location]:
     """Navigate to definition of Ignition resources."""
     logger.info(f"Definition requested at {params.position}")
 
-    # TODO: Implement go-to-definition for project scripts
-    return None
+    try:
+        from ignition_lsp.definition import get_definition
+        doc = ls.workspace.get_text_document(params.text_document.uri)
+        return get_definition(doc, params.position, ls.api_loader, ls.project_index)
+    except Exception as e:
+        logger.error(f"Error getting definition: {e}", exc_info=True)
+        return None
+
+
+@server.feature(WORKSPACE_SYMBOL)
+def workspace_symbol(
+    ls: IgnitionLanguageServer, params: WorkspaceSymbolParams
+) -> Optional[List[SymbolInformation]]:
+    """Return workspace symbols from the project index."""
+    logger.info(f"Workspace symbol query: '{params.query}'")
+
+    try:
+        from ignition_lsp.workspace_symbols import get_workspace_symbols
+        return get_workspace_symbols(params.query, ls.project_index)
+    except Exception as e:
+        logger.error(f"Error getting workspace symbols: {e}", exc_info=True)
+        return None
 
 
 def main():

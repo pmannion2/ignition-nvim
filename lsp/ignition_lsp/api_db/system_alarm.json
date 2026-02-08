@@ -1,0 +1,420 @@
+{
+  "module": "system.alarm",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "acknowledge",
+      "signature": "acknowledge(alarmIds, notes=None, username=None)",
+      "params": [
+        {
+          "name": "alarmIds",
+          "type": "List[String]",
+          "description": "List of alarm event IDs (UUIDs) to acknowledge"
+        },
+        {
+          "name": "notes",
+          "type": "String",
+          "description": "Text to attach as the Ack Note on each acknowledged alarm event. If None, no note is assigned",
+          "optional": true
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The user acknowledging the alarm. Required in Gateway scope since there is no logged-in user",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "List of alarm event IDs (UUIDs) that failed to be acknowledged"
+      },
+      "description": "Acknowledges any number of alarms, specified by their event IDs.",
+      "long_description": "Acknowledges one or more active alarms by UUID. In client scope (Vision/Perspective), the currently logged-in user is recorded as the acknowledger. In Gateway scope, the username parameter is required since there is no session user. Returns a list of IDs that failed acknowledgment.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-acknowledge",
+      "examples": [
+        "system.alarm.acknowledge(['c27c06d8-698f-4814-af89-3c22944f58c5'], 'Saw this alarm, did something about it.')",
+        "# Acknowledge from Gateway scope\nsystem.alarm.acknowledge(['c27c06d8-698f-4814-af89-3c22944f58c5'], 'Auto-acknowledged', 'admin')"
+      ]
+    },
+    {
+      "name": "cancel",
+      "signature": "cancel(alarmIds)",
+      "params": [
+        {
+          "name": "alarmIds",
+          "type": "List[String]",
+          "description": "List of alarm pipeline event IDs (UUIDs) to cancel"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Cancels any number of alarm notification pipelines, specified by their event IDs.",
+      "long_description": "Cancels alarm pipelines from the system. Canceling a pipeline will not impact the alarm that triggered the pipeline — the alarm will still be active, but will drop out of alarm notification pipelines. Use system.alarm.queryStatus() to obtain the event IDs.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-cancel",
+      "examples": [
+        "system.alarm.cancel(['c27c06d8-698f-4814-af89-3c22944f58c5'])",
+        "# Cancel all active alarms\nids = []\nresults = system.alarm.queryStatus(state=['ActiveUnacked', 'ActiveAcked'])\nfor result in results:\n    ids.append(str(result.getId()))\nsystem.alarm.cancel(ids)"
+      ]
+    },
+    {
+      "name": "createRoster",
+      "signature": "createRoster(name, description)",
+      "params": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "The name for the new roster"
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "description": "A description for the new roster. Required, but can be an empty string"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Creates a new alarm notification roster.",
+      "long_description": "Creates a new roster for use in alarm notification pipelines. Users can be added to the roster through the Gateway web interface or the Roster Management component after creation. Requires Alarm Management client permission in Vision scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-createRoster",
+      "examples": [
+        "system.alarm.createRoster('Operators', 'On-shift operators for alarm notification')"
+      ]
+    },
+    {
+      "name": "getRosters",
+      "signature": "getRosters()",
+      "params": [],
+      "returns": {
+        "type": "Dictionary[String, List[String]]",
+        "description": "A dictionary mapping roster names to lists of usernames in each roster. Empty list if no users in a roster"
+      },
+      "description": "Returns a mapping of roster names to lists of usernames contained in each roster.",
+      "long_description": "Retrieves all alarm notification rosters configured on the Gateway and their member usernames. Useful for auditing roster membership or building custom roster management interfaces.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-getRosters",
+      "examples": [
+        "rosters = system.alarm.getRosters()\nfor name, users in rosters.items():\n    print 'Roster %s: %s' % (name, ', '.join(users))"
+      ]
+    },
+    {
+      "name": "getShelvedPaths",
+      "signature": "getShelvedPaths()",
+      "params": [],
+      "returns": {
+        "type": "List[ShelvedPath]",
+        "description": "A list of ShelvedPath objects, each with getPath(), getUser(), getExpiration(), and isExpired() methods"
+      },
+      "description": "Returns a list of ShelvedPath objects representing all currently shelved alarms.",
+      "long_description": "Retrieves information about all currently shelved alarms. Each ShelvedPath object provides methods to get the alarm source path, the user who shelved it, the expiration time, and whether it has expired. Useful for building shelved alarm dashboards.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-getShelvedPaths",
+      "examples": [
+        "paths = system.alarm.getShelvedPaths()\nfor p in paths:\n    print 'Path: %s, Shelved by: %s, expires: %s, is expired? %s' % (p.getPath(), p.getUser(), p.getExpiration(), p.isExpired())"
+      ]
+    },
+    {
+      "name": "listPipelines",
+      "signature": "listPipelines(projectName='alarm-pipelines')",
+      "params": [
+        {
+          "name": "projectName",
+          "type": "String",
+          "description": "The project to check alarm pipelines for. Defaults to 'alarm-pipelines'",
+          "optional": true,
+          "default": "alarm-pipelines"
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of alarm notification pipeline names in the specified project"
+      },
+      "description": "Returns a list of the available alarm notification pipelines in a project.",
+      "long_description": "Lists all alarm notification pipeline names in the given project. In Ignition 8.0+, alarm pipelines were migrated to a dedicated 'alarm-pipelines' project, so the default project name reflects this. Unsaved pipeline name changes will not appear in the result.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-listPipelines",
+      "examples": [
+        "pipelines = system.alarm.listPipelines()\nfor pipeline in pipelines:\n    print pipeline",
+        "# List pipelines in a specific project\npipelines = system.alarm.listPipelines('my-project')\nfor p in pipelines:\n    print p"
+      ]
+    },
+    {
+      "name": "queryJournal",
+      "signature": "queryJournal(startDate=None, endDate=None, journalName=None, priority=None, state=None, path=None, source=None, displaypath=None, all_properties=None, any_properties=None, defined=None, includeData=None, includeSystem=None, includeShelved=False, isSystem=None, provider=None)",
+      "params": [
+        {
+          "name": "startDate",
+          "type": "Date",
+          "description": "The start of the time range to query. Defaults to 8 hours before now",
+          "optional": true
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "description": "The end of the time range to query. Defaults to now",
+          "optional": true
+        },
+        {
+          "name": "journalName",
+          "type": "String",
+          "description": "The journal to query. Can be omitted if only one journal exists on the Gateway",
+          "optional": true
+        },
+        {
+          "name": "priority",
+          "type": "List[int | String]",
+          "description": "Priority levels to match: Diagnostic(0), Low(1), Medium(2), High(3), Critical(4)",
+          "optional": true
+        },
+        {
+          "name": "state",
+          "type": "List[int | String]",
+          "description": "Event states to match: ClearUnacked(0), ClearAcked(1), ActiveUnacked(2), ActiveAcked(3), Enabled(4), Disabled(5)",
+          "optional": true
+        },
+        {
+          "name": "path",
+          "type": "List[String]",
+          "description": "Source paths to search. Wildcard '*' is supported",
+          "optional": true
+        },
+        {
+          "name": "source",
+          "type": "List[String]",
+          "description": "Source paths to search. Wildcard '*' is supported",
+          "optional": true
+        },
+        {
+          "name": "displaypath",
+          "type": "List[String]",
+          "description": "Display paths separated by '/'. Paths ending in '/*' search everything below",
+          "optional": true
+        },
+        {
+          "name": "all_properties",
+          "type": "List[Tuple[String, String, Any]]",
+          "description": "Property conditions where ALL must match. Each tuple is (propertyName, condition, value)",
+          "optional": true
+        },
+        {
+          "name": "any_properties",
+          "type": "List[Tuple[String, String, Any]]",
+          "description": "Property conditions where ANY match causes the event to pass. Each tuple is (propertyName, condition, value)",
+          "optional": true
+        },
+        {
+          "name": "defined",
+          "type": "List[String]",
+          "description": "Property names that must all be present on an event for it to pass",
+          "optional": true
+        },
+        {
+          "name": "includeData",
+          "type": "Boolean",
+          "description": "Whether to include event data (Active, Clear, Ack, Event Value, Runtime data)",
+          "optional": true
+        },
+        {
+          "name": "includeSystem",
+          "type": "Boolean",
+          "description": "Whether to include system events",
+          "optional": true
+        },
+        {
+          "name": "includeShelved",
+          "type": "Boolean",
+          "description": "Whether to include shelved events in the results",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "isSystem",
+          "type": "Boolean",
+          "description": "Whether returned events must or must not be system events",
+          "optional": true
+        },
+        {
+          "name": "provider",
+          "type": "List[String]",
+          "description": "Tag providers to include. Omitting queries all providers",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "AlarmQueryResult",
+        "description": "A list of PyAlarmEvent objects. Call getDataset() to get a Dataset representation"
+      },
+      "description": "Queries the alarm journal for historical alarm events within a time range.",
+      "long_description": "Queries the specified journal for historical alarm events. Returns an AlarmQueryResult containing PyAlarmEvent objects. Use getDataset() on the result to get a standard Dataset suitable for table display. The default time range is the last 8 hours. Supports filtering by priority, state, source path, display path, and custom properties with AND/OR logic.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-queryJournal",
+      "examples": [
+        "results = system.alarm.queryJournal(journalName='Journal', startDate=startDate, endDate=endDate)\ntable.data = results.getDataset()",
+        "# Query high/critical alarms from the last hour\nend = system.date.now()\nstart = system.date.addHours(end, -1)\nresults = system.alarm.queryJournal(startDate=start, endDate=end, priority=['High', 'Critical'])"
+      ]
+    },
+    {
+      "name": "queryStatus",
+      "signature": "queryStatus(priority=None, state=None, path=None, source=None, displaypath=None, all_properties=None, any_properties=None, defined=None, includeShelved=False, provider=None)",
+      "params": [
+        {
+          "name": "priority",
+          "type": "List[int | String]",
+          "description": "Priority levels to match: Diagnostic(0), Low(1), Medium(2), High(3), Critical(4)",
+          "optional": true
+        },
+        {
+          "name": "state",
+          "type": "List[int | String]",
+          "description": "Event states to match: ClearUnacked(0), ClearAcked(1), ActiveUnacked(2), ActiveAcked(3)",
+          "optional": true
+        },
+        {
+          "name": "path",
+          "type": "List[String]",
+          "description": "Source paths to search. Wildcard '*' is supported",
+          "optional": true
+        },
+        {
+          "name": "source",
+          "type": "List[String]",
+          "description": "Source paths to search. Wildcard '*' is supported",
+          "optional": true
+        },
+        {
+          "name": "displaypath",
+          "type": "List[String]",
+          "description": "Display paths separated by '/'. Paths ending in '/*' search everything below",
+          "optional": true
+        },
+        {
+          "name": "all_properties",
+          "type": "List[Tuple[String, String, Any]]",
+          "description": "Property conditions where ALL must match. Each tuple is (propertyName, condition, value)",
+          "optional": true
+        },
+        {
+          "name": "any_properties",
+          "type": "List[Tuple[String, String, Any]]",
+          "description": "Property conditions where ANY match causes the event to pass. Each tuple is (propertyName, condition, value)",
+          "optional": true
+        },
+        {
+          "name": "defined",
+          "type": "List[String]",
+          "description": "Property names that must all be present on an event for it to pass",
+          "optional": true
+        },
+        {
+          "name": "includeShelved",
+          "type": "Boolean",
+          "description": "Whether to include shelved events in the results",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "provider",
+          "type": "List[String]",
+          "description": "Tag providers to include. Omitting queries all providers",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "AlarmQueryResult",
+        "description": "A list of PyAlarmEvent objects representing current alarm states. Call getDataset() for a Dataset representation"
+      },
+      "description": "Queries the current state of alarms, returning a filterable list of alarm events.",
+      "long_description": "Queries the live alarm status, returning an AlarmQueryResult containing PyAlarmEvent objects. Each item represents the combined state of alarm events for a single alarm source. Use getDataset() to convert to a Dataset for table display. Supports filtering by priority, state, source path, display path, and custom associated data properties with AND/OR logic. By default, shelved alarms are excluded.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-queryStatus",
+      "examples": [
+        "results = system.alarm.queryStatus(source=['*HiAlarm*'])\ntable.data = results.getDataset()",
+        "# Filter with OR logic on custom properties\nprops = [('Group', '=', 'value1'), ('Group', '=', 'value2')]\nstate = ['ActiveUnacked', 'ActiveAcked']\nalarms = system.alarm.queryStatus(any_properties=props, state=state)"
+      ]
+    },
+    {
+      "name": "shelve",
+      "signature": "shelve(path, timeoutSeconds=None, timeoutMinutes=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "List[String]",
+          "description": "Source paths of alarms to shelve. If a path ends in '/*', matches everything below that path"
+        },
+        {
+          "name": "timeoutSeconds",
+          "type": "int",
+          "description": "Time to shelve alarms in seconds. Setting to 0 unshelves. Mutually exclusive with timeoutMinutes",
+          "optional": true
+        },
+        {
+          "name": "timeoutMinutes",
+          "type": "int",
+          "description": "Time to shelve alarms in minutes. Setting to 0 unshelves. Defaults to 15 minutes if neither timeout is specified",
+          "optional": true,
+          "default": "15"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Shelves the specified alarms for the given duration, suppressing notifications.",
+      "long_description": "Shelves alarms at the specified source paths for a given duration. Shelved alarms remain active but do not trigger notification pipelines. If an alarm is already shelved, this overwrites the remaining time. Timeout can be specified in seconds or minutes; if neither is given, defaults to 15 minutes. Setting timeout to 0 unshelves the alarms. Requires Alarm Management client permission in Vision scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-shelve",
+      "examples": [
+        "# Shelve a specific alarm for 30 minutes\npath = 'prov:default:/tag:Tanks/Level:/alm:HiAlarm'\nsystem.alarm.shelve([path], timeoutMinutes=30)",
+        "# Shelve all alarms under a tag path for 5 minutes\nsystem.alarm.shelve(['prov:default:/tag:Area1/*'], timeoutMinutes=5)"
+      ]
+    },
+    {
+      "name": "unshelve",
+      "signature": "unshelve(path)",
+      "params": [
+        {
+          "name": "path",
+          "type": "List[String]",
+          "description": "Source paths of alarms to unshelve. If a path ends in '/*', matches everything below that path"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Unshelves alarms at the specified source paths, re-enabling notifications.",
+      "long_description": "Removes the shelved status from alarms matching the specified source paths, allowing them to trigger notification pipelines again. Use getShelvedPaths() to discover currently shelved alarm paths. Requires Alarm Management client permission in Vision scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-alarm/system-alarm-unshelve",
+      "examples": [
+        "testPath = 'prov:TAG_PROVIDER_NAME:/tag:TAG_PATH:/alm:ALARM_NAME'\nsystem.alarm.unshelve(path=[testPath])"
+      ]
+    }
+  ]
+}

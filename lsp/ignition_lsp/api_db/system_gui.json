@@ -1,0 +1,905 @@
+{
+  "module": "system.gui",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "messageBox",
+      "signature": "messageBox(message, title='Information')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The message to display in the dialog"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Information"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Displays an informational-style message popup box to the user.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-messageBox",
+      "examples": [
+        "system.gui.messageBox('Operation completed successfully.')",
+        "system.gui.messageBox('Data saved.', 'Save Status')"
+      ]
+    },
+    {
+      "name": "warningBox",
+      "signature": "warningBox(message, title='Warning')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The warning message to display"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Warning"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Displays a message to the user in a warning-style popup dialog.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-warningBox",
+      "examples": [
+        "system.gui.warningBox('Tank level is approaching high limit.')"
+      ]
+    },
+    {
+      "name": "errorBox",
+      "signature": "errorBox(message, title='Error')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The error message to display"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Error"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Displays an error-style message box to the user.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-errorBox",
+      "examples": [
+        "system.gui.errorBox('Failed to connect to database.')"
+      ]
+    },
+    {
+      "name": "confirm",
+      "signature": "confirm(message, title='Confirm', allowCancel=False)",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The message to display in the confirmation dialog"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Confirm"
+        },
+        {
+          "name": "allowCancel",
+          "type": "Boolean",
+          "description": "If True, adds a Cancel button to the dialog in addition to Yes and No",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the user clicked Yes, False if the user clicked No. None if allowCancel is True and the user clicked Cancel"
+      },
+      "description": "Displays a confirmation dialog box to the user with Yes and No buttons.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-confirm",
+      "examples": [
+        "if system.gui.confirm('Are you sure you want to delete this record?'):\n    system.db.runUpdateQuery('DELETE FROM records WHERE id = %d' % recordId)",
+        "result = system.gui.confirm('Save changes before closing?', 'Save', True)"
+      ]
+    },
+    {
+      "name": "inputBox",
+      "signature": "inputBox(message, defaultText='')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The prompt message to display"
+        },
+        {
+          "name": "defaultText",
+          "type": "String",
+          "description": "The default text pre-filled in the input field",
+          "optional": true,
+          "default": ""
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The text entered by the user, or None if the dialog was canceled"
+      },
+      "description": "Opens a popup input dialog box that shows a prompt message and allows the user to type in a string.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-inputBox",
+      "examples": [
+        "name = system.gui.inputBox('Enter your name:')",
+        "value = system.gui.inputBox('Enter tag path:', '[default]MyTag')"
+      ]
+    },
+    {
+      "name": "passwordBox",
+      "signature": "passwordBox(message, title='Password', echoChar='*')",
+      "params": [
+        {
+          "name": "message",
+          "type": "String",
+          "description": "The prompt message to display"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Password"
+        },
+        {
+          "name": "echoChar",
+          "type": "String",
+          "description": "The character to display instead of typed characters",
+          "optional": true,
+          "default": "*"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The password entered by the user, or None if the dialog was canceled"
+      },
+      "description": "Displays a password input dialog that masks the user's input.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-passwordBox",
+      "examples": [
+        "password = system.gui.passwordBox('Enter your password:')"
+      ]
+    },
+    {
+      "name": "chooseColor",
+      "signature": "chooseColor(initialColor, title='Choose Color')",
+      "params": [
+        {
+          "name": "initialColor",
+          "type": "Color",
+          "description": "The initial color to select in the color chooser dialog"
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title for the dialog box",
+          "optional": true,
+          "default": "Choose Color"
+        }
+      ],
+      "returns": {
+        "type": "Color",
+        "description": "The color selected by the user, or None if the dialog was canceled"
+      },
+      "description": "Prompts the user to pick a color using the default color-chooser dialog box.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-chooseColor",
+      "examples": [
+        "color = system.gui.chooseColor(system.gui.color('red'))",
+        "color = system.gui.chooseColor(system.gui.color(255, 0, 0), 'Pick Background Color')"
+      ]
+    },
+    {
+      "name": "color",
+      "signature": "color(red, green, blue, alpha=255)",
+      "params": [
+        {
+          "name": "red",
+          "type": "int | String",
+          "description": "Red channel (0-255), or a color string like 'red', '#FF0000', or 'RGB(255,0,0)'"
+        },
+        {
+          "name": "green",
+          "type": "int",
+          "description": "Green channel (0-255). Only used when red is an integer",
+          "optional": true
+        },
+        {
+          "name": "blue",
+          "type": "int",
+          "description": "Blue channel (0-255). Only used when red is an integer",
+          "optional": true
+        },
+        {
+          "name": "alpha",
+          "type": "int",
+          "description": "Alpha (transparency) channel (0-255)",
+          "optional": true,
+          "default": "255"
+        }
+      ],
+      "returns": {
+        "type": "Color",
+        "description": "A new Color object"
+      },
+      "description": "Creates a new color object from RGB(A) values or by parsing a color string.",
+      "long_description": "Can be called with a single string argument (color name like 'red', hex like '#FF0000', or functional like 'RGB(255,0,0)'), or with 3-4 integer arguments for R, G, B, and optional A channels.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-color",
+      "examples": [
+        "red = system.gui.color('red')",
+        "blue = system.gui.color(0, 0, 255)",
+        "semiTransparent = system.gui.color(255, 255, 0, 128)"
+      ]
+    },
+    {
+      "name": "openDesktop",
+      "signature": "openDesktop(screen=None, handle=None, title=None, width=None, height=None, x=None, y=None, windows=None)",
+      "params": [
+        {
+          "name": "screen",
+          "type": "int",
+          "description": "The screen index to open the new desktop on",
+          "optional": true
+        },
+        {
+          "name": "handle",
+          "type": "String",
+          "description": "A unique string handle for this desktop",
+          "optional": true
+        },
+        {
+          "name": "title",
+          "type": "String",
+          "description": "The title of the new desktop frame",
+          "optional": true
+        },
+        {
+          "name": "width",
+          "type": "int",
+          "description": "Width in pixels of the new desktop frame",
+          "optional": true
+        },
+        {
+          "name": "height",
+          "type": "int",
+          "description": "Height in pixels of the new desktop frame",
+          "optional": true
+        },
+        {
+          "name": "x",
+          "type": "int",
+          "description": "X position of the new desktop frame",
+          "optional": true
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "description": "Y position of the new desktop frame",
+          "optional": true
+        },
+        {
+          "name": "windows",
+          "type": "List[String]",
+          "description": "List of window paths to open in the new desktop",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "JFrame",
+        "description": "A reference to the new Desktop frame object"
+      },
+      "description": "Creates an additional Desktop in a new frame.",
+      "long_description": "Opens a new secondary desktop frame for the Vision client. Useful for multi-monitor setups. Each desktop can have its own set of windows. Use the handle parameter to reference the desktop later with system.gui.desktop().",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-openDesktop",
+      "examples": [
+        "system.gui.openDesktop(screen=1, handle='secondary', title='Monitoring', windows=['Overview'])"
+      ]
+    },
+    {
+      "name": "closeDesktop",
+      "signature": "closeDesktop(handle=None)",
+      "params": [
+        {
+          "name": "handle",
+          "type": "String",
+          "description": "The handle of the desktop to close. If omitted, closes the desktop that the script is running in",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes an open desktop associated with the current client.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-closeDesktop",
+      "examples": [
+        "system.gui.closeDesktop('secondary')"
+      ]
+    },
+    {
+      "name": "desktop",
+      "signature": "desktop(handle=None)",
+      "params": [
+        {
+          "name": "handle",
+          "type": "String",
+          "description": "The handle of the desktop to get. If omitted, returns the primary desktop",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "DesktopHandle",
+        "description": "An object that allows invoking system.gui functions on the specified desktop"
+      },
+      "description": "Allows you to invoke system.gui functions on a specific desktop.",
+      "long_description": "Returns a desktop handle that proxies system.gui function calls to the specified desktop. For example, system.gui.desktop('secondary').messageBox('Hello') will show a message on the secondary desktop.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-desktop",
+      "examples": [
+        "system.gui.desktop('secondary').messageBox('Alert on secondary monitor!')"
+      ]
+    },
+    {
+      "name": "getCurrentDesktop",
+      "signature": "getCurrentDesktop()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The handle of the current desktop, or None if on the primary desktop"
+      },
+      "description": "Returns the handle of the desktop that the current script is running in.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getCurrentDesktop"
+    },
+    {
+      "name": "getDesktopHandles",
+      "signature": "getDesktopHandles()",
+      "params": [],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of handles for all secondary desktops currently open"
+      },
+      "description": "Returns a list of all secondary desktop handles currently open in the client.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getDesktopHandles"
+    },
+    {
+      "name": "getWindow",
+      "signature": "getWindow(windowPath)",
+      "params": [
+        {
+          "name": "windowPath",
+          "type": "String",
+          "description": "The path of the window to find"
+        }
+      ],
+      "returns": {
+        "type": "FPMIWindow",
+        "description": "A reference to the window object"
+      },
+      "description": "Finds a reference to an open window with the given path.",
+      "long_description": "Returns a reference to the window with the given path. Throws a ValueError if the named window is not currently open. Use system.gui.findWindow() to search without an exception.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getWindow",
+      "examples": [
+        "window = system.gui.getWindow('Main Windows/Overview')\nwindow.rootContainer.getComponent('Label').text = 'Updated'"
+      ]
+    },
+    {
+      "name": "findWindow",
+      "signature": "findWindow(windowPath)",
+      "params": [
+        {
+          "name": "windowPath",
+          "type": "String",
+          "description": "The path of the window to find"
+        }
+      ],
+      "returns": {
+        "type": "List[FPMIWindow]",
+        "description": "A list of matching window references. Empty list if not found"
+      },
+      "description": "Finds and returns a list of windows with the given path.",
+      "long_description": "Unlike getWindow(), this function does not throw an exception if the window is not found. Returns an empty list instead.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-findWindow",
+      "examples": [
+        "windows = system.gui.findWindow('Main Windows/Overview')\nif len(windows) > 0:\n    windows[0].rootContainer.visible = True"
+      ]
+    },
+    {
+      "name": "getWindowNames",
+      "signature": "getWindowNames()",
+      "params": [],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of all window paths in the current project, sorted alphabetically"
+      },
+      "description": "Returns a list of the paths of all windows in the current project.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getWindowNames"
+    },
+    {
+      "name": "getOpenedWindows",
+      "signature": "getOpenedWindows()",
+      "params": [],
+      "returns": {
+        "type": "Tuple[FPMIWindow]",
+        "description": "A tuple of references to all currently open windows"
+      },
+      "description": "Finds all of the currently open windows and returns a tuple of references to them.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getOpenWindows"
+    },
+    {
+      "name": "getOpenedWindowNames",
+      "signature": "getOpenedWindowNames()",
+      "params": [],
+      "returns": {
+        "type": "Tuple[String]",
+        "description": "A tuple of paths of all currently open windows"
+      },
+      "description": "Finds all of the currently open windows, returning a tuple of their paths.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getOpenedWindowNames"
+    },
+    {
+      "name": "getParentWindow",
+      "signature": "getParentWindow(event)",
+      "params": [
+        {
+          "name": "event",
+          "type": "EventObject",
+          "description": "A component event object from which to find the parent window"
+        }
+      ],
+      "returns": {
+        "type": "FPMIWindow",
+        "description": "A reference to the parent window containing the component that fired the event"
+      },
+      "description": "Finds the parent window of a component that fired an event.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getParentWindow",
+      "examples": [
+        "window = system.gui.getParentWindow(event)\nwindow.rootContainer.getComponent('Label').text = 'Clicked'"
+      ]
+    },
+    {
+      "name": "getSibling",
+      "signature": "getSibling(event, name)",
+      "params": [
+        {
+          "name": "event",
+          "type": "EventObject",
+          "description": "A component event object"
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "description": "The name of the sibling component to find"
+        }
+      ],
+      "returns": {
+        "type": "VisionComponent",
+        "description": "A reference to the sibling component"
+      },
+      "description": "Given a component event object, looks up a sibling component.",
+      "long_description": "Shortcut for event.source.parent.getComponent(name). Useful for referencing other components in the same container from an event handler.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getSibling",
+      "examples": [
+        "label = system.gui.getSibling(event, 'Label')\nlabel.text = 'Button was clicked'"
+      ]
+    },
+    {
+      "name": "getQuality",
+      "signature": "getQuality(component, propertyName)",
+      "params": [
+        {
+          "name": "component",
+          "type": "VisionComponent",
+          "description": "The component to check quality for"
+        },
+        {
+          "name": "propertyName",
+          "type": "String",
+          "description": "The name of the property to check quality for"
+        }
+      ],
+      "returns": {
+        "type": "int",
+        "description": "An integer representing the data quality of the property"
+      },
+      "description": "Returns the data quality for the property of the given component.",
+      "long_description": "Can be used to check the quality of a Tag binding on a component to take alternative actions in the event of device disconnections. Quality value of 192 indicates good quality.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getQuality",
+      "examples": [
+        "quality = system.gui.getQuality(event.source, 'text')\nif quality < 192:\n    print 'Bad quality on text property'"
+      ]
+    },
+    {
+      "name": "transform",
+      "signature": "transform(component, newX=None, newY=None, newWidth=None, newHeight=None, duration=0, framesPerSecond=24, acceleration=0, callback=None)",
+      "params": [
+        {
+          "name": "component",
+          "type": "VisionComponent",
+          "description": "The component to transform"
+        },
+        {
+          "name": "newX",
+          "type": "int",
+          "description": "New X position for the component",
+          "optional": true
+        },
+        {
+          "name": "newY",
+          "type": "int",
+          "description": "New Y position for the component",
+          "optional": true
+        },
+        {
+          "name": "newWidth",
+          "type": "int",
+          "description": "New width for the component",
+          "optional": true
+        },
+        {
+          "name": "newHeight",
+          "type": "int",
+          "description": "New height for the component",
+          "optional": true
+        },
+        {
+          "name": "duration",
+          "type": "int",
+          "description": "Duration of the animation in milliseconds. 0 for instant",
+          "optional": true,
+          "default": "0"
+        },
+        {
+          "name": "framesPerSecond",
+          "type": "int",
+          "description": "Frames per second for the animation",
+          "optional": true,
+          "default": "24"
+        },
+        {
+          "name": "acceleration",
+          "type": "int",
+          "description": "Acceleration factor for the animation. 0 for linear, positive for ease-in, negative for ease-out",
+          "optional": true,
+          "default": "0"
+        },
+        {
+          "name": "callback",
+          "type": "Function",
+          "description": "Function to call when the transformation is complete",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Sets a component's position and size at runtime, with optional animation.",
+      "long_description": "Transforms a component by changing its position and/or size. Can animate the transition by specifying a duration. The callback function is invoked when the animation completes.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-transform",
+      "examples": [
+        "system.gui.transform(event.source, newWidth=200, newHeight=100)",
+        "system.gui.transform(event.source, newX=50, newY=50, duration=1000, acceleration=1)"
+      ]
+    },
+    {
+      "name": "convertPointToScreen",
+      "signature": "convertPointToScreen(x, y, event)",
+      "params": [
+        {
+          "name": "x",
+          "type": "int",
+          "description": "X coordinate relative to the component"
+        },
+        {
+          "name": "y",
+          "type": "int",
+          "description": "Y coordinate relative to the component"
+        },
+        {
+          "name": "event",
+          "type": "EventObject",
+          "description": "A component event object to determine the source component"
+        }
+      ],
+      "returns": {
+        "type": "Tuple",
+        "description": "A tuple of (x, y) coordinates relative to the screen"
+      },
+      "description": "Converts coordinates relative to a component to screen coordinates.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-convertPointToScreen"
+    },
+    {
+      "name": "createPopupMenu",
+      "signature": "createPopupMenu(itemNames, itemFunctions)",
+      "params": [
+        {
+          "name": "itemNames",
+          "type": "List[String]",
+          "description": "A list of strings for the menu item labels"
+        },
+        {
+          "name": "itemFunctions",
+          "type": "List[Function]",
+          "description": "A list of function objects to call when each menu item is clicked"
+        }
+      ],
+      "returns": {
+        "type": "JPopupMenu",
+        "description": "A popup menu component that can be shown using its .show() method"
+      },
+      "description": "Creates a popup menu with string entries and function click handlers.",
+      "long_description": "Creates a new JPopupMenu which can be shown over a component on a mouse event. Each menu item has a label and a corresponding function that is called when the item is selected.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-createPopupMenu",
+      "examples": [
+        "def doEdit(event):\n    print 'Edit clicked'\ndef doDelete(event):\n    print 'Delete clicked'\nmenu = system.gui.createPopupMenu(['Edit', 'Delete'], [doEdit, doDelete])\nmenu.show(event.source, event.x, event.y)"
+      ]
+    },
+    {
+      "name": "getScreenIndex",
+      "signature": "getScreenIndex()",
+      "params": [],
+      "returns": {
+        "type": "int",
+        "description": "The index of the screen where the client is currently displayed"
+      },
+      "description": "Returns the index of the screen that the client is currently on.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getScreenIndex"
+    },
+    {
+      "name": "setScreenIndex",
+      "signature": "setScreenIndex(index)",
+      "params": [
+        {
+          "name": "index",
+          "type": "int",
+          "description": "The screen index to move the client to"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Moves the client to a specific monitor by screen index.",
+      "long_description": "Use system.gui.getScreens() to get a list of available monitors and their indices before calling this function.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-setScreenIndex",
+      "examples": [
+        "system.gui.setScreenIndex(1)"
+      ]
+    },
+    {
+      "name": "getScreens",
+      "signature": "getScreens()",
+      "params": [],
+      "returns": {
+        "type": "Dataset",
+        "description": "A dataset containing information about all monitors connected to the computer"
+      },
+      "description": "Returns a list of all monitors on the computer the client is running on.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-getScreens"
+    },
+    {
+      "name": "isTouchscreenModeEnabled",
+      "signature": "isTouchscreenModeEnabled()",
+      "params": [],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if Touch Screen mode is currently enabled in the client"
+      },
+      "description": "Checks whether the running client's Touch Screen mode is enabled.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-isTouchscreenModeEnabled"
+    },
+    {
+      "name": "setTouchscreenModeEnabled",
+      "signature": "setTouchscreenModeEnabled(enabled)",
+      "params": [
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "True to enable Touch Screen mode, False to disable it"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Enables or disables Touch Screen mode on the running client.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-setTouchscreenModeEnabled"
+    },
+    {
+      "name": "showNumericKeypad",
+      "signature": "showNumericKeypad(initialValue=None, fontSize=None, usePasswordMode=False)",
+      "params": [
+        {
+          "name": "initialValue",
+          "type": "Number",
+          "description": "The initial numeric value to display",
+          "optional": true
+        },
+        {
+          "name": "fontSize",
+          "type": "int",
+          "description": "The font size for the keypad display",
+          "optional": true
+        },
+        {
+          "name": "usePasswordMode",
+          "type": "Boolean",
+          "description": "If True, masks the input like a password field",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "Number",
+        "description": "The number entered by the user, or None if canceled"
+      },
+      "description": "Displays a modal on-screen numeric keypad for mouse or touchscreen input.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-show-NumericKeypad",
+      "examples": [
+        "value = system.gui.showNumericKeypad(0)\nif value is not None:\n    system.tag.writeBlocking(['[default]SetPoint'], [value])"
+      ]
+    },
+    {
+      "name": "showTouchscreenKeyboard",
+      "signature": "showTouchscreenKeyboard(initialText='', fontSize=None, passwordMode=False)",
+      "params": [
+        {
+          "name": "initialText",
+          "type": "String",
+          "description": "The initial text to display",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "fontSize",
+          "type": "int",
+          "description": "The font size for the keyboard display",
+          "optional": true
+        },
+        {
+          "name": "passwordMode",
+          "type": "Boolean",
+          "description": "If True, masks the input like a password field",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The text entered by the user, or None if canceled"
+      },
+      "description": "Displays a modal on-screen keyboard for mouse or touchscreen text entry.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-showTouchscreenKeyboard",
+      "examples": [
+        "text = system.gui.showTouchscreenKeyboard('Enter name here')"
+      ]
+    },
+    {
+      "name": "openDiagnostics",
+      "signature": "openDiagnostics()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Opens the Client runtime Diagnostics window.",
+      "long_description": "Opens the Diagnostics window which provides information about performance, logging, active threads, connection status, and the console.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-gui/system-gui-openDiagnostics"
+    }
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "module": "system.net",
+  "version": "8.1+",
+  "functions": [
+    {
+      "name": "httpGet",
+      "signature": "httpGet(url, connectTimeout=10000, readTimeout=60000, username=None, password=None, headerValues=None, bypassCertValidation=False, useCaches=True, throwOnError=True)",
+      "params": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "The URL to retrieve"
+        },
+        {
+          "name": "connectTimeout",
+          "type": "int",
+          "description": "Connection timeout in milliseconds",
+          "optional": true,
+          "default": "10000"
+        },
+        {
+          "name": "readTimeout",
+          "type": "int",
+          "description": "Read timeout in milliseconds",
+          "optional": true,
+          "default": "60000"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "Username for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "Password for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "headerValues",
+          "type": "Dictionary",
+          "description": "Custom HTTP header key-value pairs to include in the request",
+          "optional": true
+        },
+        {
+          "name": "bypassCertValidation",
+          "type": "Boolean",
+          "description": "If True, bypasses SSL certificate validation for HTTPS",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "useCaches",
+          "type": "Boolean",
+          "description": "Whether to use cached responses",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "throwOnError",
+          "type": "Boolean",
+          "description": "If True, throws an exception on HTTP error status codes",
+          "optional": true,
+          "default": "True"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The response body as a string"
+      },
+      "description": "Retrieves the document at the given URL using HTTP GET and returns it as a string.",
+      "long_description": "Performs an HTTP GET request to the given URL and returns the response body as a string. Supports Basic authentication, custom headers, SSL bypass, and caching. For more flexible HTTP interactions, consider using system.net.httpClient() instead.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-httpGet",
+      "examples": [
+        "response = system.net.httpGet('https://api.example.com/data')",
+        "response = system.net.httpGet('https://api.example.com/data', headerValues={'Authorization': 'Bearer token123'})"
+      ]
+    },
+    {
+      "name": "httpPost",
+      "signature": "httpPost(url, postData, contentType='application/x-www-form-urlencoded', connectTimeout=10000, readTimeout=60000, username=None, password=None, headerValues=None, bypassCertValidation=False)",
+      "params": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "The URL to post to"
+        },
+        {
+          "name": "postData",
+          "type": "String | Dictionary",
+          "description": "The data to post. If a dictionary, entries are URL-encoded. If a string, posted as-is with the given contentType"
+        },
+        {
+          "name": "contentType",
+          "type": "String",
+          "description": "The MIME type of the post data",
+          "optional": true,
+          "default": "application/x-www-form-urlencoded"
+        },
+        {
+          "name": "connectTimeout",
+          "type": "int",
+          "description": "Connection timeout in milliseconds",
+          "optional": true,
+          "default": "10000"
+        },
+        {
+          "name": "readTimeout",
+          "type": "int",
+          "description": "Read timeout in milliseconds",
+          "optional": true,
+          "default": "60000"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "Username for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "Password for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "headerValues",
+          "type": "Dictionary",
+          "description": "Custom HTTP header key-value pairs",
+          "optional": true
+        },
+        {
+          "name": "bypassCertValidation",
+          "type": "Boolean",
+          "description": "If True, bypasses SSL certificate validation for HTTPS",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The response body as a string"
+      },
+      "description": "Sends an HTTP POST request to the given URL and returns the response as a string.",
+      "long_description": "Performs an HTTP POST to the given URL. If postData is a dictionary, entries are encoded as application/x-www-form-urlencoded. Arbitrary data can be posted by providing a string and the appropriate contentType (e.g., 'application/json').",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-httpPost",
+      "examples": [
+        "response = system.net.httpPost('https://api.example.com/data', {'key': 'value'})",
+        "import system.util\njsonData = system.util.jsonEncode({'name': 'test'})\nresponse = system.net.httpPost('https://api.example.com/data', jsonData, 'application/json')"
+      ]
+    },
+    {
+      "name": "httpPut",
+      "signature": "httpPut(url, putData, contentType='text/plain', connectTimeout=10000, readTimeout=60000, username=None, password=None, headerValues=None, bypassCertValidation=False)",
+      "params": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "The URL to put to"
+        },
+        {
+          "name": "putData",
+          "type": "String",
+          "description": "The data to put"
+        },
+        {
+          "name": "contentType",
+          "type": "String",
+          "description": "The MIME type of the put data",
+          "optional": true,
+          "default": "text/plain"
+        },
+        {
+          "name": "connectTimeout",
+          "type": "int",
+          "description": "Connection timeout in milliseconds",
+          "optional": true,
+          "default": "10000"
+        },
+        {
+          "name": "readTimeout",
+          "type": "int",
+          "description": "Read timeout in milliseconds",
+          "optional": true,
+          "default": "60000"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "Username for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "Password for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "headerValues",
+          "type": "Dictionary",
+          "description": "Custom HTTP header key-value pairs",
+          "optional": true
+        },
+        {
+          "name": "bypassCertValidation",
+          "type": "Boolean",
+          "description": "If True, bypasses SSL certificate validation",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The response body as a string"
+      },
+      "description": "Sends an HTTP PUT request to the given URL and returns the response as a string.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-httpPut"
+    },
+    {
+      "name": "httpDelete",
+      "signature": "httpDelete(url, contentType='text/plain', connectTimeout=10000, readTimeout=60000, username=None, password=None, headerValues=None, bypassCertValidation=False)",
+      "params": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "The URL to send the DELETE request to"
+        },
+        {
+          "name": "contentType",
+          "type": "String",
+          "description": "The MIME type of the request",
+          "optional": true,
+          "default": "text/plain"
+        },
+        {
+          "name": "connectTimeout",
+          "type": "int",
+          "description": "Connection timeout in milliseconds",
+          "optional": true,
+          "default": "10000"
+        },
+        {
+          "name": "readTimeout",
+          "type": "int",
+          "description": "Read timeout in milliseconds",
+          "optional": true,
+          "default": "60000"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "Username for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "Password for HTTP Basic authentication",
+          "optional": true
+        },
+        {
+          "name": "headerValues",
+          "type": "Dictionary",
+          "description": "Custom HTTP header key-value pairs",
+          "optional": true
+        },
+        {
+          "name": "bypassCertValidation",
+          "type": "Boolean",
+          "description": "If True, bypasses SSL certificate validation",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The response body as a string"
+      },
+      "description": "Sends an HTTP DELETE request to the given URL and returns the response as a string.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-httpDelete"
+    },
+    {
+      "name": "httpClient",
+      "signature": "httpClient(timeout=60000, bypass_cert_validation=True, username=None, password=None, proxy=None, cookie_policy=None, redirect_policy=None, version=None)",
+      "params": [
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Read timeout for requests in milliseconds",
+          "optional": true,
+          "default": "60000"
+        },
+        {
+          "name": "bypass_cert_validation",
+          "type": "Boolean",
+          "description": "If True, bypasses SSL certificate validation for HTTPS",
+          "optional": true,
+          "default": "True"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "Username for HTTP Basic authentication on all requests",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "Password for HTTP Basic authentication on all requests",
+          "optional": true
+        },
+        {
+          "name": "proxy",
+          "type": "String",
+          "description": "Proxy server URL",
+          "optional": true
+        },
+        {
+          "name": "cookie_policy",
+          "type": "String",
+          "description": "Cookie policy: 'ACCEPT_ALL', 'ACCEPT_NONE', 'ACCEPT_ORIGINAL_SERVER'",
+          "optional": true
+        },
+        {
+          "name": "redirect_policy",
+          "type": "String",
+          "description": "Redirect policy: 'ALWAYS', 'NEVER', 'NORMAL'",
+          "optional": true
+        },
+        {
+          "name": "version",
+          "type": "String",
+          "description": "HTTP version to use: 'HTTP_1_1' or 'HTTP_2'",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "JythonHttpClient",
+        "description": "A reusable HTTP client object with get(), post(), put(), delete(), request() methods"
+      },
+      "description": "Creates a reusable HTTP client for sending and receiving HTTP requests. Wraps Java's HttpClient.",
+      "long_description": "Creates a JythonHttpClient object that can send HTTP requests using get(), post(), put(), delete(), and request() methods. The client is heavyweight and should be created sparingly — instantiate once and reuse, ideally as a top-level variable in a project library script. Preferred over httpGet/httpPost for modern Ignition development.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-httpClient",
+      "examples": [
+        "client = system.net.httpClient()\nresponse = client.get('https://api.example.com/data')\nprint response.getJson()",
+        "client = system.net.httpClient(timeout=30000, bypass_cert_validation=False)\nresponse = client.post('https://api.example.com/data', data={'key': 'value'})\nprint response.getStatusCode()"
+      ]
+    },
+    {
+      "name": "openURL",
+      "signature": "openURL(url)",
+      "params": [
+        {
+          "name": "url",
+          "type": "String",
+          "description": "The URL or URI scheme to open in the host OS default application"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Opens the given URL or URI scheme in the host OS default application.",
+      "long_description": "Opens the given URL or URI scheme outside of the currently running Client in whatever application the host operating system deems appropriate. For example, a web URL opens in the default browser, a mailto: URI opens the default email client.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-openURL",
+      "examples": [
+        "system.net.openURL('https://docs.inductiveautomation.com')",
+        "system.net.openURL('mailto:user@example.com')"
+      ]
+    },
+    {
+      "name": "sendEmail",
+      "signature": "sendEmail(smtp='', fromAddr='', subject='', body='', html=False, to=[], attachmentNames=None, attachmentData=None, timeout=300000, username=None, password=None, priority='3', smtpProfile=None, cc=None, bcc=None, retries=0, replyTo=None)",
+      "params": [
+        {
+          "name": "smtp",
+          "type": "String",
+          "description": "SMTP server address (host or host:port). Not needed if using smtpProfile",
+          "optional": true
+        },
+        {
+          "name": "fromAddr",
+          "type": "String",
+          "description": "Sender email address"
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "description": "Email subject line",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "body",
+          "type": "String",
+          "description": "Email body content (plain text or HTML)",
+          "optional": true,
+          "default": ""
+        },
+        {
+          "name": "html",
+          "type": "Boolean",
+          "description": "If True, body is sent as HTML; if False, as plain text",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "to",
+          "type": "List[String]",
+          "description": "List of recipient email addresses"
+        },
+        {
+          "name": "attachmentNames",
+          "type": "List[String]",
+          "description": "List of filenames for attachments",
+          "optional": true
+        },
+        {
+          "name": "attachmentData",
+          "type": "List[bytes]",
+          "description": "List of byte arrays for attachment content",
+          "optional": true
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Timeout for sending in milliseconds",
+          "optional": true,
+          "default": "300000"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "SMTP username for authentication",
+          "optional": true
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "SMTP password for authentication",
+          "optional": true
+        },
+        {
+          "name": "priority",
+          "type": "String",
+          "description": "Email priority: '1' (high), '3' (normal), '5' (low)",
+          "optional": true,
+          "default": "3"
+        },
+        {
+          "name": "smtpProfile",
+          "type": "String",
+          "description": "Name of a configured SMTP email profile on the Gateway",
+          "optional": true
+        },
+        {
+          "name": "cc",
+          "type": "List[String]",
+          "description": "List of CC recipient email addresses",
+          "optional": true
+        },
+        {
+          "name": "bcc",
+          "type": "List[String]",
+          "description": "List of BCC recipient email addresses",
+          "optional": true
+        },
+        {
+          "name": "retries",
+          "type": "int",
+          "description": "Number of retry attempts if sending fails",
+          "optional": true,
+          "default": "0"
+        },
+        {
+          "name": "replyTo",
+          "type": "String",
+          "description": "Reply-to email address",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Sends an email through the given SMTP server or SMTP profile.",
+      "long_description": "Sends an email using either a direct SMTP server address or a pre-configured SMTP profile. Supports HTML content, file attachments, CC/BCC recipients, and authentication. When using smtpProfile, the smtp parameter can be omitted.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-sendEmail",
+      "examples": [
+        "system.net.sendEmail(smtpProfile='CorporateMail', fromAddr='ignition@example.com', subject='Alarm Alert', body='Tank level is high!', to=['operator@example.com'])"
+      ]
+    },
+    {
+      "name": "getHostName",
+      "signature": "getHostName()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The hostname of the computer running the script"
+      },
+      "description": "Returns the hostname of the computer that the script is running on.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-getHostName"
+    },
+    {
+      "name": "getIpAddress",
+      "signature": "getIpAddress()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The IP address of the computer running the script"
+      },
+      "description": "Returns the IP address of the computer that the script is running on.",
+      "long_description": "Returns the IP address of the local machine. In Gateway scope, returns the Gateway's IP. In Client scope, returns the Client machine's IP.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-getIpAddress"
+    },
+    {
+      "name": "getRemoteServers",
+      "signature": "getRemoteServers(runningOnly=True)",
+      "params": [
+        {
+          "name": "runningOnly",
+          "type": "Boolean",
+          "description": "If True, only returns servers that are currently running",
+          "optional": true,
+          "default": "True"
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "List of Gateway Network server IDs"
+      },
+      "description": "Returns a list of Gateway Network servers visible from the local Gateway.",
+      "scope": ["Gateway"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://www.docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-net/system-net-getRemoteServers"
+    }
+  ]
+}

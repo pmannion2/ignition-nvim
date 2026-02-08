@@ -118,7 +118,7 @@ function M.replace_script_in_line(line_text, key, new_content)
   local after = line_text:sub(old_content_end + 1) -- Skip the closing quote
 
   -- Reconstruct the line with new content
-  return before .. new_content .. '"' .. after:sub(2) -- after starts with quote, skip it
+  return before .. new_content .. '"' .. after
 end
 
 -- Get context information for a script

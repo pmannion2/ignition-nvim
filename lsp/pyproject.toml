@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Language Server Protocol implementation for Ignition by Inductive Automation"
 readme = "README.md"
 requires-python = ">=3.8"
-license = {text = "MIT"}
+license = "MIT"
 authors = [
     {name = "Whiskey House E&T", email = "engineering@whiskeyhouse.com"}
 ]
@@ -16,13 +16,13 @@ keywords = ["ignition", "lsp", "language-server", "neovim", "inductive-automatio
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 
 dependencies = [
@@ -47,11 +47,12 @@ Homepage = "https://github.com/whiskeyhouse/ignition-nvim"
 Repository = "https://github.com/whiskeyhouse/ignition-nvim"
 Issues = "https://github.com/whiskeyhouse/ignition-nvim/issues"
 
-[tool.setuptools]
-packages = ["ignition_lsp"]
+[tool.setuptools.packages.find]
+include = ["ignition_lsp*"]
 
 [tool.setuptools.package-data]
-ignition_lsp = ["py.typed", "data/*.json"]
+ignition_lsp = ["py.typed"]
+"ignition_lsp.api_db" = ["*.json"]
 
 [tool.black]
 line-length = 100

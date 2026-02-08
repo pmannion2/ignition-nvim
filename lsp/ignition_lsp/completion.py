@@ -2,7 +2,7 @@
 
 import logging
 import re
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from lsprotocol.types import (
     CompletionItem,
@@ -16,8 +16,12 @@ from lsprotocol.types import (
 from pygls.workspace import TextDocument
 
 from .api_loader import IgnitionAPILoader
+from .project_scanner import ProjectIndex
 
 logger = logging.getLogger(__name__)
+
+# Prefixes that trigger project-level completions
+PROJECT_PREFIXES = ("project.", "shared.")
 
 
 def get_completion_context(document: TextDocument, position: CompletionParams.position) -> str:
@@ -36,7 +40,8 @@ def get_completion_context(document: TextDocument, position: CompletionParams.po
 def get_completions(
     document: TextDocument,
     position: CompletionParams.position,
-    api_loader: IgnitionAPILoader
+    api_loader: IgnitionAPILoader,
+    project_index: Optional[ProjectIndex] = None,
 ) -> CompletionList:
     """Generate completion items based on context."""
     context = get_completion_context(document, position)
@@ -61,6 +66,9 @@ def get_completions(
     elif context.startswith("system.") and context.count(".") >= 2:
         # Typed "system.tag.read" etc - show matching functions
         items.extend(_get_function_completions(context, api_loader))
+    elif _is_project_prefix(context) and project_index is not None:
+        # Typed "project." or "shared." - show project script modules
+        items.extend(_get_project_completions(context, project_index))
 
     logger.info(f"Generated {len(items)} completion items")
     return CompletionList(is_incomplete=False, items=items)
@@ -157,5 +165,105 @@ def _get_function_completions(prefix: str, api_loader: IgnitionAPILoader) -> Lis
                 insert_text_format=InsertTextFormat.Snippet,
             )
         )
+
+    return items
+
+
+# ── Project Script Completions ───────────────────────────────────────
+
+
+def _is_project_prefix(context: str) -> bool:
+    """Check if the context starts with a project-level prefix."""
+    return any(context == p.rstrip(".") or context.startswith(p) for p in PROJECT_PREFIXES)
+
+
+def _get_project_completions(
+    context: str, project_index: ProjectIndex
+) -> List[CompletionItem]:
+    """Get completions for project-level script references.
+
+    Handles contexts like:
+        "project."         -> list top-level children (e.g., "library")
+        "project.library." -> list children at that level (e.g., "utils", "config")
+        "project.library.u" -> filter children matching "u" prefix
+        "shared."          -> list shared script modules
+    """
+    # Strip trailing dot for prefix search
+    if context.endswith("."):
+        prefix = context.rstrip(".")
+        partial = ""
+    else:
+        # "project.library.ut" -> prefix="project.library", partial="ut"
+        parts = context.rsplit(".", 1)
+        if len(parts) == 2:
+            prefix = parts[0]
+            partial = parts[1]
+        else:
+            prefix = context
+            partial = ""
+
+    # Find all scripts whose module_path starts with our prefix
+    matching = project_index.search_module_paths(prefix)
+
+    if not matching:
+        return []
+
+    # Collect the next path segment after the prefix
+    prefix_depth = prefix.count(".") + 1
+    seen: Dict[str, str] = {}  # segment -> full module_path (for detail)
+
+    for loc in matching:
+        parts = loc.module_path.split(".")
+        if len(parts) <= prefix_depth:
+            continue
+
+        segment = parts[prefix_depth]
+
+        # If there's a partial, filter by it
+        if partial and not segment.lower().startswith(partial.lower()):
+            continue
+
+        if segment not in seen:
+            # Track the resource type for the detail string
+            seen[segment] = loc.resource_type
+
+    items = []
+    for segment, resource_type in sorted(seen.items()):
+        # Check if this segment is a leaf (final module) or intermediate package
+        full_path = f"{prefix}.{segment}"
+        children = [
+            s for s in project_index.search_module_paths(full_path)
+            if s.module_path != full_path
+        ]
+        is_package = len(children) > 0
+        exact_match = project_index.find_by_module_path(full_path)
+
+        if exact_match and not is_package:
+            # Leaf module — show as a script reference
+            items.append(
+                CompletionItem(
+                    label=segment,
+                    kind=CompletionItemKind.Module,
+                    detail=f"{full_path} ({resource_type})",
+                    documentation=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=f"**{full_path}**\n\nProject script module\n\nSource: `{exact_match.file_path}`",
+                    ),
+                )
+            )
+        else:
+            # Intermediate package — show as a namespace
+            child_count = len(set(
+                s.module_path.split(".")[prefix_depth]
+                for s in project_index.search_module_paths(full_path)
+                if len(s.module_path.split(".")) > prefix_depth
+            ))
+            items.append(
+                CompletionItem(
+                    label=segment,
+                    kind=CompletionItemKind.Module,
+                    detail=f"{full_path} ({child_count} children)" if child_count else full_path,
+                )
+            )
 
     return items

@@ -1,0 +1,300 @@
+{
+  "module": "system.nav",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "centerWindow",
+      "signature": "centerWindow(path)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "The path of the window to center on screen"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Centers the given window on the screen.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-centerWindow",
+      "examples": [
+        "system.nav.openWindow('Popup')\nsystem.nav.centerWindow('Popup')"
+      ]
+    },
+    {
+      "name": "closeParentWindow",
+      "signature": "closeParentWindow(event)",
+      "params": [
+        {
+          "name": "event",
+          "type": "EventObject",
+          "description": "A component event object. The enclosing window of the event's source component will be closed"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes the parent window of the component that fired the given event.",
+      "long_description": "Convenience function that closes the window containing the component that triggered the event. Commonly used on 'Close' or 'Cancel' buttons in popup windows.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-closeParentWindow",
+      "examples": [
+        "# On a 'Close' button actionPerformed\nsystem.nav.closeParentWindow(event)"
+      ]
+    },
+    {
+      "name": "closeWindow",
+      "signature": "closeWindow(path)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "The path of the window to close"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Closes the window with the given path.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-closeWindow",
+      "examples": [
+        "system.nav.closeWindow('Popups/Settings')"
+      ]
+    },
+    {
+      "name": "desktop",
+      "signature": "desktop(handle=None)",
+      "params": [
+        {
+          "name": "handle",
+          "type": "String",
+          "description": "The handle for the desktop to target. Omit for the primary desktop",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "INavUtilities",
+        "description": "A navigation utilities proxy configured for the specified desktop, with all standard system.nav methods"
+      },
+      "description": "Returns a navigation proxy for a specific desktop, enabling multi-monitor window management.",
+      "long_description": "Returns an INavUtilities object that proxies all system.nav operations to a specific desktop. In multi-monitor Vision Client setups, each monitor can have a separate desktop with its own window stack. Pass the desktop handle to target a specific one, or omit it for the primary desktop.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-desktop",
+      "examples": [
+        "system.nav.desktop().closeWindow('Main Windows/Overview')",
+        "system.nav.desktop('2nd Desktop').swapTo('Main Windows/Detail')"
+      ]
+    },
+    {
+      "name": "getCurrentWindow",
+      "signature": "getCurrentWindow()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The path of the current maximized main-screen window"
+      },
+      "description": "Returns the path of the currently displayed main-screen window.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-getCurrentWindow",
+      "examples": [
+        "currentPath = system.nav.getCurrentWindow()\nprint 'Currently on:', currentPath"
+      ]
+    },
+    {
+      "name": "goBack",
+      "signature": "goBack()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigates back to the previous main-screen window in the navigation history.",
+      "long_description": "Uses the Typical Navigation Strategy to swap to the previously displayed main-screen window. Works like a browser's back button for Vision Client windows.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-goBack",
+      "examples": [
+        "system.nav.goBack()"
+      ]
+    },
+    {
+      "name": "goForward",
+      "signature": "goForward()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigates forward to the next main-screen window after a goBack() call.",
+      "long_description": "Uses the Typical Navigation Strategy to navigate forward in the window history. Only works after a previous goBack() call, similar to a browser's forward button.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-goForward",
+      "examples": [
+        "system.nav.goForward()"
+      ]
+    },
+    {
+      "name": "goHome",
+      "signature": "goHome()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Navigates to the configured home window using the Typical Navigation Strategy.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-goHome",
+      "examples": [
+        "system.nav.goHome()"
+      ]
+    },
+    {
+      "name": "openWindow",
+      "signature": "openWindow(path, params=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "The path of the window to open"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary[String, Any]",
+          "description": "Key-value pairs to set as dynamic properties on the target window's root container",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Window",
+        "description": "A reference to the opened window object"
+      },
+      "description": "Opens the window at the given path, or brings it to front if already open.",
+      "long_description": "Opens a window by path. If the window is already open, it is brought to front. The params dictionary enables parameterized windows — keys must match dynamic property names on the window's root container. The returned Window object can be used to modify window properties like size.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-openWindow",
+      "examples": [
+        "system.nav.openWindow('Main Windows/Overview')",
+        "window = system.nav.openWindow('Popups/ValveDetail', {'valveNum': 3, 'title': 'Valve 3'})\nsystem.nav.centerWindow('Popups/ValveDetail')"
+      ]
+    },
+    {
+      "name": "openWindowInstance",
+      "signature": "openWindowInstance(path, params=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "The path of the window to open a new instance of"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary[String, Any]",
+          "description": "Key-value pairs to set as dynamic properties on the target window's root container",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Window",
+        "description": "A reference to the newly opened window instance"
+      },
+      "description": "Opens a new window instance even if the window is already open.",
+      "long_description": "Unlike openWindow() which brings an existing window to front, this function always creates a new instance. Useful for popup windows that need multiple simultaneous copies — e.g., showing HMI faceplates for multiple pieces of equipment side by side. No limit on the number of instances.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-openWindowInstance",
+      "examples": [
+        "system.nav.openWindowInstance('Popups/HOA', {'machineNum': 3})\nsystem.nav.openWindowInstance('Popups/HOA', {'machineNum': 4})\nsystem.nav.openWindowInstance('Popups/HOA', {'machineNum': 5})"
+      ]
+    },
+    {
+      "name": "swapTo",
+      "signature": "swapTo(path, params=None)",
+      "params": [
+        {
+          "name": "path",
+          "type": "String",
+          "description": "The path of the window to swap to"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary[String, Any]",
+          "description": "Key-value pairs to set as dynamic properties on the target window's root container",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Window",
+        "description": "A reference to the window that was navigated to"
+      },
+      "description": "Swaps from the current main-screen window to the specified window.",
+      "long_description": "Performs a window swap from the current main-screen window to the target window. The current window is closed and the target is opened in its place. Unlike swapWindow(), you don't need to specify the source — it is automatically determined as the current main-screen window.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-swapTo",
+      "examples": [
+        "system.nav.swapTo('Main Windows/Detail')",
+        "system.nav.swapTo('Main Windows/Report', {'startDate': startDate, 'endDate': endDate})"
+      ]
+    },
+    {
+      "name": "swapWindow",
+      "signature": "swapWindow(swapFromPath, swapToPath, params=None)",
+      "params": [
+        {
+          "name": "swapFromPath",
+          "type": "String | EventObject",
+          "description": "The path of the window to close, or a component event whose enclosing window will be closed"
+        },
+        {
+          "name": "swapToPath",
+          "type": "String",
+          "description": "The path of the window to open"
+        },
+        {
+          "name": "params",
+          "type": "Dictionary[String, Any]",
+          "description": "Key-value pairs to set as dynamic properties on the target window's root container",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Window",
+        "description": "A reference to the newly opened window"
+      },
+      "description": "Closes one window and opens another in a single swap operation.",
+      "long_description": "Performs an atomic window swap: closes the source window and opens the target. The source can be specified as a window path string or a component event object (whose enclosing window is used). Supports passing parameters to the target window's root container dynamic properties.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-nav/system-nav-swapWindow",
+      "examples": [
+        "system.nav.swapWindow(event, 'Main Windows/Detail')",
+        "system.nav.swapWindow('Main Windows/Overview', 'Main Windows/Detail', {'startDate': date1, 'endDate': date2})"
+      ]
+    }
+  ]
+}

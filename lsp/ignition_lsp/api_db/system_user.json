@@ -1,0 +1,644 @@
+{
+  "module": "system.user",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "addCompositeSchedule",
+      "signature": "addCompositeSchedule(name, scheduleOne, scheduleTwo)",
+      "params": [
+        {
+          "name": "name",
+          "type": "String",
+          "description": "The name of the new composite schedule"
+        },
+        {
+          "name": "scheduleOne",
+          "type": "String",
+          "description": "The name of the first schedule to combine"
+        },
+        {
+          "name": "scheduleTwo",
+          "type": "String",
+          "description": "The name of the second schedule to combine"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Creates a composite schedule by combining two existing schedules.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-addCompositeSchedule"
+    },
+    {
+      "name": "addHoliday",
+      "signature": "addHoliday(holiday)",
+      "params": [
+        {
+          "name": "holiday",
+          "type": "HolidayModel",
+          "description": "A HolidayModel object defining the holiday name, date, and recurrence"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Adds a new holiday to the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-addHoliday"
+    },
+    {
+      "name": "addRole",
+      "signature": "addRole(userSource, role)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The name of the user source to add the role to"
+        },
+        {
+          "name": "role",
+          "type": "String",
+          "description": "The name of the new role to add"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Adds a new role to the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-addRole",
+      "examples": [
+        "system.user.addRole('default', 'Supervisor')"
+      ]
+    },
+    {
+      "name": "addSchedule",
+      "signature": "addSchedule(schedule)",
+      "params": [
+        {
+          "name": "schedule",
+          "type": "AbstractScheduleModel",
+          "description": "A schedule model object defining the schedule configuration"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Adds a new schedule to the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-addSchedule"
+    },
+    {
+      "name": "addUser",
+      "signature": "addUser(userSource, user)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to add the user to. An empty string uses the project's default user source"
+        },
+        {
+          "name": "user",
+          "type": "User",
+          "description": "A User object created via system.user.getNewUser()"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Adds a new user to the specified user source.",
+      "long_description": "Creates a new user account in the given user source. The User object should be created with system.user.getNewUser() and configured with properties, roles, and contact info before being passed to this function. Requires User Management client permission.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-addUser",
+      "examples": [
+        "newUser = system.user.getNewUser('default', 'jsmith')\nnewUser.set('firstname', 'John')\nnewUser.set('lastname', 'Smith')\nnewUser.set('password', 'tempPass123')\nnewUser.addRole('Operator')\nresult = system.user.addUser('default', newUser)"
+      ]
+    },
+    {
+      "name": "createScheduleAdjustment",
+      "signature": "createScheduleAdjustment(startDate, endDate, isAvailable, note)",
+      "params": [
+        {
+          "name": "startDate",
+          "type": "Date",
+          "description": "The starting date and time of the schedule adjustment"
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "description": "The ending date and time of the schedule adjustment"
+        },
+        {
+          "name": "isAvailable",
+          "type": "Boolean",
+          "description": "True if the user is available during this period, False if unavailable"
+        },
+        {
+          "name": "note",
+          "type": "String",
+          "description": "A note describing the reason for the adjustment"
+        }
+      ],
+      "returns": {
+        "type": "ScheduleAdjustment",
+        "description": "A ScheduleAdjustment object that can be added to a user's schedule"
+      },
+      "description": "Creates a schedule adjustment (override) for a specific time period.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-createScheduleAdjustment"
+    },
+    {
+      "name": "editHoliday",
+      "signature": "editHoliday(holidayName, holiday)",
+      "params": [
+        {
+          "name": "holidayName",
+          "type": "String",
+          "description": "The name of the existing holiday to edit"
+        },
+        {
+          "name": "holiday",
+          "type": "HolidayModel",
+          "description": "The updated HolidayModel object"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Edits an existing holiday definition.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-editHoliday"
+    },
+    {
+      "name": "editRole",
+      "signature": "editRole(userSource, oldName, newName)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source containing the role"
+        },
+        {
+          "name": "oldName",
+          "type": "String",
+          "description": "The current name of the role"
+        },
+        {
+          "name": "newName",
+          "type": "String",
+          "description": "The new name for the role"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Renames an existing role in the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-editRole",
+      "examples": [
+        "system.user.editRole('default', 'OldRoleName', 'NewRoleName')"
+      ]
+    },
+    {
+      "name": "editSchedule",
+      "signature": "editSchedule(scheduleName, schedule)",
+      "params": [
+        {
+          "name": "scheduleName",
+          "type": "String",
+          "description": "The name of the existing schedule to edit"
+        },
+        {
+          "name": "schedule",
+          "type": "AbstractScheduleModel",
+          "description": "The updated schedule model object"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Edits an existing schedule definition.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-editSchedule"
+    },
+    {
+      "name": "editUser",
+      "signature": "editUser(userSource, user)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source containing the user. An empty string uses the project's default user source"
+        },
+        {
+          "name": "user",
+          "type": "User",
+          "description": "The modified User object (retrieved via getUser, then modified)"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Saves changes to an existing user in the user source, replacing previous data.",
+      "long_description": "Updates a user account by replacing all data with the provided User object. First retrieve the user with getUser(), make modifications, then pass the modified user to editUser(). Requires User Management client permission.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-editUser",
+      "examples": [
+        "user = system.user.getUser('default', 'jsmith')\nuser.addRole('Supervisor')\nuser.set('lastname', 'Smithson')\nsystem.user.editUser('default', user)"
+      ]
+    },
+    {
+      "name": "getHoliday",
+      "signature": "getHoliday(holidayName)",
+      "params": [
+        {
+          "name": "holidayName",
+          "type": "String",
+          "description": "The name of the holiday to retrieve"
+        }
+      ],
+      "returns": {
+        "type": "HolidayModel",
+        "description": "A HolidayModel object with the holiday definition, or None if not found"
+      },
+      "description": "Returns a specific holiday by name.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getHoliday"
+    },
+    {
+      "name": "getHolidayNames",
+      "signature": "getHolidayNames()",
+      "params": [],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of all holiday names configured in the system"
+      },
+      "description": "Returns a list of all configured holiday names.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getHolidayNames"
+    },
+    {
+      "name": "getHolidays",
+      "signature": "getHolidays()",
+      "params": [],
+      "returns": {
+        "type": "List[HolidayModel]",
+        "description": "A list of all HolidayModel objects configured in the system"
+      },
+      "description": "Returns all holidays available in the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getHolidays"
+    },
+    {
+      "name": "getNewUser",
+      "signature": "getNewUser(userSource, username)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source the new user will belong to"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username for the new user"
+        }
+      ],
+      "returns": {
+        "type": "User",
+        "description": "A new User (PyUser) object with methods for setting properties, roles, and contact info"
+      },
+      "description": "Creates a new User object for use with addUser(). Does not persist the user until addUser() is called.",
+      "long_description": "Factory method that creates a new User object pre-configured for the given user source. The returned object supports .set(property, value) for setting firstname, lastname, password, etc., .addRole(role) for adding roles, and .addContactInfo(dict) for contact details. Must be passed to system.user.addUser() to persist.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getNewUser",
+      "examples": [
+        "newUser = system.user.getNewUser('default', 'jsmith')\nnewUser.set('firstname', 'John')\nnewUser.set('lastname', 'Smith')\nnewUser.set('password', 'tempPass')\nnewUser.addRole('Operator')\nnewUser.addContactInfo({'email': 'john@example.com'})"
+      ]
+    },
+    {
+      "name": "getRoles",
+      "signature": "getRoles(userSource)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to retrieve roles from"
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of role names available in the user source"
+      },
+      "description": "Returns all role names defined in the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getRoles",
+      "examples": [
+        "roles = system.user.getRoles('default')\nfor role in roles:\n    print role"
+      ]
+    },
+    {
+      "name": "getSchedule",
+      "signature": "getSchedule(scheduleName)",
+      "params": [
+        {
+          "name": "scheduleName",
+          "type": "String",
+          "description": "The name of the schedule to retrieve"
+        }
+      ],
+      "returns": {
+        "type": "AbstractScheduleModel",
+        "description": "The schedule model object, or None if not found"
+      },
+      "description": "Returns a specific schedule by name.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getSchedule"
+    },
+    {
+      "name": "getScheduledUsers",
+      "signature": "getScheduledUsers(userSource, date=None)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to check for scheduled users"
+        },
+        {
+          "name": "date",
+          "type": "Date",
+          "description": "The date to check schedules for. If omitted, uses the current date and time",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "List[User]",
+        "description": "A list of User objects for users currently scheduled (or scheduled at the given date)"
+      },
+      "description": "Returns a list of users that are scheduled at the current or specified date/time.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getScheduledUsers",
+      "examples": [
+        "onShift = system.user.getScheduledUsers('default')\nfor user in onShift:\n    print user.get('username')"
+      ]
+    },
+    {
+      "name": "getScheduleNames",
+      "signature": "getScheduleNames()",
+      "params": [],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of all schedule names configured in the system"
+      },
+      "description": "Returns a list of all schedule names available in the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getScheduleNames"
+    },
+    {
+      "name": "getSchedules",
+      "signature": "getSchedules()",
+      "params": [],
+      "returns": {
+        "type": "List[AbstractScheduleModel]",
+        "description": "A list of all schedule model objects"
+      },
+      "description": "Returns all available schedule models with full configuration information.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getSchedules"
+    },
+    {
+      "name": "getUser",
+      "signature": "getUser(userSource, username)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to search. An empty string uses the project's default user source"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username to look up"
+        }
+      ],
+      "returns": {
+        "type": "User",
+        "description": "A User object with all properties except the password. Returns None if not found"
+      },
+      "description": "Looks up a specific user by username in the given user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getUser",
+      "examples": [
+        "user = system.user.getUser('default', 'jsmith')\nprint user.get('firstname') + ' ' + user.get('lastname')"
+      ]
+    },
+    {
+      "name": "getUsers",
+      "signature": "getUsers(userSource)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to retrieve users from"
+        }
+      ],
+      "returns": {
+        "type": "List[User]",
+        "description": "A list of User objects for all users in the user source"
+      },
+      "description": "Returns all users in the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getUsers",
+      "examples": [
+        "users = system.user.getUsers('default')\nfor user in users:\n    print user.get('username'), user.getRoles()"
+      ]
+    },
+    {
+      "name": "getUserSources",
+      "signature": "getUserSources()",
+      "params": [],
+      "returns": {
+        "type": "List[UserSourceMeta]",
+        "description": "A list of objects representing all configured user source profiles"
+      },
+      "description": "Returns all user source profiles configured on the Gateway.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-getUserSources"
+    },
+    {
+      "name": "isUserScheduled",
+      "signature": "isUserScheduled(user, date=None)",
+      "params": [
+        {
+          "name": "user",
+          "type": "User",
+          "description": "The User object to check the schedule for"
+        },
+        {
+          "name": "date",
+          "type": "Date | int",
+          "description": "The date to check. Can be a Date object or Unix time in milliseconds. If omitted, uses the current date and time",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the user is scheduled at the given date/time, False otherwise"
+      },
+      "description": "Checks if a user is currently scheduled or scheduled at a specific date/time.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-isUserScheduled",
+      "examples": [
+        "user = system.user.getUser('default', 'oper1')\nif system.user.isUserScheduled(user):\n    print 'oper1 is on shift'"
+      ]
+    },
+    {
+      "name": "removeHoliday",
+      "signature": "removeHoliday(holidayName)",
+      "params": [
+        {
+          "name": "holidayName",
+          "type": "String",
+          "description": "The name of the holiday to remove"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Removes a holiday from the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-removeHoliday"
+    },
+    {
+      "name": "removeRole",
+      "signature": "removeRole(userSource, role)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source to remove the role from"
+        },
+        {
+          "name": "role",
+          "type": "String",
+          "description": "The name of the role to remove"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Removes a role from the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-removeRole"
+    },
+    {
+      "name": "removeSchedule",
+      "signature": "removeSchedule(scheduleName)",
+      "params": [
+        {
+          "name": "scheduleName",
+          "type": "String",
+          "description": "The name of the schedule to remove"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Removes a schedule from the system.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-removeSchedule"
+    },
+    {
+      "name": "removeUser",
+      "signature": "removeUser(userSource, username)",
+      "params": [
+        {
+          "name": "userSource",
+          "type": "String",
+          "description": "The user source containing the user. An empty string uses the project's default user source"
+        },
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username of the user to remove"
+        }
+      ],
+      "returns": {
+        "type": "UIResponse",
+        "description": "A UIResponse object with getWarns(), getErrors(), and getInfos() methods"
+      },
+      "description": "Removes a user from the specified user source.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-user/system-user-removeUser",
+      "examples": [
+        "result = system.user.removeUser('default', 'jsmith')\nif len(result.getErrors()) > 0:\n    print 'Error:', result.getErrors()[0]"
+      ]
+    }
+  ]
+}

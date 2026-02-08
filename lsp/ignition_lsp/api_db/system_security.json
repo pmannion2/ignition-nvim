@@ -1,0 +1,248 @@
+{
+  "module": "system.security",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "getRoles",
+      "signature": "getRoles()",
+      "params": [],
+      "returns": {
+        "type": "Tuple[String]",
+        "description": "A tuple of role name strings assigned to the current user"
+      },
+      "description": "Returns the roles assigned to the currently logged in user as a tuple of strings.",
+      "long_description": "Retrieves the security roles assigned to the currently authenticated user in a Vision Client. Useful for role-based access control — check whether a user has a specific role before allowing access to restricted windows or actions.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-getRoles",
+      "examples": [
+        "if \"Supervisor\" in system.security.getRoles():\n    system.nav.openWindow(\"ManagementOnly\")\nelse:\n    system.gui.errorBox(\"You don't have sufficient privileges to continue\")"
+      ]
+    },
+    {
+      "name": "getUsername",
+      "signature": "getUsername()",
+      "params": [],
+      "returns": {
+        "type": "String",
+        "description": "The username of the currently logged in user"
+      },
+      "description": "Returns the username of the currently logged in user.",
+      "long_description": "Retrieves the username of the currently authenticated user in the Vision Client. Commonly used in startup scripts or conditional logic to customize application behavior based on user identity.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-getUsername",
+      "examples": [
+        "name = system.security.getUsername()\nif name == 'Bob':\n    system.nav.openWindow(\"BobsHomepage\")\nelse:\n    system.nav.openWindow(\"NormalHomepage\")"
+      ]
+    },
+    {
+      "name": "getUserRoles",
+      "signature": "getUserRoles(username, password, authProfile=None, timeout=60000)",
+      "params": [
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username to fetch roles for"
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "The password for the user"
+        },
+        {
+          "name": "authProfile",
+          "type": "String",
+          "description": "The name of the authentication profile to run against. Uses the project's default profile if omitted",
+          "optional": true
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Timeout for client-to-gateway communication in milliseconds. Vision Client only",
+          "optional": true,
+          "default": "60000"
+        }
+      ],
+      "returns": {
+        "type": "Tuple[String]",
+        "description": "A tuple of roles assigned to the user if authentication succeeds, or None if authentication fails"
+      },
+      "description": "Fetches the roles for a specified user from the Gateway by validating credentials.",
+      "long_description": "Authenticates the given username and password against an authentication profile and returns the user's roles. The user does not need to be the currently logged in user. If authentication fails, returns None. The timeout parameter is only available in Vision Client scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-getUserRoles",
+      "examples": [
+        "reqRole = \"Admin\"\nusername = \"Billy\"\npassword = \"Secret\"\nroles = system.security.getUserRoles(username, password)\nif reqRole in roles:\n    # do something requiring Admin role\n    pass"
+      ]
+    },
+    {
+      "name": "isScreenLocked",
+      "signature": "isScreenLocked()",
+      "params": [],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the screen is currently locked, False otherwise"
+      },
+      "description": "Returns whether or not the screen is currently in lock-screen mode.",
+      "long_description": "Checks the current lock status of the screen in a Vision Client application. Useful for coordinating screen locking with auto-logout timers to prevent redundant lock attempts.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-isScreenLocked",
+      "examples": [
+        "if system.util.getInactivitySeconds() > 15 and not system.security.isScreenLocked():\n    system.security.lockScreen()\nelif system.util.getInactivitySeconds() > 30:\n    system.security.logout()"
+      ]
+    },
+    {
+      "name": "lockScreen",
+      "signature": "lockScreen(obscure=None)",
+      "params": [
+        {
+          "name": "obscure",
+          "type": "Boolean",
+          "description": "If True, the locked screen will be opaque. If False, the screen content will be partially visible behind the lock overlay",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Puts the running Vision Client into lock-screen mode.",
+      "long_description": "Locks the Vision Client screen, requiring valid credentials to unlock. The screen can be unlocked by the user entering their credentials or programmatically via system.security.unlockScreen(). The optional obscure parameter controls whether the screen content is hidden behind an opaque overlay or remains partially visible.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-lockScreen",
+      "examples": [
+        "system.security.lockScreen()",
+        "system.security.lockScreen(obscure=True)"
+      ]
+    },
+    {
+      "name": "logout",
+      "signature": "logout()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Logs out the current user and returns the client to the login screen.",
+      "long_description": "Logs out of the Client for the current user and brings the Client to the login screen. Commonly used in inactivity timer scripts to automatically log out idle users for security purposes.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-logout",
+      "examples": [
+        "if system.util.getInactivitySeconds() > 30:\n    system.security.logout()"
+      ]
+    },
+    {
+      "name": "switchUser",
+      "signature": "switchUser(username, password, event=None, hideError=False)",
+      "params": [
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username to switch to"
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "The password for authentication"
+        },
+        {
+          "name": "event",
+          "type": "EventObject",
+          "description": "If specified, the enclosing window for this event's component will be closed during the switch user process. Useful for closing a login dialog after a successful switch",
+          "optional": true
+        },
+        {
+          "name": "hideError",
+          "type": "Boolean",
+          "description": "If True, suppresses the error display on a failed switch attempt",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the switch was successful, False if authentication failed"
+      },
+      "description": "Attempts to switch the current user on the fly without fully logging out.",
+      "long_description": "Authenticates and switches to a different user without going through the full logout/login cycle. If successful, all currently opened windows are closed, the user is switched, and windows are re-opened. The event parameter is useful for closing a switch-user popup window so it doesn't reopen after the switch.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-switchUser",
+      "examples": [
+        "uname = event.source.parent.getComponent(\"Username\").text\npwd = event.source.parent.getComponent(\"Password\").text\n\nsuccess = system.security.switchUser(uname, pwd, event)\n\nif not success:\n    event.source.parent.getComponent(\"Username\").requestFocusInWindow()"
+      ]
+    },
+    {
+      "name": "unlockScreen",
+      "signature": "unlockScreen()",
+      "params": [],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Unlocks the Vision Client if it is currently in lock-screen mode.",
+      "long_description": "Programmatically unlocks the Vision Client screen. Can be used in global scripts to automatically unlock specific client machines, such as kiosk displays that should never remain locked.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-unlockScreen",
+      "examples": [
+        "comp = system.net.getHostName()\nif comp == 'Line 1':\n    system.security.unlockScreen()"
+      ]
+    },
+    {
+      "name": "validateUser",
+      "signature": "validateUser(username, password, authProfile=None, timeout=60000)",
+      "params": [
+        {
+          "name": "username",
+          "type": "String",
+          "description": "The username to validate"
+        },
+        {
+          "name": "password",
+          "type": "String",
+          "description": "The password for the user"
+        },
+        {
+          "name": "authProfile",
+          "type": "String",
+          "description": "The name of the authentication profile to run against. Uses the project's default profile if omitted",
+          "optional": true
+        },
+        {
+          "name": "timeout",
+          "type": "int",
+          "description": "Timeout for client-to-gateway communication in milliseconds. Vision Client only",
+          "optional": true,
+          "default": "60000"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the username/password combination is valid, False if authentication failed"
+      },
+      "description": "Tests credentials against an authentication profile to check if they are valid.",
+      "long_description": "Validates a username and password combination against an authentication profile. When the authProfile parameter is omitted, the project's default authentication profile is used. The timeout parameter is only available in Vision Client scope for client-to-gateway communication.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-security/system-security-validateUser",
+      "examples": [
+        "currentUser = system.security.getUsername()\npassword = system.gui.passwordBox(\"Confirm Password\")\nvalid = system.security.validateUser(currentUser, password)\n\nif valid:\n    # proceed with action\n    pass\nelse:\n    system.gui.errorBox(\"Incorrect password\")"
+      ]
+    }
+  ]
+}

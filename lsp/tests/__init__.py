@@ -1,0 +1,1 @@
+# Ignition LSP test suite

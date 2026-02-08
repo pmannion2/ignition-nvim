@@ -1,0 +1,30 @@
+# .ralphrc - Ralph project configuration
+# Documentation: https://github.com/frankbria/ralph-claude-code
+
+# Project identification
+PROJECT_NAME="ignition-nvim"
+PROJECT_TYPE="lua"
+
+# Loop settings
+MAX_CALLS_PER_HOUR=100
+CLAUDE_TIMEOUT_MINUTES=15
+CLAUDE_OUTPUT_FORMAT="json"
+
+# Tool permissions
+# Lua plugin + Python LSP server project
+# Bash(*) allows all shell commands — Ralph needs mkdir, ls, wc, cd, python3, venv paths, etc.
+ALLOWED_TOOLS="Write,Read,Edit,Bash(*),WebFetch,WebSearch,Glob,Grep"
+
+# Session management
+SESSION_CONTINUITY=true
+SESSION_EXPIRY_HOURS=24
+
+# Task sources
+TASK_SOURCES="local"
+GITHUB_TASK_LABEL="ralph-task"
+BEADS_FILTER="status:open"
+
+# Circuit breaker thresholds
+CB_NO_PROGRESS_THRESHOLD=3
+CB_SAME_ERROR_THRESHOLD=5
+CB_OUTPUT_DECLINE_THRESHOLD=70

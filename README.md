@@ -20,33 +20,36 @@ This plugin uses a hybrid approach:
 
 ### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
+Minimal (uses defaults from `lazy.lua` — lazy-loads on filetype + commands, auto-installs LSP):
+
+```lua
+{ 'whiskeyhouse/ignition-nvim' }
+```
+
+With custom options:
+
 ```lua
 {
   'whiskeyhouse/ignition-nvim',
-  dependencies = {
-    'neovim/nvim-lspconfig', -- Required for LSP features
-  },
-  config = function()
-    require('ignition').setup({
-      lsp = {
-        enabled = true,
-        auto_start = true,
-        settings = {
-          ignition = {
-            version = "8.1", -- Your Ignition version
-          },
+  opts = {
+    lsp = {
+      enabled = true,
+      auto_start = true,
+      settings = {
+        ignition = {
+          version = "8.1", -- Your Ignition version
         },
       },
-      kindling = {
-        enabled = true,
-        -- path = '/path/to/kindling', -- Optional: specify Kindling path
-      },
-      decoder = {
-        auto_decode = true,
-        auto_encode = true,
-      },
-    })
-  end,
+    },
+    kindling = {
+      enabled = true,
+      -- path = '/path/to/kindling', -- Optional: specify Kindling path
+    },
+    decoder = {
+      auto_decode = true,
+      auto_encode = true,
+    },
+  },
 }
 ```
 
@@ -64,13 +67,14 @@ use {
 
 ## LSP Server Installation
 
-The Python LSP server provides advanced code intelligence features:
+The Python LSP server provides advanced code intelligence features. With lazy.nvim, it is
+installed automatically via the `build` step. To install manually:
 
 ```bash
 # Install from PyPI (once published)
 pip install ignition-lsp
 
-# Or install from source
+# Or install from source (inside the plugin directory)
 cd lsp
 pip install -e .
 ```
@@ -191,11 +195,13 @@ This plugin is under active development. See our [Linear project](https://linear
 - [x] Virtual document system for editing scripts
 - [x] Auto-detection of embedded scripts
 - [x] Interactive script selection
-- [ ] LSP server with Ignition API completion
-- [ ] Project indexing and navigation
-- [ ] Comprehensive testing suite
+- [x] LSP server with Ignition API completion (14 modules, 239 functions)
+- [x] Project indexing and navigation (workspace symbols, cross-file completions)
+- [x] Go-to-definition for system.* and project scripts
+- [x] Kindling integration for .gwbk files
+- [x] Comprehensive testing suite (162 Python + 107 Lua tests)
 - [ ] Full documentation and examples
-- [ ] Integration with existing linting tools
+- [ ] CI workflow (GitHub Actions)
 
 ## Contributing
 

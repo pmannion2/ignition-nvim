@@ -15,11 +15,14 @@ function M.create_virtual_doc(source_bufnr, script_info)
   local source_filename = vim.fn.fnamemodify(source_file, ':t')
   local virtual_name = string.format('[Ignition:%s:%s]', source_filename, script_info.key)
 
-  -- Check if a buffer with this name already exists
-  local existing_bufnr = vim.fn.bufnr(virtual_name)
-  if existing_bufnr ~= -1 and vim.api.nvim_buf_is_valid(existing_bufnr) then
-    -- Buffer already exists - return it and focus it
-    return existing_bufnr
+  -- Check if a virtual doc with this name already exists
+  -- Note: vim.fn.bufnr() treats [] as glob patterns, so we search our own table instead
+  for bufnr, metadata in pairs(M.virtual_docs) do
+    if vim.api.nvim_buf_is_valid(bufnr)
+      and metadata.source_bufnr == source_bufnr
+      and metadata.script_key == script_info.key then
+      return bufnr
+    end
   end
 
   -- Create a scratch buffer

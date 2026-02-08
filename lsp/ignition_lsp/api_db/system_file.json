@@ -1,0 +1,251 @@
+{
+  "module": "system.file",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "fileExists",
+      "signature": "fileExists(filepath)",
+      "params": [
+        {
+          "name": "filepath",
+          "type": "String",
+          "description": "The path to check for a file or directory"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if a file or folder exists at the given path, False otherwise"
+      },
+      "description": "Checks if a file or folder exists at the given path.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-fileExists",
+      "examples": [
+        "if system.file.fileExists('C:\\\\data\\\\config.json'):\n    config = system.file.readFileAsString('C:\\\\data\\\\config.json')"
+      ]
+    },
+    {
+      "name": "getTempFile",
+      "signature": "getTempFile(extension)",
+      "params": [
+        {
+          "name": "extension",
+          "type": "String",
+          "description": "The file extension for the temp file (e.g., 'csv', 'txt', 'xlsx')"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The path to the newly created temporary file"
+      },
+      "description": "Creates a new temporary file with the given extension and returns the path.",
+      "long_description": "Creates a new temporary file on the host machine with the specified extension. The file is created in the OS-default temp directory. Useful for intermediate processing where you need a file path but don't want to manage permanent file storage.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-getTempFile",
+      "examples": [
+        "tempPath = system.file.getTempFile('csv')\nsystem.file.writeFile(tempPath, csvData)"
+      ]
+    },
+    {
+      "name": "openFile",
+      "signature": "openFile(extension=None, defaultLocation=None)",
+      "params": [
+        {
+          "name": "extension",
+          "type": "String",
+          "description": "A file extension filter (e.g., 'pdf', 'txt', 'csv'). Only files matching this extension are shown",
+          "optional": true
+        },
+        {
+          "name": "defaultLocation",
+          "type": "String",
+          "description": "The default folder path to open the dialog in",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The absolute path to the selected file, or None if the user cancels the dialog"
+      },
+      "description": "Shows an 'Open File' dialog, prompting the user to choose a file to open.",
+      "long_description": "Displays a native OS file chooser dialog allowing the user to select a single file. Returns the absolute path to the chosen file, or None if the dialog is cancelled. Vision Client only — Perspective sessions execute on the Gateway where no OS file dialog is available.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-openFile",
+      "examples": [
+        "path = system.file.openFile('txt')\nif path is not None:\n    contents = system.file.readFileAsString(path)\n    event.source.parent.getComponent('Text Area').text = contents"
+      ]
+    },
+    {
+      "name": "openFiles",
+      "signature": "openFiles(extension=None, defaultLocation=None)",
+      "params": [
+        {
+          "name": "extension",
+          "type": "String",
+          "description": "A file extension filter (e.g., 'pdf', 'csv'). Only files matching this extension are shown",
+          "optional": true
+        },
+        {
+          "name": "defaultLocation",
+          "type": "String",
+          "description": "The default folder path to open the dialog in",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of absolute file paths selected by the user, or None if cancelled"
+      },
+      "description": "Shows an 'Open File' dialog allowing the user to select one or more files.",
+      "long_description": "Displays a native OS file chooser dialog with multi-select enabled, allowing the user to choose one or more files. Returns a list of file paths, or None if the dialog is cancelled. Vision Client only.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-openFiles",
+      "examples": [
+        "paths = system.file.openFiles('csv')\nif paths is not None:\n    for path in paths:\n        print path"
+      ]
+    },
+    {
+      "name": "readFileAsBytes",
+      "signature": "readFileAsBytes(filepath)",
+      "params": [
+        {
+          "name": "filepath",
+          "type": "String",
+          "description": "The path of the file to read"
+        }
+      ],
+      "returns": {
+        "type": "bytes",
+        "description": "The entire file contents as a byte array"
+      },
+      "description": "Reads the entire file at the given path and returns it as a byte array.",
+      "long_description": "Opens and reads the entire file at the specified path, returning the raw bytes. Suitable for binary files (images, PDFs, Excel workbooks). In Perspective, the path refers to the Gateway's filesystem.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-readFileAsBytes",
+      "examples": [
+        "imageBytes = system.file.readFileAsBytes('C:\\\\images\\\\logo.png')"
+      ]
+    },
+    {
+      "name": "readFileAsString",
+      "signature": "readFileAsString(filepath, encoding=None)",
+      "params": [
+        {
+          "name": "filepath",
+          "type": "String",
+          "description": "The path of the file to read"
+        },
+        {
+          "name": "encoding",
+          "type": "String",
+          "description": "The character encoding to use (e.g., 'UTF-8', 'ISO-8859-1', 'US-ASCII'). Uses system default if omitted",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The entire file contents as a string"
+      },
+      "description": "Reads the entire file at the given path and returns it as a string.",
+      "long_description": "Opens and reads the entire file at the specified path, decoding it with the given character encoding. In Perspective, the path refers to the Gateway's filesystem since all Perspective scripts execute on the Gateway.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-readFileAsString",
+      "examples": [
+        "contents = system.file.readFileAsString('/var/data/config.json')",
+        "contents = system.file.readFileAsString('C:\\\\data\\\\report.csv', 'UTF-8')"
+      ]
+    },
+    {
+      "name": "saveFile",
+      "signature": "saveFile(filename, extension=None, typeDesc=None)",
+      "params": [
+        {
+          "name": "filename",
+          "type": "String",
+          "description": "A suggested filename shown in the save dialog"
+        },
+        {
+          "name": "extension",
+          "type": "String",
+          "description": "File extension for filtering (e.g., 'jpeg', 'csv')",
+          "optional": true
+        },
+        {
+          "name": "typeDesc",
+          "type": "String",
+          "description": "A description of the file type shown in the filter (e.g., 'JPEG Image', 'CSV File')",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The filepath chosen by the user, or None if the dialog is cancelled"
+      },
+      "description": "Shows a 'Save As' dialog, prompting the user to choose a save location and filename.",
+      "long_description": "Displays a native OS 'Save As' dialog with a suggested filename. Returns the chosen path, or None if cancelled. This function only obtains the path — use system.file.writeFile() to actually write the data. Vision Client only.",
+      "scope": ["Vision"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-saveFile",
+      "examples": [
+        "path = system.file.saveFile('report.csv', 'csv', 'CSV File')\nif path is not None:\n    system.file.writeFile(path, csvData)"
+      ]
+    },
+    {
+      "name": "writeFile",
+      "signature": "writeFile(filepath, data, append=False, encoding='UTF-8')",
+      "params": [
+        {
+          "name": "filepath",
+          "type": "String",
+          "description": "The path of the file to write to"
+        },
+        {
+          "name": "data",
+          "type": "String | bytes",
+          "description": "The data to write. Can be a string (text) or byte array (binary)"
+        },
+        {
+          "name": "append",
+          "type": "Boolean",
+          "description": "If True, appends to the file. If False, overwrites the file",
+          "optional": true,
+          "default": "False"
+        },
+        {
+          "name": "encoding",
+          "type": "String",
+          "description": "The character encoding for string data (e.g., 'UTF-8', 'ISO-8859-1')",
+          "optional": true,
+          "default": "UTF-8"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Writes the given data to the file at the specified path.",
+      "long_description": "Writes string or binary data to a file. If the file exists and append is False, it is overwritten. Accepts both string and byte array data. In Perspective, writes to the Gateway's filesystem.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-file/system-file-writeFile",
+      "examples": [
+        "system.file.writeFile('C:\\\\logs\\\\output.txt', 'Hello World')",
+        "# Append to log file\nsystem.file.writeFile('/var/log/ignition/custom.log', logLine + '\\n', append=True)",
+        "# Write Excel bytes\nexcelBytes = system.dataset.toExcel(True, [ds])\nsystem.file.writeFile('C:\\\\reports\\\\data.xlsx', excelBytes)"
+      ]
+    }
+  ]
+}

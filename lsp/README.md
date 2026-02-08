@@ -4,15 +4,16 @@ Language Server Protocol implementation for Ignition by Inductive Automation.
 
 ## Features
 
-- Autocompletion for Ignition APIs (`system.*`, `shared.*`)
-- Hover documentation for Ignition functions
-- Go-to-definition for project scripts
-- Diagnostics for common issues and deprecated APIs
-- Project structure indexing
+- Autocompletion for `system.*`, `project.*`, and `shared.*` namespaces (239+ functions across 14 modules)
+- Hover documentation with function signatures, parameter details, and scope info
+- Go-to-definition for API functions and project scripts
+- Diagnostics for common scripting issues
+- Workspace symbols for project-wide script navigation
+- Project indexing across Ignition resource files
 
 ## Installation
 
-### From PyPI (once published)
+### From PyPI
 
 ```bash
 pip install ignition-lsp
@@ -72,11 +73,15 @@ ruff check ignition_lsp tests
 
 ## Architecture
 
-- `server.py` - Main LSP server implementation using pygls
-- `completion.py` - Completion provider for Ignition APIs
+- `server.py` - Main LSP server implementation using pygls 2.0
+- `api_loader.py` - API database loader and indexer
+- `completion.py` - Completion provider for Ignition APIs and project scripts
+- `hover.py` - Hover documentation provider
 - `diagnostics.py` - Diagnostic provider for code analysis
-- `indexer.py` - Project structure indexer
-- `data/` - Ignition API definitions and signatures
+- `definition.py` - Go-to-definition for API functions and project scripts
+- `project_scanner.py` - Ignition project structure indexer
+- `workspace_symbols.py` - Workspace symbol provider
+- `api_db/` - Ignition API function definitions (14 modules, 239+ functions)
 
 ## Contributing
 

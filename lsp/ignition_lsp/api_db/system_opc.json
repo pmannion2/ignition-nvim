@@ -1,0 +1,348 @@
+{
+  "module": "system.opc",
+  "version": "8.0",
+  "functions": [
+    {
+      "name": "browse",
+      "signature": "browse(opcServer=None, device=None, folderPath=None, opcItemPath=None)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server to browse. None to browse all servers",
+          "optional": true
+        },
+        {
+          "name": "device",
+          "type": "String",
+          "description": "The name of the device to browse",
+          "optional": true
+        },
+        {
+          "name": "folderPath",
+          "type": "String",
+          "description": "Filters on folder path. Use '*' for any number of characters and '?' for a single character",
+          "optional": true
+        },
+        {
+          "name": "opcItemPath",
+          "type": "String",
+          "description": "Filters on OPC item path. Use '*' for any number of characters and '?' for a single character",
+          "optional": true
+        }
+      ],
+      "returns": {
+        "type": "List[OPCBrowseTag]",
+        "description": "A list of OPCBrowseTag objects with getOpcServer(), getOpcItemPath(), getType(), getDisplayName(), getDisplayPath(), getDataType() methods"
+      },
+      "description": "Browses OPC servers in the runtime, returning a list of tags.",
+      "long_description": "Performs a fully recursive browse of OPC servers in the runtime. Warning: this browse cannot be terminated once started, which can be problematic in larger systems. Consider using system.opc.browseServer() instead for controlled, single-level browsing.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-browse",
+      "examples": [
+        "tags = system.opc.browse()\nfor row in tags:\n    print row.getOpcServer(), row.getOpcItemPath(), row.getType()",
+        "tags = system.opc.browse(opcServer='Ignition OPC UA Server', device='SLC')"
+      ]
+    },
+    {
+      "name": "browseServer",
+      "signature": "browseServer(opcServer, nodeId)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server connection"
+        },
+        {
+          "name": "nodeId",
+          "type": "String",
+          "description": "The node ID to browse. Use empty string for root, or a path like 'Devices' to browse devices"
+        }
+      ],
+      "returns": {
+        "type": "List[OPCBrowseElement]",
+        "description": "A list of browse element objects with getDisplayName(), getElementType(), getNodeId(), and getDatatype() methods"
+      },
+      "description": "Browses a single level of an OPC server, returning child nodes for the given node ID.",
+      "long_description": "Performs a single-level (non-recursive) browse of an OPC server at the specified node ID. Unlike system.opc.browse(), this function only returns immediate children, making it safe for large OPC servers. Call repeatedly to navigate the server tree. In Vision Client scope, returns OPCBrowseElement objects; in Gateway/Perspective scope, returns PyOPCTagEx objects.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-browseServer",
+      "examples": [
+        "opcServer = 'Ignition OPC UA Server'\ndevices = system.opc.browseServer(opcServer, 'Devices')\nfor device in devices:\n    print device.getDisplayName()",
+        "# Browse a specific device's tags\nresults = system.opc.browseServer('Ignition OPC UA Server', 'ns=1;s=[SLC]')\nfor r in results:\n    print r.getDisplayName(), r.getNodeId()"
+      ]
+    },
+    {
+      "name": "browseSimple",
+      "signature": "browseSimple(opcServer, device, folderPath, opcItemPath)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server to browse"
+        },
+        {
+          "name": "device",
+          "type": "String",
+          "description": "The name of the device to browse"
+        },
+        {
+          "name": "folderPath",
+          "type": "String",
+          "description": "Filters on folder path. Use '*' for any number of characters and '?' for a single character"
+        },
+        {
+          "name": "opcItemPath",
+          "type": "String",
+          "description": "Filters on OPC item path. Use '*' for any number of characters and '?' for a single character"
+        }
+      ],
+      "returns": {
+        "type": "List[OPCBrowseTag]",
+        "description": "A list of OPCBrowseTag objects with getOpcServer(), getOpcItemPath(), getType(), getDisplayName(), getDisplayPath(), getDataType() methods"
+      },
+      "description": "Browses OPC servers in the runtime, returning a list of tags. All parameters are required but can be None.",
+      "long_description": "Similar to system.opc.browse() but requires all four parameters (they can be set to None). Performs a fully recursive browse that cannot be terminated. For large systems, use system.opc.browseServer() instead for controlled browsing.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-browseSimple",
+      "examples": [
+        "tags = system.opc.browseSimple('Ignition OPC UA Server', 'SLC', '*B3*', None)\nfor tag in tags:\n    print tag.getOpcItemPath()"
+      ]
+    },
+    {
+      "name": "getServers",
+      "signature": "getServers(includeDisabled=False)",
+      "params": [
+        {
+          "name": "includeDisabled",
+          "type": "Boolean",
+          "description": "When True, returns both enabled and disabled servers. When False, returns only enabled servers",
+          "optional": true,
+          "default": "False"
+        }
+      ],
+      "returns": {
+        "type": "List[String]",
+        "description": "A list of OPC server connection names"
+      },
+      "description": "Returns a list of configured OPC server connection names.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-getServers",
+      "examples": [
+        "servers = system.opc.getServers()\nfor server in servers:\n    print server",
+        "# Include disabled servers\nallServers = system.opc.getServers(includeDisabled=True)"
+      ]
+    },
+    {
+      "name": "getServerState",
+      "signature": "getServerState(opcServer)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of an OPC server connection"
+        }
+      ],
+      "returns": {
+        "type": "String",
+        "description": "The connection state: UNKNOWN, FAULTED, CONNECTING, CLOSED, CONNECTED, or DISABLED. Returns None if the connection doesn't exist"
+      },
+      "description": "Returns the current state of the given OPC server connection.",
+      "long_description": "Retrieves the current operational state of a specified OPC server connection. Possible states are: UNKNOWN, FAULTED, CONNECTING, CLOSED, CONNECTED, and DISABLED. Returns None if the named connection does not exist.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-getServerState",
+      "examples": [
+        "allServers = system.opc.getServers()\nmessage = 'Server State:\\n'\nfor server in allServers:\n    message += server + ': ' + system.opc.getServerState(server) + '\\n'\nprint message"
+      ]
+    },
+    {
+      "name": "isServerEnabled",
+      "signature": "isServerEnabled(serverName)",
+      "params": [
+        {
+          "name": "serverName",
+          "type": "String",
+          "description": "The name of an OPC server connection"
+        }
+      ],
+      "returns": {
+        "type": "Boolean",
+        "description": "True if the connection is enabled, False if disabled"
+      },
+      "description": "Checks if an OPC server connection is enabled or disabled.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-isServerEnabled",
+      "examples": [
+        "allServers = system.opc.getServers(includeDisabled=True)\nfor server in allServers:\n    print '%s : %s' % (server, system.opc.isServerEnabled(server))"
+      ]
+    },
+    {
+      "name": "readValue",
+      "signature": "readValue(opcServer, itemPath)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server connection"
+        },
+        {
+          "name": "itemPath",
+          "type": "String",
+          "description": "The item path or address to read from the OPC server"
+        }
+      ],
+      "returns": {
+        "type": "QualifiedValue",
+        "description": "An object with value, quality, and timestamp. Use getValue(), getQuality().isGood(), and getTimestamp() to access"
+      },
+      "description": "Reads a single value directly from an OPC server connection.",
+      "long_description": "Reads the current value of a single OPC item directly from the server. Returns a QualifiedValue object containing the value, a quality code, and the server timestamp. Use getQuality().isGood() to check if the read was successful before using the value.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-readValue",
+      "examples": [
+        "server = 'Ignition OPC UA Server'\npath = '[SLCSim]_Meta:N7/N7:0'\nqv = system.opc.readValue(server, path)\nprint 'Value:', qv.getValue()\nprint 'Quality:', qv.getQuality().isGood()\nprint 'Timestamp:', qv.getTimestamp()"
+      ]
+    },
+    {
+      "name": "readValues",
+      "signature": "readValues(opcServer, itemPaths)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server connection"
+        },
+        {
+          "name": "itemPaths",
+          "type": "List[String]",
+          "description": "A list of item paths or addresses to read from the OPC server"
+        }
+      ],
+      "returns": {
+        "type": "List[QualifiedValue]",
+        "description": "A list of QualifiedValue objects in the same order as the requested item paths"
+      },
+      "description": "Reads multiple values directly from an OPC server connection in bulk.",
+      "long_description": "Bulk version of system.opc.readValue(). Reads multiple OPC items in a single call, which is more efficient than reading one at a time. Returns a list of QualifiedValue objects in the same order as the input item paths.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-readValues",
+      "examples": [
+        "paths = ['[SLCSim]_Meta:N7/N7:0', '[SLCSim]_Meta:N7/N7:1']\nvalues = system.opc.readValues('Ignition OPC UA Server', paths)\nfor qv in values:\n    print qv.getValue(), qv.getQuality().isGood()"
+      ]
+    },
+    {
+      "name": "setServerEnabled",
+      "signature": "setServerEnabled(serverName, enabled)",
+      "params": [
+        {
+          "name": "serverName",
+          "type": "String",
+          "description": "The name of an OPC server connection"
+        },
+        {
+          "name": "enabled",
+          "type": "Boolean",
+          "description": "True to enable the server connection, False to disable it"
+        }
+      ],
+      "returns": {
+        "type": "None",
+        "description": "Void"
+      },
+      "description": "Enables or disables an OPC server connection.",
+      "long_description": "Enables or disables an OPC server connection by name. Requires the OPC Server Management client permission in Vision/Perspective scope. Gateway scope is unrestricted.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-setServerEnabled",
+      "examples": [
+        "# Enable a specific server\nsystem.opc.setServerEnabled('Ignition OPC UA Server', True)",
+        "# Enable all disabled servers\nfor server in system.opc.getServers(includeDisabled=True):\n    if not system.opc.isServerEnabled(server):\n        system.opc.setServerEnabled(server, True)"
+      ]
+    },
+    {
+      "name": "writeValue",
+      "signature": "writeValue(opcServer, itemPath, value)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server connection"
+        },
+        {
+          "name": "itemPath",
+          "type": "String",
+          "description": "The item path or address to write to"
+        },
+        {
+          "name": "value",
+          "type": "Object",
+          "description": "The value to write to the OPC item"
+        }
+      ],
+      "returns": {
+        "type": "Quality",
+        "description": "A Quality object representing the write result. Call isGood() to verify success"
+      },
+      "description": "Writes a value directly through an OPC server connection synchronously.",
+      "long_description": "Writes a single value to an OPC item address and returns a Quality object indicating the result. This is a synchronous operation — the function blocks until the write completes. Requires OPC Server Management client permission in Vision/Perspective scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-writeValue",
+      "examples": [
+        "server = 'Ignition OPC UA Server'\npath = '[SLCSim]_Meta:N7/N7:0'\nresult = system.opc.writeValue(server, path, 42)\nif result.isGood():\n    print 'Write successful'\nelse:\n    print 'Write failed'"
+      ]
+    },
+    {
+      "name": "writeValues",
+      "signature": "writeValues(opcServer, itemPaths, values)",
+      "params": [
+        {
+          "name": "opcServer",
+          "type": "String",
+          "description": "The name of the OPC server connection"
+        },
+        {
+          "name": "itemPaths",
+          "type": "List[String]",
+          "description": "A list of item paths or addresses to write to"
+        },
+        {
+          "name": "values",
+          "type": "List[Object]",
+          "description": "A list of values to write, corresponding to each item path"
+        }
+      ],
+      "returns": {
+        "type": "List[Quality]",
+        "description": "A list of Quality objects in the same order as the provided addresses, each indicating the write result"
+      },
+      "description": "Writes multiple values directly through an OPC server connection in bulk.",
+      "long_description": "Bulk version of system.opc.writeValue(). Writes multiple values to OPC item addresses in a single call, which is more efficient than writing one at a time. Requires OPC Server Management client permission in Vision/Perspective scope.",
+      "scope": ["Gateway", "Vision", "Perspective"],
+      "deprecated": false,
+      "since": "8.0",
+      "docs_url": "https://docs.inductiveautomation.com/docs/8.1/appendix/scripting-functions/system-opc/system-opc-writeValues",
+      "examples": [
+        "server = 'Ignition OPC UA Server'\npaths = ['[SLCSim]_Meta:N7/N7:0', '[SLCSim]_Meta:N7/N7:1']\nvalues = [42, 100]\nresults = system.opc.writeValues(server, paths, values)\nfor i, r in enumerate(results):\n    print paths[i], 'OK' if r.isGood() else 'FAILED'"
+      ]
+    }
+  ]
+}
