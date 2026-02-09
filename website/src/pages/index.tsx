@@ -103,7 +103,7 @@ export default function Home(): React.JSX.Element {
           </Link>
           <Link
             className="secondary"
-            href="https://github.com/WhiskeyHouse/ignition-nvim"
+            href="https://github.com/pmannion2/ignition-nvim"
           >
             View on GitHub
           </Link>

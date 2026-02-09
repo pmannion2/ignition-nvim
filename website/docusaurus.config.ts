@@ -11,10 +11,10 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://WhiskeyHouse.github.io',
+  url: 'https://pmannion2.github.io',
   baseUrl: '/ignition-nvim/',
 
-  organizationName: 'WhiskeyHouse',
+  organizationName: 'pmannion2',
   projectName: 'ignition-nvim',
 
   onBrokenLinks: 'warn',
@@ -39,7 +39,7 @@ const config: Config = {
           path: '../docs',
           sidebarPath: './sidebars.ts',
           editUrl:
-            'https://github.com/WhiskeyHouse/ignition-nvim/tree/main/docs/',
+            'https://github.com/pmannion2/ignition-nvim/tree/main/docs/',
         },
         blog: false,
         theme: {
@@ -65,7 +65,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          href: 'https://github.com/WhiskeyHouse/ignition-nvim',
+          href: 'https://github.com/pmannion2/ignition-nvim',
           label: 'GitHub',
           position: 'right',
         },
@@ -95,11 +95,11 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/WhiskeyHouse/ignition-nvim',
+              href: 'https://github.com/pmannion2/ignition-nvim',
             },
             {
               label: 'ignition-lint',
-              href: 'https://WhiskeyHouse.github.io/ignition-lint/',
+              href: 'https://pmannion2.github.io/ignition-lint/',
             },
             {
               label: 'Credits',

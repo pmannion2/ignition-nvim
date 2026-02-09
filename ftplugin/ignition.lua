@@ -10,26 +10,33 @@ vim.b.did_ftplugin = 1
 -- Save user's existing options to restore on filetype change
 vim.b.undo_ftplugin = vim.b.undo_ftplugin or ''
 
-local function set_option_with_undo(option, value)
+local function set_buf_option_with_undo(option, value)
   local current_value = vim.bo[option]
   vim.bo[option] = value
   vim.b.undo_ftplugin = vim.b.undo_ftplugin
     .. string.format('|setlocal %s=%s', option, vim.inspect(current_value))
 end
 
--- Buffer options for Python-style editing (most Ignition scripts are Python)
-set_option_with_undo('expandtab', true)
-set_option_with_undo('tabstop', 4)
-set_option_with_undo('shiftwidth', 4)
-set_option_with_undo('softtabstop', 4)
-set_option_with_undo('textwidth', 100)
-set_option_with_undo('commentstring', '# %s')
+local function set_win_option_with_undo(option, value)
+  local current_value = vim.wo[option]
+  vim.wo[option] = value
+  vim.b.undo_ftplugin = vim.b.undo_ftplugin
+    .. string.format('|setlocal %s=%s', option, vim.inspect(current_value))
+end
 
--- Enable wrapping for long lines in JSON files
-set_option_with_undo('wrap', false)
+-- Buffer options for Python-style editing (most Ignition scripts are Python)
+set_buf_option_with_undo('expandtab', true)
+set_buf_option_with_undo('tabstop', 4)
+set_buf_option_with_undo('shiftwidth', 4)
+set_buf_option_with_undo('softtabstop', 4)
+set_buf_option_with_undo('textwidth', 100)
+set_buf_option_with_undo('commentstring', '# %s')
+
+-- Disable wrapping for long JSON lines
+set_win_option_with_undo('wrap', false)
 
 -- Format options for better editing experience
-set_option_with_undo('formatoptions', 'croql')
+set_buf_option_with_undo('formatoptions', 'croql')
 
 -- Set up buffer-local keymaps
 local keymap_opts = { buffer = true, silent = true, noremap = true }

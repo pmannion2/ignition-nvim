@@ -39,9 +39,9 @@ describe('Ignition encoding', function()
     local input = 'logger = system.util.getLogger("Test")\nlogger.info("Value: " + str(x))\nif x < 10:\n\treturn True'
     local encoded = encoding.encode_script(input)
     -- Should have escaped quotes, newlines, less than, etc.
-    assert.is_truthy(encoded:find('\\\\"'))
-    assert.is_truthy(encoded:find('\\\\n'))
-    assert.is_truthy(encoded:find('\\\\u003c'))
+    assert.is_truthy(encoded:find('\\"', 1, true))
+    assert.is_truthy(encoded:find('\\n', 1, true))
+    assert.is_truthy(encoded:find('\\u003c', 1, true))
   end)
 end)
 

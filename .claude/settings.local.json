@@ -48,7 +48,9 @@
       "Bash(/Users/pmannion/whiskeyhouse/ignition-nvim/lsp/venv/bin/python -m pytest:*)",
       "Bash(venv/bin/python -m pytest tests/ -v --tb=short)",
       "Bash(npm install:*)",
-      "Bash(npm run start:*)"
+      "Bash(npm run start:*)",
+      "Bash(./run_tests.sh:*)",
+      "Bash(nvim:*)"
     ],
     "deny": [],
     "ask": []

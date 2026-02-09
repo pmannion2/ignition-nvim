@@ -55,38 +55,67 @@ function M.encode_script(code)
 end
 
 -- Decode script from JSON string format
--- Converts escaped/Unicode characters back to their original form
+-- Uses single-pass parsing to correctly distinguish \\t (literal backslash + t)
+-- from \t (tab escape). Multi-pass replacement cannot handle this safely.
 function M.decode_script(encoded)
   if not encoded or encoded == '' then
     return ''
   end
 
-  local decoded = encoded
+  -- Map of single-char escapes after backslash
+  local escape_map = {
+    ['\\'] = '\\',
+    ['"']  = '"',
+    ['t']  = '\t',
+    ['b']  = '\b',
+    ['n']  = '\n',
+    ['r']  = '\r',
+    ['f']  = '\f',
+  }
 
-  -- Apply replacements in reverse order using plain string replacement
-  -- This avoids pattern matching issues with special characters
-  for i = #M.REPLACEMENT_CHARS, 1, -1 do
-    local replacement = M.REPLACEMENT_CHARS[i]
-    local search = replacement.to
-    local replace = replacement.from
+  -- Map of unicode escapes (\uXXXX)
+  local unicode_map = {
+    ['003c'] = '<',
+    ['003e'] = '>',
+    ['0026'] = '&',
+    ['003d'] = '=',
+    ['0027'] = "'",
+  }
 
-    -- Use simple string replacement (split and join)
-    local parts = {}
-    local start = 1
-    while true do
-      local pos = decoded:find(search, start, true) -- true = plain search, no patterns
-      if not pos then
-        table.insert(parts, decoded:sub(start))
-        break
+  local result = {}
+  local i = 1
+  local len = #encoded
+
+  while i <= len do
+    if encoded:sub(i, i) == '\\' and i < len then
+      local next_char = encoded:sub(i + 1, i + 1)
+
+      if next_char == 'u' and i + 5 <= len then
+        -- Potential unicode escape: \uXXXX
+        local code = encoded:sub(i + 2, i + 5)
+        if unicode_map[code] then
+          table.insert(result, unicode_map[code])
+          i = i + 6
+        else
+          -- Unknown unicode escape, keep as-is
+          table.insert(result, '\\')
+          i = i + 1
+        end
+      elseif escape_map[next_char] then
+        table.insert(result, escape_map[next_char])
+        i = i + 2
+      else
+        -- Unknown escape, keep backslash
+        table.insert(result, '\\')
+        i = i + 1
       end
-      table.insert(parts, decoded:sub(start, pos - 1))
-      table.insert(parts, replace)
-      start = pos + #search
+    else
+      table.insert(result, encoded:sub(i, i))
+      i = i + 1
     end
-    decoded = table.concat(parts)
   end
 
-  return decoded
+  return table.concat(result)
 end
 
 -- Test if a string appears to be an encoded Ignition script
