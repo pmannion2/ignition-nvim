@@ -50,7 +50,8 @@
       "Bash(npm install:*)",
       "Bash(npm run start:*)",
       "Bash(./run_tests.sh:*)",
-      "Bash(nvim:*)"
+      "Bash(nvim:*)",
+      "Bash(gh api:*)"
     ],
     "deny": [],
     "ask": []
