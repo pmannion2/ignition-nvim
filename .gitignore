@@ -65,3 +65,8 @@ doc/tags
 
 # Logs
 *.log
+
+# Docusaurus
+website/node_modules/
+website/build/
+website/.docusaurus/

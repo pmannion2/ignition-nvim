@@ -46,7 +46,9 @@
       "Bash(while read session)",
       "Bash(do tmux kill-session -t \"$session\" echo \"killed $session\" done)",
       "Bash(/Users/pmannion/whiskeyhouse/ignition-nvim/lsp/venv/bin/python -m pytest:*)",
-      "Bash(venv/bin/python -m pytest tests/ -v --tb=short)"
+      "Bash(venv/bin/python -m pytest tests/ -v --tb=short)",
+      "Bash(npm install:*)",
+      "Bash(npm run start:*)"
     ],
     "deny": [],
     "ask": []
