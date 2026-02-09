@@ -51,7 +51,13 @@
       "Bash(npm run start:*)",
       "Bash(./run_tests.sh:*)",
       "Bash(nvim:*)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(git push:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: pass minimal_init to PlenaryBustedDirectory for filetype tests\n\nPlenaryBustedDirectory runs each spec file in a subprocess. Without\nexplicitly passing minimal_init, the child process doesn''t load our\nplugin init, causing ftdetect/ignition.lua to never be sourced.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git tag:*)"
     ],
     "deny": [],
     "ask": []

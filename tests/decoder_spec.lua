@@ -23,6 +23,7 @@ end
 --- Helper: create a source buffer with JSON content and make it current
 local function setup_source_buf(lines, name)
   local buf = vim.api.nvim_create_buf(true, false)
+  vim.bo[buf].swapfile = false
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
   vim.api.nvim_buf_set_name(buf, name)
   vim.api.nvim_set_current_buf(buf)
