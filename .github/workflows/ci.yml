@@ -33,7 +33,7 @@ jobs:
       - name: Run Lua tests
         run: |
           nvim --headless -u tests/minimal_init.lua \
-            -c "PlenaryBustedDirectory tests/" 2>&1 | \
+            -c "PlenaryBustedDirectory tests/ {minimal_init = 'tests/minimal_init.lua'}" 2>&1 | \
             sed 's/\x1b\[[0-9;]*m//g' | tee test_output.txt
           # Fail if any test failed (strip ANSI codes, check failure count)
           if grep -qP 'Failed :\s+[1-9]' test_output.txt; then
