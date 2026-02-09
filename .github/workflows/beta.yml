@@ -40,6 +40,29 @@ jobs:
           name: dist
           path: lsp/dist/
 
+  plugin-archive:
+    name: Package Neovim plugin
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create plugin archive
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/}"
+          mkdir -p ignition-nvim
+          cp -r lua plugin ftdetect ftplugin syntax doc README.md LICENSE lazy.lua ignition-nvim/
+          zip -r "ignition-nvim-${VERSION}.zip" ignition-nvim/
+          tar czf "ignition-nvim-${VERSION}.tar.gz" ignition-nvim/
+
+      - name: Upload plugin archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-archive
+          path: |
+            ignition-nvim-*.zip
+            ignition-nvim-*.tar.gz
+
   publish-testpypi:
     name: Publish to TestPyPI
     needs: build
@@ -60,9 +83,29 @@ jobs:
           repository-url: https://test.pypi.org/legacy/
           packages-dir: dist/
 
+  publish-ghpackages:
+    name: Publish to GitHub Packages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Download dist artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to GitHub Packages
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://ghp.pypi.org/simple/
+          packages-dir: dist/
+          password: ${{ secrets.GITHUB_TOKEN }}
+
   github-prerelease:
     name: Create GitHub Pre-release
-    needs: build
+    needs: [build, plugin-archive]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -73,9 +116,17 @@ jobs:
           name: dist
           path: dist/
 
+      - name: Download plugin archive
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-archive
+          path: plugin-archive/
+
       - name: Create GitHub Pre-release
         uses: softprops/action-gh-release@v2
         with:
           prerelease: true
           generate_release_notes: true
-          files: dist/*
+          files: |
+            dist/*
+            plugin-archive/*
