@@ -59,7 +59,9 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: pass minimal_init to PlenaryBustedDirectory for filetype tests\n\nPlenaryBustedDirectory runs each spec file in a subprocess. Without\nexplicitly passing minimal_init, the child process doesn''t load our\nplugin init, causing ftdetect/ignition.lua to never be sourced.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git tag:*)",
       "Bash(wc:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git ls-tree:*)",
+      "WebFetch(domain:docs.github.com)"
     ],
     "deny": [],
     "ask": []

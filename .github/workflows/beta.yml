@@ -51,7 +51,7 @@ jobs:
         run: |
           VERSION="${GITHUB_REF#refs/tags/}"
           mkdir -p ignition-nvim
-          cp -r lua plugin ftdetect ftplugin syntax doc README.md LICENSE lazy.lua ignition-nvim/
+          cp -r lua plugin ftdetect ftplugin syntax README.md LICENSE lazy.lua ignition-nvim/
           zip -r "ignition-nvim-${VERSION}.zip" ignition-nvim/
           tar czf "ignition-nvim-${VERSION}.tar.gz" ignition-nvim/
 
@@ -82,26 +82,6 @@ jobs:
         with:
           repository-url: https://test.pypi.org/legacy/
           packages-dir: dist/
-
-  publish-ghpackages:
-    name: Publish to GitHub Packages
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write
-    steps:
-      - name: Download dist artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Publish to GitHub Packages
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: https://ghp.pypi.org/simple/
-          packages-dir: dist/
-          password: ${{ secrets.GITHUB_TOKEN }}
 
   github-prerelease:
     name: Create GitHub Pre-release
