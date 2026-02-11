@@ -1,9 +1,11 @@
--- lazy.nvim auto-discovered plugin spec for ignition.nvim
--- Users can install with just: { 'whiskeyhouse/ignition-nvim' }
+-- lazy.nvim plugin spec for ignition.nvim
+-- Users can install with just: { 'pmannion2/ignition-nvim' }
 -- and get sensible defaults. All options are overridable in the user spec.
 
 ---@type LazyPluginSpec
 return {
+  'pmannion2/ignition-nvim',
+
   -- Lazy-load on Ignition file types and commands
   ft = { 'ignition' },
   cmd = {
