@@ -61,7 +61,10 @@
       "Bash(wc:*)",
       "Bash(ls:*)",
       "Bash(git ls-tree:*)",
-      "WebFetch(domain:docs.github.com)"
+      "WebFetch(domain:docs.github.com)",
+      "Bash(/tmp/test-ignition-lsp/bin/pip install:*)",
+      "Bash(git -C /Users/pmannion/whiskeyhouse/ignition-git-module log --oneline --all)",
+      "Bash(xargs:*)"
     ],
     "deny": [],
     "ask": []

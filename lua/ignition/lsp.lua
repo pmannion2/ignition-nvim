@@ -44,6 +44,17 @@ function M.find_lsp_server()
     return { venv_python, server_path }
   end
 
+  -- Try venv ignition-lsp binary (installed from PyPI)
+  local venv_cmd = plugin_root .. '/lsp/venv/bin/ignition-lsp'
+  if vim.fn.executable(venv_cmd) == 1 then
+    vim.notify(
+      'Found ignition-lsp in plugin venv',
+      vim.log.levels.INFO,
+      { title = 'Ignition.nvim' }
+    )
+    return { venv_cmd }
+  end
+
   -- Try system-installed ignition-lsp
   local installed_cmd = vim.fn.exepath('ignition-lsp')
   if installed_cmd ~= '' then

@@ -43,9 +43,9 @@ dev = [
 ignition-lsp = "ignition_lsp.server:main"
 
 [project.urls]
-Homepage = "https://github.com/whiskeyhouse/ignition-nvim"
-Repository = "https://github.com/whiskeyhouse/ignition-nvim"
-Issues = "https://github.com/whiskeyhouse/ignition-nvim/issues"
+Homepage = "https://github.com/pmannion2/ignition-nvim"
+Repository = "https://github.com/pmannion2/ignition-nvim"
+Issues = "https://github.com/pmannion2/ignition-nvim/issues"
 
 [tool.setuptools.packages.find]
 include = ["ignition_lsp*"]

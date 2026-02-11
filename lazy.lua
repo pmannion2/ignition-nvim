@@ -16,7 +16,7 @@ return {
   },
 
   -- Install the Python LSP server after cloning
-  build = 'cd lsp && pip install -e .',
+  build = 'cd lsp && python3 -m venv venv && venv/bin/pip install ignition-lsp',
 
   opts = {},
 
