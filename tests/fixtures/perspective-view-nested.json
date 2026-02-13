@@ -1,0 +1,107 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {
+    "defaultSize": {
+      "height": 600,
+      "width": 800
+    }
+  },
+  "root": {
+    "children": [
+      {
+        "children": [
+          {
+            "meta": {
+              "name": "Label_Header"
+            },
+            "props": {
+              "text": "Dashboard Header"
+            },
+            "type": "ia.display.label"
+          },
+          {
+            "events": {
+              "onActionPerformed": {
+                "script": "print(\"nav clicked\")"
+              }
+            },
+            "meta": {
+              "name": "NavButton"
+            },
+            "props": {
+              "text": "Navigate"
+            },
+            "type": "ia.input.button"
+          }
+        ],
+        "meta": {
+          "name": "Header"
+        },
+        "props": {},
+        "type": "ia.container.flex"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "meta": {
+                  "name": "TankLevel"
+                },
+                "props": {
+                  "tagPath": "[default]Tanks/Level"
+                },
+                "type": "ia.display.cylindricaltank"
+              }
+            ],
+            "meta": {
+              "name": "TankGroup"
+            },
+            "props": {},
+            "type": "ia.container.flex"
+          },
+          {
+            "events": {
+              "onChange": {
+                "script": "system.tag.writeBlocking([\"[default]Setpoint\"], [newValue.value])"
+              }
+            },
+            "meta": {
+              "name": "SetpointSlider"
+            },
+            "props": {
+              "max": 100,
+              "min": 0
+            },
+            "type": "ia.input.slider"
+          }
+        ],
+        "meta": {
+          "name": "ContentArea"
+        },
+        "props": {},
+        "type": "ia.container.flex"
+      },
+      {
+        "meta": {
+          "name": "Footer"
+        },
+        "props": {
+          "text": "Status: OK"
+        },
+        "type": "ia.display.label"
+      }
+    ],
+    "events": {
+      "onStartup": {
+        "script": "logger \u003d system.util.getLogger(\"ViewStartup\")\nlogger.info(\"View loaded\")"
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {},
+    "type": "ia.container.flex"
+  }
+}
