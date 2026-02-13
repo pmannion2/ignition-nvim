@@ -67,4 +67,47 @@ function M.info()
   vim.notify(table.concat(lines, '\n'), vim.log.levels.INFO, { title = 'Ignition.nvim' })
 end
 
+--- JSON-aware indentation for ignition buffers.
+--- Called via indentexpr to compute indent for a given line.
+---@param lnum number 1-indexed line number
+---@return number indent in spaces
+function M.json_indent(lnum)
+  if lnum <= 1 then
+    return 0
+  end
+
+  local sw = vim.bo.shiftwidth
+
+  -- Find the previous non-blank line
+  local prev_lnum = vim.fn.prevnonblank(lnum - 1)
+  if prev_lnum == 0 then
+    return 0
+  end
+
+  local prev_line = vim.fn.getline(prev_lnum)
+  local prev_indent = vim.fn.indent(prev_lnum)
+
+  -- Check if previous line ends with { or [ (opening bracket)
+  local trimmed = prev_line:match('^%s*(.-)%s*$')
+  local opens = trimmed:match('[%[{]%s*$')
+
+  -- Check if current line starts with } or ] (closing bracket)
+  local cur_line = vim.fn.getline(lnum)
+  local closes = cur_line:match('^%s*[%]}]')
+
+  if opens and closes then
+    -- Previous opens, current closes → same indent as previous
+    return prev_indent
+  elseif opens then
+    -- Previous opens → indent one level
+    return prev_indent + sw
+  elseif closes then
+    -- Current closes → dedent one level
+    return math.max(0, prev_indent - sw)
+  else
+    -- Maintain previous indent
+    return prev_indent
+  end
+end
+
 return M

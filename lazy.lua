@@ -7,7 +7,7 @@ return {
   'pmannion2/ignition-nvim',
 
   -- Lazy-load on Ignition file types and commands
-  ft = { 'ignition' },
+  ft = { 'ignition', 'python' },
   cmd = {
     'IgnitionDecode',
     'IgnitionDecodeAll',
@@ -15,6 +15,9 @@ return {
     'IgnitionListScripts',
     'IgnitionOpenKindling',
     'IgnitionInfo',
+    'IgnitionComponentTree',
+    'IgnitionFormat',
+    'IgnitionTabify',
   },
 
   -- Install the Python LSP server after cloning

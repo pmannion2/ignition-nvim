@@ -24,19 +24,23 @@ local function set_win_option_with_undo(option, value)
     .. string.format('|setlocal %s=%s', option, vim.inspect(current_value))
 end
 
--- Buffer options for Python-style editing (most Ignition scripts are Python)
+-- Buffer options for JSON editing (Ignition files are JSON with 2-space indent)
 set_buf_option_with_undo('expandtab', true)
-set_buf_option_with_undo('tabstop', 4)
-set_buf_option_with_undo('shiftwidth', 4)
-set_buf_option_with_undo('softtabstop', 4)
-set_buf_option_with_undo('textwidth', 100)
-set_buf_option_with_undo('commentstring', '# %s')
+set_buf_option_with_undo('tabstop', 2)
+set_buf_option_with_undo('shiftwidth', 2)
+set_buf_option_with_undo('softtabstop', 2)
+set_buf_option_with_undo('textwidth', 0)
+set_buf_option_with_undo('commentstring', '// %s')
 
 -- Disable wrapping for long JSON lines
 set_win_option_with_undo('wrap', false)
 
--- Format options for better editing experience
+-- Format options
 set_buf_option_with_undo('formatoptions', 'croql')
+
+-- JSON-aware indentation: indent after { or [, dedent after } or ]
+vim.b.undo_ftplugin = vim.b.undo_ftplugin .. '|setlocal indentexpr<'
+vim.bo.indentexpr = 'v:lua.require("ignition").json_indent(v:lnum)'
 
 -- Set up buffer-local keymaps
 local keymap_opts = { buffer = true, silent = true, noremap = true }
@@ -60,6 +64,14 @@ vim.keymap.set('n', '<localleader>il', '<cmd>IgnitionListScripts<cr>', vim.tbl_e
 
 vim.keymap.set('n', '<localleader>ia', '<cmd>IgnitionDecodeAll<cr>', vim.tbl_extend('force', keymap_opts, {
   desc = 'Decode all scripts in file',
+}))
+
+vim.keymap.set('n', '<localleader>it', '<cmd>IgnitionComponentTree<cr>', vim.tbl_extend('force', keymap_opts, {
+  desc = 'Toggle component tree sidebar',
+}))
+
+vim.keymap.set('n', '<localleader>if', '<cmd>IgnitionFormat<cr>', vim.tbl_extend('force', keymap_opts, {
+  desc = 'Format JSON indentation',
 }))
 
 -- Open with Kindling (for .gwbk files)
@@ -92,7 +104,7 @@ if ignition_ok and ignition.config.lsp.enabled then
   -- LSP will be auto-started by the lsp.lua module
   vim.defer_fn(function()
     -- Check if LSP is attached
-    local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+    local clients = (vim.lsp.get_clients or vim.lsp.get_active_clients)({ bufnr = 0 })
     local has_ignition_lsp = false
     for _, client in ipairs(clients) do
       if client.name == 'ignition_lsp' then

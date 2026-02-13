@@ -92,13 +92,13 @@ describe('create_virtual_doc', function()
     wipe(source)
   end)
 
-  it('names buffer with [Ignition:filename:key] format', function()
+  it('names buffer with [Ignition:filename:key:Lnum] format', function()
     local source = create_source_buf({ '{}' }, unique_name('naming'))
     local vbuf = virtual_doc.create_virtual_doc(source, make_script_info('onActionPerformed', 1, ''))
 
     local name = vim.api.nvim_buf_get_name(vbuf)
     assert.is_truthy(name:find('%[Ignition:'))
-    assert.is_truthy(name:find(':onActionPerformed%]'))
+    assert.is_truthy(name:find(':onActionPerformed:L1%]'))
 
     wipe(vbuf)
     wipe(source)
