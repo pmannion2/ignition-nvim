@@ -206,12 +206,15 @@ def _find_script_line(raw_text: str, key: str, value_prefix: str) -> int:
     Returns 0-indexed line number for LSP diagnostics, or 0 if not found.
     """
     search_key = f'"{key}"'
-    # Use the first 30 chars of the value for matching
-    value_start = value_prefix[:30].replace("\n", "\\n")
+    # JSON-escape value_prefix to match the raw JSON text
+    # Use the first 30 chars for matching
+    value_slice = value_prefix[:30]
+    # json.dumps adds surrounding quotes, so strip them
+    escaped_value = json.dumps(value_slice)[1:-1]
 
     lines = raw_text.splitlines()
     for i, line in enumerate(lines):
-        if search_key in line and value_start[:20] in line:
+        if search_key in line and escaped_value[:20] in line:
             return i
 
     # Fallback: just find the key

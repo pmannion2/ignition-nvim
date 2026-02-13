@@ -186,6 +186,9 @@ local function refresh(source_bufnr)
   local json_str = table.concat(lines_content, '\n')
   local root_node, err = M.parse_view_json(json_str)
   if not root_node then
+    -- Clear stale state so keymaps don't act on outdated nodes
+    s.flat_nodes = nil
+    s.root_node = nil
     vim.api.nvim_buf_set_option(s.tree_bufnr, 'modifiable', true)
     vim.api.nvim_buf_set_lines(s.tree_bufnr, 0, -1, false, { err or 'Error parsing view' })
     vim.api.nvim_buf_set_option(s.tree_bufnr, 'modifiable', false)
