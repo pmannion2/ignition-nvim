@@ -1,12 +1,13 @@
 """Diagnostics provider integrating ignition-lint validation."""
 
+from __future__ import annotations
+
 import json
 import logging
 import sys
 import tempfile
 from pathlib import Path
-from typing import List
-from urllib.parse import unquote, urlparse
+from typing import List, Union
 
 from lsprotocol.types import Diagnostic, DiagnosticSeverity, Position, Range
 from pygls.workspace import TextDocument
@@ -22,7 +23,7 @@ _PERSPECTIVE_AVAILABLE = False
 
 try:
     from ignition_lint.validators.jython import JythonValidator
-    from ignition_lint.reporting import LintSeverity
+    from ignition_lint.reporting import LintIssue, LintSeverity
 
     _LINT_AVAILABLE = True
 except ImportError:
@@ -32,7 +33,7 @@ except ImportError:
         sys.path.insert(0, str(_SIBLING_PATH))
         try:
             from ignition_lint.validators.jython import JythonValidator
-            from ignition_lint.reporting import LintSeverity
+            from ignition_lint.reporting import LintIssue, LintSeverity
 
             _LINT_AVAILABLE = True
             logger.info(f"Loaded ignition-lint from sibling path: {_SIBLING_PATH}")
@@ -144,9 +145,6 @@ def _get_perspective_diagnostics(document: TextDocument) -> List[Diagnostic]:
 
     diagnostics = []
     try:
-        # Resolve file path from URI
-        file_path = unquote(urlparse(document.uri).path)
-
         # Write current buffer content to a temp file so we lint the
         # in-memory state, not whatever is on disk (important for did_change).
         content = document.source
@@ -225,7 +223,7 @@ def _find_script_line(raw_text: str, key: str, value_prefix: str) -> int:
 
 
 def _walk_tag_scripts(
-    node: dict | list,
+    node: Union[dict, list],
     raw_text: str,
     diagnostics: List[Diagnostic],
     uri: str,

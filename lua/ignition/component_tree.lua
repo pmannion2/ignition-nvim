@@ -164,7 +164,9 @@ end
 --- @return number|nil 1-based line number
 local function find_component_line(source_bufnr, name)
   local lines = vim.api.nvim_buf_get_lines(source_bufnr, 0, -1, false)
-  local pattern = '"name"%s*:%s*"' .. vim.pesc(name) .. '"'
+  -- JSON-escape internal double quotes before building the pattern
+  local json_escaped_name = name:gsub('"', '\\"')
+  local pattern = '"name"%s*:%s*"' .. vim.pesc(json_escaped_name) .. '"'
   for i, line in ipairs(lines) do
     if line:find(pattern) then
       return i
