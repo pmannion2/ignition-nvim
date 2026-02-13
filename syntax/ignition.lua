@@ -1,6 +1,11 @@
 -- Syntax highlighting for Ignition files
 -- This provides basic syntax highlighting with support for JSON and Python
 
+-- Skip legacy syntax when treesitter is active
+if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] then
+  return
+end
+
 -- Only load once per buffer
 if vim.b.current_syntax then
   return

@@ -4,6 +4,7 @@ local M = {}
 local encoding = require('ignition.encoding')
 local json_parser = require('ignition.json_parser')
 local virtual_doc = require('ignition.virtual_doc')
+local lsp = require('ignition.lsp')
 
 -- Decode embedded scripts in current buffer
 function M.decode_current_buffer()
@@ -100,6 +101,9 @@ function M.decode_script(source_bufnr, script_info)
       vim.log.levels.INFO,
       { title = 'Ignition.nvim' }
     )
+
+    -- Attach ignition LSP for project completions and go-to-definition
+    lsp.start_lsp_for_buffer(virtual_bufnr)
   end
 end
 
@@ -117,9 +121,11 @@ function M.decode_all_scripts()
     return
   end
 
-  -- Decode each script
+  -- Decode each script, returning to source window between each
+  local source_win = vim.api.nvim_get_current_win()
   for _, script in ipairs(scripts) do
     M.decode_script(bufnr, script)
+    vim.api.nvim_set_current_win(source_win)
   end
 
   vim.notify(

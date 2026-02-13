@@ -66,6 +66,17 @@ M.schema = {
       show_statusline = { type = "boolean", default = true },
     },
   },
+  component_tree = {
+    type = "table",
+    default = {
+      width = 40,
+      position = 'left',
+    },
+    fields = {
+      width = { type = "number", default = 40 },
+      position = { type = "string", default = 'left' },
+    },
+  },
 }
 
 -- Validate configuration against schema

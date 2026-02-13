@@ -13,14 +13,19 @@ function M.create_virtual_doc(source_bufnr, script_info)
   -- Set buffer name to indicate it's a virtual document
   local source_file = vim.api.nvim_buf_get_name(source_bufnr)
   local source_filename = vim.fn.fnamemodify(source_file, ':t')
-  local virtual_name = string.format('[Ignition:%s:%s]', source_filename, script_info.key)
+  -- Use context if available for a more descriptive buffer name
+  local display_key = script_info.context or script_info.key
+  local virtual_name = string.format('[Ignition:%s:%s:L%d]', source_filename, display_key, script_info.line)
 
-  -- Check if a virtual doc with this name already exists
+  -- Check if a virtual doc with this identity already exists
   -- Note: vim.fn.bufnr() treats [] as glob patterns, so we search our own table instead
+  -- Identity = source buffer + script key + line number (prevents collisions between
+  -- multiple eventScript entries in tag files)
   for bufnr, metadata in pairs(M.virtual_docs) do
     if vim.api.nvim_buf_is_valid(bufnr)
       and metadata.source_bufnr == source_bufnr
-      and metadata.script_key == script_info.key then
+      and metadata.script_key == script_info.key
+      and metadata.line_num == script_info.line then
       return bufnr
     end
   end

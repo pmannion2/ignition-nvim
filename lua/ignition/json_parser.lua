@@ -37,13 +37,20 @@ function M.find_scripts(bufnr)
         if script_content and script_content ~= '' then
           -- Check if this looks like an encoded script
           if encoding.is_encoded_script(script_content) then
-            table.insert(scripts, {
+            local script_entry = {
               key = captured_key,
               line = line_num,
               col = key_start,
               content = script_content,
               line_text = line_text,
-            })
+            }
+
+            -- For eventScript entries, compute tag context (tag name + event name)
+            if captured_key == 'eventScript' then
+              script_entry.context = M.get_tag_context(lines, line_num)
+            end
+
+            table.insert(scripts, script_entry)
           end
         end
       end
@@ -121,9 +128,59 @@ function M.replace_script_in_line(line_text, key, new_content)
   return before .. new_content .. '"' .. after
 end
 
+-- Get tag context for an eventScript entry
+-- Scans backward from the script line to find the event name and tag name
+-- Returns a string like "MyTag/valueChanged" or falls back to "Event Script"
+function M.get_tag_context(lines, script_line_num)
+  local event_name = nil
+  local tag_name = nil
+
+  -- Scan backward from the eventScript line
+  for i = script_line_num - 1, math.max(1, script_line_num - 20), -1 do
+    local line = lines[i]
+    if line then
+      -- Look for the event name key (e.g., "valueChanged":)
+      if not event_name then
+        local event = line:match('"(%w+)"%s*:%s*{')
+        if event and event ~= 'eventScripts' then
+          event_name = event
+        end
+      end
+
+      -- Look for the tag name (e.g., "name": "MyTag")
+      if not tag_name then
+        local name = line:match('"name"%s*:%s*"([^"]*)"')
+        if name then
+          tag_name = name
+        end
+      end
+
+      -- Found both, stop scanning
+      if event_name and tag_name then
+        break
+      end
+    end
+  end
+
+  if tag_name and event_name then
+    return tag_name .. '/' .. event_name
+  elseif tag_name then
+    return tag_name .. '/Event Script'
+  elseif event_name then
+    return event_name
+  end
+
+  return nil
+end
+
 -- Get context information for a script
 -- Returns a human-readable description of where the script is
 function M.get_script_context(script_info)
+  -- Use pre-computed context if available (e.g., from tag context detection)
+  if script_info.context then
+    return script_info.context
+  end
+
   local key = script_info.key
   local contexts = {
     script = 'Script',
