@@ -1,0 +1,1294 @@
+{
+  "package": "java.lang",
+  "classes": [
+    {
+      "name": "Object",
+      "description": "The root class of the Java class hierarchy. Every class has Object as a superclass.",
+      "constructors": [
+        {
+          "signature": "Object()",
+          "params": [],
+          "description": "Constructs a new Object."
+        }
+      ],
+      "methods": [
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The reference object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if this object is equal to the argument"},
+          "description": "Indicates whether some other object is equal to this one.",
+          "static": false
+        },
+        {
+          "name": "hashCode",
+          "signature": "hashCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "A hash code value for this object"},
+          "description": "Returns a hash code value for this object.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this object"},
+          "description": "Returns a string representation of this object.",
+          "static": false
+        },
+        {
+          "name": "getClass",
+          "signature": "getClass()",
+          "params": [],
+          "returns": {"type": "Class", "description": "The runtime class of this object"},
+          "description": "Returns the runtime class of this object.",
+          "static": false
+        },
+        {
+          "name": "notify",
+          "signature": "notify()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Wakes up a single thread that is waiting on this object's monitor.",
+          "static": false
+        },
+        {
+          "name": "notifyAll",
+          "signature": "notifyAll()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Wakes up all threads that are waiting on this object's monitor.",
+          "static": false
+        },
+        {
+          "name": "wait",
+          "signature": "wait(timeout)",
+          "params": [{"name": "timeout", "type": "long", "description": "Maximum time to wait in milliseconds"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Causes the current thread to wait until another thread invokes notify() or notifyAll(), or a specified amount of time has elapsed.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html"
+    },
+    {
+      "name": "String",
+      "description": "Represents character strings. All string literals in Java are instances of this class. Strings are immutable.",
+      "constructors": [
+        {
+          "signature": "String()",
+          "params": [],
+          "description": "Creates a new empty string."
+        },
+        {
+          "signature": "String(original)",
+          "params": [{"name": "original", "type": "String", "description": "The initial value of the string"}],
+          "description": "Creates a new string that is a copy of the argument string."
+        },
+        {
+          "signature": "String(bytes, charset)",
+          "params": [
+            {"name": "bytes", "type": "byte[]", "description": "The bytes to decode"},
+            {"name": "charset", "type": "String", "description": "The charset to use for decoding"}
+          ],
+          "description": "Creates a new string by decoding the byte array using the specified charset."
+        }
+      ],
+      "methods": [
+        {
+          "name": "length",
+          "signature": "length()",
+          "params": [],
+          "returns": {"type": "int", "description": "The length of this string"},
+          "description": "Returns the length of this string.",
+          "static": false
+        },
+        {
+          "name": "charAt",
+          "signature": "charAt(index)",
+          "params": [{"name": "index", "type": "int", "description": "The index of the character"}],
+          "returns": {"type": "char", "description": "The character at the specified index"},
+          "description": "Returns the character at the specified index.",
+          "static": false
+        },
+        {
+          "name": "substring",
+          "signature": "substring(beginIndex, endIndex)",
+          "params": [
+            {"name": "beginIndex", "type": "int", "description": "The beginning index, inclusive"},
+            {"name": "endIndex", "type": "int", "description": "The ending index, exclusive"}
+          ],
+          "returns": {"type": "String", "description": "The specified substring"},
+          "description": "Returns a substring of this string.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(s)",
+          "params": [{"name": "s", "type": "CharSequence", "description": "The sequence to search for"}],
+          "returns": {"type": "boolean", "description": "True if this string contains the specified sequence"},
+          "description": "Returns true if this string contains the specified sequence of characters.",
+          "static": false
+        },
+        {
+          "name": "startsWith",
+          "signature": "startsWith(prefix)",
+          "params": [{"name": "prefix", "type": "String", "description": "The prefix to check"}],
+          "returns": {"type": "boolean", "description": "True if the string starts with the prefix"},
+          "description": "Tests if this string starts with the specified prefix.",
+          "static": false
+        },
+        {
+          "name": "endsWith",
+          "signature": "endsWith(suffix)",
+          "params": [{"name": "suffix", "type": "String", "description": "The suffix to check"}],
+          "returns": {"type": "boolean", "description": "True if the string ends with the suffix"},
+          "description": "Tests if this string ends with the specified suffix.",
+          "static": false
+        },
+        {
+          "name": "indexOf",
+          "signature": "indexOf(str)",
+          "params": [{"name": "str", "type": "String", "description": "The substring to search for"}],
+          "returns": {"type": "int", "description": "The index of the first occurrence, or -1"},
+          "description": "Returns the index of the first occurrence of the specified substring.",
+          "static": false
+        },
+        {
+          "name": "lastIndexOf",
+          "signature": "lastIndexOf(str)",
+          "params": [{"name": "str", "type": "String", "description": "The substring to search for"}],
+          "returns": {"type": "int", "description": "The index of the last occurrence, or -1"},
+          "description": "Returns the index of the last occurrence of the specified substring.",
+          "static": false
+        },
+        {
+          "name": "replace",
+          "signature": "replace(target, replacement)",
+          "params": [
+            {"name": "target", "type": "CharSequence", "description": "The sequence to replace"},
+            {"name": "replacement", "type": "CharSequence", "description": "The replacement sequence"}
+          ],
+          "returns": {"type": "String", "description": "The resulting string"},
+          "description": "Replaces each occurrence of the target with the replacement.",
+          "static": false
+        },
+        {
+          "name": "replaceAll",
+          "signature": "replaceAll(regex, replacement)",
+          "params": [
+            {"name": "regex", "type": "String", "description": "The regular expression"},
+            {"name": "replacement", "type": "String", "description": "The replacement string"}
+          ],
+          "returns": {"type": "String", "description": "The resulting string"},
+          "description": "Replaces each substring that matches the given regular expression with the replacement.",
+          "static": false
+        },
+        {
+          "name": "split",
+          "signature": "split(regex)",
+          "params": [{"name": "regex", "type": "String", "description": "The delimiting regular expression"}],
+          "returns": {"type": "String[]", "description": "The array of strings computed by splitting"},
+          "description": "Splits this string around matches of the given regular expression.",
+          "static": false
+        },
+        {
+          "name": "trim",
+          "signature": "trim()",
+          "params": [],
+          "returns": {"type": "String", "description": "The trimmed string"},
+          "description": "Returns a copy of the string with leading and trailing whitespace removed.",
+          "static": false
+        },
+        {
+          "name": "toLowerCase",
+          "signature": "toLowerCase()",
+          "params": [],
+          "returns": {"type": "String", "description": "The string converted to lowercase"},
+          "description": "Converts all characters in this string to lowercase.",
+          "static": false
+        },
+        {
+          "name": "toUpperCase",
+          "signature": "toUpperCase()",
+          "params": [],
+          "returns": {"type": "String", "description": "The string converted to uppercase"},
+          "description": "Converts all characters in this string to uppercase.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(anObject)",
+          "params": [{"name": "anObject", "type": "Object", "description": "The object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the strings are equal"},
+          "description": "Compares this string to the specified object for equality.",
+          "static": false
+        },
+        {
+          "name": "equalsIgnoreCase",
+          "signature": "equalsIgnoreCase(anotherString)",
+          "params": [{"name": "anotherString", "type": "String", "description": "The string to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the strings are equal, ignoring case"},
+          "description": "Compares this string to another, ignoring case considerations.",
+          "static": false
+        },
+        {
+          "name": "isEmpty",
+          "signature": "isEmpty()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if length() is 0"},
+          "description": "Returns true if the length of this string is 0.",
+          "static": false
+        },
+        {
+          "name": "format",
+          "signature": "format(format, args)",
+          "params": [
+            {"name": "format", "type": "String", "description": "A format string"},
+            {"name": "args", "type": "Object...", "description": "Arguments referenced by format specifiers"}
+          ],
+          "returns": {"type": "String", "description": "A formatted string"},
+          "description": "Returns a formatted string using the specified format string and arguments.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to convert"}],
+          "returns": {"type": "String", "description": "The string representation of the argument"},
+          "description": "Returns the string representation of the Object argument.",
+          "static": true
+        },
+        {
+          "name": "join",
+          "signature": "join(delimiter, elements)",
+          "params": [
+            {"name": "delimiter", "type": "CharSequence", "description": "The delimiter between elements"},
+            {"name": "elements", "type": "CharSequence...", "description": "The elements to join"}
+          ],
+          "returns": {"type": "String", "description": "A new string composed of the elements joined by the delimiter"},
+          "description": "Returns a new string composed of the CharSequence elements joined together with the specified delimiter.",
+          "static": true
+        },
+        {
+          "name": "matches",
+          "signature": "matches(regex)",
+          "params": [{"name": "regex", "type": "String", "description": "The regular expression to match"}],
+          "returns": {"type": "boolean", "description": "True if this string matches the regex"},
+          "description": "Tells whether this string matches the given regular expression.",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(anotherString)",
+          "params": [{"name": "anotherString", "type": "String", "description": "The string to compare with"}],
+          "returns": {"type": "int", "description": "The value 0 if equal; negative if less; positive if greater"},
+          "description": "Compares two strings lexicographically.",
+          "static": false
+        },
+        {
+          "name": "getBytes",
+          "signature": "getBytes(charset)",
+          "params": [{"name": "charset", "type": "String", "description": "The charset to use for encoding"}],
+          "returns": {"type": "byte[]", "description": "The resulting byte array"},
+          "description": "Encodes this string into a sequence of bytes using the named charset.",
+          "static": false
+        },
+        {
+          "name": "toCharArray",
+          "signature": "toCharArray()",
+          "params": [],
+          "returns": {"type": "char[]", "description": "A newly allocated character array"},
+          "description": "Converts this string to a new character array.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html"
+    },
+    {
+      "name": "Integer",
+      "description": "Wraps a value of the primitive type int. Provides methods for converting int to String and String to int.",
+      "constructors": [
+        {
+          "signature": "Integer(value)",
+          "params": [{"name": "value", "type": "int", "description": "The int value"}],
+          "description": "Constructs a new Integer object with the specified int value."
+        },
+        {
+          "signature": "Integer(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "description": "Constructs a new Integer object from a string representation."
+        }
+      ],
+      "methods": [
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {"type": "int", "description": "The int value represented by this object"},
+          "description": "Returns the value of this Integer as an int.",
+          "static": false
+        },
+        {
+          "name": "longValue",
+          "signature": "longValue()",
+          "params": [],
+          "returns": {"type": "long", "description": "The value as a long"},
+          "description": "Returns the value of this Integer as a long.",
+          "static": false
+        },
+        {
+          "name": "doubleValue",
+          "signature": "doubleValue()",
+          "params": [],
+          "returns": {"type": "double", "description": "The value as a double"},
+          "description": "Returns the value of this Integer as a double.",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(anotherInteger)",
+          "params": [{"name": "anotherInteger", "type": "Integer", "description": "The Integer to compare with"}],
+          "returns": {"type": "int", "description": "0 if equal, negative if less, positive if greater"},
+          "description": "Compares two Integer objects numerically.",
+          "static": false
+        },
+        {
+          "name": "parseInt",
+          "signature": "parseInt(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse as an integer"}],
+          "returns": {"type": "int", "description": "The integer value represented by the string"},
+          "description": "Parses the string argument as a signed decimal integer.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(i)",
+          "params": [{"name": "i", "type": "int", "description": "An int value"}],
+          "returns": {"type": "Integer", "description": "An Integer instance representing the value"},
+          "description": "Returns an Integer instance representing the specified int value.",
+          "static": true
+        },
+        {
+          "name": "toString",
+          "signature": "toString(i)",
+          "params": [{"name": "i", "type": "int", "description": "An int to convert"}],
+          "returns": {"type": "String", "description": "A string representation of the int"},
+          "description": "Returns a String object representing the specified integer.",
+          "static": true
+        },
+        {
+          "name": "toHexString",
+          "signature": "toHexString(i)",
+          "params": [{"name": "i", "type": "int", "description": "An integer to convert"}],
+          "returns": {"type": "String", "description": "The hex string representation"},
+          "description": "Returns a string representation of the integer as an unsigned hex value.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "MAX_VALUE", "type": "int", "description": "The maximum value an int can have (2^31 - 1).", "static": true, "final": true},
+        {"name": "MIN_VALUE", "type": "int", "description": "The minimum value an int can have (-2^31).", "static": true, "final": true},
+        {"name": "TYPE", "type": "Class", "description": "The Class instance representing the primitive type int.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Integer.html"
+    },
+    {
+      "name": "Long",
+      "description": "Wraps a value of the primitive type long. Provides methods for converting long to String and String to long.",
+      "constructors": [
+        {
+          "signature": "Long(value)",
+          "params": [{"name": "value", "type": "long", "description": "The long value"}],
+          "description": "Constructs a new Long object with the specified long value."
+        },
+        {
+          "signature": "Long(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "description": "Constructs a new Long object from a string representation."
+        }
+      ],
+      "methods": [
+        {
+          "name": "longValue",
+          "signature": "longValue()",
+          "params": [],
+          "returns": {"type": "long", "description": "The long value represented by this object"},
+          "description": "Returns the value of this Long as a long.",
+          "static": false
+        },
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {"type": "int", "description": "The value as an int"},
+          "description": "Returns the value of this Long as an int.",
+          "static": false
+        },
+        {
+          "name": "parseLong",
+          "signature": "parseLong(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse as a long"}],
+          "returns": {"type": "long", "description": "The long value represented by the string"},
+          "description": "Parses the string argument as a signed decimal long.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(l)",
+          "params": [{"name": "l", "type": "long", "description": "A long value"}],
+          "returns": {"type": "Long", "description": "A Long instance representing the value"},
+          "description": "Returns a Long instance representing the specified long value.",
+          "static": true
+        },
+        {
+          "name": "toString",
+          "signature": "toString(l)",
+          "params": [{"name": "l", "type": "long", "description": "A long to convert"}],
+          "returns": {"type": "String", "description": "A string representation of the long"},
+          "description": "Returns a String object representing the specified long.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "MAX_VALUE", "type": "long", "description": "The maximum value a long can have (2^63 - 1).", "static": true, "final": true},
+        {"name": "MIN_VALUE", "type": "long", "description": "The minimum value a long can have (-2^63).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Long.html"
+    },
+    {
+      "name": "Double",
+      "description": "Wraps a value of the primitive type double. Provides methods for converting double to String and String to double.",
+      "constructors": [
+        {
+          "signature": "Double(value)",
+          "params": [{"name": "value", "type": "double", "description": "The double value"}],
+          "description": "Constructs a new Double object with the specified double value."
+        },
+        {
+          "signature": "Double(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "description": "Constructs a new Double object from a string representation."
+        }
+      ],
+      "methods": [
+        {
+          "name": "doubleValue",
+          "signature": "doubleValue()",
+          "params": [],
+          "returns": {"type": "double", "description": "The double value represented by this object"},
+          "description": "Returns the double value of this Double object.",
+          "static": false
+        },
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {"type": "int", "description": "The value as an int"},
+          "description": "Returns the value of this Double as an int.",
+          "static": false
+        },
+        {
+          "name": "isNaN",
+          "signature": "isNaN()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this value is NaN"},
+          "description": "Returns true if this Double value is Not-a-Number (NaN).",
+          "static": false
+        },
+        {
+          "name": "isInfinite",
+          "signature": "isInfinite()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this value is infinite"},
+          "description": "Returns true if this Double value is infinitely large in magnitude.",
+          "static": false
+        },
+        {
+          "name": "parseDouble",
+          "signature": "parseDouble(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "returns": {"type": "double", "description": "The double value represented by the string"},
+          "description": "Returns a new double initialized to the value of the specified String.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(d)",
+          "params": [{"name": "d", "type": "double", "description": "A double value"}],
+          "returns": {"type": "Double", "description": "A Double instance representing the value"},
+          "description": "Returns a Double instance representing the specified double value.",
+          "static": true
+        },
+        {
+          "name": "toString",
+          "signature": "toString(d)",
+          "params": [{"name": "d", "type": "double", "description": "A double to convert"}],
+          "returns": {"type": "String", "description": "A string representation of the double"},
+          "description": "Returns a string representation of the double argument.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "MAX_VALUE", "type": "double", "description": "The largest positive finite value of type double.", "static": true, "final": true},
+        {"name": "MIN_VALUE", "type": "double", "description": "The smallest positive nonzero value of type double.", "static": true, "final": true},
+        {"name": "NaN", "type": "double", "description": "A constant holding a Not-a-Number (NaN) value.", "static": true, "final": true},
+        {"name": "POSITIVE_INFINITY", "type": "double", "description": "Positive infinity.", "static": true, "final": true},
+        {"name": "NEGATIVE_INFINITY", "type": "double", "description": "Negative infinity.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Double.html"
+    },
+    {
+      "name": "Float",
+      "description": "Wraps a value of the primitive type float. Provides methods for converting float to String and String to float.",
+      "constructors": [
+        {
+          "signature": "Float(value)",
+          "params": [{"name": "value", "type": "float", "description": "The float value"}],
+          "description": "Constructs a new Float object with the specified float value."
+        }
+      ],
+      "methods": [
+        {
+          "name": "floatValue",
+          "signature": "floatValue()",
+          "params": [],
+          "returns": {"type": "float", "description": "The float value of this object"},
+          "description": "Returns the float value of this Float object.",
+          "static": false
+        },
+        {
+          "name": "parseFloat",
+          "signature": "parseFloat(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "returns": {"type": "float", "description": "The float value represented by the string"},
+          "description": "Returns a new float initialized to the value of the specified String.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(f)",
+          "params": [{"name": "f", "type": "float", "description": "A float value"}],
+          "returns": {"type": "Float", "description": "A Float instance representing the value"},
+          "description": "Returns a Float instance representing the specified float value.",
+          "static": true
+        },
+        {
+          "name": "isNaN",
+          "signature": "isNaN()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this value is NaN"},
+          "description": "Returns true if this Float value is Not-a-Number (NaN).",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "MAX_VALUE", "type": "float", "description": "The largest positive finite value of type float.", "static": true, "final": true},
+        {"name": "MIN_VALUE", "type": "float", "description": "The smallest positive nonzero value of type float.", "static": true, "final": true},
+        {"name": "NaN", "type": "float", "description": "A constant holding a Not-a-Number (NaN) value.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Float.html"
+    },
+    {
+      "name": "Boolean",
+      "description": "Wraps a value of the primitive type boolean. Provides methods for converting boolean to String and String to boolean.",
+      "constructors": [
+        {
+          "signature": "Boolean(value)",
+          "params": [{"name": "value", "type": "boolean", "description": "The boolean value"}],
+          "description": "Constructs a new Boolean object with the specified boolean value."
+        },
+        {
+          "signature": "Boolean(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "description": "Creates a Boolean from the string (true if string is 'true', ignoring case)."
+        }
+      ],
+      "methods": [
+        {
+          "name": "booleanValue",
+          "signature": "booleanValue()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "The primitive boolean value"},
+          "description": "Returns the value of this Boolean object as a boolean primitive.",
+          "static": false
+        },
+        {
+          "name": "parseBoolean",
+          "signature": "parseBoolean(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to parse"}],
+          "returns": {"type": "boolean", "description": "The boolean value represented by the string"},
+          "description": "Parses the string argument as a boolean.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(b)",
+          "params": [{"name": "b", "type": "boolean", "description": "A boolean value"}],
+          "returns": {"type": "Boolean", "description": "A Boolean instance representing the value"},
+          "description": "Returns a Boolean instance representing the specified boolean value.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "TRUE", "type": "Boolean", "description": "The Boolean object corresponding to the value true.", "static": true, "final": true},
+        {"name": "FALSE", "type": "Boolean", "description": "The Boolean object corresponding to the value false.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html"
+    },
+    {
+      "name": "Math",
+      "description": "Contains methods for performing basic numeric operations such as elementary exponential, logarithm, square root, and trigonometric functions.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "abs",
+          "signature": "abs(a)",
+          "params": [{"name": "a", "type": "double", "description": "The argument whose absolute value is to be determined"}],
+          "returns": {"type": "double", "description": "The absolute value of the argument"},
+          "description": "Returns the absolute value of a value.",
+          "static": true
+        },
+        {
+          "name": "max",
+          "signature": "max(a, b)",
+          "params": [
+            {"name": "a", "type": "double", "description": "The first value"},
+            {"name": "b", "type": "double", "description": "The second value"}
+          ],
+          "returns": {"type": "double", "description": "The greater of a and b"},
+          "description": "Returns the greater of two values.",
+          "static": true
+        },
+        {
+          "name": "min",
+          "signature": "min(a, b)",
+          "params": [
+            {"name": "a", "type": "double", "description": "The first value"},
+            {"name": "b", "type": "double", "description": "The second value"}
+          ],
+          "returns": {"type": "double", "description": "The smaller of a and b"},
+          "description": "Returns the smaller of two values.",
+          "static": true
+        },
+        {
+          "name": "pow",
+          "signature": "pow(a, b)",
+          "params": [
+            {"name": "a", "type": "double", "description": "The base"},
+            {"name": "b", "type": "double", "description": "The exponent"}
+          ],
+          "returns": {"type": "double", "description": "The value a^b"},
+          "description": "Returns the value of the first argument raised to the power of the second argument.",
+          "static": true
+        },
+        {
+          "name": "sqrt",
+          "signature": "sqrt(a)",
+          "params": [{"name": "a", "type": "double", "description": "A value"}],
+          "returns": {"type": "double", "description": "The positive square root of a"},
+          "description": "Returns the correctly rounded positive square root of a double value.",
+          "static": true
+        },
+        {
+          "name": "ceil",
+          "signature": "ceil(a)",
+          "params": [{"name": "a", "type": "double", "description": "A value"}],
+          "returns": {"type": "double", "description": "The smallest integer value >= a"},
+          "description": "Returns the smallest double value that is greater than or equal to the argument and is equal to a mathematical integer.",
+          "static": true
+        },
+        {
+          "name": "floor",
+          "signature": "floor(a)",
+          "params": [{"name": "a", "type": "double", "description": "A value"}],
+          "returns": {"type": "double", "description": "The largest integer value <= a"},
+          "description": "Returns the largest double value that is less than or equal to the argument and is equal to a mathematical integer.",
+          "static": true
+        },
+        {
+          "name": "round",
+          "signature": "round(a)",
+          "params": [{"name": "a", "type": "double", "description": "A floating-point value to round"}],
+          "returns": {"type": "long", "description": "The closest long to the argument"},
+          "description": "Returns the closest long to the argument, with ties rounding to positive infinity.",
+          "static": true
+        },
+        {
+          "name": "random",
+          "signature": "random()",
+          "params": [],
+          "returns": {"type": "double", "description": "A pseudorandom double >= 0.0 and < 1.0"},
+          "description": "Returns a double value with a positive sign, >= 0.0 and < 1.0.",
+          "static": true
+        },
+        {
+          "name": "log",
+          "signature": "log(a)",
+          "params": [{"name": "a", "type": "double", "description": "A value"}],
+          "returns": {"type": "double", "description": "The natural logarithm (base e) of a"},
+          "description": "Returns the natural logarithm (base e) of a double value.",
+          "static": true
+        },
+        {
+          "name": "log10",
+          "signature": "log10(a)",
+          "params": [{"name": "a", "type": "double", "description": "A value"}],
+          "returns": {"type": "double", "description": "The base 10 logarithm of a"},
+          "description": "Returns the base 10 logarithm of a double value.",
+          "static": true
+        },
+        {
+          "name": "sin",
+          "signature": "sin(a)",
+          "params": [{"name": "a", "type": "double", "description": "An angle, in radians"}],
+          "returns": {"type": "double", "description": "The sine of the argument"},
+          "description": "Returns the trigonometric sine of an angle.",
+          "static": true
+        },
+        {
+          "name": "cos",
+          "signature": "cos(a)",
+          "params": [{"name": "a", "type": "double", "description": "An angle, in radians"}],
+          "returns": {"type": "double", "description": "The cosine of the argument"},
+          "description": "Returns the trigonometric cosine of an angle.",
+          "static": true
+        },
+        {
+          "name": "tan",
+          "signature": "tan(a)",
+          "params": [{"name": "a", "type": "double", "description": "An angle, in radians"}],
+          "returns": {"type": "double", "description": "The tangent of the argument"},
+          "description": "Returns the trigonometric tangent of an angle.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "PI", "type": "double", "description": "The ratio of the circumference of a circle to its diameter.", "static": true, "final": true},
+        {"name": "E", "type": "double", "description": "The base of the natural logarithm.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html"
+    },
+    {
+      "name": "System",
+      "description": "Provides access to system-level resources including standard I/O, environment variables, and system properties.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "currentTimeMillis",
+          "signature": "currentTimeMillis()",
+          "params": [],
+          "returns": {"type": "long", "description": "The current time in milliseconds since epoch"},
+          "description": "Returns the current time in milliseconds since January 1, 1970 UTC.",
+          "static": true
+        },
+        {
+          "name": "nanoTime",
+          "signature": "nanoTime()",
+          "params": [],
+          "returns": {"type": "long", "description": "The current value of the running JVM's high-resolution time source, in nanoseconds"},
+          "description": "Returns the current value of the running JVM's high-resolution time source, in nanoseconds.",
+          "static": true
+        },
+        {
+          "name": "getenv",
+          "signature": "getenv(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the environment variable"}],
+          "returns": {"type": "String", "description": "The value of the environment variable, or null"},
+          "description": "Gets the value of the specified environment variable.",
+          "static": true
+        },
+        {
+          "name": "getProperty",
+          "signature": "getProperty(key)",
+          "params": [{"name": "key", "type": "String", "description": "The name of the system property"}],
+          "returns": {"type": "String", "description": "The value of the system property, or null"},
+          "description": "Gets the system property indicated by the specified key.",
+          "static": true
+        },
+        {
+          "name": "gc",
+          "signature": "gc()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Runs the garbage collector.",
+          "static": true
+        },
+        {
+          "name": "exit",
+          "signature": "exit(status)",
+          "params": [{"name": "status", "type": "int", "description": "Exit status code"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Terminates the currently running JVM. A nonzero status code indicates abnormal termination.",
+          "static": true
+        },
+        {
+          "name": "arraycopy",
+          "signature": "arraycopy(src, srcPos, dest, destPos, length)",
+          "params": [
+            {"name": "src", "type": "Object", "description": "The source array"},
+            {"name": "srcPos", "type": "int", "description": "Starting position in the source array"},
+            {"name": "dest", "type": "Object", "description": "The destination array"},
+            {"name": "destPos", "type": "int", "description": "Starting position in the destination array"},
+            {"name": "length", "type": "int", "description": "The number of elements to copy"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Copies an array from the source array to the destination array.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "out", "type": "PrintStream", "description": "The standard output stream.", "static": true, "final": true},
+        {"name": "err", "type": "PrintStream", "description": "The standard error output stream.", "static": true, "final": true},
+        {"name": "in", "type": "InputStream", "description": "The standard input stream.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/System.html"
+    },
+    {
+      "name": "Thread",
+      "description": "A thread is a thread of execution in a program. The JVM allows applications to have multiple threads running concurrently.",
+      "constructors": [
+        {
+          "signature": "Thread()",
+          "params": [],
+          "description": "Allocates a new Thread object."
+        },
+        {
+          "signature": "Thread(target)",
+          "params": [{"name": "target", "type": "Runnable", "description": "The object whose run method is invoked"}],
+          "description": "Allocates a new Thread object with the specified Runnable target."
+        },
+        {
+          "signature": "Thread(target, name)",
+          "params": [
+            {"name": "target", "type": "Runnable", "description": "The object whose run method is invoked"},
+            {"name": "name", "type": "String", "description": "The name of the new thread"}
+          ],
+          "description": "Allocates a new Thread object with the specified target and name."
+        }
+      ],
+      "methods": [
+        {
+          "name": "start",
+          "signature": "start()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Causes this thread to begin execution. The JVM calls the run method of this thread.",
+          "static": false
+        },
+        {
+          "name": "run",
+          "signature": "run()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "If this thread was constructed with a separate Runnable, then that Runnable's run method is called.",
+          "static": false
+        },
+        {
+          "name": "join",
+          "signature": "join()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Waits for this thread to die.",
+          "static": false
+        },
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of this thread"},
+          "description": "Returns this thread's name.",
+          "static": false
+        },
+        {
+          "name": "setName",
+          "signature": "setName(name)",
+          "params": [{"name": "name", "type": "String", "description": "The new name for this thread"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Changes the name of this thread.",
+          "static": false
+        },
+        {
+          "name": "isAlive",
+          "signature": "isAlive()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the thread is alive"},
+          "description": "Tests if this thread is alive.",
+          "static": false
+        },
+        {
+          "name": "isDaemon",
+          "signature": "isDaemon()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this is a daemon thread"},
+          "description": "Tests if this thread is a daemon thread.",
+          "static": false
+        },
+        {
+          "name": "setDaemon",
+          "signature": "setDaemon(on)",
+          "params": [{"name": "on", "type": "boolean", "description": "If true, marks this thread as a daemon"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Marks this thread as either a daemon thread or a user thread.",
+          "static": false
+        },
+        {
+          "name": "sleep",
+          "signature": "sleep(millis)",
+          "params": [{"name": "millis", "type": "long", "description": "The length of time to sleep in milliseconds"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Causes the currently executing thread to sleep for the specified number of milliseconds.",
+          "static": true
+        },
+        {
+          "name": "currentThread",
+          "signature": "currentThread()",
+          "params": [],
+          "returns": {"type": "Thread", "description": "The currently executing thread"},
+          "description": "Returns a reference to the currently executing thread object.",
+          "static": true
+        },
+        {
+          "name": "interrupt",
+          "signature": "interrupt()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Interrupts this thread.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html"
+    },
+    {
+      "name": "Exception",
+      "description": "The class Exception and its subclasses indicate conditions that a reasonable application might want to catch.",
+      "constructors": [
+        {
+          "signature": "Exception()",
+          "params": [],
+          "description": "Constructs a new exception with null as its detail message."
+        },
+        {
+          "signature": "Exception(message)",
+          "params": [{"name": "message", "type": "String", "description": "The detail message"}],
+          "description": "Constructs a new exception with the specified detail message."
+        },
+        {
+          "signature": "Exception(message, cause)",
+          "params": [
+            {"name": "message", "type": "String", "description": "The detail message"},
+            {"name": "cause", "type": "Throwable", "description": "The cause of this exception"}
+          ],
+          "description": "Constructs a new exception with the specified detail message and cause."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getMessage",
+          "signature": "getMessage()",
+          "params": [],
+          "returns": {"type": "String", "description": "The detail message string"},
+          "description": "Returns the detail message string of this throwable.",
+          "static": false
+        },
+        {
+          "name": "getCause",
+          "signature": "getCause()",
+          "params": [],
+          "returns": {"type": "Throwable", "description": "The cause of this throwable, or null"},
+          "description": "Returns the cause of this throwable or null if the cause is unknown.",
+          "static": false
+        },
+        {
+          "name": "printStackTrace",
+          "signature": "printStackTrace()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Prints this throwable and its backtrace to the standard error stream.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A short description of this throwable"},
+          "description": "Returns a short description of this throwable.",
+          "static": false
+        },
+        {
+          "name": "getStackTrace",
+          "signature": "getStackTrace()",
+          "params": [],
+          "returns": {"type": "StackTraceElement[]", "description": "An array of stack trace elements"},
+          "description": "Provides programmatic access to the stack trace information.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html"
+    },
+    {
+      "name": "RuntimeException",
+      "description": "RuntimeException is the superclass of exceptions that can be thrown during the normal operation of the JVM. Methods do not need to declare these in throws clauses.",
+      "constructors": [
+        {
+          "signature": "RuntimeException()",
+          "params": [],
+          "description": "Constructs a new runtime exception with null as its detail message."
+        },
+        {
+          "signature": "RuntimeException(message)",
+          "params": [{"name": "message", "type": "String", "description": "The detail message"}],
+          "description": "Constructs a new runtime exception with the specified detail message."
+        },
+        {
+          "signature": "RuntimeException(message, cause)",
+          "params": [
+            {"name": "message", "type": "String", "description": "The detail message"},
+            {"name": "cause", "type": "Throwable", "description": "The cause of this exception"}
+          ],
+          "description": "Constructs a new runtime exception with the specified detail message and cause."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getMessage",
+          "signature": "getMessage()",
+          "params": [],
+          "returns": {"type": "String", "description": "The detail message string"},
+          "description": "Returns the detail message string of this throwable.",
+          "static": false
+        },
+        {
+          "name": "getCause",
+          "signature": "getCause()",
+          "params": [],
+          "returns": {"type": "Throwable", "description": "The cause of this throwable, or null"},
+          "description": "Returns the cause of this throwable or null if the cause is unknown.",
+          "static": false
+        },
+        {
+          "name": "printStackTrace",
+          "signature": "printStackTrace()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Prints this throwable and its backtrace to the standard error stream.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/RuntimeException.html"
+    },
+    {
+      "name": "StringBuilder",
+      "description": "A mutable sequence of characters. Provides an API compatible with StringBuffer but with no guarantee of synchronization.",
+      "constructors": [
+        {
+          "signature": "StringBuilder()",
+          "params": [],
+          "description": "Constructs a string builder with no characters and an initial capacity of 16."
+        },
+        {
+          "signature": "StringBuilder(str)",
+          "params": [{"name": "str", "type": "String", "description": "The initial contents of the builder"}],
+          "description": "Constructs a string builder initialized to the contents of the specified string."
+        },
+        {
+          "signature": "StringBuilder(capacity)",
+          "params": [{"name": "capacity", "type": "int", "description": "The initial capacity"}],
+          "description": "Constructs a string builder with the specified initial capacity."
+        }
+      ],
+      "methods": [
+        {
+          "name": "append",
+          "signature": "append(str)",
+          "params": [{"name": "str", "type": "Object", "description": "The value to append"}],
+          "returns": {"type": "StringBuilder", "description": "A reference to this object"},
+          "description": "Appends the string representation of the argument to this sequence.",
+          "static": false
+        },
+        {
+          "name": "insert",
+          "signature": "insert(offset, str)",
+          "params": [
+            {"name": "offset", "type": "int", "description": "The offset position"},
+            {"name": "str", "type": "String", "description": "The string to insert"}
+          ],
+          "returns": {"type": "StringBuilder", "description": "A reference to this object"},
+          "description": "Inserts the string into this character sequence at the indicated offset.",
+          "static": false
+        },
+        {
+          "name": "delete",
+          "signature": "delete(start, end)",
+          "params": [
+            {"name": "start", "type": "int", "description": "The beginning index, inclusive"},
+            {"name": "end", "type": "int", "description": "The ending index, exclusive"}
+          ],
+          "returns": {"type": "StringBuilder", "description": "A reference to this object"},
+          "description": "Removes the characters in a substring of this sequence.",
+          "static": false
+        },
+        {
+          "name": "replace",
+          "signature": "replace(start, end, str)",
+          "params": [
+            {"name": "start", "type": "int", "description": "The beginning index, inclusive"},
+            {"name": "end", "type": "int", "description": "The ending index, exclusive"},
+            {"name": "str", "type": "String", "description": "The replacement string"}
+          ],
+          "returns": {"type": "StringBuilder", "description": "A reference to this object"},
+          "description": "Replaces the characters in a substring with the specified string.",
+          "static": false
+        },
+        {
+          "name": "reverse",
+          "signature": "reverse()",
+          "params": [],
+          "returns": {"type": "StringBuilder", "description": "A reference to this object"},
+          "description": "Causes this character sequence to be replaced by the reverse of the sequence.",
+          "static": false
+        },
+        {
+          "name": "length",
+          "signature": "length()",
+          "params": [],
+          "returns": {"type": "int", "description": "The length (character count)"},
+          "description": "Returns the length (character count) of this sequence.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this sequence"},
+          "description": "Returns a string representing the data in this sequence.",
+          "static": false
+        },
+        {
+          "name": "charAt",
+          "signature": "charAt(index)",
+          "params": [{"name": "index", "type": "int", "description": "The index of the character"}],
+          "returns": {"type": "char", "description": "The character at the specified index"},
+          "description": "Returns the character at the specified index.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/StringBuilder.html"
+    },
+    {
+      "name": "Class",
+      "description": "Instances of the class Class represent classes and interfaces in a running Java application.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The fully qualified name of the class"},
+          "description": "Returns the name of the entity represented by this Class object.",
+          "static": false
+        },
+        {
+          "name": "getSimpleName",
+          "signature": "getSimpleName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The simple name of the underlying class"},
+          "description": "Returns the simple name of the underlying class.",
+          "static": false
+        },
+        {
+          "name": "getSuperclass",
+          "signature": "getSuperclass()",
+          "params": [],
+          "returns": {"type": "Class", "description": "The superclass of this class"},
+          "description": "Returns the Class representing the superclass of the entity.",
+          "static": false
+        },
+        {
+          "name": "isInstance",
+          "signature": "isInstance(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to check"}],
+          "returns": {"type": "boolean", "description": "True if obj is an instance of this class"},
+          "description": "Determines if the specified Object is assignment-compatible with this Class.",
+          "static": false
+        },
+        {
+          "name": "newInstance",
+          "signature": "newInstance()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A newly allocated instance of the class"},
+          "description": "Creates a new instance of the class represented by this Class object.",
+          "static": false,
+          "deprecated": true
+        },
+        {
+          "name": "forName",
+          "signature": "forName(className)",
+          "params": [{"name": "className", "type": "String", "description": "The fully qualified name of the desired class"}],
+          "returns": {"type": "Class", "description": "The Class object for the named class"},
+          "description": "Returns the Class object associated with the class or interface with the given string name.",
+          "static": true
+        },
+        {
+          "name": "isAssignableFrom",
+          "signature": "isAssignableFrom(cls)",
+          "params": [{"name": "cls", "type": "Class", "description": "The Class object to check"}],
+          "returns": {"type": "boolean", "description": "True if the class is assignable from the specified class"},
+          "description": "Determines if the class or interface represented by this Class object is the same as, or a superclass of, the class represented by the specified Class parameter.",
+          "static": false
+        },
+        {
+          "name": "getMethod",
+          "signature": "getMethod(name, parameterTypes)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the method"},
+            {"name": "parameterTypes", "type": "Class...", "description": "The parameter types of the method"}
+          ],
+          "returns": {"type": "Method", "description": "The Method object matching the specified name and parameters"},
+          "description": "Returns a Method object that reflects the specified public member method.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html"
+    },
+    {
+      "name": "Comparable",
+      "description": "Imposes a total ordering on the objects of each class that implements it. This ordering is referred to as the natural ordering.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "compareTo",
+          "signature": "compareTo(o)",
+          "params": [{"name": "o", "type": "T", "description": "The object to be compared"}],
+          "returns": {"type": "int", "description": "A negative integer, zero, or a positive integer"},
+          "description": "Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html"
+    }
+  ]
+}

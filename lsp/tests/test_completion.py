@@ -1,5 +1,7 @@
 """Tests for completion.py — context detection, completion items, snippets."""
 
+import textwrap
+
 import pytest
 from lsprotocol.types import CompletionItemKind, InsertTextFormat
 
@@ -10,10 +12,13 @@ from ignition_lsp.completion import (
     _get_system_modules,
     _get_module_functions,
     _get_function_completions,
-    _is_project_prefix,
+    _is_project_module,
     _get_project_completions,
+    _get_leaf_symbol_completions,
+    _get_class_member_completions,
 )
 from ignition_lsp.project_scanner import ProjectIndex, ScriptLocation
+from ignition_lsp.script_symbols import SymbolCache
 
 
 # ── Context Detection Tests ───────────────────────────────────────────
@@ -211,27 +216,49 @@ def _make_index(scripts) -> ProjectIndex:
     return idx
 
 
-class TestIsProjectPrefix:
+class TestIsProjectModule:
+    def _index_with_general(self):
+        return _make_index([
+            _make_loc(module_path="project.library.utils"),
+            _make_loc(module_path="general.comments"),
+        ])
+
     def test_project_dot(self):
-        assert _is_project_prefix("project.") is True
+        assert _is_project_module("project.", self._index_with_general()) is True
 
     def test_project_bare(self):
-        assert _is_project_prefix("project") is True
+        assert _is_project_module("project", self._index_with_general()) is True
 
     def test_shared_dot(self):
-        assert _is_project_prefix("shared.") is True
+        assert _is_project_module("shared.", self._index_with_general()) is True
 
     def test_shared_bare(self):
-        assert _is_project_prefix("shared") is True
+        assert _is_project_module("shared", self._index_with_general()) is True
 
     def test_project_deep(self):
-        assert _is_project_prefix("project.library.utils") is True
+        assert _is_project_module("project.library.utils", self._index_with_general()) is True
 
     def test_system_not_project(self):
-        assert _is_project_prefix("system.tag") is False
+        assert _is_project_module("system.tag", self._index_with_general()) is False
 
     def test_empty_not_project(self):
-        assert _is_project_prefix("") is False
+        assert _is_project_module("", self._index_with_general()) is False
+
+    def test_none_index(self):
+        assert _is_project_module("project.", None) is False
+
+    def test_dynamic_package(self):
+        """Top-level packages like 'general' are recognized from the index."""
+        assert _is_project_module("general", self._index_with_general()) is True
+
+    def test_dynamic_package_dot(self):
+        assert _is_project_module("general.", self._index_with_general()) is True
+
+    def test_dynamic_package_deep(self):
+        assert _is_project_module("general.comments", self._index_with_general()) is True
+
+    def test_unknown_prefix(self):
+        assert _is_project_module("foobar", self._index_with_general()) is False
 
 
 class TestGetProjectCompletions:
@@ -367,3 +394,150 @@ class TestGetCompletionsWithProjectIndex:
         result = get_completions(doc, position(0, 11), api_loader, project_index=index)
         labels = [item.label for item in result.items]
         assert "readBlocking" in labels
+
+
+# ── Leaf Module Symbol Completions ───────────────────────────────────
+
+
+def _write_py(tmp_path, source, filename="code.py"):
+    p = tmp_path / filename
+    p.write_text(textwrap.dedent(source))
+    return str(p)
+
+
+class TestLeafModuleCompletions:
+    """Tests for completions inside a leaf .py module."""
+
+    def test_leaf_shows_functions_classes_variables(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            TIMEOUT = 30
+
+            def helper(data):
+                """Help with data."""
+                pass
+
+            class Worker:
+                def run(self):
+                    pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.library.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.library.utils.", index, symbol_cache)
+        labels = [item.label for item in items]
+        assert "helper" in labels
+        assert "Worker" in labels
+        assert "TIMEOUT" in labels
+
+    def test_leaf_function_kind(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            def process(data, timeout=30):
+                pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.utils.", index, symbol_cache)
+        assert len(items) == 1
+        item = items[0]
+        assert item.kind == CompletionItemKind.Function
+        assert "def process(data, timeout)" in item.detail
+
+    def test_partial_filtering(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            def alpha():
+                pass
+            def beta():
+                pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.utils.a", index, symbol_cache)
+        assert len(items) == 1
+        assert items[0].label == "alpha"
+
+    def test_class_member_completions(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            class Handler:
+                MAX_RETRIES = 3
+                def __init__(self, name):
+                    self.name = name
+                def process(self, data):
+                    pass
+                def __repr__(self):
+                    return "Handler"
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.utils.Handler.", index, symbol_cache)
+        labels = [item.label for item in items]
+        assert "__init__" in labels
+        assert "process" in labels
+        assert "MAX_RETRIES" in labels
+        # Dunder methods (except __init__) should be excluded
+        assert "__repr__" not in labels
+
+    def test_without_symbol_cache(self):
+        """Without symbol_cache, leaf modules show as regular module completions."""
+        index = _make_index([
+            _make_loc(module_path="project.library.utils", file_path="/p/code.py"),
+        ])
+        # No symbol_cache -> falls back to showing "utils" as a module
+        items = _get_project_completions("project.library.", index, symbol_cache=None)
+        labels = [item.label for item in items]
+        assert "utils" in labels
+
+    def test_parse_error_returns_empty(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, "def broken(\n")
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.utils.", index, symbol_cache)
+        assert items == []
+
+    def test_non_leaf_package_unchanged(self, tmp_path, symbol_cache):
+        """If a prefix has child modules, it's not a leaf — show packages not symbols."""
+        path = _write_py(tmp_path, "def foo(): pass\n")
+        index = _make_index([
+            _make_loc(module_path="project.library.utils", file_path=path),
+            _make_loc(module_path="project.library.config", file_path="/p/config.py"),
+        ])
+        items = _get_project_completions("project.library.", index, symbol_cache)
+        labels = [item.label for item in items]
+        # Should show child modules, not symbols from utils.py
+        assert "utils" in labels
+        assert "config" in labels
+
+    def test_private_symbols_excluded(self, tmp_path, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            _INTERNAL = "hidden"
+            def _private_helper():
+                pass
+            def public_func():
+                pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        items = _get_project_completions("project.utils.", index, symbol_cache)
+        labels = [item.label for item in items]
+        assert "public_func" in labels
+        assert "_private_helper" not in labels
+        assert "_INTERNAL" not in labels
+
+    def test_get_completions_integration(self, tmp_path, mock_document, position, api_loader, symbol_cache):
+        """Full integration: get_completions returns leaf symbols."""
+        path = _write_py(tmp_path, '''\
+            def tagChangeEvent(event):
+                """Handle tag change."""
+                pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.library.callables", file_path=path),
+        ])
+        doc = mock_document("project.library.callables.")
+        result = get_completions(doc, position(0, 26), api_loader, project_index=index, symbol_cache=symbol_cache)
+        labels = [item.label for item in result.items]
+        assert "tagChangeEvent" in labels

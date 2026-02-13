@@ -1,0 +1,546 @@
+{
+  "package": "javax.net.ssl",
+  "classes": [
+    {
+      "name": "SSLContext",
+      "description": "Represents an implementation of a secure socket protocol. Acts as a factory for SSLSocketFactory, SSLServerSocketFactory, and SSLEngine. Initialized with optional KeyManager, TrustManager, and SecureRandom.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(protocol)",
+          "params": [{"name": "protocol", "type": "String", "description": "The standard name of the requested protocol (e.g., TLS, TLSv1.2, TLSv1.3)"}],
+          "returns": {"type": "SSLContext", "description": "The new SSLContext object"},
+          "description": "Returns an SSLContext object that implements the specified secure socket protocol.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(protocol, provider)",
+          "params": [
+            {"name": "protocol", "type": "String", "description": "The standard name of the requested protocol"},
+            {"name": "provider", "type": "String", "description": "The name of the provider"}
+          ],
+          "returns": {"type": "SSLContext", "description": "The new SSLContext object"},
+          "description": "Returns an SSLContext object that implements the specified secure socket protocol from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "getDefault",
+          "signature": "getDefault()",
+          "params": [],
+          "returns": {"type": "SSLContext", "description": "The default SSLContext object"},
+          "description": "Returns the default SSL context. The default context is initialized with default KeyManager, TrustManager, and SecureRandom.",
+          "static": true
+        },
+        {
+          "name": "setDefault",
+          "signature": "setDefault(context)",
+          "params": [{"name": "context", "type": "SSLContext", "description": "The SSLContext to set as the default"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the default SSL context. The context must have been initialized before being passed to this method.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(km, tm, random)",
+          "params": [
+            {"name": "km", "type": "KeyManager[]", "description": "The sources of authentication keys, or null"},
+            {"name": "tm", "type": "TrustManager[]", "description": "The sources of peer authentication trust decisions, or null"},
+            {"name": "random", "type": "SecureRandom", "description": "The source of randomness, or null for default implementation"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this context. Either of the first two parameters may be null, in which case the installed security providers will be searched for the highest priority implementation of the appropriate factory.",
+          "static": false
+        },
+        {
+          "name": "getSocketFactory",
+          "signature": "getSocketFactory()",
+          "params": [],
+          "returns": {"type": "SSLSocketFactory", "description": "The SSLSocketFactory object"},
+          "description": "Returns a SocketFactory object for this context. Used to create SSLSocket instances for client-side SSL connections.",
+          "static": false
+        },
+        {
+          "name": "getServerSocketFactory",
+          "signature": "getServerSocketFactory()",
+          "params": [],
+          "returns": {"type": "SSLServerSocketFactory", "description": "The SSLServerSocketFactory object"},
+          "description": "Returns a ServerSocketFactory object for this context. Used to create SSLServerSocket instances for server-side SSL connections.",
+          "static": false
+        },
+        {
+          "name": "createSSLEngine",
+          "signature": "createSSLEngine()",
+          "params": [],
+          "returns": {"type": "SSLEngine", "description": "The SSLEngine object"},
+          "description": "Creates a new SSLEngine using this context. Applications using this factory method are providing no hints for an internal session reuse strategy.",
+          "static": false
+        },
+        {
+          "name": "createSSLEngine",
+          "signature": "createSSLEngine(peerHost, peerPort)",
+          "params": [
+            {"name": "peerHost", "type": "String", "description": "The non-authoritative name of the host"},
+            {"name": "peerPort", "type": "int", "description": "The non-authoritative port"}
+          ],
+          "returns": {"type": "SSLEngine", "description": "The SSLEngine object"},
+          "description": "Creates a new SSLEngine using this context with advisory peer information. The peer host and port are used as hints for an internal session reuse strategy.",
+          "static": false
+        },
+        {
+          "name": "getDefaultSSLParameters",
+          "signature": "getDefaultSSLParameters()",
+          "params": [],
+          "returns": {"type": "SSLParameters", "description": "The default SSLParameters"},
+          "description": "Returns a copy of the SSLParameters indicating the default settings for this SSL context.",
+          "static": false
+        },
+        {
+          "name": "getSupportedSSLParameters",
+          "signature": "getSupportedSSLParameters()",
+          "params": [],
+          "returns": {"type": "SSLParameters", "description": "The supported SSLParameters"},
+          "description": "Returns a copy of the SSLParameters indicating the supported settings for this SSL context.",
+          "static": false
+        },
+        {
+          "name": "getProtocol",
+          "signature": "getProtocol()",
+          "params": [],
+          "returns": {"type": "String", "description": "The protocol name (e.g., TLS, TLSv1.2)"},
+          "description": "Returns the protocol name of this SSLContext object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/net/ssl/SSLContext.html"
+    },
+    {
+      "name": "HttpsURLConnection",
+      "description": "Extends HttpURLConnection with support for HTTPS-specific features such as SSL socket factories and hostname verifiers. Used to make HTTPS requests with certificate and hostname verification control.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "setDefaultSSLSocketFactory",
+          "signature": "setDefaultSSLSocketFactory(sf)",
+          "params": [{"name": "sf", "type": "SSLSocketFactory", "description": "The default SSL socket factory"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the default SSLSocketFactory inherited by new instances of this class. Newly created instances will use this factory unless overridden by setSSLSocketFactory.",
+          "static": true
+        },
+        {
+          "name": "getDefaultSSLSocketFactory",
+          "signature": "getDefaultSSLSocketFactory()",
+          "params": [],
+          "returns": {"type": "SSLSocketFactory", "description": "The default SSLSocketFactory"},
+          "description": "Gets the default static SSLSocketFactory used when creating sockets for secure HTTPS URL connections.",
+          "static": true
+        },
+        {
+          "name": "setDefaultHostnameVerifier",
+          "signature": "setDefaultHostnameVerifier(v)",
+          "params": [{"name": "v", "type": "HostnameVerifier", "description": "The default hostname verifier"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the default HostnameVerifier inherited by new instances of this class. Newly created instances will use this verifier unless overridden by setHostnameVerifier.",
+          "static": true
+        },
+        {
+          "name": "getDefaultHostnameVerifier",
+          "signature": "getDefaultHostnameVerifier()",
+          "params": [],
+          "returns": {"type": "HostnameVerifier", "description": "The default hostname verifier"},
+          "description": "Gets the default HostnameVerifier used when creating new HTTPS URL connections.",
+          "static": true
+        },
+        {
+          "name": "setSSLSocketFactory",
+          "signature": "setSSLSocketFactory(sf)",
+          "params": [{"name": "sf", "type": "SSLSocketFactory", "description": "The SSL socket factory"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the SSLSocketFactory to be used for this particular HttpsURLConnection.",
+          "static": false
+        },
+        {
+          "name": "getSSLSocketFactory",
+          "signature": "getSSLSocketFactory()",
+          "params": [],
+          "returns": {"type": "SSLSocketFactory", "description": "The SSL socket factory"},
+          "description": "Gets the SSLSocketFactory used for this connection.",
+          "static": false
+        },
+        {
+          "name": "setHostnameVerifier",
+          "signature": "setHostnameVerifier(v)",
+          "params": [{"name": "v", "type": "HostnameVerifier", "description": "The hostname verifier"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the HostnameVerifier for this particular HttpsURLConnection.",
+          "static": false
+        },
+        {
+          "name": "getHostnameVerifier",
+          "signature": "getHostnameVerifier()",
+          "params": [],
+          "returns": {"type": "HostnameVerifier", "description": "The hostname verifier"},
+          "description": "Gets the HostnameVerifier in place on this instance.",
+          "static": false
+        },
+        {
+          "name": "getCipherSuite",
+          "signature": "getCipherSuite()",
+          "params": [],
+          "returns": {"type": "String", "description": "The cipher suite name"},
+          "description": "Returns the cipher suite in use on this connection.",
+          "static": false
+        },
+        {
+          "name": "getServerCertificates",
+          "signature": "getServerCertificates()",
+          "params": [],
+          "returns": {"type": "Certificate[]", "description": "The server's certificate chain"},
+          "description": "Returns the server's certificate chain which was established as part of defining the session. Throws SSLPeerUnverifiedException if the peer is not verified.",
+          "static": false
+        },
+        {
+          "name": "getPeerPrincipal",
+          "signature": "getPeerPrincipal()",
+          "params": [],
+          "returns": {"type": "Principal", "description": "The server's principal"},
+          "description": "Returns the server's principal which was established as part of defining the session. Throws SSLPeerUnverifiedException if the peer is not verified.",
+          "static": false
+        },
+        {
+          "name": "setRequestMethod",
+          "signature": "setRequestMethod(method)",
+          "params": [{"name": "method", "type": "String", "description": "The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the request method (GET, POST, PUT, etc.). Inherited from HttpURLConnection.",
+          "static": false
+        },
+        {
+          "name": "getResponseCode",
+          "signature": "getResponseCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "The HTTP status code"},
+          "description": "Gets the HTTP response status code (e.g., 200 for OK, 404 for Not Found). Inherited from HttpURLConnection.",
+          "static": false
+        },
+        {
+          "name": "getResponseMessage",
+          "signature": "getResponseMessage()",
+          "params": [],
+          "returns": {"type": "String", "description": "The HTTP response message (e.g., OK, Not Found)"},
+          "description": "Gets the HTTP response message returned along with the response code. Inherited from HttpURLConnection.",
+          "static": false
+        },
+        {
+          "name": "setRequestProperty",
+          "signature": "setRequestProperty(key, value)",
+          "params": [
+            {"name": "key", "type": "String", "description": "The keyword of the request header (e.g., Content-Type, Authorization)"},
+            {"name": "value", "type": "String", "description": "The value of the request header"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the general request property. If a property with the key already exists, overwrite its value. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "getInputStream",
+          "signature": "getInputStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An input stream that reads from this connection"},
+          "description": "Returns an input stream that reads from this open connection. Used to read the response body. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "getErrorStream",
+          "signature": "getErrorStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An error stream, or null if no error"},
+          "description": "Returns the error stream if the connection failed but the server sent useful data (e.g., a 404 page). Inherited from HttpURLConnection.",
+          "static": false
+        },
+        {
+          "name": "getOutputStream",
+          "signature": "getOutputStream()",
+          "params": [],
+          "returns": {"type": "OutputStream", "description": "An output stream that writes to this connection"},
+          "description": "Returns an output stream that writes to this connection. Used to send request body data. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "disconnect",
+          "signature": "disconnect()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Indicates that other requests to the server are unlikely in the near future. Releases resources. Inherited from HttpURLConnection.",
+          "static": false
+        },
+        {
+          "name": "setDoOutput",
+          "signature": "setDoOutput(dooutput)",
+          "params": [{"name": "dooutput", "type": "boolean", "description": "True to allow sending data"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether this connection allows sending data (output). Must be true for POST/PUT requests. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "setDoInput",
+          "signature": "setDoInput(doinput)",
+          "params": [{"name": "doinput", "type": "boolean", "description": "True to allow reading data"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether this connection allows receiving data (input). Defaults to true. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "setConnectTimeout",
+          "signature": "setConnectTimeout(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "Timeout in milliseconds (0 means infinite)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a specified timeout value, in milliseconds, for opening a connection to the resource. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "setReadTimeout",
+          "signature": "setReadTimeout(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "Timeout in milliseconds (0 means infinite)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the read timeout, in milliseconds. A non-zero value specifies the timeout when reading from the input stream. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "getContentType",
+          "signature": "getContentType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The content type of the resource, or null"},
+          "description": "Returns the value of the content-type header field. Inherited from URLConnection.",
+          "static": false
+        },
+        {
+          "name": "connect",
+          "signature": "connect()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Opens a communications link to the resource if such a connection has not already been established. Inherited from URLConnection.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/net/ssl/HttpsURLConnection.html"
+    },
+    {
+      "name": "TrustManagerFactory",
+      "description": "Acts as a factory for TrustManager objects based on a source of trust material. Used to validate remote certificates during SSL/TLS handshakes.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The standard name of the requested trust management algorithm (e.g., PKIX, SunX509)"}],
+          "returns": {"type": "TrustManagerFactory", "description": "The new TrustManagerFactory object"},
+          "description": "Returns a TrustManagerFactory object that acts as a factory for trust managers.",
+          "static": true
+        },
+        {
+          "name": "getDefaultAlgorithm",
+          "signature": "getDefaultAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The default algorithm name (e.g., PKIX)"},
+          "description": "Obtains the default TrustManagerFactory algorithm name. The default algorithm can be changed at runtime by setting the ssl.TrustManagerFactory.algorithm security property.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(ks)",
+          "params": [{"name": "ks", "type": "KeyStore", "description": "The key store, or null to use the default trust store"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this factory with a source of certificate authorities and related trust material. If the KeyStore parameter is null, the default trust store is used.",
+          "static": false
+        },
+        {
+          "name": "getTrustManagers",
+          "signature": "getTrustManagers()",
+          "params": [],
+          "returns": {"type": "TrustManager[]", "description": "The array of trust managers"},
+          "description": "Returns one trust manager for each type of trust material. Usually returns a single X509TrustManager.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The algorithm name of this TrustManagerFactory"},
+          "description": "Returns the algorithm name of this TrustManagerFactory object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/net/ssl/TrustManagerFactory.html"
+    },
+    {
+      "name": "KeyManagerFactory",
+      "description": "Acts as a factory for KeyManager objects based on a source of key material. Used to provide client authentication credentials during SSL/TLS handshakes.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The standard name of the requested key management algorithm (e.g., SunX509, PKIX)"}],
+          "returns": {"type": "KeyManagerFactory", "description": "The new KeyManagerFactory object"},
+          "description": "Returns a KeyManagerFactory object that acts as a factory for key managers.",
+          "static": true
+        },
+        {
+          "name": "getDefaultAlgorithm",
+          "signature": "getDefaultAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The default algorithm name (e.g., SunX509)"},
+          "description": "Obtains the default KeyManagerFactory algorithm name. The default algorithm can be changed at runtime by setting the ssl.KeyManagerFactory.algorithm security property.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(ks, password)",
+          "params": [
+            {"name": "ks", "type": "KeyStore", "description": "The key store containing key material, or null"},
+            {"name": "password", "type": "char[]", "description": "The password for recovering keys in the KeyStore"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this factory with a source of key material. The provider typically uses a KeyStore for obtaining key material for use during secure socket negotiations.",
+          "static": false
+        },
+        {
+          "name": "getKeyManagers",
+          "signature": "getKeyManagers()",
+          "params": [],
+          "returns": {"type": "KeyManager[]", "description": "The array of key managers"},
+          "description": "Returns one key manager for each type of key material. Usually returns a single X509KeyManager.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The algorithm name of this KeyManagerFactory"},
+          "description": "Returns the algorithm name of this KeyManagerFactory object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/net/ssl/KeyManagerFactory.html"
+    },
+    {
+      "name": "SSLParameters",
+      "description": "Encapsulates parameters for an SSL/TLS connection. Includes cipher suites, protocols, and client authentication settings. Can be applied to SSLSocket, SSLServerSocket, and SSLEngine.",
+      "constructors": [
+        {
+          "signature": "SSLParameters()",
+          "params": [],
+          "description": "Constructs SSLParameters with default values for cipher suites and protocols."
+        },
+        {
+          "signature": "SSLParameters(cipherSuites)",
+          "params": [{"name": "cipherSuites", "type": "String[]", "description": "The array of cipher suite names, or null"}],
+          "description": "Constructs SSLParameters from an array of cipher suites. Protocols are set to default values."
+        },
+        {
+          "signature": "SSLParameters(cipherSuites, protocols)",
+          "params": [
+            {"name": "cipherSuites", "type": "String[]", "description": "The array of cipher suite names, or null"},
+            {"name": "protocols", "type": "String[]", "description": "The array of protocol names, or null"}
+          ],
+          "description": "Constructs SSLParameters from an array of cipher suites and protocols."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getCipherSuites",
+          "signature": "getCipherSuites()",
+          "params": [],
+          "returns": {"type": "String[]", "description": "The array of cipher suite names, or null"},
+          "description": "Returns a copy of the array of cipher suites, or null if none have been set.",
+          "static": false
+        },
+        {
+          "name": "setCipherSuites",
+          "signature": "setCipherSuites(cipherSuites)",
+          "params": [{"name": "cipherSuites", "type": "String[]", "description": "The array of cipher suite names, or null"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the array of cipher suites.",
+          "static": false
+        },
+        {
+          "name": "getProtocols",
+          "signature": "getProtocols()",
+          "params": [],
+          "returns": {"type": "String[]", "description": "The array of protocol names, or null"},
+          "description": "Returns a copy of the array of protocols, or null if none have been set.",
+          "static": false
+        },
+        {
+          "name": "setProtocols",
+          "signature": "setProtocols(protocols)",
+          "params": [{"name": "protocols", "type": "String[]", "description": "The array of protocol names, or null"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the array of protocols.",
+          "static": false
+        },
+        {
+          "name": "getEndpointIdentificationAlgorithm",
+          "signature": "getEndpointIdentificationAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The endpoint identification algorithm (e.g., HTTPS, LDAPS), or null"},
+          "description": "Gets the endpoint identification algorithm. Returns null if no algorithm has been set.",
+          "static": false
+        },
+        {
+          "name": "setEndpointIdentificationAlgorithm",
+          "signature": "setEndpointIdentificationAlgorithm(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The algorithm name (e.g., HTTPS), or null to disable"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the endpoint identification algorithm. If the algorithm is non-null or non-empty, the endpoint identification/verification procedures must be handled during SSL/TLS handshaking.",
+          "static": false
+        },
+        {
+          "name": "getNeedClientAuth",
+          "signature": "getNeedClientAuth()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if client authentication is required"},
+          "description": "Returns whether client authentication should be required.",
+          "static": false
+        },
+        {
+          "name": "setNeedClientAuth",
+          "signature": "setNeedClientAuth(needClientAuth)",
+          "params": [{"name": "needClientAuth", "type": "boolean", "description": "Whether client authentication is required"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether client authentication should be required. Calling this method clears the wantClientAuth flag.",
+          "static": false
+        },
+        {
+          "name": "getWantClientAuth",
+          "signature": "getWantClientAuth()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if client authentication is requested"},
+          "description": "Returns whether client authentication should be requested.",
+          "static": false
+        },
+        {
+          "name": "setWantClientAuth",
+          "signature": "setWantClientAuth(wantClientAuth)",
+          "params": [{"name": "wantClientAuth", "type": "boolean", "description": "Whether client authentication is requested"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether client authentication should be requested. Calling this method clears the needClientAuth flag.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/net/ssl/SSLParameters.html"
+    }
+  ]
+}

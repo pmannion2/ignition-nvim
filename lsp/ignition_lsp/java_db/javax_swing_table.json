@@ -1,0 +1,147 @@
+{
+  "package": "javax.swing.table",
+  "classes": [
+    {
+      "name": "DefaultTableModel",
+      "description": "An implementation of TableModel that uses a Vector of Vectors to store cell values. The most commonly used table model in Ignition Vision scripts for Power Table customization.",
+      "constructors": [
+        {"signature": "DefaultTableModel()", "params": [], "description": "Constructs a default DefaultTableModel which is a table of zero columns and zero rows."},
+        {"signature": "DefaultTableModel(rowCount, columnCount)", "params": [{"name": "rowCount", "type": "int", "description": "The number of rows the table holds"}, {"name": "columnCount", "type": "int", "description": "The number of columns the table holds"}], "description": "Constructs a DefaultTableModel with the specified number of rows and columns of null values."},
+        {"signature": "DefaultTableModel(columnNames, rowCount)", "params": [{"name": "columnNames", "type": "Object[]", "description": "Array of column names"}, {"name": "rowCount", "type": "int", "description": "The number of rows the table holds"}], "description": "Constructs a DefaultTableModel with as many columns as there are elements in columnNames and the specified number of rows."},
+        {"signature": "DefaultTableModel(data, columnNames)", "params": [{"name": "data", "type": "Object[][]", "description": "The data of the table, a 2D array of Objects"}, {"name": "columnNames", "type": "Object[]", "description": "The names of the columns"}], "description": "Constructs a DefaultTableModel and initializes the table by passing data and columnNames."}
+      ],
+      "methods": [
+        {"name": "addRow", "signature": "addRow(rowData)", "params": [{"name": "rowData", "type": "Object[]", "description": "The data of the row being added"}], "returns": {"type": "void", "description": ""}, "description": "Adds a row to the end of the model. The new row will contain null values unless rowData is specified.", "static": false},
+        {"name": "insertRow", "signature": "insertRow(row, rowData)", "params": [{"name": "row", "type": "int", "description": "The row index of the row to be inserted"}, {"name": "rowData", "type": "Object[]", "description": "The data of the row being inserted"}], "returns": {"type": "void", "description": ""}, "description": "Inserts a row at the specified position in the model.", "static": false},
+        {"name": "removeRow", "signature": "removeRow(row)", "params": [{"name": "row", "type": "int", "description": "The row index of the row to be removed"}], "returns": {"type": "void", "description": ""}, "description": "Removes the row at the specified index from the model.", "static": false},
+        {"name": "setValueAt", "signature": "setValueAt(aValue, row, column)", "params": [{"name": "aValue", "type": "Object", "description": "The new value"}, {"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "void", "description": ""}, "description": "Sets the object value for the cell at the specified row and column.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(row, column)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value for the cell at the specified row and column.", "static": false},
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows in the model"}, "description": "Returns the number of rows in this data table.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns in the model"}, "description": "Returns the number of columns in this data table.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(column)", "params": [{"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "String", "description": "The name of the column"}, "description": "Returns the column name at the given column index.", "static": false},
+        {"name": "setColumnIdentifiers", "signature": "setColumnIdentifiers(newIdentifiers)", "params": [{"name": "newIdentifiers", "type": "Object[]", "description": "Array of column identifiers. If null, column names are set to empty strings."}], "returns": {"type": "void", "description": ""}, "description": "Replaces the column identifiers in the model. If the number of new identifiers differs, the model is restructured accordingly.", "static": false},
+        {"name": "addColumn", "signature": "addColumn(columnName)", "params": [{"name": "columnName", "type": "Object", "description": "The identifier of the column being added"}], "returns": {"type": "void", "description": ""}, "description": "Adds a column to the model with null cell values.", "static": false},
+        {"name": "addColumn", "signature": "addColumn(columnName, columnData)", "params": [{"name": "columnName", "type": "Object", "description": "The identifier of the column being added"}, {"name": "columnData", "type": "Object[]", "description": "The data of the column being added"}], "returns": {"type": "void", "description": ""}, "description": "Adds a column to the model with the specified column data.", "static": false},
+        {"name": "setRowCount", "signature": "setRowCount(rowCount)", "params": [{"name": "rowCount", "type": "int", "description": "The new number of rows"}], "returns": {"type": "void", "description": ""}, "description": "Sets the number of rows in the model. New rows are added with null values; excess rows are discarded.", "static": false},
+        {"name": "setNumRows", "signature": "setNumRows(rowCount)", "params": [{"name": "rowCount", "type": "int", "description": "The new number of rows"}], "returns": {"type": "void", "description": ""}, "description": "Obsolete as of Java 2 platform v1.3. Please use setRowCount instead.", "static": false},
+        {"name": "moveRow", "signature": "moveRow(start, end, to)", "params": [{"name": "start", "type": "int", "description": "The starting row index to be moved"}, {"name": "end", "type": "int", "description": "The ending row index to be moved"}, {"name": "to", "type": "int", "description": "The destination of the rows to be moved"}], "returns": {"type": "void", "description": ""}, "description": "Moves one or more rows from the inclusive range start to end to the to position in the model.", "static": false},
+        {"name": "getDataVector", "signature": "getDataVector()", "params": [], "returns": {"type": "Vector", "description": "The Vector of Vectors containing the table's data values"}, "description": "Returns the Vector of Vectors that contains the table's data values.", "static": false},
+        {"name": "isCellEditable", "signature": "isCellEditable(row, column)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "boolean", "description": "True (all cells are editable by default)"}, "description": "Returns true regardless of parameter values. All cells are editable by default in DefaultTableModel.", "static": false},
+        {"name": "setColumnCount", "signature": "setColumnCount(columnCount)", "params": [{"name": "columnCount", "type": "int", "description": "The new number of columns in the model"}], "returns": {"type": "void", "description": ""}, "description": "Sets the number of columns in the model. New columns are added with null column names and null cell values; excess columns are discarded.", "static": false},
+        {"name": "fireTableDataChanged", "signature": "fireTableDataChanged()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that all cell values in the table's rows may have changed. Triggers a table repaint.", "static": false},
+        {"name": "fireTableRowsInserted", "signature": "fireTableRowsInserted(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was inserted"}, {"name": "lastRow", "type": "int", "description": "The last row that was inserted"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been inserted.", "static": false},
+        {"name": "fireTableRowsDeleted", "signature": "fireTableRowsDeleted(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was deleted"}, {"name": "lastRow", "type": "int", "description": "The last row that was deleted"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been deleted.", "static": false},
+        {"name": "fireTableRowsUpdated", "signature": "fireTableRowsUpdated(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was updated"}, {"name": "lastRow", "type": "int", "description": "The last row that was updated"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been updated.", "static": false},
+        {"name": "fireTableCellUpdated", "signature": "fireTableCellUpdated(row, column)", "params": [{"name": "row", "type": "int", "description": "The row of the cell that was updated"}, {"name": "column", "type": "int", "description": "The column of the cell that was updated"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that the value of the cell at [row, column] has been updated.", "static": false},
+        {"name": "fireTableStructureChanged", "signature": "fireTableStructureChanged()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that the table's structure has changed. The number of columns, column names, and column types may have all changed.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/table/DefaultTableModel.html"
+    },
+    {
+      "name": "AbstractTableModel",
+      "description": "An abstract implementation of the TableModel interface that provides default implementations for most methods. Subclass this to create custom table models for Ignition Vision Power Tables.",
+      "constructors": [],
+      "methods": [
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows in the model"}, "description": "Returns the number of rows in the model. Must be implemented by subclasses.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns in the model"}, "description": "Returns the number of columns in the model. Must be implemented by subclasses.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(row, column)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value for the cell at the specified row and column. Must be implemented by subclasses.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(column)", "params": [{"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "String", "description": "The default name of the column"}, "description": "Returns a default name for the column using spreadsheet conventions: A, B, C, ... Z, AA, AB, etc.", "static": false},
+        {"name": "getColumnClass", "signature": "getColumnClass(columnIndex)", "params": [{"name": "columnIndex", "type": "int", "description": "The column index"}], "returns": {"type": "Class", "description": "The class of the column data (Object.class by default)"}, "description": "Returns Object.class regardless of columnIndex. Override to return the appropriate class for the column's data type.", "static": false},
+        {"name": "isCellEditable", "signature": "isCellEditable(row, column)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "boolean", "description": "False by default"}, "description": "Returns false. Override to allow cell editing in specific rows and columns.", "static": false},
+        {"name": "setValueAt", "signature": "setValueAt(aValue, row, column)", "params": [{"name": "aValue", "type": "Object", "description": "The new value"}, {"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "void", "description": ""}, "description": "Empty implementation. Override to set the value at the specified cell and fire appropriate events.", "static": false},
+        {"name": "addTableModelListener", "signature": "addTableModelListener(l)", "params": [{"name": "l", "type": "TableModelListener", "description": "The TableModelListener to add"}], "returns": {"type": "void", "description": ""}, "description": "Adds a listener to the list that is notified each time a change to the data model occurs.", "static": false},
+        {"name": "removeTableModelListener", "signature": "removeTableModelListener(l)", "params": [{"name": "l", "type": "TableModelListener", "description": "The TableModelListener to remove"}], "returns": {"type": "void", "description": ""}, "description": "Removes a listener from the list that is notified each time a change to the data model occurs.", "static": false},
+        {"name": "fireTableDataChanged", "signature": "fireTableDataChanged()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that all cell values in the table's rows may have changed.", "static": false},
+        {"name": "fireTableStructureChanged", "signature": "fireTableStructureChanged()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that the table's structure has changed.", "static": false},
+        {"name": "fireTableRowsInserted", "signature": "fireTableRowsInserted(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was inserted"}, {"name": "lastRow", "type": "int", "description": "The last row that was inserted"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been inserted.", "static": false},
+        {"name": "fireTableRowsDeleted", "signature": "fireTableRowsDeleted(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was deleted"}, {"name": "lastRow", "type": "int", "description": "The last row that was deleted"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been deleted.", "static": false},
+        {"name": "fireTableRowsUpdated", "signature": "fireTableRowsUpdated(firstRow, lastRow)", "params": [{"name": "firstRow", "type": "int", "description": "The first row that was updated"}, {"name": "lastRow", "type": "int", "description": "The last row that was updated"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that rows in the range [firstRow, lastRow] have been updated.", "static": false},
+        {"name": "fireTableCellUpdated", "signature": "fireTableCellUpdated(row, column)", "params": [{"name": "row", "type": "int", "description": "The row of the cell that was updated"}, {"name": "column", "type": "int", "description": "The column of the cell that was updated"}], "returns": {"type": "void", "description": ""}, "description": "Notifies all listeners that the value of the cell at [row, column] has been updated.", "static": false},
+        {"name": "findColumn", "signature": "findColumn(columnName)", "params": [{"name": "columnName", "type": "String", "description": "The name of the column to find"}], "returns": {"type": "int", "description": "The column index, or -1 if not found"}, "description": "Returns the index of the column with the given name, or -1 if no column has that name.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/table/AbstractTableModel.html"
+    },
+    {
+      "name": "TableModel",
+      "description": "The interface that specifies the methods the JTable will use to interrogate a tabular data model. This is the base interface that all table models must implement.",
+      "constructors": [],
+      "methods": [
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows in the model"}, "description": "Returns the number of rows in the model.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns in the model"}, "description": "Returns the number of columns in the model.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(columnIndex)", "params": [{"name": "columnIndex", "type": "int", "description": "The index of the column"}], "returns": {"type": "String", "description": "The name of the column"}, "description": "Returns the name of the column at the given index.", "static": false},
+        {"name": "getColumnClass", "signature": "getColumnClass(columnIndex)", "params": [{"name": "columnIndex", "type": "int", "description": "The index of the column"}], "returns": {"type": "Class", "description": "The class of the column data"}, "description": "Returns the most specific superclass for all the cell values in the column. Used by the JTable to set up a default renderer and editor for the column.", "static": false},
+        {"name": "isCellEditable", "signature": "isCellEditable(rowIndex, columnIndex)", "params": [{"name": "rowIndex", "type": "int", "description": "The row index"}, {"name": "columnIndex", "type": "int", "description": "The column index"}], "returns": {"type": "boolean", "description": "True if the cell is editable"}, "description": "Returns true if the cell at the specified position is editable.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(rowIndex, columnIndex)", "params": [{"name": "rowIndex", "type": "int", "description": "The row index"}, {"name": "columnIndex", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value for the cell at the specified position.", "static": false},
+        {"name": "setValueAt", "signature": "setValueAt(aValue, rowIndex, columnIndex)", "params": [{"name": "aValue", "type": "Object", "description": "The new value to assign"}, {"name": "rowIndex", "type": "int", "description": "The row index"}, {"name": "columnIndex", "type": "int", "description": "The column index"}], "returns": {"type": "void", "description": ""}, "description": "Sets the value in the cell at the specified position.", "static": false},
+        {"name": "addTableModelListener", "signature": "addTableModelListener(l)", "params": [{"name": "l", "type": "TableModelListener", "description": "The TableModelListener to add"}], "returns": {"type": "void", "description": ""}, "description": "Adds a listener to the list that is notified each time a change to the data model occurs.", "static": false},
+        {"name": "removeTableModelListener", "signature": "removeTableModelListener(l)", "params": [{"name": "l", "type": "TableModelListener", "description": "The TableModelListener to remove"}], "returns": {"type": "void", "description": ""}, "description": "Removes a listener from the list that is notified each time a change to the data model occurs.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/table/TableModel.html"
+    },
+    {
+      "name": "TableCellRenderer",
+      "description": "An interface that defines the method required by any object that would like to be a renderer for cells in a JTable. Commonly implemented in Ignition Vision scripts for custom Power Table cell rendering.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getTableCellRendererComponent",
+          "signature": "getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column)",
+          "params": [
+            {"name": "table", "type": "JTable", "description": "The JTable that is asking the renderer to draw"},
+            {"name": "value", "type": "Object", "description": "The value of the cell to be rendered"},
+            {"name": "isSelected", "type": "boolean", "description": "True if the cell is selected"},
+            {"name": "hasFocus", "type": "boolean", "description": "True if the cell has focus"},
+            {"name": "row", "type": "int", "description": "The row index of the cell being drawn"},
+            {"name": "column", "type": "int", "description": "The column index of the cell being drawn"}
+          ],
+          "returns": {"type": "Component", "description": "The component used for drawing the cell"},
+          "description": "Returns the component used for drawing the cell. This method is used to configure the renderer appropriately before drawing.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/table/TableCellRenderer.html"
+    },
+    {
+      "name": "DefaultTableCellRenderer",
+      "description": "The standard class for rendering (displaying) individual cells in a JTable. Extends JLabel, so it supports text, icons, and formatting. Commonly subclassed in Ignition Vision scripts to customize Power Table cell appearance.",
+      "constructors": [
+        {"signature": "DefaultTableCellRenderer()", "params": [], "description": "Creates a default table cell renderer with no icon, left-aligned text, and opaque background."}
+      ],
+      "methods": [
+        {
+          "name": "getTableCellRendererComponent",
+          "signature": "getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column)",
+          "params": [
+            {"name": "table", "type": "JTable", "description": "The JTable that is asking the renderer to draw"},
+            {"name": "value", "type": "Object", "description": "The value of the cell to be rendered"},
+            {"name": "isSelected", "type": "boolean", "description": "True if the cell is selected"},
+            {"name": "hasFocus", "type": "boolean", "description": "True if the cell has focus"},
+            {"name": "row", "type": "int", "description": "The row index of the cell being drawn"},
+            {"name": "column", "type": "int", "description": "The column index of the cell being drawn"}
+          ],
+          "returns": {"type": "Component", "description": "This renderer component configured for the specified cell"},
+          "description": "Returns this renderer configured for the specified cell. Sets the text, colors, and font based on the table and selection state.",
+          "static": false
+        },
+        {"name": "setValue", "signature": "setValue(value)", "params": [{"name": "value", "type": "Object", "description": "The value to set as the cell's display text (converted via toString)"}], "returns": {"type": "void", "description": ""}, "description": "Sets the string value for this cell renderer. Calls setText with the string representation of the value.", "static": false},
+        {"name": "setForeground", "signature": "setForeground(c)", "params": [{"name": "c", "type": "Color", "description": "The foreground color to set"}], "returns": {"type": "void", "description": ""}, "description": "Overrides JComponent.setForeground to assign the unselected-foreground color.", "static": false},
+        {"name": "setBackground", "signature": "setBackground(c)", "params": [{"name": "c", "type": "Color", "description": "The background color to set"}], "returns": {"type": "void", "description": ""}, "description": "Overrides JComponent.setBackground to assign the unselected-background color.", "static": false},
+        {"name": "setFont", "signature": "setFont(font)", "params": [{"name": "font", "type": "Font", "description": "The font to use for rendering text"}], "returns": {"type": "void", "description": ""}, "description": "Sets the font for this component. Inherited from JLabel.", "static": false},
+        {"name": "setHorizontalAlignment", "signature": "setHorizontalAlignment(alignment)", "params": [{"name": "alignment", "type": "int", "description": "One of SwingConstants: LEFT, CENTER, RIGHT, LEADING, or TRAILING"}], "returns": {"type": "void", "description": ""}, "description": "Sets the alignment of the renderer's contents along the X axis. Inherited from JLabel.", "static": false},
+        {"name": "setOpaque", "signature": "setOpaque(isOpaque)", "params": [{"name": "isOpaque", "type": "boolean", "description": "True if this component should be opaque"}], "returns": {"type": "void", "description": ""}, "description": "Sets whether this component is opaque. An opaque component paints its entire background.", "static": false},
+        {"name": "setText", "signature": "setText(text)", "params": [{"name": "text", "type": "String", "description": "The text to display"}], "returns": {"type": "void", "description": ""}, "description": "Sets the text displayed by this renderer. Inherited from JLabel. Supports HTML via '<html>' prefix.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/table/DefaultTableCellRenderer.html"
+    }
+  ]
+}

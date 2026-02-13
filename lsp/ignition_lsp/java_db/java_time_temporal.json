@@ -1,0 +1,32 @@
+{
+  "package": "java.time.temporal",
+  "classes": [
+    {
+      "name": "ChronoUnit",
+      "description": "A standard set of date periods units. Provides a unit-based access to manipulate dates, times, or date-times.",
+      "constructors": [],
+      "methods": [
+        {"name": "getDuration", "signature": "getDuration()", "params": [], "returns": {"type": "Duration", "description": "The estimated duration of this unit"}, "description": "Gets the estimated duration of this unit.", "static": false},
+        {"name": "isDurationEstimated", "signature": "isDurationEstimated()", "params": [], "returns": {"type": "boolean", "description": "True if the duration is estimated"}, "description": "Checks if the duration of the unit is an estimate.", "static": false},
+        {"name": "isDateBased", "signature": "isDateBased()", "params": [], "returns": {"type": "boolean", "description": "True if this is date-based"}, "description": "Checks if this unit is a date unit (DAYS and above).", "static": false},
+        {"name": "isTimeBased", "signature": "isTimeBased()", "params": [], "returns": {"type": "boolean", "description": "True if this is time-based"}, "description": "Checks if this unit is a time unit (HOURS and below).", "static": false},
+        {"name": "between", "signature": "between(temporal1Inclusive, temporal2Exclusive)", "params": [{"name": "temporal1Inclusive", "type": "Temporal", "description": "The base temporal object"}, {"name": "temporal2Exclusive", "type": "Temporal", "description": "The other temporal object"}], "returns": {"type": "long", "description": "The amount of time between the two temporals"}, "description": "Calculates the amount of time between two temporal objects.", "static": false}
+      ],
+      "fields": [
+        {"name": "NANOS", "type": "ChronoUnit", "description": "Unit for nanoseconds.", "static": true, "final": true},
+        {"name": "MICROS", "type": "ChronoUnit", "description": "Unit for microseconds.", "static": true, "final": true},
+        {"name": "MILLIS", "type": "ChronoUnit", "description": "Unit for milliseconds.", "static": true, "final": true},
+        {"name": "SECONDS", "type": "ChronoUnit", "description": "Unit for seconds.", "static": true, "final": true},
+        {"name": "MINUTES", "type": "ChronoUnit", "description": "Unit for minutes.", "static": true, "final": true},
+        {"name": "HOURS", "type": "ChronoUnit", "description": "Unit for hours.", "static": true, "final": true},
+        {"name": "HALF_DAYS", "type": "ChronoUnit", "description": "Unit for half-days (12 hours).", "static": true, "final": true},
+        {"name": "DAYS", "type": "ChronoUnit", "description": "Unit for days.", "static": true, "final": true},
+        {"name": "WEEKS", "type": "ChronoUnit", "description": "Unit for weeks.", "static": true, "final": true},
+        {"name": "MONTHS", "type": "ChronoUnit", "description": "Unit for months.", "static": true, "final": true},
+        {"name": "YEARS", "type": "ChronoUnit", "description": "Unit for years.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/time/temporal/ChronoUnit.html"
+    }
+  ]
+}

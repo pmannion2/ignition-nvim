@@ -1,0 +1,112 @@
+{
+  "package": "java.text",
+  "classes": [
+    {
+      "name": "SimpleDateFormat",
+      "description": "A concrete class for formatting and parsing dates in a locale-sensitive manner. Allows formatting (date -> text), parsing (text -> date), and normalization.",
+      "constructors": [
+        {"signature": "SimpleDateFormat()", "params": [], "description": "Constructs a SimpleDateFormat using the default pattern and date format symbols for the default locale."},
+        {"signature": "SimpleDateFormat(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The pattern describing the date and time format"}], "description": "Constructs a SimpleDateFormat using the given pattern and the default date format symbols for the default locale."},
+        {"signature": "SimpleDateFormat(pattern, locale)", "params": [{"name": "pattern", "type": "String", "description": "The pattern describing the date and time format"}, {"name": "locale", "type": "Locale", "description": "The locale whose date format symbols should be used"}], "description": "Constructs a SimpleDateFormat using the given pattern and the date format symbols for the given locale."}
+      ],
+      "methods": [
+        {"name": "format", "signature": "format(date)", "params": [{"name": "date", "type": "Date", "description": "The date value to be formatted"}], "returns": {"type": "String", "description": "The formatted date-time string"}, "description": "Formats the given Date into a date/time string.", "static": false},
+        {"name": "parse", "signature": "parse(source)", "params": [{"name": "source", "type": "String", "description": "The date/time string to be parsed"}], "returns": {"type": "Date", "description": "A Date parsed from the string"}, "description": "Parses text from the beginning of the given string to produce a date.", "static": false},
+        {"name": "applyPattern", "signature": "applyPattern(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The new date/time pattern"}], "returns": {"type": "void", "description": ""}, "description": "Applies the given pattern string to this date format.", "static": false},
+        {"name": "toPattern", "signature": "toPattern()", "params": [], "returns": {"type": "String", "description": "The pattern string"}, "description": "Returns the pattern string describing this date format.", "static": false},
+        {"name": "setTimeZone", "signature": "setTimeZone(zone)", "params": [{"name": "zone", "type": "TimeZone", "description": "The given new time zone"}], "returns": {"type": "void", "description": ""}, "description": "Sets the time zone for the calendar of this DateFormat object.", "static": false},
+        {"name": "getTimeZone", "signature": "getTimeZone()", "params": [], "returns": {"type": "TimeZone", "description": "The time zone associated with this DateFormat"}, "description": "Gets the time zone.", "static": false},
+        {"name": "setLenient", "signature": "setLenient(lenient)", "params": [{"name": "lenient", "type": "boolean", "description": "When true, parsing is lenient"}], "returns": {"type": "void", "description": ""}, "description": "Specify whether or not date/time parsing is to be lenient.", "static": false},
+        {"name": "isLenient", "signature": "isLenient()", "params": [], "returns": {"type": "boolean", "description": "True if the calendar is lenient"}, "description": "Tell whether date/time parsing is to be lenient.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html"
+    },
+    {
+      "name": "DecimalFormat",
+      "description": "A concrete subclass of NumberFormat that formats decimal numbers. It can format and parse numbers for any locale, including support for grouping separators, scientific notation, and custom patterns.",
+      "constructors": [
+        {"signature": "DecimalFormat()", "params": [], "description": "Creates a DecimalFormat using the default pattern and symbols for the default locale."},
+        {"signature": "DecimalFormat(pattern)", "params": [{"name": "pattern", "type": "String", "description": "A non-localized pattern string"}], "description": "Creates a DecimalFormat using the given pattern and the default symbols for the default locale."},
+        {"signature": "DecimalFormat(pattern, symbols)", "params": [{"name": "pattern", "type": "String", "description": "A non-localized pattern string"}, {"name": "symbols", "type": "DecimalFormatSymbols", "description": "The set of symbols to be used"}], "description": "Creates a DecimalFormat using the given pattern and symbols."}
+      ],
+      "methods": [
+        {"name": "format", "signature": "format(number)", "params": [{"name": "number", "type": "double", "description": "The number to format"}], "returns": {"type": "String", "description": "The formatted number string"}, "description": "Formats a double to produce a string.", "static": false},
+        {"name": "parse", "signature": "parse(source)", "params": [{"name": "source", "type": "String", "description": "The string to be parsed"}], "returns": {"type": "Number", "description": "The parsed number"}, "description": "Parses text from the beginning of the given string to produce a number.", "static": false},
+        {"name": "applyPattern", "signature": "applyPattern(pattern)", "params": [{"name": "pattern", "type": "String", "description": "A non-localized pattern string"}], "returns": {"type": "void", "description": ""}, "description": "Apply the given pattern to this Format object.", "static": false},
+        {"name": "toPattern", "signature": "toPattern()", "params": [], "returns": {"type": "String", "description": "A non-localized pattern string"}, "description": "Synthesizes a pattern string that represents the current state of this Format object.", "static": false},
+        {"name": "setMaximumFractionDigits", "signature": "setMaximumFractionDigits(newValue)", "params": [{"name": "newValue", "type": "int", "description": "The maximum number of fraction digits to be shown"}], "returns": {"type": "void", "description": ""}, "description": "Sets the maximum number of digits allowed in the fraction portion of a number.", "static": false},
+        {"name": "setMinimumFractionDigits", "signature": "setMinimumFractionDigits(newValue)", "params": [{"name": "newValue", "type": "int", "description": "The minimum number of fraction digits to be shown"}], "returns": {"type": "void", "description": ""}, "description": "Sets the minimum number of digits allowed in the fraction portion of a number.", "static": false},
+        {"name": "setGroupingUsed", "signature": "setGroupingUsed(newValue)", "params": [{"name": "newValue", "type": "boolean", "description": "True if grouping is used"}], "returns": {"type": "void", "description": ""}, "description": "Set whether or not grouping will be used in this format.", "static": false},
+        {"name": "setRoundingMode", "signature": "setRoundingMode(roundingMode)", "params": [{"name": "roundingMode", "type": "RoundingMode", "description": "The RoundingMode to be used"}], "returns": {"type": "void", "description": ""}, "description": "Sets the RoundingMode used in this DecimalFormat.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/text/DecimalFormat.html"
+    },
+    {
+      "name": "MessageFormat",
+      "description": "Provides a means to produce concatenated messages in a language-neutral way. Use this to construct messages displayed for end users.",
+      "constructors": [
+        {"signature": "MessageFormat(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The pattern for this message format"}], "description": "Constructs a MessageFormat for the default locale and the specified pattern."},
+        {"signature": "MessageFormat(pattern, locale)", "params": [{"name": "pattern", "type": "String", "description": "The pattern for this message format"}, {"name": "locale", "type": "Locale", "description": "The locale for this message format"}], "description": "Constructs a MessageFormat for the specified locale and pattern."}
+      ],
+      "methods": [
+        {"name": "format", "signature": "format(pattern, arguments)", "params": [{"name": "pattern", "type": "String", "description": "The pattern string"}, {"name": "arguments", "type": "Object...", "description": "The objects to be formatted and substituted"}], "returns": {"type": "String", "description": "The formatted string"}, "description": "Creates a MessageFormat with the given pattern and uses it to format the given arguments. This is a convenience static method.", "static": true},
+        {"name": "format", "signature": "format(arguments)", "params": [{"name": "arguments", "type": "Object[]", "description": "An array of objects to be formatted and substituted"}], "returns": {"type": "String", "description": "The formatted string"}, "description": "Formats an array of objects and appends the MessageFormat's pattern, with format elements replaced by the formatted objects.", "static": false},
+        {"name": "applyPattern", "signature": "applyPattern(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The pattern for this message format"}], "returns": {"type": "void", "description": ""}, "description": "Sets the pattern used by this message format.", "static": false},
+        {"name": "toPattern", "signature": "toPattern()", "params": [], "returns": {"type": "String", "description": "The pattern string"}, "description": "Returns the pattern string of this message format.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/text/MessageFormat.html"
+    },
+    {
+      "name": "NumberFormat",
+      "description": "Abstract base class for all number formats. Provides the interface for formatting and parsing numbers. Use the static factory methods to obtain instances.",
+      "constructors": [],
+      "methods": [
+        {"name": "getInstance", "signature": "getInstance()", "params": [], "returns": {"type": "NumberFormat", "description": "A general-purpose number format for the current default locale"}, "description": "Returns a general-purpose number format for the current default locale.", "static": true},
+        {"name": "getNumberInstance", "signature": "getNumberInstance()", "params": [], "returns": {"type": "NumberFormat", "description": "A number format for the current default locale"}, "description": "Returns a general-purpose number format for the current default locale.", "static": true},
+        {"name": "getCurrencyInstance", "signature": "getCurrencyInstance()", "params": [], "returns": {"type": "NumberFormat", "description": "A currency format for the current default locale"}, "description": "Returns a currency format for the current default locale.", "static": true},
+        {"name": "getPercentInstance", "signature": "getPercentInstance()", "params": [], "returns": {"type": "NumberFormat", "description": "A percent format for the current default locale"}, "description": "Returns a percentage format for the current default locale.", "static": true},
+        {"name": "getIntegerInstance", "signature": "getIntegerInstance()", "params": [], "returns": {"type": "NumberFormat", "description": "A number format for integer values for the current default locale"}, "description": "Returns an integer number format for the current default locale. The returned format will parse numbers as integers.", "static": true},
+        {"name": "format", "signature": "format(number)", "params": [{"name": "number", "type": "double", "description": "The number to format"}], "returns": {"type": "String", "description": "The formatted string"}, "description": "Specialization of format. Formats a double to produce a string.", "static": false},
+        {"name": "parse", "signature": "parse(source)", "params": [{"name": "source", "type": "String", "description": "A String whose beginning should be parsed"}], "returns": {"type": "Number", "description": "A Number parsed from the string"}, "description": "Parses text from the beginning of the given string to produce a number.", "static": false},
+        {"name": "setMaximumFractionDigits", "signature": "setMaximumFractionDigits(newValue)", "params": [{"name": "newValue", "type": "int", "description": "The maximum number of fraction digits to be shown"}], "returns": {"type": "void", "description": ""}, "description": "Sets the maximum number of digits allowed in the fraction portion of a number.", "static": false},
+        {"name": "setMinimumFractionDigits", "signature": "setMinimumFractionDigits(newValue)", "params": [{"name": "newValue", "type": "int", "description": "The minimum number of fraction digits to be shown"}], "returns": {"type": "void", "description": ""}, "description": "Sets the minimum number of digits allowed in the fraction portion of a number.", "static": false},
+        {"name": "setGroupingUsed", "signature": "setGroupingUsed(newValue)", "params": [{"name": "newValue", "type": "boolean", "description": "True if grouping is used"}], "returns": {"type": "void", "description": ""}, "description": "Set whether or not grouping will be used in this format.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/text/NumberFormat.html"
+    },
+    {
+      "name": "DateFormat",
+      "description": "Abstract class for date/time formatting subclasses which formats and parses dates or time in a language-independent manner. Use the static factory methods to obtain instances.",
+      "constructors": [],
+      "methods": [
+        {"name": "getDateInstance", "signature": "getDateInstance()", "params": [], "returns": {"type": "DateFormat", "description": "A date formatter with the default formatting style for the default locale"}, "description": "Gets the date formatter with the default formatting style for the default locale.", "static": true},
+        {"name": "getDateInstance", "signature": "getDateInstance(style)", "params": [{"name": "style", "type": "int", "description": "The given formatting style (SHORT, MEDIUM, LONG, FULL, or DEFAULT)"}], "returns": {"type": "DateFormat", "description": "A date formatter with the given formatting style for the default locale"}, "description": "Gets the date formatter with the given formatting style for the default locale.", "static": true},
+        {"name": "getTimeInstance", "signature": "getTimeInstance()", "params": [], "returns": {"type": "DateFormat", "description": "A time formatter with the default formatting style for the default locale"}, "description": "Gets the time formatter with the default formatting style for the default locale.", "static": true},
+        {"name": "getTimeInstance", "signature": "getTimeInstance(style)", "params": [{"name": "style", "type": "int", "description": "The given formatting style (SHORT, MEDIUM, LONG, FULL, or DEFAULT)"}], "returns": {"type": "DateFormat", "description": "A time formatter with the given formatting style for the default locale"}, "description": "Gets the time formatter with the given formatting style for the default locale.", "static": true},
+        {"name": "getDateTimeInstance", "signature": "getDateTimeInstance()", "params": [], "returns": {"type": "DateFormat", "description": "A date/time formatter with the default formatting style for the default locale"}, "description": "Gets the date/time formatter with the default formatting style for the default locale.", "static": true},
+        {"name": "getDateTimeInstance", "signature": "getDateTimeInstance(dateStyle, timeStyle)", "params": [{"name": "dateStyle", "type": "int", "description": "The given date formatting style (SHORT, MEDIUM, LONG, FULL, or DEFAULT)"}, {"name": "timeStyle", "type": "int", "description": "The given time formatting style (SHORT, MEDIUM, LONG, FULL, or DEFAULT)"}], "returns": {"type": "DateFormat", "description": "A date/time formatter with the given formatting styles for the default locale"}, "description": "Gets the date/time formatter with the given date and time formatting styles for the default locale.", "static": true},
+        {"name": "format", "signature": "format(date)", "params": [{"name": "date", "type": "Date", "description": "The time value to be formatted into a date/time string"}], "returns": {"type": "String", "description": "The formatted date/time string"}, "description": "Formats a Date into a date/time string.", "static": false},
+        {"name": "parse", "signature": "parse(source)", "params": [{"name": "source", "type": "String", "description": "A String whose beginning should be parsed"}], "returns": {"type": "Date", "description": "A Date parsed from the string"}, "description": "Parses text from the beginning of the given string to produce a date.", "static": false},
+        {"name": "setTimeZone", "signature": "setTimeZone(zone)", "params": [{"name": "zone", "type": "TimeZone", "description": "The given new time zone"}], "returns": {"type": "void", "description": ""}, "description": "Sets the time zone for the calendar of this DateFormat object.", "static": false},
+        {"name": "setLenient", "signature": "setLenient(lenient)", "params": [{"name": "lenient", "type": "boolean", "description": "When true, parsing is lenient"}], "returns": {"type": "void", "description": ""}, "description": "Specify whether or not date/time parsing is to be lenient.", "static": false}
+      ],
+      "fields": [
+        {"name": "SHORT", "type": "int", "description": "Constant for short style pattern.", "static": true, "final": true},
+        {"name": "MEDIUM", "type": "int", "description": "Constant for medium style pattern.", "static": true, "final": true},
+        {"name": "LONG", "type": "int", "description": "Constant for long style pattern.", "static": true, "final": true},
+        {"name": "FULL", "type": "int", "description": "Constant for full style pattern.", "static": true, "final": true},
+        {"name": "DEFAULT", "type": "int", "description": "Constant for default style pattern. Its value is MEDIUM.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/text/DateFormat.html"
+    }
+  ]
+}

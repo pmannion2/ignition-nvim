@@ -1,0 +1,101 @@
+{
+  "package": "com.inductiveautomation.ignition.common",
+  "classes": [
+    {
+      "name": "LoggerEx",
+      "description": "Extended logger for Ignition. Provides convenience methods for structured logging with automatic module context.",
+      "constructors": [],
+      "methods": [
+        {"name": "newBuilder", "signature": "newBuilder()", "params": [], "returns": {"type": "LoggerEx.Builder", "description": "A new LoggerEx builder"}, "description": "Creates a new builder for constructing a LoggerEx instance.", "static": true},
+        {"name": "getLogger", "signature": "getLogger(name)", "params": [{"name": "name", "type": "String", "description": "Logger name"}], "returns": {"type": "LoggerEx", "description": "A LoggerEx instance"}, "description": "Gets or creates a named LoggerEx.", "static": true},
+        {"name": "trace", "signature": "trace(message)", "params": [{"name": "message", "type": "String", "description": "The log message"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message at TRACE level.", "static": false},
+        {"name": "tracef", "signature": "tracef(format, args)", "params": [{"name": "format", "type": "String", "description": "Format string"}, {"name": "args", "type": "Object...", "description": "Format arguments"}], "returns": {"type": "void", "description": ""}, "description": "Logs a formatted message at TRACE level.", "static": false},
+        {"name": "debug", "signature": "debug(message)", "params": [{"name": "message", "type": "String", "description": "The log message"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message at DEBUG level.", "static": false},
+        {"name": "debugf", "signature": "debugf(format, args)", "params": [{"name": "format", "type": "String", "description": "Format string"}, {"name": "args", "type": "Object...", "description": "Format arguments"}], "returns": {"type": "void", "description": ""}, "description": "Logs a formatted message at DEBUG level.", "static": false},
+        {"name": "info", "signature": "info(message)", "params": [{"name": "message", "type": "String", "description": "The log message"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message at INFO level.", "static": false},
+        {"name": "infof", "signature": "infof(format, args)", "params": [{"name": "format", "type": "String", "description": "Format string"}, {"name": "args", "type": "Object...", "description": "Format arguments"}], "returns": {"type": "void", "description": ""}, "description": "Logs a formatted message at INFO level.", "static": false},
+        {"name": "warn", "signature": "warn(message)", "params": [{"name": "message", "type": "String", "description": "The log message"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message at WARN level.", "static": false},
+        {"name": "warnf", "signature": "warnf(format, args)", "params": [{"name": "format", "type": "String", "description": "Format string"}, {"name": "args", "type": "Object...", "description": "Format arguments"}], "returns": {"type": "void", "description": ""}, "description": "Logs a formatted message at WARN level.", "static": false},
+        {"name": "error", "signature": "error(message)", "params": [{"name": "message", "type": "String", "description": "The log message"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message at ERROR level.", "static": false},
+        {"name": "error", "signature": "error(message, throwable)", "params": [{"name": "message", "type": "String", "description": "The log message"}, {"name": "throwable", "type": "Throwable", "description": "The exception"}], "returns": {"type": "void", "description": ""}, "description": "Logs a message with exception at ERROR level.", "static": false},
+        {"name": "errorf", "signature": "errorf(format, args)", "params": [{"name": "format", "type": "String", "description": "Format string"}, {"name": "args", "type": "Object...", "description": "Format arguments"}], "returns": {"type": "void", "description": ""}, "description": "Logs a formatted message at ERROR level.", "static": false},
+        {"name": "isTraceEnabled", "signature": "isTraceEnabled()", "params": [], "returns": {"type": "boolean", "description": "True if TRACE level is enabled"}, "description": "Checks if TRACE level logging is enabled.", "static": false},
+        {"name": "isDebugEnabled", "signature": "isDebugEnabled()", "params": [], "returns": {"type": "boolean", "description": "True if DEBUG level is enabled"}, "description": "Checks if DEBUG level logging is enabled.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/common/logging/LoggerEx.html"
+    },
+    {
+      "name": "Dataset",
+      "description": "Interface representing a tabular dataset with named, typed columns and rows. Central data structure in Ignition for query results and tag history.",
+      "constructors": [],
+      "methods": [
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows"}, "description": "Returns the number of rows in this dataset.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns"}, "description": "Returns the number of columns in this dataset.", "static": false},
+        {"name": "getColumnIndex", "signature": "getColumnIndex(name)", "params": [{"name": "name", "type": "String", "description": "The column name"}], "returns": {"type": "int", "description": "The column index, or -1 if not found"}, "description": "Returns the index of the column with the given name.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(col)", "params": [{"name": "col", "type": "int", "description": "The column index"}], "returns": {"type": "String", "description": "The column name"}, "description": "Returns the name of the column at the given index.", "static": false},
+        {"name": "getColumnNames", "signature": "getColumnNames()", "params": [], "returns": {"type": "List", "description": "A list of column names"}, "description": "Returns a list of all column names.", "static": false},
+        {"name": "getColumnType", "signature": "getColumnType(col)", "params": [{"name": "col", "type": "int", "description": "The column index"}], "returns": {"type": "Class", "description": "The Java class type of the column"}, "description": "Returns the type of the column at the given index.", "static": false},
+        {"name": "getColumnTypes", "signature": "getColumnTypes()", "params": [], "returns": {"type": "List", "description": "A list of column types"}, "description": "Returns a list of all column types.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(row, col)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "col", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value at the specified row and column.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(row, colName)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "colName", "type": "String", "description": "The column name"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value at the specified row and named column.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/common/Dataset.html"
+    },
+    {
+      "name": "BasicDataset",
+      "description": "Default mutable implementation of the Dataset interface. Used to construct datasets programmatically.",
+      "constructors": [
+        {"signature": "BasicDataset()", "params": [], "description": "Creates an empty dataset."},
+        {"signature": "BasicDataset(columnNames, columnTypes, data)", "params": [{"name": "columnNames", "type": "List", "description": "Column name list"}, {"name": "columnTypes", "type": "List", "description": "Column type list"}, {"name": "data", "type": "Object[][]", "description": "Two-dimensional data array"}], "description": "Creates a dataset with the specified columns and data."},
+        {"signature": "BasicDataset(dataset)", "params": [{"name": "dataset", "type": "Dataset", "description": "Source dataset to copy"}], "description": "Creates a copy of an existing dataset."}
+      ],
+      "methods": [
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows"}, "description": "Returns the number of rows in this dataset.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns"}, "description": "Returns the number of columns in this dataset.", "static": false},
+        {"name": "getValueAt", "signature": "getValueAt(row, col)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "col", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the value at the specified row and column.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(col)", "params": [{"name": "col", "type": "int", "description": "The column index"}], "returns": {"type": "String", "description": "The column name"}, "description": "Returns the name of the column at the given index.", "static": false},
+        {"name": "getColumnIndex", "signature": "getColumnIndex(name)", "params": [{"name": "name", "type": "String", "description": "The column name"}], "returns": {"type": "int", "description": "The column index"}, "description": "Returns the index of the column with the given name.", "static": false},
+        {"name": "setValueAt", "signature": "setValueAt(row, col, value)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "col", "type": "int", "description": "The column index"}, {"name": "value", "type": "Object", "description": "The new value"}], "returns": {"type": "void", "description": ""}, "description": "Sets the value at the specified row and column.", "static": false},
+        {"name": "addRow", "signature": "addRow(values)", "params": [{"name": "values", "type": "Object[]", "description": "Row values matching column order"}], "returns": {"type": "void", "description": ""}, "description": "Adds a new row with the specified values.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/common/BasicDataset.html"
+    },
+    {
+      "name": "QualifiedValue",
+      "description": "Interface representing a value with associated quality and timestamp. Used extensively in Ignition's tag system.",
+      "constructors": [],
+      "methods": [
+        {"name": "getValue", "signature": "getValue()", "params": [], "returns": {"type": "Object", "description": "The value"}, "description": "Returns the value.", "static": false},
+        {"name": "getQuality", "signature": "getQuality()", "params": [], "returns": {"type": "QualityCode", "description": "The quality code"}, "description": "Returns the quality code associated with this value.", "static": false},
+        {"name": "getTimestamp", "signature": "getTimestamp()", "params": [], "returns": {"type": "Date", "description": "The timestamp"}, "description": "Returns the timestamp of this value.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/common/model/values/QualifiedValue.html"
+    },
+    {
+      "name": "BasicQualifiedValue",
+      "description": "Default implementation of QualifiedValue. Commonly used when constructing tag values programmatically.",
+      "constructors": [
+        {"signature": "BasicQualifiedValue(value)", "params": [{"name": "value", "type": "Object", "description": "The value"}], "description": "Creates a new BasicQualifiedValue with GOOD quality and current timestamp."},
+        {"signature": "BasicQualifiedValue(value, quality)", "params": [{"name": "value", "type": "Object", "description": "The value"}, {"name": "quality", "type": "QualityCode", "description": "The quality code"}], "description": "Creates a new BasicQualifiedValue with the specified quality."},
+        {"signature": "BasicQualifiedValue(value, quality, timestamp)", "params": [{"name": "value", "type": "Object", "description": "The value"}, {"name": "quality", "type": "QualityCode", "description": "The quality code"}, {"name": "timestamp", "type": "Date", "description": "The timestamp"}], "description": "Creates a new BasicQualifiedValue with the specified quality and timestamp."}
+      ],
+      "methods": [
+        {"name": "getValue", "signature": "getValue()", "params": [], "returns": {"type": "Object", "description": "The value"}, "description": "Returns the value.", "static": false},
+        {"name": "getQuality", "signature": "getQuality()", "params": [], "returns": {"type": "QualityCode", "description": "The quality code"}, "description": "Returns the quality code.", "static": false},
+        {"name": "getTimestamp", "signature": "getTimestamp()", "params": [], "returns": {"type": "Date", "description": "The timestamp"}, "description": "Returns the timestamp.", "static": false},
+        {"name": "toString", "signature": "toString()", "params": [], "returns": {"type": "String", "description": "String representation"}, "description": "Returns a string representation including value, quality, and timestamp.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/common/model/values/BasicQualifiedValue.html"
+    }
+  ]
+}

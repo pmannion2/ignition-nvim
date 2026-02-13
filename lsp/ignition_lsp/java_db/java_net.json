@@ -1,0 +1,867 @@
+{
+  "package": "java.net",
+  "classes": [
+    {
+      "name": "URL",
+      "description": "Represents a Uniform Resource Locator, a pointer to a resource on the World Wide Web.",
+      "constructors": [
+        {
+          "signature": "URL(spec)",
+          "params": [{"name": "spec", "type": "String", "description": "The String to parse as a URL"}],
+          "description": "Creates a URL object from the String representation."
+        },
+        {
+          "signature": "URL(protocol, host, port, file)",
+          "params": [
+            {"name": "protocol", "type": "String", "description": "The protocol name (e.g., http, https)"},
+            {"name": "host", "type": "String", "description": "The host name"},
+            {"name": "port", "type": "int", "description": "The port number (-1 for default)"},
+            {"name": "file", "type": "String", "description": "The file path on the host"}
+          ],
+          "description": "Creates a URL object from the specified protocol, host, port number, and file."
+        },
+        {
+          "signature": "URL(protocol, host, file)",
+          "params": [
+            {"name": "protocol", "type": "String", "description": "The protocol name"},
+            {"name": "host", "type": "String", "description": "The host name"},
+            {"name": "file", "type": "String", "description": "The file path on the host"}
+          ],
+          "description": "Creates a URL from the specified protocol name, host name, and file name. Uses the default port for the protocol."
+        },
+        {
+          "signature": "URL(context, spec)",
+          "params": [
+            {"name": "context", "type": "URL", "description": "The context in which to parse the spec"},
+            {"name": "spec", "type": "String", "description": "The String to parse as a URL"}
+          ],
+          "description": "Creates a URL by parsing the spec within the specified context."
+        }
+      ],
+      "methods": [
+        {
+          "name": "openConnection",
+          "signature": "openConnection()",
+          "params": [],
+          "returns": {"type": "URLConnection", "description": "A URLConnection linking to the URL"},
+          "description": "Returns a URLConnection instance that represents a connection to the remote object referred to by the URL.",
+          "static": false
+        },
+        {
+          "name": "openStream",
+          "signature": "openStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An input stream for reading from the URL connection"},
+          "description": "Opens a connection to this URL and returns an InputStream for reading from that connection.",
+          "static": false
+        },
+        {
+          "name": "getProtocol",
+          "signature": "getProtocol()",
+          "params": [],
+          "returns": {"type": "String", "description": "The protocol name of this URL"},
+          "description": "Gets the protocol name of this URL (e.g., http, https, ftp).",
+          "static": false
+        },
+        {
+          "name": "getHost",
+          "signature": "getHost()",
+          "params": [],
+          "returns": {"type": "String", "description": "The host name of this URL"},
+          "description": "Gets the host name of this URL.",
+          "static": false
+        },
+        {
+          "name": "getPort",
+          "signature": "getPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The port number, or -1 if not set"},
+          "description": "Gets the port number of this URL. Returns -1 if the port is not set.",
+          "static": false
+        },
+        {
+          "name": "getDefaultPort",
+          "signature": "getDefaultPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The default port number for the protocol"},
+          "description": "Gets the default port number of the protocol associated with this URL.",
+          "static": false
+        },
+        {
+          "name": "getPath",
+          "signature": "getPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The path part of this URL"},
+          "description": "Gets the path part of this URL.",
+          "static": false
+        },
+        {
+          "name": "getQuery",
+          "signature": "getQuery()",
+          "params": [],
+          "returns": {"type": "String", "description": "The query part of this URL, or null"},
+          "description": "Gets the query part of this URL.",
+          "static": false
+        },
+        {
+          "name": "getFile",
+          "signature": "getFile()",
+          "params": [],
+          "returns": {"type": "String", "description": "The file name of this URL (path + query)"},
+          "description": "Gets the file name of this URL, which includes the path and query components.",
+          "static": false
+        },
+        {
+          "name": "getRef",
+          "signature": "getRef()",
+          "params": [],
+          "returns": {"type": "String", "description": "The anchor (fragment) of this URL, or null"},
+          "description": "Gets the anchor (also known as the fragment or reference) of this URL.",
+          "static": false
+        },
+        {
+          "name": "getUserInfo",
+          "signature": "getUserInfo()",
+          "params": [],
+          "returns": {"type": "String", "description": "The userInfo part of this URL, or null"},
+          "description": "Gets the userInfo part of this URL.",
+          "static": false
+        },
+        {
+          "name": "getAuthority",
+          "signature": "getAuthority()",
+          "params": [],
+          "returns": {"type": "String", "description": "The authority part of this URL"},
+          "description": "Gets the authority part of this URL.",
+          "static": false
+        },
+        {
+          "name": "toExternalForm",
+          "signature": "toExternalForm()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this URL"},
+          "description": "Constructs a string representation of this URL.",
+          "static": false
+        },
+        {
+          "name": "toURI",
+          "signature": "toURI()",
+          "params": [],
+          "returns": {"type": "URI", "description": "A URI equivalent to this URL"},
+          "description": "Returns a URI equivalent to this URL. Throws URISyntaxException if the URL is not strictly formatted.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this URL"},
+          "description": "Constructs a string representation of this URL.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The URL to compare against"}],
+          "returns": {"type": "boolean", "description": "True if the objects are the same URL"},
+          "description": "Compares this URL for equality with another object. Two URLs are equal if they have the same protocol, host, port, and file.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/URL.html"
+    },
+    {
+      "name": "HttpURLConnection",
+      "description": "A URLConnection with support for HTTP-specific features. Used to make HTTP requests and read responses.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "setRequestMethod",
+          "signature": "setRequestMethod(method)",
+          "params": [{"name": "method", "type": "String", "description": "The HTTP method (GET, POST, PUT, DELETE, HEAD, OPTIONS, TRACE)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the request method (GET, POST, PUT, etc.).",
+          "static": false
+        },
+        {
+          "name": "getRequestMethod",
+          "signature": "getRequestMethod()",
+          "params": [],
+          "returns": {"type": "String", "description": "The HTTP request method"},
+          "description": "Gets the request method.",
+          "static": false
+        },
+        {
+          "name": "getResponseCode",
+          "signature": "getResponseCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "The HTTP status code"},
+          "description": "Gets the HTTP response status code (e.g., 200 for OK, 404 for Not Found).",
+          "static": false
+        },
+        {
+          "name": "getResponseMessage",
+          "signature": "getResponseMessage()",
+          "params": [],
+          "returns": {"type": "String", "description": "The HTTP response message (e.g., OK, Not Found)"},
+          "description": "Gets the HTTP response message returned along with the response code.",
+          "static": false
+        },
+        {
+          "name": "setRequestProperty",
+          "signature": "setRequestProperty(key, value)",
+          "params": [
+            {"name": "key", "type": "String", "description": "The keyword of the request header (e.g., Content-Type)"},
+            {"name": "value", "type": "String", "description": "The value of the request header"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the general request property. If a property with the key already exists, overwrite its value.",
+          "static": false
+        },
+        {
+          "name": "addRequestProperty",
+          "signature": "addRequestProperty(key, value)",
+          "params": [
+            {"name": "key", "type": "String", "description": "The keyword of the request header"},
+            {"name": "value", "type": "String", "description": "The value of the request header"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds a general request property specified by a key-value pair. Does not overwrite existing values.",
+          "static": false
+        },
+        {
+          "name": "getHeaderField",
+          "signature": "getHeaderField(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of a header field"}],
+          "returns": {"type": "String", "description": "The value of the named header field, or null"},
+          "description": "Returns the value of the named header field.",
+          "static": false
+        },
+        {
+          "name": "getHeaderFields",
+          "signature": "getHeaderFields()",
+          "params": [],
+          "returns": {"type": "Map", "description": "An unmodifiable Map of header fields"},
+          "description": "Returns an unmodifiable Map of the header fields. The Map keys are header names and values are lists of field values.",
+          "static": false
+        },
+        {
+          "name": "getInputStream",
+          "signature": "getInputStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An input stream that reads from this connection"},
+          "description": "Returns an input stream that reads from this open connection. Used to read the response body.",
+          "static": false
+        },
+        {
+          "name": "getErrorStream",
+          "signature": "getErrorStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An error stream, or null if no error"},
+          "description": "Returns the error stream if the connection failed but the server sent useful data (e.g., a 404 page).",
+          "static": false
+        },
+        {
+          "name": "getOutputStream",
+          "signature": "getOutputStream()",
+          "params": [],
+          "returns": {"type": "OutputStream", "description": "An output stream that writes to this connection"},
+          "description": "Returns an output stream that writes to this connection. Used to send request body data.",
+          "static": false
+        },
+        {
+          "name": "disconnect",
+          "signature": "disconnect()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Indicates that other requests to the server are unlikely in the near future. Releases resources.",
+          "static": false
+        },
+        {
+          "name": "setDoOutput",
+          "signature": "setDoOutput(dooutput)",
+          "params": [{"name": "dooutput", "type": "boolean", "description": "True to allow sending data"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether this connection allows sending data (output). Must be true for POST/PUT requests.",
+          "static": false
+        },
+        {
+          "name": "setDoInput",
+          "signature": "setDoInput(doinput)",
+          "params": [{"name": "doinput", "type": "boolean", "description": "True to allow reading data"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether this connection allows receiving data (input). Defaults to true.",
+          "static": false
+        },
+        {
+          "name": "setConnectTimeout",
+          "signature": "setConnectTimeout(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "Timeout in milliseconds (0 means infinite)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a specified timeout value, in milliseconds, for opening a connection to the resource.",
+          "static": false
+        },
+        {
+          "name": "setReadTimeout",
+          "signature": "setReadTimeout(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "Timeout in milliseconds (0 means infinite)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the read timeout, in milliseconds. A non-zero value specifies the timeout when reading from the input stream.",
+          "static": false
+        },
+        {
+          "name": "getContentLength",
+          "signature": "getContentLength()",
+          "params": [],
+          "returns": {"type": "int", "description": "The content length, or -1 if not known"},
+          "description": "Returns the value of the content-length header field, or -1 if not known.",
+          "static": false
+        },
+        {
+          "name": "getContentType",
+          "signature": "getContentType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The content type of the resource, or null"},
+          "description": "Returns the value of the content-type header field.",
+          "static": false
+        },
+        {
+          "name": "setInstanceFollowRedirects",
+          "signature": "setInstanceFollowRedirects(followRedirects)",
+          "params": [{"name": "followRedirects", "type": "boolean", "description": "Whether to follow redirects"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets whether this HttpURLConnection instance should automatically follow HTTP redirects (3xx responses).",
+          "static": false
+        },
+        {
+          "name": "getURL",
+          "signature": "getURL()",
+          "params": [],
+          "returns": {"type": "URL", "description": "The URL of this connection"},
+          "description": "Returns the value of this URLConnection's URL field.",
+          "static": false
+        },
+        {
+          "name": "connect",
+          "signature": "connect()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Opens a communications link to the resource if such a connection has not already been established.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "HTTP_OK", "type": "int", "description": "HTTP status code 200: OK.", "static": true, "final": true},
+        {"name": "HTTP_CREATED", "type": "int", "description": "HTTP status code 201: Created.", "static": true, "final": true},
+        {"name": "HTTP_NO_CONTENT", "type": "int", "description": "HTTP status code 204: No Content.", "static": true, "final": true},
+        {"name": "HTTP_MOVED_PERM", "type": "int", "description": "HTTP status code 301: Moved Permanently.", "static": true, "final": true},
+        {"name": "HTTP_MOVED_TEMP", "type": "int", "description": "HTTP status code 302: Temporary Redirect.", "static": true, "final": true},
+        {"name": "HTTP_NOT_MODIFIED", "type": "int", "description": "HTTP status code 304: Not Modified.", "static": true, "final": true},
+        {"name": "HTTP_BAD_REQUEST", "type": "int", "description": "HTTP status code 400: Bad Request.", "static": true, "final": true},
+        {"name": "HTTP_UNAUTHORIZED", "type": "int", "description": "HTTP status code 401: Unauthorized.", "static": true, "final": true},
+        {"name": "HTTP_FORBIDDEN", "type": "int", "description": "HTTP status code 403: Forbidden.", "static": true, "final": true},
+        {"name": "HTTP_NOT_FOUND", "type": "int", "description": "HTTP status code 404: Not Found.", "static": true, "final": true},
+        {"name": "HTTP_INTERNAL_ERROR", "type": "int", "description": "HTTP status code 500: Internal Server Error.", "static": true, "final": true},
+        {"name": "HTTP_BAD_GATEWAY", "type": "int", "description": "HTTP status code 502: Bad Gateway.", "static": true, "final": true},
+        {"name": "HTTP_UNAVAILABLE", "type": "int", "description": "HTTP status code 503: Service Unavailable.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/HttpURLConnection.html"
+    },
+    {
+      "name": "URI",
+      "description": "Represents a Uniform Resource Identifier (RFC 2396). Provides methods for parsing, normalizing, and resolving URI references.",
+      "constructors": [
+        {
+          "signature": "URI(str)",
+          "params": [{"name": "str", "type": "String", "description": "The string to be parsed into a URI"}],
+          "description": "Constructs a URI by parsing the given string."
+        },
+        {
+          "signature": "URI(scheme, host, path, fragment)",
+          "params": [
+            {"name": "scheme", "type": "String", "description": "Scheme name (e.g., http, https)"},
+            {"name": "host", "type": "String", "description": "Host name"},
+            {"name": "path", "type": "String", "description": "Path"},
+            {"name": "fragment", "type": "String", "description": "Fragment"}
+          ],
+          "description": "Constructs a hierarchical URI from the given components."
+        },
+        {
+          "signature": "URI(scheme, userInfo, host, port, path, query, fragment)",
+          "params": [
+            {"name": "scheme", "type": "String", "description": "Scheme name"},
+            {"name": "userInfo", "type": "String", "description": "User information"},
+            {"name": "host", "type": "String", "description": "Host name"},
+            {"name": "port", "type": "int", "description": "Port number (-1 for undefined)"},
+            {"name": "path", "type": "String", "description": "Path"},
+            {"name": "query", "type": "String", "description": "Query"},
+            {"name": "fragment", "type": "String", "description": "Fragment"}
+          ],
+          "description": "Constructs a hierarchical URI from the given components."
+        },
+        {
+          "signature": "URI(scheme, authority, path, query, fragment)",
+          "params": [
+            {"name": "scheme", "type": "String", "description": "Scheme name"},
+            {"name": "authority", "type": "String", "description": "Authority"},
+            {"name": "path", "type": "String", "description": "Path"},
+            {"name": "query", "type": "String", "description": "Query"},
+            {"name": "fragment", "type": "String", "description": "Fragment"}
+          ],
+          "description": "Constructs a hierarchical URI from the given components."
+        }
+      ],
+      "methods": [
+        {
+          "name": "create",
+          "signature": "create(str)",
+          "params": [{"name": "str", "type": "String", "description": "The string to be parsed into a URI"}],
+          "returns": {"type": "URI", "description": "The new URI"},
+          "description": "Creates a URI by parsing the given string. Throws IllegalArgumentException instead of checked URISyntaxException.",
+          "static": true
+        },
+        {
+          "name": "getScheme",
+          "signature": "getScheme()",
+          "params": [],
+          "returns": {"type": "String", "description": "The scheme component, or null if undefined"},
+          "description": "Returns the scheme component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getHost",
+          "signature": "getHost()",
+          "params": [],
+          "returns": {"type": "String", "description": "The host component, or null if undefined"},
+          "description": "Returns the host component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getPort",
+          "signature": "getPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The port component, or -1 if undefined"},
+          "description": "Returns the port component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getPath",
+          "signature": "getPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The decoded path component, or null"},
+          "description": "Returns the decoded path component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getQuery",
+          "signature": "getQuery()",
+          "params": [],
+          "returns": {"type": "String", "description": "The decoded query component, or null"},
+          "description": "Returns the decoded query component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getFragment",
+          "signature": "getFragment()",
+          "params": [],
+          "returns": {"type": "String", "description": "The decoded fragment component, or null"},
+          "description": "Returns the decoded fragment component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getAuthority",
+          "signature": "getAuthority()",
+          "params": [],
+          "returns": {"type": "String", "description": "The decoded authority component, or null"},
+          "description": "Returns the decoded authority component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getUserInfo",
+          "signature": "getUserInfo()",
+          "params": [],
+          "returns": {"type": "String", "description": "The decoded user-information component, or null"},
+          "description": "Returns the decoded user-information component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getRawPath",
+          "signature": "getRawPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The raw path component, or null"},
+          "description": "Returns the raw (encoded) path component of this URI.",
+          "static": false
+        },
+        {
+          "name": "getRawQuery",
+          "signature": "getRawQuery()",
+          "params": [],
+          "returns": {"type": "String", "description": "The raw query component, or null"},
+          "description": "Returns the raw (encoded) query component of this URI.",
+          "static": false
+        },
+        {
+          "name": "resolve",
+          "signature": "resolve(uri)",
+          "params": [{"name": "uri", "type": "URI", "description": "The URI to resolve against this URI"}],
+          "returns": {"type": "URI", "description": "The resulting URI"},
+          "description": "Resolves the given URI against this URI.",
+          "static": false
+        },
+        {
+          "name": "resolve",
+          "signature": "resolve(str)",
+          "params": [{"name": "str", "type": "String", "description": "The URI string to resolve"}],
+          "returns": {"type": "URI", "description": "The resulting URI"},
+          "description": "Constructs a new URI by parsing the given string and then resolving it against this URI.",
+          "static": false
+        },
+        {
+          "name": "relativize",
+          "signature": "relativize(uri)",
+          "params": [{"name": "uri", "type": "URI", "description": "The URI to relativize against this URI"}],
+          "returns": {"type": "URI", "description": "The resulting URI"},
+          "description": "Relativizes the given URI against this URI.",
+          "static": false
+        },
+        {
+          "name": "normalize",
+          "signature": "normalize()",
+          "params": [],
+          "returns": {"type": "URI", "description": "A normalized URI equivalent to this URI"},
+          "description": "Normalizes this URI's path by resolving . and .. segments.",
+          "static": false
+        },
+        {
+          "name": "toURL",
+          "signature": "toURL()",
+          "params": [],
+          "returns": {"type": "URL", "description": "A URL constructed from this URI"},
+          "description": "Constructs a URL from this URI.",
+          "static": false
+        },
+        {
+          "name": "isAbsolute",
+          "signature": "isAbsolute()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this URI is absolute (has a scheme)"},
+          "description": "Tells whether or not this URI is absolute (has a scheme component).",
+          "static": false
+        },
+        {
+          "name": "isOpaque",
+          "signature": "isOpaque()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this URI is opaque"},
+          "description": "Tells whether or not this URI is opaque (absolute with a scheme-specific part that does not begin with a slash).",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "The string form of this URI"},
+          "description": "Returns the content of this URI as a string.",
+          "static": false
+        },
+        {
+          "name": "toASCIIString",
+          "signature": "toASCIIString()",
+          "params": [],
+          "returns": {"type": "String", "description": "The URI as a US-ASCII string"},
+          "description": "Returns the content of this URI as a US-ASCII string, encoding non-ASCII characters.",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(that)",
+          "params": [{"name": "that", "type": "URI", "description": "The URI to compare with"}],
+          "returns": {"type": "int", "description": "Negative, zero, or positive value"},
+          "description": "Compares this URI with another URI for ordering.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(ob)",
+          "params": [{"name": "ob", "type": "Object", "description": "The object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the given object is equal to this URI"},
+          "description": "Tests this URI for equality with another object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/URI.html"
+    },
+    {
+      "name": "URLEncoder",
+      "description": "Utility class for HTML form encoding. Translates a string into application/x-www-form-urlencoded format.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "encode",
+          "signature": "encode(s, enc)",
+          "params": [
+            {"name": "s", "type": "String", "description": "String to be translated"},
+            {"name": "enc", "type": "String", "description": "The name of a supported character encoding (e.g., UTF-8)"}
+          ],
+          "returns": {"type": "String", "description": "The translated String"},
+          "description": "Translates a string into application/x-www-form-urlencoded format using a specific encoding scheme.",
+          "static": true
+        },
+        {
+          "name": "encode",
+          "signature": "encode(s)",
+          "params": [
+            {"name": "s", "type": "String", "description": "String to be translated"}
+          ],
+          "returns": {"type": "String", "description": "The translated String"},
+          "description": "Translates a string into application/x-www-form-urlencoded format using the platform's default encoding.",
+          "static": true,
+          "deprecated": true
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/URLEncoder.html"
+    },
+    {
+      "name": "URLDecoder",
+      "description": "Utility class for HTML form decoding. Converts a string from application/x-www-form-urlencoded format.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "decode",
+          "signature": "decode(s, enc)",
+          "params": [
+            {"name": "s", "type": "String", "description": "The String to decode"},
+            {"name": "enc", "type": "String", "description": "The name of a supported character encoding (e.g., UTF-8)"}
+          ],
+          "returns": {"type": "String", "description": "The decoded String"},
+          "description": "Decodes an application/x-www-form-urlencoded string using a specific encoding scheme.",
+          "static": true
+        },
+        {
+          "name": "decode",
+          "signature": "decode(s)",
+          "params": [
+            {"name": "s", "type": "String", "description": "The String to decode"}
+          ],
+          "returns": {"type": "String", "description": "The decoded String"},
+          "description": "Decodes an application/x-www-form-urlencoded string using the platform's default encoding.",
+          "static": true,
+          "deprecated": true
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/URLDecoder.html"
+    },
+    {
+      "name": "Socket",
+      "description": "Implements client sockets (TCP). A socket is an endpoint for communication between two machines.",
+      "constructors": [
+        {
+          "signature": "Socket()",
+          "params": [],
+          "description": "Creates an unconnected socket."
+        },
+        {
+          "signature": "Socket(host, port)",
+          "params": [
+            {"name": "host", "type": "String", "description": "The host name or IP address"},
+            {"name": "port", "type": "int", "description": "The port number"}
+          ],
+          "description": "Creates a stream socket and connects it to the specified port on the named host."
+        },
+        {
+          "signature": "Socket(address, port)",
+          "params": [
+            {"name": "address", "type": "InetAddress", "description": "The IP address"},
+            {"name": "port", "type": "int", "description": "The port number"}
+          ],
+          "description": "Creates a stream socket and connects it to the specified port at the specified IP address."
+        }
+      ],
+      "methods": [
+        {
+          "name": "connect",
+          "signature": "connect(endpoint)",
+          "params": [{"name": "endpoint", "type": "SocketAddress", "description": "The SocketAddress to connect to"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Connects this socket to the server.",
+          "static": false
+        },
+        {
+          "name": "connect",
+          "signature": "connect(endpoint, timeout)",
+          "params": [
+            {"name": "endpoint", "type": "SocketAddress", "description": "The SocketAddress to connect to"},
+            {"name": "timeout", "type": "int", "description": "The timeout value in milliseconds (0 means infinite)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Connects this socket to the server with a specified timeout value.",
+          "static": false
+        },
+        {
+          "name": "getInputStream",
+          "signature": "getInputStream()",
+          "params": [],
+          "returns": {"type": "InputStream", "description": "An input stream for reading bytes from this socket"},
+          "description": "Returns an input stream for this socket. Used to receive data.",
+          "static": false
+        },
+        {
+          "name": "getOutputStream",
+          "signature": "getOutputStream()",
+          "params": [],
+          "returns": {"type": "OutputStream", "description": "An output stream for writing bytes to this socket"},
+          "description": "Returns an output stream for this socket. Used to send data.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this socket. Any thread currently blocked in an I/O operation on this socket will throw a SocketException.",
+          "static": false
+        },
+        {
+          "name": "getInetAddress",
+          "signature": "getInetAddress()",
+          "params": [],
+          "returns": {"type": "InetAddress", "description": "The remote IP address this socket is connected to, or null"},
+          "description": "Returns the address to which the socket is connected.",
+          "static": false
+        },
+        {
+          "name": "getLocalAddress",
+          "signature": "getLocalAddress()",
+          "params": [],
+          "returns": {"type": "InetAddress", "description": "The local address the socket is bound to"},
+          "description": "Gets the local address to which the socket is bound.",
+          "static": false
+        },
+        {
+          "name": "getPort",
+          "signature": "getPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The remote port number this socket is connected to"},
+          "description": "Returns the remote port number to which this socket is connected.",
+          "static": false
+        },
+        {
+          "name": "getLocalPort",
+          "signature": "getLocalPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The local port number this socket is bound to, or -1"},
+          "description": "Returns the local port number to which this socket is bound.",
+          "static": false
+        },
+        {
+          "name": "setSoTimeout",
+          "signature": "setSoTimeout(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "The timeout in milliseconds (0 means infinite)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Enable/disable SO_TIMEOUT with the specified timeout, in milliseconds. A read() call on the InputStream will block for only this amount of time.",
+          "static": false
+        },
+        {
+          "name": "getSoTimeout",
+          "signature": "getSoTimeout()",
+          "params": [],
+          "returns": {"type": "int", "description": "The SO_TIMEOUT value"},
+          "description": "Returns setting for SO_TIMEOUT. A value of 0 means the option is disabled (infinite timeout).",
+          "static": false
+        },
+        {
+          "name": "setKeepAlive",
+          "signature": "setKeepAlive(on)",
+          "params": [{"name": "on", "type": "boolean", "description": "Whether to enable keep-alive"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Enable/disable SO_KEEPALIVE.",
+          "static": false
+        },
+        {
+          "name": "setTcpNoDelay",
+          "signature": "setTcpNoDelay(on)",
+          "params": [{"name": "on", "type": "boolean", "description": "Whether to enable TCP_NODELAY (disable Nagle's algorithm)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Enable/disable TCP_NODELAY (disable/enable Nagle's algorithm).",
+          "static": false
+        },
+        {
+          "name": "isClosed",
+          "signature": "isClosed()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the socket has been closed"},
+          "description": "Returns the closed state of the socket.",
+          "static": false
+        },
+        {
+          "name": "isConnected",
+          "signature": "isConnected()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the socket was successfully connected to a server"},
+          "description": "Returns the connection state of the socket.",
+          "static": false
+        },
+        {
+          "name": "isBound",
+          "signature": "isBound()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the socket was successfully bound to an address"},
+          "description": "Returns the binding state of the socket.",
+          "static": false
+        },
+        {
+          "name": "isInputShutdown",
+          "signature": "isInputShutdown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the input of the socket has been shutdown"},
+          "description": "Returns whether the read-half of the socket connection is closed.",
+          "static": false
+        },
+        {
+          "name": "isOutputShutdown",
+          "signature": "isOutputShutdown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the output of the socket has been shutdown"},
+          "description": "Returns whether the write-half of the socket connection is closed.",
+          "static": false
+        },
+        {
+          "name": "shutdownInput",
+          "signature": "shutdownInput()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Places the input stream for this socket at end of stream. Any data sent to the input stream side of the socket is acknowledged and silently discarded.",
+          "static": false
+        },
+        {
+          "name": "shutdownOutput",
+          "signature": "shutdownOutput()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Disables the output stream for this socket. Any previously written data will be sent followed by TCP's normal connection termination sequence.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this socket"},
+          "description": "Converts this socket to a String.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/net/Socket.html"
+    }
+  ]
+}

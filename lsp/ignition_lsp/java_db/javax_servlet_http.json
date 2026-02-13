@@ -1,0 +1,844 @@
+{
+  "package": "javax.servlet.http",
+  "classes": [
+    {
+      "name": "HttpServletRequest",
+      "description": "Extends the ServletRequest interface to provide request information for HTTP servlets. The servlet container creates an HttpServletRequest object and passes it as an argument to the servlet's service methods (doGet, doPost, etc.).",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getMethod",
+          "signature": "getMethod()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the HTTP method (GET, POST, PUT, DELETE, etc.)"},
+          "description": "Returns the name of the HTTP method with which this request was made, for example GET, POST, or PUT.",
+          "static": false
+        },
+        {
+          "name": "getRequestURI",
+          "signature": "getRequestURI()",
+          "params": [],
+          "returns": {"type": "String", "description": "The part of the URL from the protocol name up to the query string"},
+          "description": "Returns the part of this request's URL from the protocol name up to the query string in the first line of the HTTP request.",
+          "static": false
+        },
+        {
+          "name": "getRequestURL",
+          "signature": "getRequestURL()",
+          "params": [],
+          "returns": {"type": "StringBuffer", "description": "The reconstructed URL"},
+          "description": "Reconstructs the URL the client used to make the request. The returned URL contains a protocol, server name, port number, and server path, but it does not include query string parameters.",
+          "static": false
+        },
+        {
+          "name": "getQueryString",
+          "signature": "getQueryString()",
+          "params": [],
+          "returns": {"type": "String", "description": "The query string, or null if the URL contains no query string"},
+          "description": "Returns the query string that is contained in the request URL after the path. Returns null if the URL does not have a query string.",
+          "static": false
+        },
+        {
+          "name": "getPathInfo",
+          "signature": "getPathInfo()",
+          "params": [],
+          "returns": {"type": "String", "description": "The extra path information, or null if not specified"},
+          "description": "Returns any extra path information associated with the URL the client sent when it made this request. The extra path information follows the servlet path but precedes the query string.",
+          "static": false
+        },
+        {
+          "name": "getContextPath",
+          "signature": "getContextPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The portion of the request URI that indicates the context of the request"},
+          "description": "Returns the portion of the request URI that indicates the context of the request. The context path always comes first in a request URI and starts with a / character.",
+          "static": false
+        },
+        {
+          "name": "getServletPath",
+          "signature": "getServletPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The part of the URL that calls the servlet"},
+          "description": "Returns the part of this request's URL that calls the servlet. This path starts with a / character and includes either the servlet name or a path to the servlet.",
+          "static": false
+        },
+        {
+          "name": "getHeader",
+          "signature": "getHeader(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the request header"}],
+          "returns": {"type": "String", "description": "The value of the requested header, or null if not present"},
+          "description": "Returns the value of the specified request header as a String. If the request did not include a header of the specified name, this method returns null.",
+          "static": false
+        },
+        {
+          "name": "getHeaders",
+          "signature": "getHeaders(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the request header"}],
+          "returns": {"type": "Enumeration", "description": "An Enumeration of String values for the header"},
+          "description": "Returns all the values of the specified request header as an Enumeration of String objects. Some headers, such as Accept-Language, can be sent by clients as several headers with different values.",
+          "static": false
+        },
+        {
+          "name": "getHeaderNames",
+          "signature": "getHeaderNames()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An Enumeration of all header names sent with this request"},
+          "description": "Returns an enumeration of all the header names this request contains. If the request has no headers, this method returns an empty enumeration.",
+          "static": false
+        },
+        {
+          "name": "getIntHeader",
+          "signature": "getIntHeader(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the request header"}],
+          "returns": {"type": "int", "description": "The value of the header as an integer, or -1 if not present"},
+          "description": "Returns the value of the specified request header as an int. If the request does not have a header of the specified name, this method returns -1.",
+          "static": false
+        },
+        {
+          "name": "getParameter",
+          "signature": "getParameter(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the parameter"}],
+          "returns": {"type": "String", "description": "The value of the parameter, or null if not present"},
+          "description": "Returns the value of a request parameter as a String, or null if the parameter does not exist. Request parameters are contained in the query string or posted form data.",
+          "static": false
+        },
+        {
+          "name": "getParameterValues",
+          "signature": "getParameterValues(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the parameter"}],
+          "returns": {"type": "String[]", "description": "An array of String values, or null if the parameter does not exist"},
+          "description": "Returns an array of String objects containing all of the values the given request parameter has, or null if the parameter does not exist.",
+          "static": false
+        },
+        {
+          "name": "getParameterNames",
+          "signature": "getParameterNames()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An Enumeration of String objects containing the parameter names"},
+          "description": "Returns an Enumeration of String objects containing the names of the parameters contained in this request.",
+          "static": false
+        },
+        {
+          "name": "getParameterMap",
+          "signature": "getParameterMap()",
+          "params": [],
+          "returns": {"type": "Map", "description": "An immutable Map of parameter names to String array values"},
+          "description": "Returns a java.util.Map of the parameters of this request. Request parameters are contained in the query string or posted form data.",
+          "static": false
+        },
+        {
+          "name": "getAttribute",
+          "signature": "getAttribute(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the attribute"}],
+          "returns": {"type": "Object", "description": "The value of the attribute, or null if no attribute of the given name exists"},
+          "description": "Returns the value of the named attribute as an Object, or null if no attribute of the given name exists. Attributes can be set by the servlet container or by a servlet.",
+          "static": false
+        },
+        {
+          "name": "setAttribute",
+          "signature": "setAttribute(name, o)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the attribute"},
+            {"name": "o", "type": "Object", "description": "The Object to be stored, or null to remove the attribute"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Stores an attribute in this request. Attributes are reset between requests. If the object passed is null, the effect is the same as calling removeAttribute.",
+          "static": false
+        },
+        {
+          "name": "removeAttribute",
+          "signature": "removeAttribute(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the attribute to remove"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Removes an attribute from this request. This method is not generally needed as attributes only persist as long as the request is being handled.",
+          "static": false
+        },
+        {
+          "name": "getAttributeNames",
+          "signature": "getAttributeNames()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An Enumeration of strings containing the names of the request's attributes"},
+          "description": "Returns an Enumeration containing the names of the attributes available to this request.",
+          "static": false
+        },
+        {
+          "name": "getSession",
+          "signature": "getSession()",
+          "params": [],
+          "returns": {"type": "HttpSession", "description": "The HttpSession associated with this request"},
+          "description": "Returns the current session associated with this request, or if the request does not have a session, creates one.",
+          "static": false
+        },
+        {
+          "name": "getSession",
+          "signature": "getSession(create)",
+          "params": [{"name": "create", "type": "boolean", "description": "True to create a new session if none exists; false to return null"}],
+          "returns": {"type": "HttpSession", "description": "The HttpSession associated with this request, or null if create is false and no session exists"},
+          "description": "Returns the current HttpSession associated with this request or, if there is no current session and create is true, returns a new session.",
+          "static": false
+        },
+        {
+          "name": "getCookies",
+          "signature": "getCookies()",
+          "params": [],
+          "returns": {"type": "Cookie[]", "description": "An array of all the Cookies included with this request, or null if the request has no cookies"},
+          "description": "Returns an array containing all of the Cookie objects the client sent with this request. This method returns null if no cookies were sent.",
+          "static": false
+        },
+        {
+          "name": "getContentType",
+          "signature": "getContentType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The MIME type of the body of the request, or null if the type is not known"},
+          "description": "Returns the MIME type of the body of the request, or null if the type is not known.",
+          "static": false
+        },
+        {
+          "name": "getContentLength",
+          "signature": "getContentLength()",
+          "params": [],
+          "returns": {"type": "int", "description": "The length of the request body in bytes, or -1 if the length is not known"},
+          "description": "Returns the length, in bytes, of the request body and made available by the input stream, or -1 if the length is not known.",
+          "static": false
+        },
+        {
+          "name": "getCharacterEncoding",
+          "signature": "getCharacterEncoding()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the character encoding, or null if not specified"},
+          "description": "Returns the name of the character encoding used in the body of this request, or null if the request does not specify a character encoding.",
+          "static": false
+        },
+        {
+          "name": "getInputStream",
+          "signature": "getInputStream()",
+          "params": [],
+          "returns": {"type": "ServletInputStream", "description": "A ServletInputStream for reading binary data from the request body"},
+          "description": "Retrieves the body of the request as binary data using a ServletInputStream. Either this method or getReader may be called to read the body, not both.",
+          "static": false
+        },
+        {
+          "name": "getReader",
+          "signature": "getReader()",
+          "params": [],
+          "returns": {"type": "BufferedReader", "description": "A BufferedReader for reading the body of the request as character data"},
+          "description": "Retrieves the body of the request as character data using a BufferedReader. The reader translates the character data according to the character encoding used on the body.",
+          "static": false
+        },
+        {
+          "name": "getRemoteAddr",
+          "signature": "getRemoteAddr()",
+          "params": [],
+          "returns": {"type": "String", "description": "The IP address of the client or last proxy that sent the request"},
+          "description": "Returns the Internet Protocol (IP) address of the client or last proxy that sent the request.",
+          "static": false
+        },
+        {
+          "name": "getRemoteHost",
+          "signature": "getRemoteHost()",
+          "params": [],
+          "returns": {"type": "String", "description": "The fully qualified name of the client"},
+          "description": "Returns the fully qualified name of the client or the last proxy that sent the request. If the engine cannot or chooses not to resolve the hostname, this method returns the IP address.",
+          "static": false
+        },
+        {
+          "name": "getRemotePort",
+          "signature": "getRemotePort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The source port of the client or last proxy that sent the request"},
+          "description": "Returns the Internet Protocol (IP) source port of the client or last proxy that sent the request.",
+          "static": false
+        },
+        {
+          "name": "getLocalAddr",
+          "signature": "getLocalAddr()",
+          "params": [],
+          "returns": {"type": "String", "description": "The IP address on which the request was received"},
+          "description": "Returns the Internet Protocol (IP) address of the interface on which the request was received.",
+          "static": false
+        },
+        {
+          "name": "getLocalPort",
+          "signature": "getLocalPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The port number on which the request was received"},
+          "description": "Returns the Internet Protocol (IP) port number of the interface on which the request was received.",
+          "static": false
+        },
+        {
+          "name": "getServerName",
+          "signature": "getServerName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the server to which the request was sent"},
+          "description": "Returns the host name of the server to which the request was sent. It is the value of the part before : in the Host header value, if any, or the resolved server name, or the server IP address.",
+          "static": false
+        },
+        {
+          "name": "getServerPort",
+          "signature": "getServerPort()",
+          "params": [],
+          "returns": {"type": "int", "description": "The port number to which the request was sent"},
+          "description": "Returns the port number to which the request was sent. It is the value of the part after : in the Host header value, if any, or the server port where the client connection was accepted on.",
+          "static": false
+        },
+        {
+          "name": "getScheme",
+          "signature": "getScheme()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the scheme used to make this request (e.g., http or https)"},
+          "description": "Returns the name of the scheme used to make this request, for example http, https, or ftp.",
+          "static": false
+        },
+        {
+          "name": "getProtocol",
+          "signature": "getProtocol()",
+          "params": [],
+          "returns": {"type": "String", "description": "The protocol name and version (e.g., HTTP/1.1)"},
+          "description": "Returns the name and version of the protocol the request uses in the form protocol/majorVersion.minorVersion, for example HTTP/1.1.",
+          "static": false
+        },
+        {
+          "name": "isSecure",
+          "signature": "isSecure()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the request was made using a secure channel such as HTTPS"},
+          "description": "Returns a boolean indicating whether this request was made using a secure channel, such as HTTPS.",
+          "static": false
+        },
+        {
+          "name": "getLocale",
+          "signature": "getLocale()",
+          "params": [],
+          "returns": {"type": "Locale", "description": "The preferred Locale for the client"},
+          "description": "Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html"
+    },
+    {
+      "name": "HttpServletResponse",
+      "description": "Extends the ServletResponse interface to provide HTTP-specific functionality in sending a response. The servlet container creates an HttpServletResponse object and passes it as an argument to the servlet's service methods (doGet, doPost, etc.).",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "setStatus",
+          "signature": "setStatus(sc)",
+          "params": [{"name": "sc", "type": "int", "description": "The status code (e.g., 200, 404, 500)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the status code for this response. This method is used to set the return status code when there is no error. Use sendError to send an error with a description.",
+          "static": false
+        },
+        {
+          "name": "getStatus",
+          "signature": "getStatus()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current status code set on this response"},
+          "description": "Gets the current status code of this response.",
+          "static": false
+        },
+        {
+          "name": "setHeader",
+          "signature": "setHeader(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the header"},
+            {"name": "value", "type": "String", "description": "The header value to set"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a response header with the given name and value. If the header had already been set, the new value overwrites the previous one.",
+          "static": false
+        },
+        {
+          "name": "addHeader",
+          "signature": "addHeader(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the header"},
+            {"name": "value", "type": "String", "description": "The additional header value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds a response header with the given name and value. This method allows response headers to have multiple values.",
+          "static": false
+        },
+        {
+          "name": "setIntHeader",
+          "signature": "setIntHeader(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the header"},
+            {"name": "value", "type": "int", "description": "The assigned integer value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a response header with the given name and integer value. If the header had already been set, the new value overwrites the previous one.",
+          "static": false
+        },
+        {
+          "name": "addIntHeader",
+          "signature": "addIntHeader(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the header"},
+            {"name": "value", "type": "int", "description": "The additional integer value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds a response header with the given name and integer value. This method allows response headers to have multiple values.",
+          "static": false
+        },
+        {
+          "name": "setDateHeader",
+          "signature": "setDateHeader(name, date)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the header to set"},
+            {"name": "date", "type": "long", "description": "The assigned date value in milliseconds since the epoch"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a response header with the given name and date-value. The date is specified in terms of milliseconds since the epoch.",
+          "static": false
+        },
+        {
+          "name": "containsHeader",
+          "signature": "containsHeader(name)",
+          "params": [{"name": "name", "type": "String", "description": "The header name"}],
+          "returns": {"type": "boolean", "description": "True if the named response header has already been set"},
+          "description": "Returns a boolean indicating whether the named response header has already been set.",
+          "static": false
+        },
+        {
+          "name": "setContentType",
+          "signature": "setContentType(type)",
+          "params": [{"name": "type", "type": "String", "description": "The MIME type of the content (e.g., text/html, application/json)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the content type of the response being sent to the client, if the response has not been committed yet. The given content type may include a character encoding specification.",
+          "static": false
+        },
+        {
+          "name": "getContentType",
+          "signature": "getContentType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The content type used for the MIME body sent in this response, or null if not defined"},
+          "description": "Returns the content type used for the MIME body sent in this response.",
+          "static": false
+        },
+        {
+          "name": "setContentLength",
+          "signature": "setContentLength(len)",
+          "params": [{"name": "len", "type": "int", "description": "The content length in bytes"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the length of the content body in the response. In HTTP servlets, this method sets the HTTP Content-Length header.",
+          "static": false
+        },
+        {
+          "name": "setCharacterEncoding",
+          "signature": "setCharacterEncoding(charset)",
+          "params": [{"name": "charset", "type": "String", "description": "The character encoding name (e.g., UTF-8)"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the character encoding (MIME charset) of the response being sent to the client. If the content type has already been set, the charset in the content type string is updated.",
+          "static": false
+        },
+        {
+          "name": "getCharacterEncoding",
+          "signature": "getCharacterEncoding()",
+          "params": [],
+          "returns": {"type": "String", "description": "The character encoding name, e.g., UTF-8"},
+          "description": "Returns the name of the character encoding (MIME charset) used for the body sent in this response.",
+          "static": false
+        },
+        {
+          "name": "getOutputStream",
+          "signature": "getOutputStream()",
+          "params": [],
+          "returns": {"type": "ServletOutputStream", "description": "A ServletOutputStream for writing binary data to the response body"},
+          "description": "Returns a ServletOutputStream suitable for writing binary data in the response. Either this method or getWriter may be called to write the body, not both.",
+          "static": false
+        },
+        {
+          "name": "getWriter",
+          "signature": "getWriter()",
+          "params": [],
+          "returns": {"type": "PrintWriter", "description": "A PrintWriter for writing character text to the response body"},
+          "description": "Returns a PrintWriter object that can send character text to the client. The character encoding used is that set by setCharacterEncoding or setContentType.",
+          "static": false
+        },
+        {
+          "name": "sendError",
+          "signature": "sendError(sc)",
+          "params": [{"name": "sc", "type": "int", "description": "The error status code"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sends an error response to the client using the specified status code and clears the buffer. The server defaults to creating the response to look like an HTML-formatted server error page.",
+          "static": false
+        },
+        {
+          "name": "sendError",
+          "signature": "sendError(sc, msg)",
+          "params": [
+            {"name": "sc", "type": "int", "description": "The error status code"},
+            {"name": "msg", "type": "String", "description": "The descriptive message"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sends an error response to the client using the specified status code and descriptive message. The server defaults to creating the response to look like an HTML-formatted server error page.",
+          "static": false
+        },
+        {
+          "name": "sendRedirect",
+          "signature": "sendRedirect(location)",
+          "params": [{"name": "location", "type": "String", "description": "The redirect location URL"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sends a temporary redirect response to the client using the specified redirect location URL and clears the buffer.",
+          "static": false
+        },
+        {
+          "name": "addCookie",
+          "signature": "addCookie(cookie)",
+          "params": [{"name": "cookie", "type": "Cookie", "description": "The Cookie to return to the client"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds the specified cookie to the response. This method can be called multiple times to set more than one cookie.",
+          "static": false
+        },
+        {
+          "name": "encodeURL",
+          "signature": "encodeURL(url)",
+          "params": [{"name": "url", "type": "String", "description": "The URL to be encoded"}],
+          "returns": {"type": "String", "description": "The encoded URL, or the URL unchanged if encoding is not needed"},
+          "description": "Encodes the specified URL by including the session ID in it, or returns the URL unchanged if encoding is not needed. The implementation of this method includes the logic to determine whether the session ID needs to be encoded in the URL.",
+          "static": false
+        },
+        {
+          "name": "encodeRedirectURL",
+          "signature": "encodeRedirectURL(url)",
+          "params": [{"name": "url", "type": "String", "description": "The URL to be encoded"}],
+          "returns": {"type": "String", "description": "The encoded URL, or the URL unchanged if encoding is not needed"},
+          "description": "Encodes the specified URL for use in the sendRedirect method or, if encoding is not needed, returns the URL unchanged.",
+          "static": false
+        },
+        {
+          "name": "flushBuffer",
+          "signature": "flushBuffer()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Forces any content in the buffer to be written to the client. A call to this method automatically commits the response, meaning the status code and headers will be written.",
+          "static": false
+        },
+        {
+          "name": "resetBuffer",
+          "signature": "resetBuffer()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Clears the content of the underlying buffer in the response without clearing headers or status code. Throws IllegalStateException if the response has been committed.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Clears any data that exists in the buffer as well as the status code and headers. Throws IllegalStateException if the response has already been committed.",
+          "static": false
+        },
+        {
+          "name": "setBufferSize",
+          "signature": "setBufferSize(size)",
+          "params": [{"name": "size", "type": "int", "description": "The preferred buffer size in bytes"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the preferred buffer size for the body of the response. The servlet container will use a buffer at least as large as the size requested.",
+          "static": false
+        },
+        {
+          "name": "getBufferSize",
+          "signature": "getBufferSize()",
+          "params": [],
+          "returns": {"type": "int", "description": "The actual buffer size used"},
+          "description": "Returns the actual buffer size used for the response. If no buffering is used, this method returns 0.",
+          "static": false
+        },
+        {
+          "name": "isCommitted",
+          "signature": "isCommitted()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the response has been committed"},
+          "description": "Returns a boolean indicating if the response has been committed. A committed response has already had its status code and headers written.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "SC_OK", "type": "int", "description": "Status code 200 indicating the request succeeded normally.", "static": true, "final": true},
+        {"name": "SC_CREATED", "type": "int", "description": "Status code 201 indicating the request succeeded and created a new resource on the server.", "static": true, "final": true},
+        {"name": "SC_NO_CONTENT", "type": "int", "description": "Status code 204 indicating the request succeeded but there is no new information to return.", "static": true, "final": true},
+        {"name": "SC_MOVED_PERMANENTLY", "type": "int", "description": "Status code 301 indicating the resource has permanently moved to a new location.", "static": true, "final": true},
+        {"name": "SC_FOUND", "type": "int", "description": "Status code 302 indicating the resource has temporarily moved to another location.", "static": true, "final": true},
+        {"name": "SC_NOT_MODIFIED", "type": "int", "description": "Status code 304 indicating the resource has not been modified since the last request.", "static": true, "final": true},
+        {"name": "SC_BAD_REQUEST", "type": "int", "description": "Status code 400 indicating the request sent by the client was syntactically incorrect.", "static": true, "final": true},
+        {"name": "SC_UNAUTHORIZED", "type": "int", "description": "Status code 401 indicating the request requires HTTP authentication.", "static": true, "final": true},
+        {"name": "SC_FORBIDDEN", "type": "int", "description": "Status code 403 indicating the server understood the request but refused to fulfill it.", "static": true, "final": true},
+        {"name": "SC_NOT_FOUND", "type": "int", "description": "Status code 404 indicating the requested resource is not available.", "static": true, "final": true},
+        {"name": "SC_METHOD_NOT_ALLOWED", "type": "int", "description": "Status code 405 indicating the HTTP method is not allowed for the requested resource.", "static": true, "final": true},
+        {"name": "SC_INTERNAL_SERVER_ERROR", "type": "int", "description": "Status code 500 indicating an error inside the HTTP server which prevented it from fulfilling the request.", "static": true, "final": true},
+        {"name": "SC_SERVICE_UNAVAILABLE", "type": "int", "description": "Status code 503 indicating the HTTP server is temporarily overloaded and unable to handle the request.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletResponse.html"
+    },
+    {
+      "name": "HttpSession",
+      "description": "Provides a way to identify a user across more than one page request or visit to a Web site and to store information about that user. The servlet container uses this interface to create a session between an HTTP client and an HTTP server.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getAttribute",
+          "signature": "getAttribute(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the attribute"}],
+          "returns": {"type": "Object", "description": "The object bound with the specified name, or null if no object is bound under the name"},
+          "description": "Returns the object bound with the specified name in this session, or null if no object is bound under the name.",
+          "static": false
+        },
+        {
+          "name": "setAttribute",
+          "signature": "setAttribute(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name to which the object is bound"},
+            {"name": "value", "type": "Object", "description": "The object to be bound"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Binds an object to this session, using the name specified. If an object of the same name is already bound to the session, the object is replaced.",
+          "static": false
+        },
+        {
+          "name": "removeAttribute",
+          "signature": "removeAttribute(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the attribute to remove"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Removes the object bound with the specified name from this session. If the session does not have an object bound with the specified name, this method does nothing.",
+          "static": false
+        },
+        {
+          "name": "getAttributeNames",
+          "signature": "getAttributeNames()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An Enumeration of String objects specifying the names of all objects bound to this session"},
+          "description": "Returns an Enumeration of String objects containing the names of all the objects bound to this session.",
+          "static": false
+        },
+        {
+          "name": "getId",
+          "signature": "getId()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string specifying the unique identifier assigned to this session"},
+          "description": "Returns a string containing the unique identifier assigned to this session. The identifier is assigned by the servlet container and is implementation dependent.",
+          "static": false
+        },
+        {
+          "name": "getCreationTime",
+          "signature": "getCreationTime()",
+          "params": [],
+          "returns": {"type": "long", "description": "The time when this session was created, measured in milliseconds since midnight January 1, 1970 GMT"},
+          "description": "Returns the time when this session was created, measured in milliseconds since midnight January 1, 1970 GMT.",
+          "static": false
+        },
+        {
+          "name": "getLastAccessedTime",
+          "signature": "getLastAccessedTime()",
+          "params": [],
+          "returns": {"type": "long", "description": "The last time the client sent a request associated with this session, in milliseconds since the epoch"},
+          "description": "Returns the last time the client sent a request associated with this session, as the number of milliseconds since midnight January 1, 1970 GMT, and marked by the time the container received the request.",
+          "static": false
+        },
+        {
+          "name": "setMaxInactiveInterval",
+          "signature": "setMaxInactiveInterval(interval)",
+          "params": [{"name": "interval", "type": "int", "description": "The number of seconds before the session times out. A negative value means the session should never time out."}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies the time, in seconds, between client requests before the servlet container will invalidate this session. A negative time indicates the session should never time out.",
+          "static": false
+        },
+        {
+          "name": "getMaxInactiveInterval",
+          "signature": "getMaxInactiveInterval()",
+          "params": [],
+          "returns": {"type": "int", "description": "The maximum time interval, in seconds, that the session will be kept open between client accesses"},
+          "description": "Returns the maximum time interval, in seconds, that the servlet container will keep this session open between client accesses. A negative value means the session never times out.",
+          "static": false
+        },
+        {
+          "name": "invalidate",
+          "signature": "invalidate()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Invalidates this session then unbinds any objects bound to it. Throws IllegalStateException if called on an already invalidated session.",
+          "static": false
+        },
+        {
+          "name": "isNew",
+          "signature": "isNew()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the server has created a session but the client has not yet joined"},
+          "description": "Returns true if the client does not yet know about the session or if the client chooses not to join the session.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpSession.html"
+    },
+    {
+      "name": "Cookie",
+      "description": "Creates a cookie, a small amount of information sent by a servlet to a Web browser, saved by the browser, and later sent back to the server. A cookie has a name, a single value, and optional attributes such as a comment, path, domain, maximum age, and version number.",
+      "constructors": [
+        {
+          "signature": "Cookie(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the cookie, which must conform to RFC 2109"},
+            {"name": "value", "type": "String", "description": "The value of the cookie"}
+          ],
+          "description": "Constructs a cookie with the specified name and value. The name must conform to RFC 2109 and cannot contain whitespace or the following characters: [ ] ( ) = , \" / ? @ : ;"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the cookie"},
+          "description": "Returns the name of the cookie. The name cannot be changed after creation.",
+          "static": false
+        },
+        {
+          "name": "getValue",
+          "signature": "getValue()",
+          "params": [],
+          "returns": {"type": "String", "description": "The value of the cookie"},
+          "description": "Gets the current value of this cookie.",
+          "static": false
+        },
+        {
+          "name": "setValue",
+          "signature": "setValue(newValue)",
+          "params": [{"name": "newValue", "type": "String", "description": "The new value of the cookie"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Assigns a new value to this cookie.",
+          "static": false
+        },
+        {
+          "name": "getDomain",
+          "signature": "getDomain()",
+          "params": [],
+          "returns": {"type": "String", "description": "The domain name set for this cookie"},
+          "description": "Gets the domain name of this cookie. Domain names are formatted according to RFC 2109.",
+          "static": false
+        },
+        {
+          "name": "setDomain",
+          "signature": "setDomain(domain)",
+          "params": [{"name": "domain", "type": "String", "description": "The domain name within which this cookie is visible"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies the domain within which this cookie should be presented. The form of the domain name is specified by RFC 2109.",
+          "static": false
+        },
+        {
+          "name": "getPath",
+          "signature": "getPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The path on the server to which the browser returns this cookie"},
+          "description": "Returns the path on the server to which the browser returns this cookie. The cookie is visible to all subpaths on the server.",
+          "static": false
+        },
+        {
+          "name": "setPath",
+          "signature": "setPath(uri)",
+          "params": [{"name": "uri", "type": "String", "description": "The URI path for which the cookie is valid"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies a path for the cookie to which the client should return the cookie. The cookie is visible to all the pages in the directory specified and all subdirectories.",
+          "static": false
+        },
+        {
+          "name": "getMaxAge",
+          "signature": "getMaxAge()",
+          "params": [],
+          "returns": {"type": "int", "description": "The maximum age in seconds. A negative value means the cookie persists until browser shutdown."},
+          "description": "Gets the maximum age in seconds of this cookie. By default, -1 is returned, which indicates that the cookie will persist until browser shutdown.",
+          "static": false
+        },
+        {
+          "name": "setMaxAge",
+          "signature": "setMaxAge(expiry)",
+          "params": [{"name": "expiry", "type": "int", "description": "The maximum age of the cookie in seconds; 0 deletes the cookie; negative means the cookie is not stored persistently"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the maximum age in seconds for this cookie. A positive value indicates the cookie will expire after that many seconds. A value of zero causes the cookie to be deleted. A negative value means the cookie is not stored persistently and will be deleted when the Web browser exits.",
+          "static": false
+        },
+        {
+          "name": "getSecure",
+          "signature": "getSecure()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the browser is sending cookies only over a secure protocol, false otherwise"},
+          "description": "Returns true if the browser is sending cookies only over a secure protocol, or false if the browser can send cookies using any protocol.",
+          "static": false
+        },
+        {
+          "name": "setSecure",
+          "signature": "setSecure(flag)",
+          "params": [{"name": "flag", "type": "boolean", "description": "True if the cookie should only be sent using a secure protocol"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Indicates to the browser whether the cookie should only be sent using a secure protocol, such as HTTPS or SSL.",
+          "static": false
+        },
+        {
+          "name": "isHttpOnly",
+          "signature": "isHttpOnly()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the cookie is HTTP only, preventing client-side script access"},
+          "description": "Checks whether this cookie has been marked as HttpOnly. HttpOnly cookies are not supposed to be exposed to client-side scripting code.",
+          "static": false
+        },
+        {
+          "name": "setHttpOnly",
+          "signature": "setHttpOnly(isHttpOnly)",
+          "params": [{"name": "isHttpOnly", "type": "boolean", "description": "True to mark the cookie as HTTP only"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Marks or unmarks this cookie as HttpOnly. If isHttpOnly is set to true, the cookie is not accessible to client-side scripting code.",
+          "static": false
+        },
+        {
+          "name": "getComment",
+          "signature": "getComment()",
+          "params": [],
+          "returns": {"type": "String", "description": "The comment of the cookie, or null if the cookie has no comment"},
+          "description": "Returns the comment describing the purpose of this cookie, or null if the cookie has no comment.",
+          "static": false
+        },
+        {
+          "name": "setComment",
+          "signature": "setComment(purpose)",
+          "params": [{"name": "purpose", "type": "String", "description": "The comment to display to the user"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies a comment that describes a cookie's purpose. The comment is useful if the browser presents the cookie to the user.",
+          "static": false
+        },
+        {
+          "name": "getVersion",
+          "signature": "getVersion()",
+          "params": [],
+          "returns": {"type": "int", "description": "0 if the cookie complies with the original Netscape spec; 1 if the cookie complies with RFC 2109"},
+          "description": "Returns the version of the protocol this cookie complies with. Version 0 complies with the original Netscape cookie specification. Version 1 complies with RFC 2109.",
+          "static": false
+        },
+        {
+          "name": "setVersion",
+          "signature": "setVersion(v)",
+          "params": [{"name": "v", "type": "int", "description": "0 for the Netscape cookie spec; 1 for RFC 2109"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the version of the cookie protocol that this cookie complies with. Version 0 is the original Netscape cookie specification. Version 1 complies with RFC 2109.",
+          "static": false
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A clone of this cookie"},
+          "description": "Overrides the standard java.lang.Object.clone method to return a copy of this cookie.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javaee/7/api/javax/servlet/http/Cookie.html"
+    }
+  ]
+}

@@ -16,7 +16,9 @@ from lsprotocol.types import (
 from pygls.workspace import TextDocument
 
 from .api_loader import IgnitionAPILoader
+from .java_loader import JavaAPILoader
 from .project_scanner import ProjectIndex
+from .script_symbols import SymbolCache
 
 logger = logging.getLogger(__name__)
 
@@ -42,8 +44,28 @@ def get_completions(
     position: CompletionParams.position,
     api_loader: IgnitionAPILoader,
     project_index: Optional[ProjectIndex] = None,
+    java_loader: Optional[JavaAPILoader] = None,
+    symbol_cache: Optional[SymbolCache] = None,
 ) -> CompletionList:
     """Generate completion items based on context."""
+    # JSON completions for Perspective views
+    if document.uri.endswith(".json"):
+        from .json_completion import get_json_completions, is_perspective_json
+
+        if is_perspective_json(document):
+            result = get_json_completions(document, position)
+            if result is not None:
+                return result
+
+    # Java import / class member completions
+    if java_loader:
+        from .java_scope import detect_java_context
+        java_ctx = detect_java_context(document, position, java_loader)
+        if java_ctx:
+            java_items = _get_java_completions(java_ctx, java_loader)
+            if java_items:
+                return CompletionList(is_incomplete=False, items=java_items)
+
     context = get_completion_context(document, position)
     logger.info(f"Completion context: '{context}'")
 
@@ -51,7 +73,7 @@ def get_completions(
 
     if not context:
         # No context - offer top-level modules
-        items.extend(_get_top_level_completions())
+        items.extend(_get_top_level_completions(project_index))
     elif context == "system" or context == "system.":
         # Just typed "system" or "system." - show available modules
         items.extend(_get_system_modules(api_loader))
@@ -60,23 +82,33 @@ def get_completions(
         module = context.rstrip(".")  # "system.tag." -> "system.tag"
         items.extend(_get_module_functions(module, api_loader))
     elif context.startswith("system.") and context.count(".") == 1:
-        # Typed "system.tag" (no trailing dot) - show functions for that module
+        # Typed "system.tag" or partial like "system.t"
         module = context
-        items.extend(_get_module_functions(module, api_loader))
+        funcs = _get_module_functions(module, api_loader)
+        if funcs:
+            # Exact module match (e.g., "system.tag") - show its functions
+            items.extend(funcs)
+        else:
+            # Partial module name (e.g., "system.t") - show matching modules
+            partial = context.split(".")[-1].lower()
+            items.extend(
+                m for m in _get_system_modules(api_loader)
+                if m.label.lower().startswith(partial)
+            )
     elif context.startswith("system.") and context.count(".") >= 2:
         # Typed "system.tag.read" etc - show matching functions
         items.extend(_get_function_completions(context, api_loader))
-    elif _is_project_prefix(context) and project_index is not None:
-        # Typed "project." or "shared." - show project script modules
-        items.extend(_get_project_completions(context, project_index))
+    elif _is_project_module(context, project_index):
+        # Typed "project.", "shared.", "general.", or any known script package
+        items.extend(_get_project_completions(context, project_index, symbol_cache))
 
     logger.info(f"Generated {len(items)} completion items")
     return CompletionList(is_incomplete=False, items=items)
 
 
-def _get_top_level_completions() -> List[CompletionItem]:
+def _get_top_level_completions(project_index: Optional[ProjectIndex] = None) -> List[CompletionItem]:
     """Get completions for top-level Ignition objects."""
-    return [
+    items = [
         CompletionItem(
             label="system",
             kind=CompletionItemKind.Module,
@@ -90,6 +122,21 @@ def _get_top_level_completions() -> List[CompletionItem]:
             documentation="Access project-level shared scripts",
         ),
     ]
+
+    # Include top-level project packages (general, core, Alerts, etc.)
+    if project_index is not None:
+        for pkg in _get_project_packages(project_index):
+            if pkg not in ("system", "shared"):
+                items.append(
+                    CompletionItem(
+                        label=pkg,
+                        kind=CompletionItemKind.Module,
+                        detail=f"Project script package",
+                        documentation=f"Project script package '{pkg}'",
+                    )
+                )
+
+    return items
 
 
 def _get_system_modules(api_loader: IgnitionAPILoader) -> List[CompletionItem]:
@@ -172,13 +219,38 @@ def _get_function_completions(prefix: str, api_loader: IgnitionAPILoader) -> Lis
 # ── Project Script Completions ───────────────────────────────────────
 
 
-def _is_project_prefix(context: str) -> bool:
-    """Check if the context starts with a project-level prefix."""
-    return any(context == p.rstrip(".") or context.startswith(p) for p in PROJECT_PREFIXES)
+def _get_project_packages(project_index: ProjectIndex) -> List[str]:
+    """Get unique top-level package names from the project index."""
+    packages = set()
+    for loc in project_index.scripts:
+        top = loc.module_path.split(".")[0]
+        if top:
+            packages.add(top)
+    return sorted(packages)
+
+
+def _is_project_module(context: str, project_index: Optional[ProjectIndex]) -> bool:
+    """Check if the context matches a known project module prefix.
+
+    Handles static prefixes (project.*, shared.*) and dynamic top-level
+    packages discovered by the project scanner (general.*, core.*, etc.).
+    """
+    if project_index is None:
+        return False
+
+    # Static prefixes always match
+    if any(context == p.rstrip(".") or context.startswith(p) for p in PROJECT_PREFIXES):
+        return True
+
+    # Check if the first segment matches a known project package
+    first_segment = context.split(".")[0]
+    return first_segment in _get_project_packages(project_index)
 
 
 def _get_project_completions(
-    context: str, project_index: ProjectIndex
+    context: str,
+    project_index: ProjectIndex,
+    symbol_cache: Optional[SymbolCache] = None,
 ) -> List[CompletionItem]:
     """Get completions for project-level script references.
 
@@ -187,6 +259,8 @@ def _get_project_completions(
         "project.library." -> list children at that level (e.g., "utils", "config")
         "project.library.u" -> filter children matching "u" prefix
         "shared."          -> list shared script modules
+        "project.library.utils." -> list symbols inside utils.py (leaf module)
+        "project.library.utils.MyClass." -> list class members
     """
     # Strip trailing dot for prefix search
     if context.endswith("."):
@@ -201,6 +275,28 @@ def _get_project_completions(
         else:
             prefix = context
             partial = ""
+
+    # ── Leaf module detection: show symbols inside .py files ──
+    if symbol_cache is not None:
+        # Check if prefix itself is a leaf module (no children beyond itself)
+        leaf = project_index.find_by_module_path(prefix)
+        if leaf and leaf.script_key == "__file__":
+            children = [
+                s for s in project_index.search_module_paths(prefix)
+                if s.module_path != prefix
+            ]
+            if not children:
+                return _get_leaf_symbol_completions(leaf, partial, symbol_cache)
+
+        # Check for class member access: prefix = "module_path.ClassName"
+        if "." in prefix:
+            module_candidate, class_name = prefix.rsplit(".", 1)
+            leaf = project_index.find_by_module_path(module_candidate)
+            if leaf and leaf.script_key == "__file__":
+                symbols = symbol_cache.get(leaf.file_path, leaf.module_path)
+                for cls in symbols.classes:
+                    if cls.name == class_name:
+                        return _get_class_member_completions(cls, partial, module_candidate)
 
     # Find all scripts whose module_path starts with our prefix
     matching = project_index.search_module_paths(prefix)
@@ -266,4 +362,281 @@ def _get_project_completions(
                 )
             )
 
+    return items
+
+
+# ── Leaf Module Symbol Completions ────────────────────────────────────
+
+
+def _get_leaf_symbol_completions(
+    loc, partial: str, symbol_cache: SymbolCache
+) -> List[CompletionItem]:
+    """Return completions for symbols inside a leaf .py module.
+
+    Shows functions, classes, and variables from the file.
+    Skips private names (starting with _).
+    """
+    symbols = symbol_cache.get(loc.file_path, loc.module_path)
+    if symbols.parse_error:
+        return []
+
+    items: List[CompletionItem] = []
+
+    for func in symbols.functions:
+        if func.name.startswith("_"):
+            continue
+        if partial and not func.name.lower().startswith(partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=func.name,
+                kind=CompletionItemKind.Function,
+                detail=func.signature,
+                documentation=MarkupContent(
+                    kind=MarkupKind.Markdown,
+                    value=func.get_markdown_doc(loc.module_path),
+                ),
+            )
+        )
+
+    for cls in symbols.classes:
+        if cls.name.startswith("_"):
+            continue
+        if partial and not cls.name.lower().startswith(partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=cls.name,
+                kind=CompletionItemKind.Class,
+                detail=f"class {cls.name}",
+                documentation=MarkupContent(
+                    kind=MarkupKind.Markdown,
+                    value=cls.get_markdown_doc(loc.module_path),
+                ),
+            )
+        )
+
+    for var in symbols.variables:
+        if var.name.startswith("_"):
+            continue
+        if partial and not var.name.lower().startswith(partial.lower()):
+            continue
+        detail = var.type_hint or ""
+        if var.value_repr:
+            detail = f"{detail} = {var.value_repr}" if detail else f"= {var.value_repr}"
+        items.append(
+            CompletionItem(
+                label=var.name,
+                kind=CompletionItemKind.Variable,
+                detail=detail or "variable",
+            )
+        )
+
+    return items
+
+
+def _get_class_member_completions(
+    cls, partial: str, module_path: str
+) -> List[CompletionItem]:
+    """Return completions for members of a class inside a leaf module.
+
+    Shows methods (excluding most dunder methods) and class variables.
+    """
+    items: List[CompletionItem] = []
+
+    for method in cls.methods:
+        # Skip dunder methods except __init__
+        if method.name.startswith("__") and method.name != "__init__":
+            continue
+        if partial and not method.name.lower().startswith(partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=method.name,
+                kind=CompletionItemKind.Method,
+                detail=method.signature,
+                documentation=MarkupContent(
+                    kind=MarkupKind.Markdown,
+                    value=method.get_markdown_doc(f"{module_path}.{cls.name}"),
+                ),
+            )
+        )
+
+    for var_name in cls.class_variables:
+        if partial and not var_name.lower().startswith(partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=var_name,
+                kind=CompletionItemKind.Field,
+                detail=f"{cls.name}.{var_name}",
+            )
+        )
+
+    return items
+
+
+# ── Java Class Completions ───────────────────────────────────────────
+
+
+def _get_java_completions(context, java_loader: JavaAPILoader) -> List[CompletionItem]:
+    """Route Java completion by context type."""
+    from .java_scope import JavaContextType
+
+    if context.type == JavaContextType.IMPORT_PACKAGE:
+        return _get_java_package_completions(context, java_loader)
+    elif context.type == JavaContextType.IMPORT_CLASS:
+        return _get_java_class_import_completions(context, java_loader)
+    elif context.type == JavaContextType.CLASS_MEMBER:
+        return _get_java_member_completions(context, instance=True)
+    elif context.type == JavaContextType.STATIC_MEMBER:
+        return _get_java_member_completions(context, instance=False)
+    elif context.type == JavaContextType.CONSTRUCTOR:
+        return _get_java_constructor_completions(context)
+    return []
+
+
+def _get_java_package_completions(context, java_loader: JavaAPILoader) -> List[CompletionItem]:
+    """Offer sub-packages for 'from java.' or 'from java.net.'."""
+    subs = java_loader.get_sub_packages(context.package)
+    items = []
+    for sub in subs:
+        if context.partial and not sub.lower().startswith(context.partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=sub,
+                kind=CompletionItemKind.Module,
+                detail=f"{context.package}.{sub}",
+            )
+        )
+    return items
+
+
+def _get_java_class_import_completions(context, java_loader: JavaAPILoader) -> List[CompletionItem]:
+    """Offer classes for 'from java.net import '."""
+    classes = java_loader.get_package_classes(context.package)
+    items = []
+    for cls in classes:
+        if context.partial and not cls.name.lower().startswith(context.partial.lower()):
+            continue
+        items.append(
+            CompletionItem(
+                label=cls.name,
+                kind=CompletionItemKind.Class,
+                detail=cls.full_name,
+                documentation=MarkupContent(
+                    kind=MarkupKind.Markdown,
+                    value=cls.description,
+                ),
+            )
+        )
+    return items
+
+
+def _get_java_member_completions(context, instance: bool = True) -> List[CompletionItem]:
+    """Offer methods and fields for a class instance or static access."""
+    cls = context.java_class
+    items = []
+
+    if instance:
+        # Instance access: show instance methods
+        for m in cls.methods:
+            if context.partial and not m.name.lower().startswith(context.partial.lower()):
+                continue
+            items.append(
+                CompletionItem(
+                    label=m.name,
+                    kind=CompletionItemKind.Method,
+                    detail=m.signature,
+                    documentation=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=m.description,
+                    ),
+                    insert_text=m.get_completion_snippet(),
+                    insert_text_format=InsertTextFormat.Snippet,
+                    deprecated=m.deprecated,
+                )
+            )
+    else:
+        # Static access: show static methods first, then instance methods
+        for m in cls.static_methods:
+            if context.partial and not m.name.lower().startswith(context.partial.lower()):
+                continue
+            items.append(
+                CompletionItem(
+                    label=m.name,
+                    kind=CompletionItemKind.Method,
+                    detail=f"(static) {m.signature}",
+                    documentation=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=m.description,
+                    ),
+                    insert_text=m.get_completion_snippet(),
+                    insert_text_format=InsertTextFormat.Snippet,
+                    deprecated=m.deprecated,
+                )
+            )
+        for m in cls.methods:
+            if context.partial and not m.name.lower().startswith(context.partial.lower()):
+                continue
+            items.append(
+                CompletionItem(
+                    label=m.name,
+                    kind=CompletionItemKind.Method,
+                    detail=m.signature,
+                    documentation=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=m.description,
+                    ),
+                    insert_text=m.get_completion_snippet(),
+                    insert_text_format=InsertTextFormat.Snippet,
+                    deprecated=m.deprecated,
+                )
+            )
+
+    # Static fields (e.g., Integer.MAX_VALUE, Math.PI)
+    for f in cls.fields:
+        if f.static:
+            if context.partial and not f.name.lower().startswith(context.partial.lower()):
+                continue
+            items.append(
+                CompletionItem(
+                    label=f.name,
+                    kind=CompletionItemKind.Field,
+                    detail=f"{f.type} (static)",
+                    documentation=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=f.description,
+                    ),
+                )
+            )
+
+    return items
+
+
+def _get_java_constructor_completions(context) -> List[CompletionItem]:
+    """Offer constructor parameter snippets for 'ClassName('."""
+    cls = context.java_class
+    items = []
+    for i, ctor in enumerate(cls.constructors):
+        snippet_parts = []
+        for j, p in enumerate(ctor.params, 1):
+            snippet_parts.append(f"${{{j}:{p['name']}}}")
+        snippet = ", ".join(snippet_parts) if snippet_parts else ""
+
+        items.append(
+            CompletionItem(
+                label=ctor.signature,
+                kind=CompletionItemKind.Constructor,
+                detail=f"{cls.name} constructor",
+                documentation=MarkupContent(
+                    kind=MarkupKind.Markdown,
+                    value=ctor.description,
+                ),
+                insert_text=snippet + ")$0" if snippet else ")$0",
+                insert_text_format=InsertTextFormat.Snippet,
+                sort_text=f"0{i}",
+            )
+        )
     return items

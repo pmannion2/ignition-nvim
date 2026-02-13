@@ -1,0 +1,277 @@
+{
+  "package": "java.util.regex",
+  "classes": [
+    {
+      "name": "Pattern",
+      "description": "A compiled representation of a regular expression. A regular expression must first be compiled into an instance of this class, which can then be used to create a Matcher object.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "compile",
+          "signature": "compile(regex)",
+          "params": [{"name": "regex", "type": "String", "description": "The expression to be compiled"}],
+          "returns": {"type": "Pattern", "description": "The compiled pattern"},
+          "description": "Compiles the given regular expression into a pattern.",
+          "static": true
+        },
+        {
+          "name": "compile",
+          "signature": "compile(regex, flags)",
+          "params": [
+            {"name": "regex", "type": "String", "description": "The expression to be compiled"},
+            {"name": "flags", "type": "int", "description": "Match flags, a bit mask of CASE_INSENSITIVE, MULTILINE, DOTALL, UNICODE_CASE, COMMENTS, LITERAL, or UNIX_LINES"}
+          ],
+          "returns": {"type": "Pattern", "description": "The compiled pattern"},
+          "description": "Compiles the given regular expression into a pattern with the given flags.",
+          "static": true
+        },
+        {
+          "name": "matches",
+          "signature": "matches(regex, input)",
+          "params": [
+            {"name": "regex", "type": "String", "description": "The expression to be compiled"},
+            {"name": "input", "type": "CharSequence", "description": "The character sequence to be matched"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the entire input sequence matches the pattern"},
+          "description": "Compiles the given regular expression and attempts to match the given input against it. Equivalent to Pattern.compile(regex).matcher(input).matches().",
+          "static": true
+        },
+        {
+          "name": "quote",
+          "signature": "quote(s)",
+          "params": [{"name": "s", "type": "String", "description": "The string to be literalized"}],
+          "returns": {"type": "String", "description": "A literal string replacement"},
+          "description": "Returns a literal pattern String for the specified String. Metacharacters or escape sequences in the input will be given no special meaning.",
+          "static": true
+        },
+        {
+          "name": "matcher",
+          "signature": "matcher(input)",
+          "params": [{"name": "input", "type": "CharSequence", "description": "The character sequence to be matched"}],
+          "returns": {"type": "Matcher", "description": "A new matcher for this pattern"},
+          "description": "Creates a matcher that will match the given input against this pattern.",
+          "static": false
+        },
+        {
+          "name": "split",
+          "signature": "split(input)",
+          "params": [{"name": "input", "type": "CharSequence", "description": "The character sequence to be split"}],
+          "returns": {"type": "String[]", "description": "The array of strings computed by splitting the input around matches of this pattern"},
+          "description": "Splits the given input sequence around matches of this pattern.",
+          "static": false
+        },
+        {
+          "name": "split",
+          "signature": "split(input, limit)",
+          "params": [
+            {"name": "input", "type": "CharSequence", "description": "The character sequence to be split"},
+            {"name": "limit", "type": "int", "description": "The result threshold controlling the number of times the pattern is applied"}
+          ],
+          "returns": {"type": "String[]", "description": "The array of strings computed by splitting the input around matches of this pattern"},
+          "description": "Splits the given input sequence around matches of this pattern. The limit parameter controls the number of times the pattern is applied and therefore affects the length of the resulting array.",
+          "static": false
+        },
+        {
+          "name": "pattern",
+          "signature": "pattern()",
+          "params": [],
+          "returns": {"type": "String", "description": "The source of this pattern"},
+          "description": "Returns the regular expression from which this pattern was compiled.",
+          "static": false
+        },
+        {
+          "name": "flags",
+          "signature": "flags()",
+          "params": [],
+          "returns": {"type": "int", "description": "The match flags specified when this pattern was compiled"},
+          "description": "Returns this pattern's match flags.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "The string representation of this pattern"},
+          "description": "Returns the string representation of this pattern. This is the regular expression from which this pattern was compiled.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "CASE_INSENSITIVE", "type": "int", "description": "Enables case-insensitive matching. By default, case-insensitive matching assumes that only US-ASCII characters are being matched.", "static": true, "final": true},
+        {"name": "MULTILINE", "type": "int", "description": "Enables multiline mode. In multiline mode the expressions ^ and $ match just after or just before a line terminator or the end of the input sequence.", "static": true, "final": true},
+        {"name": "DOTALL", "type": "int", "description": "Enables dotall mode. In dotall mode, the expression . matches any character, including a line terminator.", "static": true, "final": true},
+        {"name": "UNICODE_CASE", "type": "int", "description": "Enables Unicode-aware case folding. When this flag is specified, case-insensitive matching is done in a manner consistent with the Unicode Standard.", "static": true, "final": true},
+        {"name": "COMMENTS", "type": "int", "description": "Permits whitespace and comments in pattern. In this mode, whitespace is ignored, and embedded comments starting with # are ignored until the end of a line.", "static": true, "final": true},
+        {"name": "LITERAL", "type": "int", "description": "Enables literal parsing of the pattern. When this flag is specified, the input string that specifies the pattern is treated as a sequence of literal characters.", "static": true, "final": true},
+        {"name": "UNIX_LINES", "type": "int", "description": "Enables Unix lines mode. In this mode, only the newline character is recognized as a line terminator in the behavior of ., ^, and $.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html"
+    },
+    {
+      "name": "Matcher",
+      "description": "An engine that performs match operations on a character sequence by interpreting a Pattern. A matcher is created from a pattern by invoking the pattern's matcher method.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "matches",
+          "signature": "matches()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if and only if the entire input sequence matches this matcher's pattern"},
+          "description": "Attempts to match the entire input sequence against the pattern.",
+          "static": false
+        },
+        {
+          "name": "find",
+          "signature": "find()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if and only if a subsequence of the input matches this matcher's pattern"},
+          "description": "Attempts to find the next subsequence of the input sequence that matches the pattern.",
+          "static": false
+        },
+        {
+          "name": "find",
+          "signature": "find(start)",
+          "params": [{"name": "start", "type": "int", "description": "The index to start searching for a match"}],
+          "returns": {"type": "boolean", "description": "True if and only if a subsequence of the input starting at the given index matches this matcher's pattern"},
+          "description": "Resets this matcher and then attempts to find the next subsequence of the input sequence that matches the pattern, starting at the specified index.",
+          "static": false
+        },
+        {
+          "name": "group",
+          "signature": "group()",
+          "params": [],
+          "returns": {"type": "String", "description": "The matched subsequence as a string"},
+          "description": "Returns the input subsequence matched by the previous match.",
+          "static": false
+        },
+        {
+          "name": "group",
+          "signature": "group(group)",
+          "params": [{"name": "group", "type": "int", "description": "The index of a capturing group in this matcher's pattern"}],
+          "returns": {"type": "String", "description": "The subsequence captured by the given group, or null if the match was successful but the group failed to match"},
+          "description": "Returns the input subsequence captured by the given group during the previous match operation.",
+          "static": false
+        },
+        {
+          "name": "groupCount",
+          "signature": "groupCount()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of capturing groups in this matcher's pattern"},
+          "description": "Returns the number of capturing groups in this matcher's pattern.",
+          "static": false
+        },
+        {
+          "name": "start",
+          "signature": "start()",
+          "params": [],
+          "returns": {"type": "int", "description": "The index of the first character matched"},
+          "description": "Returns the start index of the previous match.",
+          "static": false
+        },
+        {
+          "name": "start",
+          "signature": "start(group)",
+          "params": [{"name": "group", "type": "int", "description": "The index of a capturing group in this matcher's pattern"}],
+          "returns": {"type": "int", "description": "The index of the first character captured by the group, or -1 if the match was successful but the group failed to match"},
+          "description": "Returns the start index of the subsequence captured by the given group during the previous match operation.",
+          "static": false
+        },
+        {
+          "name": "end",
+          "signature": "end()",
+          "params": [],
+          "returns": {"type": "int", "description": "The offset after the last character matched"},
+          "description": "Returns the offset after the last character matched.",
+          "static": false
+        },
+        {
+          "name": "end",
+          "signature": "end(group)",
+          "params": [{"name": "group", "type": "int", "description": "The index of a capturing group in this matcher's pattern"}],
+          "returns": {"type": "int", "description": "The offset after the last character captured by the group, or -1 if the match was successful but the group failed to match"},
+          "description": "Returns the offset after the last character of the subsequence captured by the given group during the previous match operation.",
+          "static": false
+        },
+        {
+          "name": "replaceAll",
+          "signature": "replaceAll(replacement)",
+          "params": [{"name": "replacement", "type": "String", "description": "The replacement string"}],
+          "returns": {"type": "String", "description": "The string constructed by replacing each matching subsequence with the replacement string"},
+          "description": "Replaces every subsequence of the input sequence that matches the pattern with the given replacement string.",
+          "static": false
+        },
+        {
+          "name": "replaceFirst",
+          "signature": "replaceFirst(replacement)",
+          "params": [{"name": "replacement", "type": "String", "description": "The replacement string"}],
+          "returns": {"type": "String", "description": "The string constructed by replacing the first matching subsequence with the replacement string"},
+          "description": "Replaces the first subsequence of the input sequence that matches the pattern with the given replacement string.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "Matcher", "description": "This matcher"},
+          "description": "Resets this matcher. Discards all of its explicit state information and sets its append position to zero.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset(input)",
+          "params": [{"name": "input", "type": "CharSequence", "description": "The new input character sequence"}],
+          "returns": {"type": "Matcher", "description": "This matcher"},
+          "description": "Resets this matcher with a new input sequence. Discards all of its explicit state information and sets its append position to zero.",
+          "static": false
+        },
+        {
+          "name": "lookingAt",
+          "signature": "lookingAt()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if and only if a prefix of the input sequence matches this matcher's pattern"},
+          "description": "Attempts to match the input sequence, starting at the beginning of the region, against the pattern.",
+          "static": false
+        },
+        {
+          "name": "hitEnd",
+          "signature": "hitEnd()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the end of input was hit by the search engine in the last match operation"},
+          "description": "Returns true if the end of input was hit by the search engine in the last match operation performed by this matcher.",
+          "static": false
+        },
+        {
+          "name": "appendReplacement",
+          "signature": "appendReplacement(sb, replacement)",
+          "params": [
+            {"name": "sb", "type": "StringBuffer", "description": "The target string buffer"},
+            {"name": "replacement", "type": "String", "description": "The replacement string"}
+          ],
+          "returns": {"type": "Matcher", "description": "This matcher"},
+          "description": "Implements a non-terminal append-and-replace step. Reads characters from the input sequence and appends them to the given string buffer, then appends the replacement string.",
+          "static": false
+        },
+        {
+          "name": "appendTail",
+          "signature": "appendTail(sb)",
+          "params": [{"name": "sb", "type": "StringBuffer", "description": "The target string buffer"}],
+          "returns": {"type": "StringBuffer", "description": "The target string buffer"},
+          "description": "Implements a terminal append-and-replace step. Reads characters from the input sequence and appends them to the given string buffer.",
+          "static": false
+        },
+        {
+          "name": "pattern",
+          "signature": "pattern()",
+          "params": [],
+          "returns": {"type": "Pattern", "description": "The pattern for which this matcher was created"},
+          "description": "Returns the pattern that is interpreted by this matcher.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html"
+    }
+  ]
+}

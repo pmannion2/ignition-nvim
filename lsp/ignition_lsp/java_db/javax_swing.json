@@ -1,0 +1,296 @@
+{
+  "package": "javax.swing",
+  "classes": [
+    {
+      "name": "JOptionPane",
+      "description": "Provides standard dialog boxes for displaying messages, getting user input, and confirming actions. Commonly used in Ignition Vision client scripts.",
+      "constructors": [
+        {"signature": "JOptionPane()", "params": [], "description": "Creates a JOptionPane with a test message."},
+        {"signature": "JOptionPane(message)", "params": [{"name": "message", "type": "Object", "description": "The message to display"}], "description": "Creates a JOptionPane to display the specified message."},
+        {"signature": "JOptionPane(message, messageType)", "params": [{"name": "message", "type": "Object", "description": "The message to display"}, {"name": "messageType", "type": "int", "description": "The type of message (e.g., INFORMATION_MESSAGE)"}], "description": "Creates a JOptionPane to display the specified message with the specified type."}
+      ],
+      "methods": [
+        {
+          "name": "showMessageDialog",
+          "signature": "showMessageDialog(parentComponent, message)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Displays an information-message dialog titled 'Message'.",
+          "static": true
+        },
+        {
+          "name": "showMessageDialog",
+          "signature": "showMessageDialog(parentComponent, message, title, messageType)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"},
+            {"name": "title", "type": "String", "description": "The title string for the dialog"},
+            {"name": "messageType", "type": "int", "description": "The type of message (e.g., ERROR_MESSAGE, WARNING_MESSAGE)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Displays a message dialog with a specified title and message type.",
+          "static": true
+        },
+        {
+          "name": "showConfirmDialog",
+          "signature": "showConfirmDialog(parentComponent, message)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"}
+          ],
+          "returns": {"type": "int", "description": "YES_OPTION, NO_OPTION, CANCEL_OPTION, or CLOSED_OPTION"},
+          "description": "Displays a dialog with Yes, No, and Cancel options.",
+          "static": true
+        },
+        {
+          "name": "showConfirmDialog",
+          "signature": "showConfirmDialog(parentComponent, message, title, optionType)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"},
+            {"name": "title", "type": "String", "description": "The title string for the dialog"},
+            {"name": "optionType", "type": "int", "description": "The option type (e.g., YES_NO_OPTION, YES_NO_CANCEL_OPTION)"}
+          ],
+          "returns": {"type": "int", "description": "The option selected by the user"},
+          "description": "Displays a confirmation dialog with the specified title and option type.",
+          "static": true
+        },
+        {
+          "name": "showConfirmDialog",
+          "signature": "showConfirmDialog(parentComponent, message, title, optionType, messageType)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"},
+            {"name": "title", "type": "String", "description": "The title string for the dialog"},
+            {"name": "optionType", "type": "int", "description": "The option type (e.g., YES_NO_OPTION)"},
+            {"name": "messageType", "type": "int", "description": "The message type (e.g., WARNING_MESSAGE)"}
+          ],
+          "returns": {"type": "int", "description": "The option selected by the user"},
+          "description": "Displays a confirmation dialog with the specified title, option type, and message type.",
+          "static": true
+        },
+        {
+          "name": "showInputDialog",
+          "signature": "showInputDialog(message)",
+          "params": [
+            {"name": "message", "type": "Object", "description": "The message to display"}
+          ],
+          "returns": {"type": "String", "description": "User's input, or null if cancelled"},
+          "description": "Shows a question-message dialog requesting input from the user.",
+          "static": true
+        },
+        {
+          "name": "showInputDialog",
+          "signature": "showInputDialog(parentComponent, message)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"}
+          ],
+          "returns": {"type": "String", "description": "User's input, or null if cancelled"},
+          "description": "Shows a question-message dialog requesting input from the user, parented to the specified component.",
+          "static": true
+        },
+        {
+          "name": "showInputDialog",
+          "signature": "showInputDialog(parentComponent, message, title, messageType)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"},
+            {"name": "title", "type": "String", "description": "The title string for the dialog"},
+            {"name": "messageType", "type": "int", "description": "The message type (e.g., PLAIN_MESSAGE)"}
+          ],
+          "returns": {"type": "String", "description": "User's input, or null if cancelled"},
+          "description": "Shows a dialog requesting input from the user with a specified title and message type.",
+          "static": true
+        },
+        {
+          "name": "showOptionDialog",
+          "signature": "showOptionDialog(parentComponent, message, title, optionType, messageType, icon, options, initialValue)",
+          "params": [
+            {"name": "parentComponent", "type": "Component", "description": "The parent component for the dialog, or null"},
+            {"name": "message", "type": "Object", "description": "The message to display"},
+            {"name": "title", "type": "String", "description": "The title string for the dialog"},
+            {"name": "optionType", "type": "int", "description": "The option type (e.g., DEFAULT_OPTION)"},
+            {"name": "messageType", "type": "int", "description": "The message type (e.g., QUESTION_MESSAGE)"},
+            {"name": "icon", "type": "Icon", "description": "The icon to display, or null"},
+            {"name": "options", "type": "Object[]", "description": "Array of objects for the buttons, or null for default"},
+            {"name": "initialValue", "type": "Object", "description": "The default selection, or null"}
+          ],
+          "returns": {"type": "int", "description": "The index of the chosen option, or CLOSED_OPTION if closed"},
+          "description": "Displays a fully customizable dialog with a specified icon, button labels, and initial selection.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "YES_OPTION", "type": "int", "description": "Return value (0) when the user selects Yes.", "static": true, "final": true},
+        {"name": "NO_OPTION", "type": "int", "description": "Return value (1) when the user selects No.", "static": true, "final": true},
+        {"name": "CANCEL_OPTION", "type": "int", "description": "Return value (2) when the user selects Cancel.", "static": true, "final": true},
+        {"name": "OK_OPTION", "type": "int", "description": "Return value (0) when the user selects OK.", "static": true, "final": true},
+        {"name": "CLOSED_OPTION", "type": "int", "description": "Return value (-1) when the user closes the dialog without choosing.", "static": true, "final": true},
+        {"name": "YES_NO_OPTION", "type": "int", "description": "Option type for dialogs with Yes and No buttons.", "static": true, "final": true},
+        {"name": "YES_NO_CANCEL_OPTION", "type": "int", "description": "Option type for dialogs with Yes, No, and Cancel buttons.", "static": true, "final": true},
+        {"name": "OK_CANCEL_OPTION", "type": "int", "description": "Option type for dialogs with OK and Cancel buttons.", "static": true, "final": true},
+        {"name": "DEFAULT_OPTION", "type": "int", "description": "Option type meaning the dialog has no preset button configuration.", "static": true, "final": true},
+        {"name": "ERROR_MESSAGE", "type": "int", "description": "Message type for error messages.", "static": true, "final": true},
+        {"name": "INFORMATION_MESSAGE", "type": "int", "description": "Message type for informational messages.", "static": true, "final": true},
+        {"name": "WARNING_MESSAGE", "type": "int", "description": "Message type for warning messages.", "static": true, "final": true},
+        {"name": "QUESTION_MESSAGE", "type": "int", "description": "Message type for questions.", "static": true, "final": true},
+        {"name": "PLAIN_MESSAGE", "type": "int", "description": "Message type meaning no icon is used.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JOptionPane.html"
+    },
+    {
+      "name": "JTable",
+      "description": "Displays and edits regular two-dimensional tables of cells. Used in Ignition Vision for data display components.",
+      "constructors": [
+        {"signature": "JTable()", "params": [], "description": "Constructs a default JTable initialized with a default data model, column model, and selection model."},
+        {"signature": "JTable(rowData, columnNames)", "params": [{"name": "rowData", "type": "Object[][]", "description": "The data for the table"}, {"name": "columnNames", "type": "Object[]", "description": "The names of each column"}], "description": "Constructs a JTable to display the values in the two-dimensional array."},
+        {"signature": "JTable(dm)", "params": [{"name": "dm", "type": "TableModel", "description": "The data model for the table"}], "description": "Constructs a JTable initialized with the given data model."},
+        {"signature": "JTable(numRows, numColumns)", "params": [{"name": "numRows", "type": "int", "description": "The number of rows"}, {"name": "numColumns", "type": "int", "description": "The number of columns"}], "description": "Constructs a JTable with the given number of rows and columns of empty cells."}
+      ],
+      "methods": [
+        {"name": "getValueAt", "signature": "getValueAt(row, column)", "params": [{"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "Object", "description": "The value at the specified cell"}, "description": "Returns the cell value at the given row and column.", "static": false},
+        {"name": "setValueAt", "signature": "setValueAt(aValue, row, column)", "params": [{"name": "aValue", "type": "Object", "description": "The new value"}, {"name": "row", "type": "int", "description": "The row index"}, {"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "void", "description": ""}, "description": "Sets the value for the cell at the given row and column.", "static": false},
+        {"name": "getRowCount", "signature": "getRowCount()", "params": [], "returns": {"type": "int", "description": "The number of rows"}, "description": "Returns the number of rows in the table.", "static": false},
+        {"name": "getColumnCount", "signature": "getColumnCount()", "params": [], "returns": {"type": "int", "description": "The number of columns"}, "description": "Returns the number of columns in the column model.", "static": false},
+        {"name": "getColumnName", "signature": "getColumnName(column)", "params": [{"name": "column", "type": "int", "description": "The column index"}], "returns": {"type": "String", "description": "The name of the column"}, "description": "Returns the name of the column at the given index.", "static": false},
+        {"name": "getSelectedRow", "signature": "getSelectedRow()", "params": [], "returns": {"type": "int", "description": "The index of the first selected row, or -1"}, "description": "Returns the index of the first selected row, -1 if no row is selected.", "static": false},
+        {"name": "getSelectedRows", "signature": "getSelectedRows()", "params": [], "returns": {"type": "int[]", "description": "An array of selected row indices"}, "description": "Returns the indices of all selected rows.", "static": false},
+        {"name": "getSelectedColumn", "signature": "getSelectedColumn()", "params": [], "returns": {"type": "int", "description": "The index of the first selected column, or -1"}, "description": "Returns the index of the first selected column, -1 if no column is selected.", "static": false},
+        {"name": "getModel", "signature": "getModel()", "params": [], "returns": {"type": "TableModel", "description": "The TableModel that provides the data"}, "description": "Returns the TableModel that provides the data displayed by this JTable.", "static": false},
+        {"name": "setModel", "signature": "setModel(dataModel)", "params": [{"name": "dataModel", "type": "TableModel", "description": "The new data source for the table"}], "returns": {"type": "void", "description": ""}, "description": "Sets the data model for this table.", "static": false},
+        {"name": "clearSelection", "signature": "clearSelection()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Deselects all selected columns and rows.", "static": false},
+        {"name": "setRowSelectionInterval", "signature": "setRowSelectionInterval(index0, index1)", "params": [{"name": "index0", "type": "int", "description": "One end of the interval"}, {"name": "index1", "type": "int", "description": "The other end of the interval"}], "returns": {"type": "void", "description": ""}, "description": "Selects the rows from index0 to index1, inclusive.", "static": false},
+        {"name": "getRowHeight", "signature": "getRowHeight()", "params": [], "returns": {"type": "int", "description": "The height in pixels of each row"}, "description": "Returns the height of a table row, in pixels.", "static": false},
+        {"name": "setRowHeight", "signature": "setRowHeight(rowHeight)", "params": [{"name": "rowHeight", "type": "int", "description": "New row height in pixels"}], "returns": {"type": "void", "description": ""}, "description": "Sets the height, in pixels, of all cells to rowHeight.", "static": false},
+        {"name": "setAutoResizeMode", "signature": "setAutoResizeMode(mode)", "params": [{"name": "mode", "type": "int", "description": "The auto resize mode constant"}], "returns": {"type": "void", "description": ""}, "description": "Sets the table's auto resize mode when the table is resized.", "static": false}
+      ],
+      "fields": [
+        {"name": "AUTO_RESIZE_OFF", "type": "int", "description": "Do not adjust column widths automatically.", "static": true, "final": true},
+        {"name": "AUTO_RESIZE_ALL_COLUMNS", "type": "int", "description": "Proportionally resize all columns when the table is resized.", "static": true, "final": true},
+        {"name": "AUTO_RESIZE_LAST_COLUMN", "type": "int", "description": "Adjust only the last column during resize.", "static": true, "final": true},
+        {"name": "AUTO_RESIZE_NEXT_COLUMN", "type": "int", "description": "Adjust only the next column during resize.", "static": true, "final": true},
+        {"name": "AUTO_RESIZE_SUBSEQUENT_COLUMNS", "type": "int", "description": "Adjust subsequent columns equally during resize (default).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JTable.html"
+    },
+    {
+      "name": "JPanel",
+      "description": "A generic lightweight container for grouping components. Uses FlowLayout by default.",
+      "constructors": [
+        {"signature": "JPanel()", "params": [], "description": "Creates a new JPanel with a double buffer and a FlowLayout."},
+        {"signature": "JPanel(layout)", "params": [{"name": "layout", "type": "LayoutManager", "description": "The LayoutManager to use"}], "description": "Creates a new JPanel with the specified layout manager."},
+        {"signature": "JPanel(isDoubleBuffered)", "params": [{"name": "isDoubleBuffered", "type": "boolean", "description": "Whether to use double buffering"}], "description": "Creates a new JPanel with FlowLayout and the specified buffering strategy."}
+      ],
+      "methods": [
+        {"name": "add", "signature": "add(comp)", "params": [{"name": "comp", "type": "Component", "description": "The component to add"}], "returns": {"type": "Component", "description": "The added component"}, "description": "Appends the specified component to the end of this container.", "static": false},
+        {"name": "add", "signature": "add(comp, constraints)", "params": [{"name": "comp", "type": "Component", "description": "The component to add"}, {"name": "constraints", "type": "Object", "description": "Layout constraints for the component"}], "returns": {"type": "void", "description": ""}, "description": "Adds the specified component with the specified constraints to the layout.", "static": false},
+        {"name": "remove", "signature": "remove(comp)", "params": [{"name": "comp", "type": "Component", "description": "The component to remove"}], "returns": {"type": "void", "description": ""}, "description": "Removes the specified component from this container.", "static": false},
+        {"name": "removeAll", "signature": "removeAll()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all the components from this container.", "static": false},
+        {"name": "setLayout", "signature": "setLayout(mgr)", "params": [{"name": "mgr", "type": "LayoutManager", "description": "The new layout manager"}], "returns": {"type": "void", "description": ""}, "description": "Sets the layout manager for this container.", "static": false},
+        {"name": "getLayout", "signature": "getLayout()", "params": [], "returns": {"type": "LayoutManager", "description": "The current layout manager"}, "description": "Gets the layout manager for this container.", "static": false},
+        {"name": "setBackground", "signature": "setBackground(bg)", "params": [{"name": "bg", "type": "Color", "description": "The desired background color"}], "returns": {"type": "void", "description": ""}, "description": "Sets the background color of this component.", "static": false},
+        {"name": "setBorder", "signature": "setBorder(border)", "params": [{"name": "border", "type": "Border", "description": "The border to render for this component"}], "returns": {"type": "void", "description": ""}, "description": "Sets the border of this component.", "static": false},
+        {"name": "setPreferredSize", "signature": "setPreferredSize(preferredSize)", "params": [{"name": "preferredSize", "type": "Dimension", "description": "The new preferred size"}], "returns": {"type": "void", "description": ""}, "description": "Sets the preferred size of this component.", "static": false},
+        {"name": "revalidate", "signature": "revalidate()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Supports deferred layout by marking this component as needing to be laid out.", "static": false},
+        {"name": "repaint", "signature": "repaint()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Repaints this component.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JPanel.html"
+    },
+    {
+      "name": "JFrame",
+      "description": "A top-level window with a title and border. Commonly used as the main application window.",
+      "constructors": [
+        {"signature": "JFrame()", "params": [], "description": "Constructs a new frame that is initially invisible."},
+        {"signature": "JFrame(title)", "params": [{"name": "title", "type": "String", "description": "The title for the frame"}], "description": "Creates a new, initially invisible frame with the specified title."}
+      ],
+      "methods": [
+        {"name": "setTitle", "signature": "setTitle(title)", "params": [{"name": "title", "type": "String", "description": "The title to display in the frame's border"}], "returns": {"type": "void", "description": ""}, "description": "Sets the title for this frame.", "static": false},
+        {"name": "getTitle", "signature": "getTitle()", "params": [], "returns": {"type": "String", "description": "The title of this frame"}, "description": "Gets the title of the frame.", "static": false},
+        {"name": "setSize", "signature": "setSize(width, height)", "params": [{"name": "width", "type": "int", "description": "The new width in pixels"}, {"name": "height", "type": "int", "description": "The new height in pixels"}], "returns": {"type": "void", "description": ""}, "description": "Resizes this component to the specified width and height.", "static": false},
+        {"name": "setVisible", "signature": "setVisible(b)", "params": [{"name": "b", "type": "boolean", "description": "Whether the frame should be visible"}], "returns": {"type": "void", "description": ""}, "description": "Shows or hides this frame depending on the value of the parameter.", "static": false},
+        {"name": "setDefaultCloseOperation", "signature": "setDefaultCloseOperation(operation)", "params": [{"name": "operation", "type": "int", "description": "The close operation constant"}], "returns": {"type": "void", "description": ""}, "description": "Sets the operation that happens when the user closes the frame.", "static": false},
+        {"name": "setLocationRelativeTo", "signature": "setLocationRelativeTo(c)", "params": [{"name": "c", "type": "Component", "description": "The component to center relative to, or null for screen center"}], "returns": {"type": "void", "description": ""}, "description": "Sets the location of the window relative to the specified component. Pass null to center on screen.", "static": false},
+        {"name": "setResizable", "signature": "setResizable(resizable)", "params": [{"name": "resizable", "type": "boolean", "description": "Whether the frame is resizable"}], "returns": {"type": "void", "description": ""}, "description": "Sets whether this frame is resizable by the user.", "static": false},
+        {"name": "getContentPane", "signature": "getContentPane()", "params": [], "returns": {"type": "Container", "description": "The content pane of this frame"}, "description": "Returns the content pane object for this frame.", "static": false},
+        {"name": "setContentPane", "signature": "setContentPane(contentPane)", "params": [{"name": "contentPane", "type": "Container", "description": "The content pane for this frame"}], "returns": {"type": "void", "description": ""}, "description": "Sets the content pane for this frame.", "static": false},
+        {"name": "pack", "signature": "pack()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Causes this window to be sized to fit the preferred size of its subcomponents.", "static": false},
+        {"name": "setJMenuBar", "signature": "setJMenuBar(menubar)", "params": [{"name": "menubar", "type": "JMenuBar", "description": "The menu bar for this frame"}], "returns": {"type": "void", "description": ""}, "description": "Sets the menu bar for this frame.", "static": false},
+        {"name": "dispose", "signature": "dispose()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Releases all native screen resources used by this window and its subcomponents.", "static": false}
+      ],
+      "fields": [
+        {"name": "EXIT_ON_CLOSE", "type": "int", "description": "Exit the application when the frame is closed (value 3).", "static": true, "final": true},
+        {"name": "DISPOSE_ON_CLOSE", "type": "int", "description": "Dispose the frame when it is closed.", "static": true, "final": true},
+        {"name": "DO_NOTHING_ON_CLOSE", "type": "int", "description": "Do nothing when the frame is closed.", "static": true, "final": true},
+        {"name": "HIDE_ON_CLOSE", "type": "int", "description": "Hide the frame when it is closed (default).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JFrame.html"
+    },
+    {
+      "name": "JButton",
+      "description": "An implementation of a push button. Used to trigger actions when clicked.",
+      "constructors": [
+        {"signature": "JButton()", "params": [], "description": "Creates a button with no text or icon."},
+        {"signature": "JButton(text)", "params": [{"name": "text", "type": "String", "description": "The text of the button"}], "description": "Creates a button with the specified text."},
+        {"signature": "JButton(icon)", "params": [{"name": "icon", "type": "Icon", "description": "The icon image to display"}], "description": "Creates a button with the specified icon."},
+        {"signature": "JButton(text, icon)", "params": [{"name": "text", "type": "String", "description": "The text of the button"}, {"name": "icon", "type": "Icon", "description": "The icon image to display"}], "description": "Creates a button with the specified text and icon."}
+      ],
+      "methods": [
+        {"name": "setText", "signature": "setText(text)", "params": [{"name": "text", "type": "String", "description": "The string used to set the text"}], "returns": {"type": "void", "description": ""}, "description": "Sets the button's text.", "static": false},
+        {"name": "getText", "signature": "getText()", "params": [], "returns": {"type": "String", "description": "The text of the button"}, "description": "Returns the button's text.", "static": false},
+        {"name": "setEnabled", "signature": "setEnabled(b)", "params": [{"name": "b", "type": "boolean", "description": "Whether the button should be enabled"}], "returns": {"type": "void", "description": ""}, "description": "Enables or disables the button.", "static": false},
+        {"name": "isEnabled", "signature": "isEnabled()", "params": [], "returns": {"type": "boolean", "description": "True if the button is enabled"}, "description": "Returns whether the button is enabled.", "static": false},
+        {"name": "addActionListener", "signature": "addActionListener(l)", "params": [{"name": "l", "type": "ActionListener", "description": "The ActionListener to add"}], "returns": {"type": "void", "description": ""}, "description": "Adds an ActionListener to the button.", "static": false},
+        {"name": "removeActionListener", "signature": "removeActionListener(l)", "params": [{"name": "l", "type": "ActionListener", "description": "The ActionListener to remove"}], "returns": {"type": "void", "description": ""}, "description": "Removes an ActionListener from the button.", "static": false},
+        {"name": "setIcon", "signature": "setIcon(defaultIcon)", "params": [{"name": "defaultIcon", "type": "Icon", "description": "The icon used as the default image"}], "returns": {"type": "void", "description": ""}, "description": "Sets the button's default icon.", "static": false},
+        {"name": "setToolTipText", "signature": "setToolTipText(text)", "params": [{"name": "text", "type": "String", "description": "The tooltip text to display"}], "returns": {"type": "void", "description": ""}, "description": "Sets the tooltip text for this button.", "static": false},
+        {"name": "doClick", "signature": "doClick()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Programmatically performs a click, triggering all associated ActionListeners.", "static": false},
+        {"name": "setMnemonic", "signature": "setMnemonic(mnemonic)", "params": [{"name": "mnemonic", "type": "int", "description": "The keyboard mnemonic (KeyEvent.VK_* constant)"}], "returns": {"type": "void", "description": ""}, "description": "Sets the keyboard mnemonic for this button.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JButton.html"
+    },
+    {
+      "name": "JLabel",
+      "description": "A display area for a short text string, an image, or both. Does not react to input events.",
+      "constructors": [
+        {"signature": "JLabel()", "params": [], "description": "Creates a JLabel with no image and an empty string for the title."},
+        {"signature": "JLabel(text)", "params": [{"name": "text", "type": "String", "description": "The text to display"}], "description": "Creates a JLabel with the specified text."},
+        {"signature": "JLabel(image)", "params": [{"name": "image", "type": "Icon", "description": "The image to display"}], "description": "Creates a JLabel with the specified image."},
+        {"signature": "JLabel(text, horizontalAlignment)", "params": [{"name": "text", "type": "String", "description": "The text to display"}, {"name": "horizontalAlignment", "type": "int", "description": "One of LEFT, CENTER, RIGHT, LEADING, or TRAILING"}], "description": "Creates a JLabel with the specified text and horizontal alignment."}
+      ],
+      "methods": [
+        {"name": "setText", "signature": "setText(text)", "params": [{"name": "text", "type": "String", "description": "The single line of text to display"}], "returns": {"type": "void", "description": ""}, "description": "Sets the text this label will display. Supports HTML via '<html>' prefix.", "static": false},
+        {"name": "getText", "signature": "getText()", "params": [], "returns": {"type": "String", "description": "The text displayed by this label"}, "description": "Returns the text string that the label displays.", "static": false},
+        {"name": "setIcon", "signature": "setIcon(icon)", "params": [{"name": "icon", "type": "Icon", "description": "The image to display as the default icon"}], "returns": {"type": "void", "description": ""}, "description": "Sets the icon this label will display.", "static": false},
+        {"name": "getIcon", "signature": "getIcon()", "params": [], "returns": {"type": "Icon", "description": "The default icon"}, "description": "Returns the graphic image (glyph, icon) that the label displays.", "static": false},
+        {"name": "setHorizontalAlignment", "signature": "setHorizontalAlignment(alignment)", "params": [{"name": "alignment", "type": "int", "description": "One of LEFT, CENTER, RIGHT, LEADING, or TRAILING"}], "returns": {"type": "void", "description": ""}, "description": "Sets the alignment of the label's contents along the X axis.", "static": false},
+        {"name": "setVerticalAlignment", "signature": "setVerticalAlignment(alignment)", "params": [{"name": "alignment", "type": "int", "description": "One of TOP, CENTER, or BOTTOM"}], "returns": {"type": "void", "description": ""}, "description": "Sets the alignment of the label's contents along the Y axis.", "static": false},
+        {"name": "setFont", "signature": "setFont(font)", "params": [{"name": "font", "type": "Font", "description": "The font for this component"}], "returns": {"type": "void", "description": ""}, "description": "Sets the font for this component.", "static": false},
+        {"name": "setForeground", "signature": "setForeground(fg)", "params": [{"name": "fg", "type": "Color", "description": "The desired foreground color"}], "returns": {"type": "void", "description": ""}, "description": "Sets the foreground color of this component.", "static": false},
+        {"name": "setToolTipText", "signature": "setToolTipText(text)", "params": [{"name": "text", "type": "String", "description": "The tooltip text to display"}], "returns": {"type": "void", "description": ""}, "description": "Sets the tooltip text for this label.", "static": false},
+        {"name": "setLabelFor", "signature": "setLabelFor(c)", "params": [{"name": "c", "type": "Component", "description": "The component this label is for"}], "returns": {"type": "void", "description": ""}, "description": "Sets the component that this label describes for accessibility purposes.", "static": false}
+      ],
+      "fields": [
+        {"name": "LEFT", "type": "int", "description": "Left alignment constant (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "CENTER", "type": "int", "description": "Center alignment constant (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "RIGHT", "type": "int", "description": "Right alignment constant (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "TOP", "type": "int", "description": "Top alignment constant (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "BOTTOM", "type": "int", "description": "Bottom alignment constant (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "LEADING", "type": "int", "description": "Leading alignment constant for bidi support (inherited from SwingConstants).", "static": true, "final": true},
+        {"name": "TRAILING", "type": "int", "description": "Trailing alignment constant for bidi support (inherited from SwingConstants).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/swing/JLabel.html"
+    }
+  ]
+}

@@ -4,6 +4,8 @@ import pytest
 from lsprotocol.types import Position
 
 from ignition_lsp.api_loader import IgnitionAPILoader
+from ignition_lsp.java_loader import JavaAPILoader
+from ignition_lsp.script_symbols import SymbolCache
 
 
 class MockTextDocument:
@@ -29,6 +31,12 @@ def api_loader():
 
 
 @pytest.fixture
+def java_loader():
+    """Create a real JavaAPILoader from the java_db directory."""
+    return JavaAPILoader()
+
+
+@pytest.fixture
 def mock_document():
     """Factory fixture for creating mock text documents."""
 
@@ -36,6 +44,12 @@ def mock_document():
         return MockTextDocument(uri, source)
 
     return _make
+
+
+@pytest.fixture
+def symbol_cache():
+    """Create a fresh SymbolCache for testing."""
+    return SymbolCache()
 
 
 @pytest.fixture

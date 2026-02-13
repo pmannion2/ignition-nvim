@@ -1,0 +1,605 @@
+{
+  "package": "javax.crypto",
+  "classes": [
+    {
+      "name": "Cipher",
+      "description": "Provides the functionality of a cryptographic cipher for encryption and decryption. Forms the core of the Java Cryptographic Extension (JCE) framework.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(transformation)",
+          "params": [
+            {"name": "transformation", "type": "String", "description": "The name of the transformation (e.g., AES/CBC/PKCS5Padding)"}
+          ],
+          "returns": {"type": "Cipher", "description": "A Cipher object that implements the specified transformation"},
+          "description": "Returns a Cipher object that implements the specified transformation.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(transformation, provider)",
+          "params": [
+            {"name": "transformation", "type": "String", "description": "The name of the transformation (e.g., AES/CBC/PKCS5Padding)"},
+            {"name": "provider", "type": "String", "description": "The name of the provider"}
+          ],
+          "returns": {"type": "Cipher", "description": "A Cipher object that implements the specified transformation"},
+          "description": "Returns a Cipher object that implements the specified transformation from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "getMaxAllowedKeyLength",
+          "signature": "getMaxAllowedKeyLength(transformation)",
+          "params": [
+            {"name": "transformation", "type": "String", "description": "The cipher transformation"}
+          ],
+          "returns": {"type": "int", "description": "The maximum key length in bits, or Integer.MAX_VALUE"},
+          "description": "Returns the maximum key length for the specified transformation according to the installed JCE jurisdiction policy files.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(opmode, key)",
+          "params": [
+            {"name": "opmode", "type": "int", "description": "The operation mode (ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE, or UNWRAP_MODE)"},
+            {"name": "key", "type": "Key", "description": "The key for this cipher"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this cipher with a key for the specified operation mode.",
+          "static": false
+        },
+        {
+          "name": "init",
+          "signature": "init(opmode, key, params)",
+          "params": [
+            {"name": "opmode", "type": "int", "description": "The operation mode (ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE, or UNWRAP_MODE)"},
+            {"name": "key", "type": "Key", "description": "The key for this cipher"},
+            {"name": "params", "type": "AlgorithmParameterSpec", "description": "The algorithm parameters (e.g., IvParameterSpec)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this cipher with a key and a set of algorithm parameters.",
+          "static": false
+        },
+        {
+          "name": "init",
+          "signature": "init(opmode, key, random)",
+          "params": [
+            {"name": "opmode", "type": "int", "description": "The operation mode (ENCRYPT_MODE, DECRYPT_MODE, WRAP_MODE, or UNWRAP_MODE)"},
+            {"name": "key", "type": "Key", "description": "The key for this cipher"},
+            {"name": "random", "type": "SecureRandom", "description": "The source of randomness"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this cipher with a key and a source of randomness.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input buffer"}
+          ],
+          "returns": {"type": "byte[]", "description": "The new buffer with the result, or null if the cipher is a block cipher and the input data is too short"},
+          "description": "Continues a multiple-part encryption or decryption operation, processing another data part.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input, inputOffset, inputLen)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input buffer"},
+            {"name": "inputOffset", "type": "int", "description": "The offset in input where the input starts"},
+            {"name": "inputLen", "type": "int", "description": "The input length"}
+          ],
+          "returns": {"type": "byte[]", "description": "The new buffer with the result, or null if the cipher is a block cipher and the input data is too short"},
+          "description": "Continues a multiple-part encryption or decryption operation, processing another data part from offset.",
+          "static": false
+        },
+        {
+          "name": "doFinal",
+          "signature": "doFinal()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "The new buffer with the result"},
+          "description": "Finishes a multiple-part encryption or decryption operation. Processes any buffered input data and applies padding if required.",
+          "static": false
+        },
+        {
+          "name": "doFinal",
+          "signature": "doFinal(input)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input buffer"}
+          ],
+          "returns": {"type": "byte[]", "description": "The new buffer with the result"},
+          "description": "Encrypts or decrypts data in a single-part operation, or finishes a multiple-part operation. The data is processed and padded as needed.",
+          "static": false
+        },
+        {
+          "name": "doFinal",
+          "signature": "doFinal(input, inputOffset, inputLen)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input buffer"},
+            {"name": "inputOffset", "type": "int", "description": "The offset in input where the input starts"},
+            {"name": "inputLen", "type": "int", "description": "The input length"}
+          ],
+          "returns": {"type": "byte[]", "description": "The new buffer with the result"},
+          "description": "Encrypts or decrypts data in a single-part operation, or finishes a multiple-part operation, using a sub-array of the input.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The algorithm name of this cipher"},
+          "description": "Returns the algorithm name of this Cipher object.",
+          "static": false
+        },
+        {
+          "name": "getBlockSize",
+          "signature": "getBlockSize()",
+          "params": [],
+          "returns": {"type": "int", "description": "The block size in bytes, or 0 if the algorithm is not a block cipher"},
+          "description": "Returns the block size (in bytes) of this cipher.",
+          "static": false
+        },
+        {
+          "name": "getOutputSize",
+          "signature": "getOutputSize(inputLen)",
+          "params": [
+            {"name": "inputLen", "type": "int", "description": "The input length in bytes"}
+          ],
+          "returns": {"type": "int", "description": "The required output buffer size in bytes"},
+          "description": "Returns the length in bytes that an output buffer would need to be in order to hold the result of the next update or doFinal operation.",
+          "static": false
+        },
+        {
+          "name": "getIV",
+          "signature": "getIV()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "The initialization vector, or null if the algorithm does not use an IV"},
+          "description": "Returns the initialization vector (IV) in a new buffer.",
+          "static": false
+        },
+        {
+          "name": "getParameters",
+          "signature": "getParameters()",
+          "params": [],
+          "returns": {"type": "AlgorithmParameters", "description": "The parameters used with this cipher, or null"},
+          "description": "Returns the parameters used with this cipher. The returned parameters may be the same that were used to initialize this cipher.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "ENCRYPT_MODE", "type": "int", "description": "Constant used to initialize cipher for encryption.", "static": true, "final": true},
+        {"name": "DECRYPT_MODE", "type": "int", "description": "Constant used to initialize cipher for decryption.", "static": true, "final": true},
+        {"name": "WRAP_MODE", "type": "int", "description": "Constant used to initialize cipher for key wrapping.", "static": true, "final": true},
+        {"name": "UNWRAP_MODE", "type": "int", "description": "Constant used to initialize cipher for key unwrapping.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/Cipher.html"
+    },
+    {
+      "name": "SecretKeySpec",
+      "description": "Constructs a secret key from a given byte array. Implements the javax.crypto.SecretKey interface. Useful for constructing keys for algorithms that do not require key material in a provider-specific format.",
+      "constructors": [
+        {
+          "signature": "SecretKeySpec(key, algorithm)",
+          "params": [
+            {"name": "key", "type": "byte[]", "description": "The key material of the secret key"},
+            {"name": "algorithm", "type": "String", "description": "The name of the secret-key algorithm (e.g., AES, DES, HmacSHA256)"}
+          ],
+          "description": "Constructs a secret key from the given byte array."
+        },
+        {
+          "signature": "SecretKeySpec(key, offset, len, algorithm)",
+          "params": [
+            {"name": "key", "type": "byte[]", "description": "The key material of the secret key"},
+            {"name": "offset", "type": "int", "description": "The offset in key where the key material starts"},
+            {"name": "len", "type": "int", "description": "The length of the key material"},
+            {"name": "algorithm", "type": "String", "description": "The name of the secret-key algorithm (e.g., AES, DES, HmacSHA256)"}
+          ],
+          "description": "Constructs a secret key from the given byte array, using the first len bytes of key starting at offset."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the algorithm associated with this key"},
+          "description": "Returns the name of the algorithm associated with this secret key.",
+          "static": false
+        },
+        {
+          "name": "getFormat",
+          "signature": "getFormat()",
+          "params": [],
+          "returns": {"type": "String", "description": "The format name (RAW)"},
+          "description": "Returns the name of the encoding format for this secret key. Always returns \"RAW\".",
+          "static": false
+        },
+        {
+          "name": "getEncoded",
+          "signature": "getEncoded()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "A copy of the key material"},
+          "description": "Returns the key material of this secret key as a byte array.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [
+            {"name": "obj", "type": "Object", "description": "The object to compare with"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the given object is equal to this SecretKeySpec"},
+          "description": "Tests for equality between the specified object and this object. Two SecretKeySpec objects are equal if their key material and algorithm are the same.",
+          "static": false
+        },
+        {
+          "name": "hashCode",
+          "signature": "hashCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "A hash code value for this object"},
+          "description": "Calculates a hash code value for this object based on the key material and algorithm.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/spec/SecretKeySpec.html"
+    },
+    {
+      "name": "KeyGenerator",
+      "description": "Provides the functionality of a symmetric key generator. Key generators are constructed using one of the getInstance factory methods.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [
+            {"name": "algorithm", "type": "String", "description": "The standard name of the requested key algorithm (e.g., AES, DES, HmacSHA256)"}
+          ],
+          "returns": {"type": "KeyGenerator", "description": "The new KeyGenerator object"},
+          "description": "Returns a KeyGenerator object that generates secret keys for the specified algorithm.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm, provider)",
+          "params": [
+            {"name": "algorithm", "type": "String", "description": "The standard name of the requested key algorithm"},
+            {"name": "provider", "type": "String", "description": "The name of the provider"}
+          ],
+          "returns": {"type": "KeyGenerator", "description": "The new KeyGenerator object"},
+          "description": "Returns a KeyGenerator object that generates secret keys for the specified algorithm from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(keysize)",
+          "params": [
+            {"name": "keysize", "type": "int", "description": "The key size in bits (e.g., 128, 192, 256 for AES)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this key generator for a certain key size.",
+          "static": false
+        },
+        {
+          "name": "init",
+          "signature": "init(keysize, random)",
+          "params": [
+            {"name": "keysize", "type": "int", "description": "The key size in bits"},
+            {"name": "random", "type": "SecureRandom", "description": "The source of randomness for this key generator"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this key generator for a certain key size, using the given source of randomness.",
+          "static": false
+        },
+        {
+          "name": "init",
+          "signature": "init(params)",
+          "params": [
+            {"name": "params", "type": "AlgorithmParameterSpec", "description": "The algorithm parameter specification"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this key generator with the specified parameter set.",
+          "static": false
+        },
+        {
+          "name": "generateKey",
+          "signature": "generateKey()",
+          "params": [],
+          "returns": {"type": "SecretKey", "description": "The new key"},
+          "description": "Generates a secret key.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The algorithm name of this KeyGenerator object"},
+          "description": "Returns the algorithm name of this KeyGenerator object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/KeyGenerator.html"
+    },
+    {
+      "name": "Mac",
+      "description": "Provides the functionality of a Message Authentication Code (MAC) algorithm. A MAC provides a way to check the integrity of information transmitted over or stored in an unreliable medium, based on a secret key.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [
+            {"name": "algorithm", "type": "String", "description": "The standard name of the requested MAC algorithm (e.g., HmacSHA256, HmacSHA1)"}
+          ],
+          "returns": {"type": "Mac", "description": "The new Mac object"},
+          "description": "Returns a Mac object that implements the specified MAC algorithm.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm, provider)",
+          "params": [
+            {"name": "algorithm", "type": "String", "description": "The standard name of the requested MAC algorithm"},
+            {"name": "provider", "type": "String", "description": "The name of the provider"}
+          ],
+          "returns": {"type": "Mac", "description": "The new Mac object"},
+          "description": "Returns a Mac object that implements the specified MAC algorithm from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "init",
+          "signature": "init(key)",
+          "params": [
+            {"name": "key", "type": "Key", "description": "The key for this MAC"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this Mac object with the given key.",
+          "static": false
+        },
+        {
+          "name": "init",
+          "signature": "init(key, params)",
+          "params": [
+            {"name": "key", "type": "Key", "description": "The key for this MAC"},
+            {"name": "params", "type": "AlgorithmParameterSpec", "description": "The algorithm parameters"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Initializes this Mac object with the given key and algorithm parameters.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input)",
+          "params": [
+            {"name": "input", "type": "byte", "description": "The input byte"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Processes the given byte.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input byte array"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Processes the given array of bytes.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input, offset, len)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The input buffer"},
+            {"name": "offset", "type": "int", "description": "The offset in input where the input starts"},
+            {"name": "len", "type": "int", "description": "The number of bytes to process"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Processes the first len bytes in input, starting at offset.",
+          "static": false
+        },
+        {
+          "name": "doFinal",
+          "signature": "doFinal()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "The MAC result"},
+          "description": "Finishes the MAC operation. Processes any remaining buffered data and returns the computed MAC. The Mac object is reset after this call.",
+          "static": false
+        },
+        {
+          "name": "doFinal",
+          "signature": "doFinal(input)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The data in bytes to process before finishing the MAC operation"}
+          ],
+          "returns": {"type": "byte[]", "description": "The MAC result"},
+          "description": "Processes the given array of bytes and finishes the MAC operation. Equivalent to calling update(input) followed by doFinal().",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resets this Mac object. The Mac can be reused to generate another MAC from the same key.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The algorithm name of this Mac object"},
+          "description": "Returns the algorithm name of this Mac object.",
+          "static": false
+        },
+        {
+          "name": "getMacLength",
+          "signature": "getMacLength()",
+          "params": [],
+          "returns": {"type": "int", "description": "The MAC length in bytes"},
+          "description": "Returns the length of the MAC in bytes.",
+          "static": false
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A clone of this Mac object"},
+          "description": "Returns a clone if the provider implementation is cloneable.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/Mac.html"
+    },
+    {
+      "name": "CipherInputStream",
+      "description": "A FilterInputStream that reads data from an underlying InputStream and decrypts or decodes it using a Cipher. Useful for transparent decryption of data streams.",
+      "constructors": [
+        {
+          "signature": "CipherInputStream(is, c)",
+          "params": [
+            {"name": "is", "type": "InputStream", "description": "The underlying input stream to read data from"},
+            {"name": "c", "type": "Cipher", "description": "An initialized Cipher object"}
+          ],
+          "description": "Constructs a CipherInputStream from an InputStream and a Cipher. The Cipher must already be initialized."
+        }
+      ],
+      "methods": [
+        {
+          "name": "read",
+          "signature": "read()",
+          "params": [],
+          "returns": {"type": "int", "description": "The next byte of data, or -1 if the end of the stream is reached"},
+          "description": "Reads the next byte of data from this input stream. The byte is decrypted using the cipher.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(b)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The buffer into which the data is read"}
+          ],
+          "returns": {"type": "int", "description": "The total number of bytes read into the buffer, or -1 if the end of stream is reached"},
+          "description": "Reads up to b.length bytes of data from this input stream into an array of bytes.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The buffer into which the data is read"},
+            {"name": "off", "type": "int", "description": "The start offset in the destination array b"},
+            {"name": "len", "type": "int", "description": "The maximum number of bytes read"}
+          ],
+          "returns": {"type": "int", "description": "The total number of bytes read into the buffer, or -1 if the end of stream is reached"},
+          "description": "Reads up to len bytes of data from this input stream into an array of bytes, starting at offset off.",
+          "static": false
+        },
+        {
+          "name": "available",
+          "signature": "available()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of bytes that can be read without blocking"},
+          "description": "Returns the number of bytes that can be read from this input stream without blocking.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this input stream and releases any system resources associated with the stream.",
+          "static": false
+        },
+        {
+          "name": "skip",
+          "signature": "skip(n)",
+          "params": [
+            {"name": "n", "type": "long", "description": "The number of bytes to be skipped"}
+          ],
+          "returns": {"type": "long", "description": "The actual number of bytes skipped"},
+          "description": "Skips n bytes of input from the bytes that can be read from this input stream without blocking.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/CipherInputStream.html"
+    },
+    {
+      "name": "CipherOutputStream",
+      "description": "A FilterOutputStream that writes data to an underlying OutputStream and encrypts or encodes it using a Cipher. Useful for transparent encryption of data streams.",
+      "constructors": [
+        {
+          "signature": "CipherOutputStream(os, c)",
+          "params": [
+            {"name": "os", "type": "OutputStream", "description": "The underlying output stream to write data to"},
+            {"name": "c", "type": "Cipher", "description": "An initialized Cipher object"}
+          ],
+          "description": "Constructs a CipherOutputStream from an OutputStream and a Cipher. The Cipher must already be initialized."
+        }
+      ],
+      "methods": [
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [
+            {"name": "b", "type": "int", "description": "The byte to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes the specified byte to this output stream. The byte is encrypted before being written.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The data to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes b.length bytes from the specified byte array to this output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The data to write"},
+            {"name": "off", "type": "int", "description": "The start offset in the data"},
+            {"name": "len", "type": "int", "description": "The number of bytes to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes len bytes from the specified byte array starting at offset off to this output stream.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Flushes this output stream by forcing any buffered output bytes that have already been processed by the cipher to be written out.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this output stream and releases any system resources associated with it. Invokes the doFinal method of the cipher before closing the stream.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/crypto/CipherOutputStream.html"
+    }
+  ]
+}

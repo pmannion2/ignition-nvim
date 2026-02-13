@@ -8,6 +8,9 @@ from lsprotocol.types import Hover, HoverParams, MarkupContent, MarkupKind
 from pygls.workspace import TextDocument
 
 from .api_loader import IgnitionAPILoader
+from .java_loader import JavaAPILoader
+from .project_scanner import ProjectIndex
+from .script_symbols import SymbolCache
 
 logger = logging.getLogger(__name__)
 
@@ -34,7 +37,10 @@ def get_word_at_position(document: TextDocument, position: HoverParams.position)
 def get_hover_info(
     document: TextDocument,
     position: HoverParams.position,
-    api_loader: IgnitionAPILoader
+    api_loader: IgnitionAPILoader,
+    java_loader: Optional[JavaAPILoader] = None,
+    project_index: Optional[ProjectIndex] = None,
+    symbol_cache: Optional[SymbolCache] = None,
 ) -> Optional[Hover]:
     """Get hover information for the word at position."""
     word = get_word_at_position(document, position)
@@ -42,6 +48,18 @@ def get_hover_info(
 
     if not word:
         return None
+
+    # Try Java class/method hover first
+    if java_loader is not None:
+        java_hover = _get_java_hover(document, position, word, java_loader)
+        if java_hover:
+            return java_hover
+
+    # Try project symbol hover (functions/classes in project .py files)
+    if project_index is not None and symbol_cache is not None:
+        project_hover = _get_project_symbol_hover(word, project_index, symbol_cache)
+        if project_hover:
+            return project_hover
 
     # Try to find the function in the API database
     func = api_loader.get_function(word)
@@ -90,4 +108,152 @@ def get_hover_info(
 
     # No match found
     logger.debug(f"No hover info found for '{word}'")
+    return None
+
+
+def _get_project_symbol_hover(
+    word: str,
+    project_index: ProjectIndex,
+    symbol_cache: SymbolCache,
+) -> Optional[Hover]:
+    """Get hover for a project script symbol.
+
+    Splits word on dots, tries progressively shorter module paths.
+    When a leaf module is found, looks up the remaining symbol name.
+
+    Handles:
+        - "module.functionName" -> function hover
+        - "module.ClassName" -> class hover
+        - "module.ClassName.method" -> method hover
+        - "module.varName" -> variable hover
+    """
+    parts = word.split(".")
+    # Try progressively shorter module paths
+    for i in range(len(parts) - 1, 0, -1):
+        module_path = ".".join(parts[:i])
+        remaining = parts[i:]
+
+        loc = project_index.find_by_module_path(module_path)
+        if loc is None or loc.script_key != "__file__":
+            continue
+
+        symbols = symbol_cache.get(loc.file_path, loc.module_path)
+        if symbols.parse_error:
+            continue
+
+        symbol_name = remaining[0]
+
+        # Check functions
+        for func in symbols.functions:
+            if func.name == symbol_name:
+                return Hover(
+                    contents=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=func.get_markdown_doc(module_path),
+                    )
+                )
+
+        # Check classes
+        for cls in symbols.classes:
+            if cls.name == symbol_name:
+                # If there's a method name after the class name
+                if len(remaining) > 1:
+                    method_name = remaining[1]
+                    for method in cls.methods:
+                        if method.name == method_name:
+                            return Hover(
+                                contents=MarkupContent(
+                                    kind=MarkupKind.Markdown,
+                                    value=method.get_markdown_doc(f"{module_path}.{cls.name}"),
+                                )
+                            )
+                # Just the class itself
+                return Hover(
+                    contents=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=cls.get_markdown_doc(module_path),
+                    )
+                )
+
+        # Check variables
+        for var in symbols.variables:
+            if var.name == symbol_name:
+                detail = var.name
+                if var.type_hint:
+                    detail += f": {var.type_hint}"
+                if var.value_repr:
+                    detail += f" = {var.value_repr}"
+                md = f"**{module_path}.{var.name}**\n\n`{detail}`"
+                return Hover(
+                    contents=MarkupContent(
+                        kind=MarkupKind.Markdown,
+                        value=md,
+                    )
+                )
+
+    return None
+
+
+def _get_java_hover(
+    document: TextDocument,
+    position,
+    word: str,
+    java_loader: JavaAPILoader,
+) -> Optional[Hover]:
+    """Get hover information for Java classes and methods.
+
+    Handles:
+        - Hovering on an imported class name -> class documentation
+        - Hovering on ClassName.methodName -> method documentation
+        - Hovering on a package in an import statement -> package summary
+    """
+    from .java_scope import scan_imports
+
+    imported = scan_imports(document, java_loader)
+
+    # Check for "ClassName.methodName" or "ClassName.FIELD_NAME"
+    if "." in word:
+        parts = word.split(".", 1)
+        class_name = parts[0]
+        member_name = parts[1]
+
+        if class_name in imported:
+            cls = imported[class_name]
+            # Try method first
+            md = cls.get_method_markdown(member_name)
+            if md:
+                return Hover(
+                    contents=MarkupContent(kind=MarkupKind.Markdown, value=md)
+                )
+            # Try field
+            md = cls.get_field_markdown(member_name)
+            if md:
+                return Hover(
+                    contents=MarkupContent(kind=MarkupKind.Markdown, value=md)
+                )
+
+    # Check if word is an imported class name
+    if word in imported:
+        cls = imported[word]
+        md = cls.get_markdown_doc()
+        return Hover(
+            contents=MarkupContent(kind=MarkupKind.Markdown, value=md)
+        )
+
+    # Check if hovering over a package name in an import statement
+    line = document.lines[position.line].rstrip("\n\r")
+    if line.strip().startswith(("from ", "import ")):
+        # Check if word matches a known package
+        for pkg in java_loader.get_all_packages():
+            if word == pkg or pkg.endswith(f".{word}"):
+                classes = java_loader.get_package_classes(pkg)
+                class_names = [c.name for c in classes[:15]]
+                if len(classes) > 15:
+                    class_names.append("...")
+                md = f"**{pkg}** (Java package)\n\n"
+                md += f"{len(classes)} classes: {', '.join(f'`{n}`' for n in class_names)}"
+                return Hover(
+                    contents=MarkupContent(kind=MarkupKind.Markdown, value=md)
+                )
+
     return None
