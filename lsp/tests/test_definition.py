@@ -1,5 +1,7 @@
 """Tests for definition provider — system.* API and project script resolution."""
 
+import textwrap
+
 import pytest
 from pathlib import Path
 
@@ -14,6 +16,7 @@ from ignition_lsp.definition import (
     _api_function_location,
 )
 from ignition_lsp.project_scanner import ProjectIndex, ScriptLocation
+from ignition_lsp.script_symbols import SymbolCache
 
 
 def _make_loc(**kwargs) -> ScriptLocation:
@@ -214,3 +217,90 @@ class TestGetDefinition:
         assert loc is not None
         # Should be the API JSON, not the project file
         assert loc.uri.endswith("system_tag.json")
+
+
+# ── Symbol-Level Definition Tests ────────────────────────────────────
+
+
+def _write_py(tmp_path, source, filename="code.py"):
+    p = tmp_path / filename
+    p.write_text(textwrap.dedent(source))
+    return str(p)
+
+
+class TestSymbolLevelDefinition:
+    """Tests for go-to-definition that resolves to specific symbol lines."""
+
+    def test_jump_to_function(self, tmp_path, mock_document, position, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            LOGGER = "test"
+
+            def tagChangeEvent(event):
+                pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.callables", file_path=path),
+        ])
+        doc = mock_document("project.callables.tagChangeEvent(event)")
+        loc = get_definition(doc, position(0, 20), None, index, symbol_cache)
+        assert loc is not None
+        assert loc.uri == f"file://{path}"
+        # tagChangeEvent is on line 3 (1-based) -> line 2 (0-based)
+        assert loc.range.start.line == 2
+
+    def test_jump_to_class(self, tmp_path, mock_document, position, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            def foo():
+                pass
+
+            class Handler:
+                def run(self):
+                    pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        doc = mock_document("project.utils.Handler()")
+        loc = get_definition(doc, position(0, 15), None, index, symbol_cache)
+        assert loc is not None
+        # Handler is on line 4 (1-based) -> line 3 (0-based)
+        assert loc.range.start.line == 3
+
+    def test_jump_to_method(self, tmp_path, mock_document, position, symbol_cache):
+        path = _write_py(tmp_path, '''\
+            class Handler:
+                def __init__(self):
+                    pass
+
+                def process(self, data):
+                    pass
+        ''')
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        doc = mock_document("project.utils.Handler.process(data)")
+        loc = get_definition(doc, position(0, 25), None, index, symbol_cache)
+        assert loc is not None
+        # process is on line 5 (1-based) -> line 4 (0-based)
+        assert loc.range.start.line == 4
+
+    def test_unknown_symbol_falls_back_to_line_1(self, tmp_path, mock_document, position, symbol_cache):
+        path = _write_py(tmp_path, "def foo(): pass\n")
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path=path),
+        ])
+        doc = mock_document("project.utils.nonexistent()")
+        loc = get_definition(doc, position(0, 15), None, index, symbol_cache)
+        assert loc is not None
+        # Falls back to the module's line_number (1 -> 0)
+        assert loc.range.start.line == 0
+
+    def test_without_cache_preserves_existing(self, mock_document, position):
+        """Without symbol_cache, definition jumps to file line 1 as before."""
+        index = _make_index([
+            _make_loc(module_path="project.utils", file_path="/p/code.py", line_number=1),
+        ])
+        doc = mock_document("project.utils.someFunc()")
+        loc = get_definition(doc, position(0, 10), None, index)  # no symbol_cache
+        assert loc is not None
+        assert loc.range.start.line == 0

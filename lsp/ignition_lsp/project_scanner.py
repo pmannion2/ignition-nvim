@@ -57,6 +57,7 @@ class ProjectIndex:
 
     root_path: str
     scripts: List[ScriptLocation] = field(default_factory=list)
+    parent_roots: List[str] = field(default_factory=list)
     last_updated: Optional[datetime] = None
 
     @property
@@ -106,6 +107,30 @@ class ProjectScanner:
 
         logger.info(f"Scanning Ignition project at {self.root_path}")
 
+        # 1. Scan this project's directories
+        self._scan_project_dir(index)
+
+        # 2. Collect and merge parent scripts
+        parent_chain = self._collect_parent_scripts(set())
+        if parent_chain:
+            child_module_paths = {s.module_path for s in index.scripts}
+            for parent_root, parent_scripts in parent_chain:
+                index.parent_roots.append(parent_root)
+                for script in parent_scripts:
+                    # Child overrides parent: skip if module_path already exists
+                    if script.module_path not in child_module_paths:
+                        index.scripts.append(script)
+                        child_module_paths.add(script.module_path)
+
+        index.last_updated = datetime.now()
+        logger.info(
+            f"Scan complete: {index.script_count} scripts found "
+            f"in {len(index.scripts_by_type())} resource types"
+        )
+        return index
+
+    def _scan_project_dir(self, index: ProjectIndex) -> None:
+        """Scan this project's directories into the index."""
         ignition_dir = self.root_path / "ignition"
         if ignition_dir.is_dir():
             self._scan_ignition_dir(ignition_dir, index)
@@ -116,12 +141,91 @@ class ProjectScanner:
             if json_file.name in SCRIPT_JSON_FILES:
                 self._scan_json_file(json_file, "unknown", "", index)
 
-        index.last_updated = datetime.now()
-        logger.info(
-            f"Scan complete: {index.script_count} scripts found "
-            f"in {len(index.scripts_by_type())} resource types"
-        )
-        return index
+    def _read_project_json(self) -> Optional[Dict]:
+        """Parse project.json and return its contents."""
+        project_file = self.root_path / "project.json"
+        if not project_file.is_file():
+            return None
+        try:
+            return json.loads(project_file.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as e:
+            logger.debug(f"Could not read project.json at {self.root_path}: {e}")
+            return None
+
+    def _resolve_parent_path(self, parent_name: str) -> Optional[Path]:
+        """Find the parent project directory by name.
+
+        Searches sibling directories for a project.json whose 'title' matches,
+        falling back to a sibling directory whose name matches.
+        """
+        siblings_dir = self.root_path.parent
+        if not siblings_dir.is_dir():
+            return None
+
+        # First pass: look for project.json with matching title
+        for child in sorted(siblings_dir.iterdir()):
+            if not child.is_dir() or child == self.root_path:
+                continue
+            pj = child / "project.json"
+            if pj.is_file():
+                try:
+                    data = json.loads(pj.read_text(encoding="utf-8"))
+                    if data.get("title") == parent_name:
+                        return child
+                except (json.JSONDecodeError, OSError):
+                    continue
+
+        # Fallback: match directory name
+        candidate = siblings_dir / parent_name
+        if candidate.is_dir() and candidate != self.root_path:
+            return candidate
+
+        return None
+
+    def _collect_parent_scripts(
+        self, visited: set,
+    ) -> List[tuple]:
+        """Recursively collect scripts from parent projects.
+
+        Returns list of (root_path_str, scripts_list) tuples,
+        deepest ancestor first (so closer parents override).
+        Uses visited set for cycle detection.
+        """
+        project_data = self._read_project_json()
+        if not project_data:
+            return []
+
+        parent_name = project_data.get("parent")
+        if not parent_name:
+            return []
+
+        parent_path = self._resolve_parent_path(parent_name)
+        if parent_path is None:
+            logger.warning(
+                f"Parent project '{parent_name}' not found for {self.root_path}"
+            )
+            return []
+
+        parent_str = str(parent_path.resolve())
+        if parent_str in visited:
+            logger.warning(
+                f"Cycle detected in project hierarchy: {parent_name} at {parent_str}"
+            )
+            return []
+
+        visited.add(parent_str)
+
+        # Scan parent project
+        parent_scanner = ProjectScanner(parent_str)
+        parent_index = ProjectIndex(root_path=parent_str)
+        if parent_scanner.is_ignition_project():
+            parent_scanner._scan_project_dir(parent_index)
+
+        # Recurse into grandparent (deepest first)
+        result = parent_scanner._collect_parent_scripts(visited)
+        # Append this parent's scripts last (closer parent overrides)
+        result.append((parent_str, parent_index.scripts))
+        return result
 
     def _scan_ignition_dir(self, ignition_dir: Path, index: ProjectIndex) -> None:
         """Scan the ignition/ subdirectory."""
@@ -175,6 +279,10 @@ class ProjectScanner:
                     module_path = self._compute_module_path(file_path, base_dir)
                     self._scan_json_file(file_path, resource_type, module_path, index)
 
+    # Skip JSON files larger than this (tag exports like tags.json/udts.json
+    # can be tens of MB and are not useful to index for script completions)
+    _MAX_JSON_SIZE = 1_000_000  # 1 MB
+
     def _scan_json_file(
         self,
         file_path: Path,
@@ -184,6 +292,10 @@ class ProjectScanner:
     ) -> None:
         """Scan a single JSON file for embedded scripts."""
         try:
+            size = file_path.stat().st_size
+            if size > self._MAX_JSON_SIZE:
+                logger.debug(f"Skipping large file ({size} bytes): {file_path}")
+                return
             text = file_path.read_text(encoding="utf-8")
         except (OSError, UnicodeDecodeError) as e:
             logger.debug(f"Could not read {file_path}: {e}")

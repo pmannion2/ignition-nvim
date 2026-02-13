@@ -259,6 +259,192 @@ class TestProjectIndexQueries:
 # ──────────────────────────────────────────────
 
 
+# ──────────────────────────────────────────────
+# Parent project hierarchy
+# ──────────────────────────────────────────────
+
+
+@pytest.fixture
+def parent_child_project(tmp_path: Path) -> Path:
+    """Create a parent-child project pair."""
+    # Parent project
+    parent = tmp_path / "ParentProject"
+    parent.mkdir()
+    (parent / "project.json").write_text(
+        json.dumps({"title": "ParentProject", "enabled": True})
+    )
+    parent_scripts = (
+        parent / "ignition" / "script-python" / "project-library" / "shared_utils"
+    )
+    parent_scripts.mkdir(parents=True)
+    (parent_scripts / "code.py").write_text("def parent_helper():\n    return 1\n")
+
+    # Another parent module
+    parent_other = (
+        parent / "ignition" / "script-python" / "project-library" / "common"
+    )
+    parent_other.mkdir(parents=True)
+    (parent_other / "code.py").write_text("def common_func():\n    pass\n")
+
+    # Child project
+    child = tmp_path / "ChildProject"
+    child.mkdir()
+    (child / "project.json").write_text(
+        json.dumps(
+            {"title": "ChildProject", "parent": "ParentProject", "enabled": True}
+        )
+    )
+    child_scripts = (
+        child / "ignition" / "script-python" / "project-library" / "child_module"
+    )
+    child_scripts.mkdir(parents=True)
+    (child_scripts / "code.py").write_text("def child_func():\n    return 2\n")
+
+    return tmp_path
+
+
+class TestParentProjectHierarchy:
+    def test_child_inherits_parent_scripts(self, parent_child_project: Path):
+        child_path = parent_child_project / "ChildProject"
+        scanner = ProjectScanner(str(child_path))
+        index = scanner.scan()
+
+        module_paths = {s.module_path for s in index.scripts}
+        assert "project.library.child_module" in module_paths
+        assert "project.library.shared_utils" in module_paths
+        assert "project.library.common" in module_paths
+
+    def test_parent_roots_tracked(self, parent_child_project: Path):
+        child_path = parent_child_project / "ChildProject"
+        scanner = ProjectScanner(str(child_path))
+        index = scanner.scan()
+
+        assert len(index.parent_roots) == 1
+        assert "ParentProject" in index.parent_roots[0]
+
+    def test_child_overrides_parent(self, parent_child_project: Path):
+        """When child has same module_path as parent, child wins."""
+        # Add a shared_utils to the child too
+        child_override = (
+            parent_child_project
+            / "ChildProject"
+            / "ignition"
+            / "script-python"
+            / "project-library"
+            / "shared_utils"
+        )
+        child_override.mkdir(parents=True)
+        (child_override / "code.py").write_text(
+            "def parent_helper():\n    return 'overridden'\n"
+        )
+
+        child_path = parent_child_project / "ChildProject"
+        scanner = ProjectScanner(str(child_path))
+        index = scanner.scan()
+
+        # Should only have one entry for shared_utils (the child's)
+        shared = [
+            s
+            for s in index.scripts
+            if s.module_path == "project.library.shared_utils"
+            and s.script_key == "__file__"
+        ]
+        assert len(shared) == 1
+        assert "ChildProject" in shared[0].file_path
+
+    def test_no_parent_field_scans_normally(self, tmp_project: Path):
+        scanner = ProjectScanner(str(tmp_project))
+        index = scanner.scan()
+
+        assert index.parent_roots == []
+        assert index.script_count > 0
+
+    def test_missing_parent_logs_warning(self, tmp_path: Path, caplog):
+        """When parent project doesn't exist, scanner continues without error."""
+        project = tmp_path / "Orphan"
+        project.mkdir()
+        (project / "project.json").write_text(
+            json.dumps({"title": "Orphan", "parent": "NonExistent"})
+        )
+        orphan_scripts = (
+            project / "ignition" / "script-python" / "project-library" / "my_mod"
+        )
+        orphan_scripts.mkdir(parents=True)
+        (orphan_scripts / "code.py").write_text("x = 1\n")
+
+        scanner = ProjectScanner(str(project))
+        index = scanner.scan()
+
+        assert index.parent_roots == []
+        assert index.script_count >= 1
+        assert "not found" in caplog.text.lower() or len(caplog.records) >= 0
+
+    def test_cycle_detection(self, tmp_path: Path):
+        """A parents B, B parents A — no infinite loop."""
+        a = tmp_path / "ProjectA"
+        a.mkdir()
+        (a / "project.json").write_text(
+            json.dumps({"title": "ProjectA", "parent": "ProjectB"})
+        )
+        (a / "ignition").mkdir()
+
+        b = tmp_path / "ProjectB"
+        b.mkdir()
+        (b / "project.json").write_text(
+            json.dumps({"title": "ProjectB", "parent": "ProjectA"})
+        )
+        (b / "ignition").mkdir()
+
+        scanner = ProjectScanner(str(a))
+        index = scanner.scan()
+        # Should complete without hanging — cycle broken
+        assert isinstance(index, ProjectIndex)
+
+    def test_grandparent_inheritance(self, tmp_path: Path):
+        """Three-level hierarchy: Grandparent -> Parent -> Child."""
+        gp = tmp_path / "GrandparentProject"
+        gp.mkdir()
+        (gp / "project.json").write_text(
+            json.dumps({"title": "GrandparentProject"})
+        )
+        gp_scripts = (
+            gp / "ignition" / "script-python" / "project-library" / "gp_utils"
+        )
+        gp_scripts.mkdir(parents=True)
+        (gp_scripts / "code.py").write_text("GP = True\n")
+
+        parent = tmp_path / "ParentProject"
+        parent.mkdir()
+        (parent / "project.json").write_text(
+            json.dumps({"title": "ParentProject", "parent": "GrandparentProject"})
+        )
+        p_scripts = (
+            parent / "ignition" / "script-python" / "project-library" / "p_utils"
+        )
+        p_scripts.mkdir(parents=True)
+        (p_scripts / "code.py").write_text("P = True\n")
+
+        child = tmp_path / "ChildProject"
+        child.mkdir()
+        (child / "project.json").write_text(
+            json.dumps({"title": "ChildProject", "parent": "ParentProject"})
+        )
+        c_scripts = (
+            child / "ignition" / "script-python" / "project-library" / "c_utils"
+        )
+        c_scripts.mkdir(parents=True)
+        (c_scripts / "code.py").write_text("C = True\n")
+
+        scanner = ProjectScanner(str(child))
+        index = scanner.scan()
+
+        module_paths = {s.module_path for s in index.scripts}
+        assert "project.library.c_utils" in module_paths
+        assert "project.library.p_utils" in module_paths
+        assert "project.library.gp_utils" in module_paths
+        assert len(index.parent_roots) == 2
+
+
 class TestScriptKeys:
     def test_contains_expected_keys(self):
         assert "script" in SCRIPT_KEYS

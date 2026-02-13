@@ -15,6 +15,7 @@ from pygls.workspace import TextDocument
 
 from .api_loader import APIFunction, IgnitionAPILoader
 from .project_scanner import ProjectIndex, ScriptLocation
+from .script_symbols import SymbolCache
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,7 @@ def get_definition(
     position: Position,
     api_loader: Optional[IgnitionAPILoader],
     project_index: Optional[ProjectIndex],
+    symbol_cache: Optional[SymbolCache] = None,
 ) -> Optional[Location]:
     """Resolve go-to-definition for the identifier at position.
 
@@ -43,7 +45,7 @@ def get_definition(
 
     # 2. Try project/shared script definition
     if project_index is not None:
-        loc = _resolve_project_script(word, project_index)
+        loc = _resolve_project_script(word, project_index, symbol_cache)
         if loc is not None:
             return loc
 
@@ -133,19 +135,30 @@ def _find_function_line(json_path: Path, function_name: str) -> int:
 
 
 def _resolve_project_script(
-    word: str, project_index: ProjectIndex
+    word: str,
+    project_index: ProjectIndex,
+    symbol_cache: Optional[SymbolCache] = None,
 ) -> Optional[Location]:
     """Resolve a project.*/shared.* reference to its source file location.
 
     Tries progressively shorter prefixes: if the cursor is on
     "project.library.utils.doStuff", we try the full string first,
     then "project.library.utils", then "project.library", etc.
+
+    When a leaf module is found and there are remaining segments past the
+    module path, looks up the symbol in the file and jumps to its line.
     """
     # Try the word and progressively shorter prefixes
     candidate = word
     while "." in candidate:
         loc = project_index.find_by_module_path(candidate)
         if loc is not None:
+            # Check if the original word has symbols past this module path
+            if symbol_cache is not None and loc.script_key == "__file__" and word != candidate:
+                remaining = word[len(candidate) + 1:]  # e.g., "doStuff" or "MyClass.method"
+                symbol_loc = _resolve_symbol_in_file(loc, remaining, symbol_cache)
+                if symbol_loc is not None:
+                    return symbol_loc
             return _script_location_to_lsp(loc)
 
         # Try prefix match — if this candidate uniquely matches one script, jump to it
@@ -155,6 +168,72 @@ def _resolve_project_script(
 
         # Strip the last segment and try again
         candidate = candidate.rsplit(".", 1)[0]
+
+    return None
+
+
+def _resolve_symbol_in_file(
+    loc: ScriptLocation, symbol_name: str, symbol_cache: SymbolCache
+) -> Optional[Location]:
+    """Look up a symbol by name in a script file and return its Location.
+
+    Handles dotted names like "ClassName.method" by looking up the class
+    first, then the method within it.
+
+    Falls back to None if the symbol isn't found (caller falls back to file line 1).
+    """
+    symbols = symbol_cache.get(loc.file_path, loc.module_path)
+    if symbols.parse_error:
+        return None
+
+    parts = symbol_name.split(".", 1)
+    name = parts[0]
+
+    # Check functions
+    for func in symbols.functions:
+        if func.name == name:
+            return Location(
+                uri=f"file://{loc.file_path}",
+                range=Range(
+                    start=Position(line=func.line_number - 1, character=0),
+                    end=Position(line=func.line_number - 1, character=0),
+                ),
+            )
+
+    # Check classes
+    for cls in symbols.classes:
+        if cls.name == name:
+            # If there's a method after the class name, jump to the method
+            if len(parts) > 1:
+                method_name = parts[1]
+                for method in cls.methods:
+                    if method.name == method_name:
+                        return Location(
+                            uri=f"file://{loc.file_path}",
+                            range=Range(
+                                start=Position(line=method.line_number - 1, character=0),
+                                end=Position(line=method.line_number - 1, character=0),
+                            ),
+                        )
+            # Jump to the class definition
+            return Location(
+                uri=f"file://{loc.file_path}",
+                range=Range(
+                    start=Position(line=cls.line_number - 1, character=0),
+                    end=Position(line=cls.line_number - 1, character=0),
+                ),
+            )
+
+    # Check variables
+    for var in symbols.variables:
+        if var.name == name:
+            return Location(
+                uri=f"file://{loc.file_path}",
+                range=Range(
+                    start=Position(line=var.line_number - 1, character=0),
+                    end=Position(line=var.line_number - 1, character=0),
+                ),
+            )
 
     return None
 
