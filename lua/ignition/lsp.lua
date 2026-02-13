@@ -34,7 +34,17 @@ function M.setup(config)
   })
 
   -- Auto-start for matching filetypes in Ignition projects
-  vim.lsp.enable('ignition_lsp')
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'ignition', 'python' },
+    callback = function(args)
+      -- Get the registered config
+      local config = vim.lsp.config.ignition_lsp
+      if config then
+        vim.lsp.start(config, { bufnr = args.buf })
+      end
+    end,
+    desc = 'Start Ignition LSP for Ignition project files',
+  })
 end
 
 -- Find the Ignition LSP server executable
@@ -82,7 +92,12 @@ function M.start_lsp_for_buffer(bufnr)
     return clients[1].id
   end
 
-  return vim.lsp.start('ignition_lsp', { bufnr = bufnr })
+  local config = vim.lsp.config.ignition_lsp
+  if config then
+    return vim.lsp.start(config, { bufnr = bufnr })
+  end
+
+  return nil
 end
 
 return M
