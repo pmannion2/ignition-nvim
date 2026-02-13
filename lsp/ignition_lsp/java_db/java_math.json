@@ -1,0 +1,727 @@
+{
+  "package": "java.math",
+  "classes": [
+    {
+      "name": "BigDecimal",
+      "description": "Immutable, arbitrary-precision signed decimal numbers. Commonly used in Ignition for precise arithmetic on financial and measurement values where floating-point rounding is unacceptable.",
+      "constructors": [
+        {
+          "signature": "BigDecimal(val)",
+          "params": [{"name": "val", "type": "String", "description": "String representation of the BigDecimal value"}],
+          "description": "Translates the string representation of a BigDecimal into a BigDecimal. This is the preferred constructor for precise values."
+        },
+        {
+          "signature": "BigDecimal(val)",
+          "params": [{"name": "val", "type": "double", "description": "A double value to convert to BigDecimal"}],
+          "description": "Translates a double into a BigDecimal. Note: the result may be unpredictable due to floating-point representation. Prefer the String constructor or valueOf(double)."
+        },
+        {
+          "signature": "BigDecimal(val, mc)",
+          "params": [
+            {"name": "val", "type": "String", "description": "String representation of the BigDecimal value"},
+            {"name": "mc", "type": "MathContext", "description": "The MathContext controlling precision and rounding"}
+          ],
+          "description": "Translates the string representation of a BigDecimal into a BigDecimal, with rounding according to the context settings."
+        },
+        {
+          "signature": "BigDecimal(intVal)",
+          "params": [{"name": "intVal", "type": "BigInteger", "description": "The BigInteger value to convert"}],
+          "description": "Translates a BigInteger into a BigDecimal with scale zero."
+        }
+      ],
+      "methods": [
+        {
+          "name": "valueOf",
+          "signature": "valueOf(val)",
+          "params": [{"name": "val", "type": "long", "description": "The long value to convert"}],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the specified long value and scale zero"},
+          "description": "Translates a long value into a BigDecimal with scale zero.",
+          "static": true
+        },
+        {
+          "name": "valueOf",
+          "signature": "valueOf(unscaledVal, scale)",
+          "params": [
+            {"name": "unscaledVal", "type": "long", "description": "The unscaled value of the BigDecimal"},
+            {"name": "scale", "type": "int", "description": "The scale of the BigDecimal"}
+          ],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the specified unscaled value and scale"},
+          "description": "Translates a long unscaled value and an int scale into a BigDecimal.",
+          "static": true
+        },
+        {
+          "name": "add",
+          "signature": "add(augend)",
+          "params": [{"name": "augend", "type": "BigDecimal", "description": "Value to be added to this BigDecimal"}],
+          "returns": {"type": "BigDecimal", "description": "this + augend"},
+          "description": "Returns a BigDecimal whose value is (this + augend).",
+          "static": false
+        },
+        {
+          "name": "subtract",
+          "signature": "subtract(subtrahend)",
+          "params": [{"name": "subtrahend", "type": "BigDecimal", "description": "Value to be subtracted from this BigDecimal"}],
+          "returns": {"type": "BigDecimal", "description": "this - subtrahend"},
+          "description": "Returns a BigDecimal whose value is (this - subtrahend).",
+          "static": false
+        },
+        {
+          "name": "multiply",
+          "signature": "multiply(multiplicand)",
+          "params": [{"name": "multiplicand", "type": "BigDecimal", "description": "Value to be multiplied by this BigDecimal"}],
+          "returns": {"type": "BigDecimal", "description": "this * multiplicand"},
+          "description": "Returns a BigDecimal whose value is (this * multiplicand).",
+          "static": false
+        },
+        {
+          "name": "divide",
+          "signature": "divide(divisor)",
+          "params": [{"name": "divisor", "type": "BigDecimal", "description": "Value by which this BigDecimal is to be divided"}],
+          "returns": {"type": "BigDecimal", "description": "this / divisor"},
+          "description": "Returns a BigDecimal whose value is (this / divisor). Throws ArithmeticException if the result is a non-terminating decimal expansion.",
+          "static": false
+        },
+        {
+          "name": "divide",
+          "signature": "divide(divisor, scale, roundingMode)",
+          "params": [
+            {"name": "divisor", "type": "BigDecimal", "description": "Value by which this BigDecimal is to be divided"},
+            {"name": "scale", "type": "int", "description": "Scale of the resulting BigDecimal"},
+            {"name": "roundingMode", "type": "int", "description": "Rounding mode to apply (e.g., BigDecimal.ROUND_HALF_UP)"}
+          ],
+          "returns": {"type": "BigDecimal", "description": "this / divisor with specified scale and rounding"},
+          "description": "Returns a BigDecimal whose value is (this / divisor), with the specified scale and rounding mode applied.",
+          "static": false
+        },
+        {
+          "name": "divide",
+          "signature": "divide(divisor, roundingMode)",
+          "params": [
+            {"name": "divisor", "type": "BigDecimal", "description": "Value by which this BigDecimal is to be divided"},
+            {"name": "roundingMode", "type": "int", "description": "Rounding mode to apply (e.g., BigDecimal.ROUND_HALF_UP)"}
+          ],
+          "returns": {"type": "BigDecimal", "description": "this / divisor with the scale of this and specified rounding"},
+          "description": "Returns a BigDecimal whose value is (this / divisor), using the scale of this BigDecimal and the specified rounding mode.",
+          "static": false
+        },
+        {
+          "name": "remainder",
+          "signature": "remainder(divisor)",
+          "params": [{"name": "divisor", "type": "BigDecimal", "description": "Value by which this BigDecimal is to be divided"}],
+          "returns": {"type": "BigDecimal", "description": "this % divisor"},
+          "description": "Returns a BigDecimal whose value is (this % divisor).",
+          "static": false
+        },
+        {
+          "name": "abs",
+          "signature": "abs()",
+          "params": [],
+          "returns": {"type": "BigDecimal", "description": "The absolute value of this BigDecimal"},
+          "description": "Returns a BigDecimal whose value is the absolute value of this BigDecimal.",
+          "static": false
+        },
+        {
+          "name": "negate",
+          "signature": "negate()",
+          "params": [],
+          "returns": {"type": "BigDecimal", "description": "-this"},
+          "description": "Returns a BigDecimal whose value is (-this).",
+          "static": false
+        },
+        {
+          "name": "pow",
+          "signature": "pow(n)",
+          "params": [{"name": "n", "type": "int", "description": "Power to raise this BigDecimal to"}],
+          "returns": {"type": "BigDecimal", "description": "this^n"},
+          "description": "Returns a BigDecimal whose value is (this^n). The power is exact and computed with unlimited precision.",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(val)",
+          "params": [{"name": "val", "type": "BigDecimal", "description": "BigDecimal to compare with"}],
+          "returns": {"type": "int", "description": "-1 if less, 0 if equal, 1 if greater (ignoring scale)"},
+          "description": "Compares this BigDecimal with the specified BigDecimal. Two BigDecimal objects that are equal in value but have different scales (like 2.0 and 2.00) are considered equal by this method.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(x)",
+          "params": [{"name": "x", "type": "Object", "description": "Object to compare with"}],
+          "returns": {"type": "boolean", "description": "True only if both value and scale are equal"},
+          "description": "Compares this BigDecimal with the specified Object for equality. Unlike compareTo, this method considers two BigDecimal objects equal only if they are equal in value and scale (2.0 is not equal to 2.00).",
+          "static": false
+        },
+        {
+          "name": "min",
+          "signature": "min(val)",
+          "params": [{"name": "val", "type": "BigDecimal", "description": "Value to compare with"}],
+          "returns": {"type": "BigDecimal", "description": "The lesser of this and val"},
+          "description": "Returns the minimum of this BigDecimal and val.",
+          "static": false
+        },
+        {
+          "name": "max",
+          "signature": "max(val)",
+          "params": [{"name": "val", "type": "BigDecimal", "description": "Value to compare with"}],
+          "returns": {"type": "BigDecimal", "description": "The greater of this and val"},
+          "description": "Returns the maximum of this BigDecimal and val.",
+          "static": false
+        },
+        {
+          "name": "scale",
+          "signature": "scale()",
+          "params": [],
+          "returns": {"type": "int", "description": "The scale of this BigDecimal"},
+          "description": "Returns the scale of this BigDecimal. The scale is the number of digits to the right of the decimal point.",
+          "static": false
+        },
+        {
+          "name": "precision",
+          "signature": "precision()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of digits in the unscaled value"},
+          "description": "Returns the precision of this BigDecimal, which is the number of digits in the unscaled value.",
+          "static": false
+        },
+        {
+          "name": "setScale",
+          "signature": "setScale(newScale, roundingMode)",
+          "params": [
+            {"name": "newScale", "type": "int", "description": "The scale of the resulting BigDecimal"},
+            {"name": "roundingMode", "type": "int", "description": "The rounding mode to apply (e.g., BigDecimal.ROUND_HALF_UP)"}
+          ],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the specified scale"},
+          "description": "Returns a BigDecimal whose scale is the specified value, with rounding applied if necessary.",
+          "static": false
+        },
+        {
+          "name": "setScale",
+          "signature": "setScale(newScale)",
+          "params": [{"name": "newScale", "type": "int", "description": "The scale of the resulting BigDecimal"}],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the specified scale"},
+          "description": "Returns a BigDecimal whose scale is the specified value. Throws ArithmeticException if rounding would be required.",
+          "static": false
+        },
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {"type": "int", "description": "This BigDecimal converted to an int"},
+          "description": "Converts this BigDecimal to an int, with possible loss of information.",
+          "static": false
+        },
+        {
+          "name": "longValue",
+          "signature": "longValue()",
+          "params": [],
+          "returns": {"type": "long", "description": "This BigDecimal converted to a long"},
+          "description": "Converts this BigDecimal to a long, with possible loss of information.",
+          "static": false
+        },
+        {
+          "name": "doubleValue",
+          "signature": "doubleValue()",
+          "params": [],
+          "returns": {"type": "double", "description": "This BigDecimal converted to a double"},
+          "description": "Converts this BigDecimal to a double, with possible loss of precision.",
+          "static": false
+        },
+        {
+          "name": "floatValue",
+          "signature": "floatValue()",
+          "params": [],
+          "returns": {"type": "float", "description": "This BigDecimal converted to a float"},
+          "description": "Converts this BigDecimal to a float, with possible loss of precision.",
+          "static": false
+        },
+        {
+          "name": "toBigInteger",
+          "signature": "toBigInteger()",
+          "params": [],
+          "returns": {"type": "BigInteger", "description": "This BigDecimal converted to a BigInteger"},
+          "description": "Converts this BigDecimal to a BigInteger, discarding the fractional part.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "String representation of this BigDecimal using scientific notation if needed"},
+          "description": "Returns the string representation of this BigDecimal, using scientific notation if an exponent is needed.",
+          "static": false
+        },
+        {
+          "name": "toPlainString",
+          "signature": "toPlainString()",
+          "params": [],
+          "returns": {"type": "String", "description": "String representation without an exponent field"},
+          "description": "Returns a string representation of this BigDecimal without an exponent field.",
+          "static": false
+        },
+        {
+          "name": "toEngineeringString",
+          "signature": "toEngineeringString()",
+          "params": [],
+          "returns": {"type": "String", "description": "String representation using engineering notation if an exponent is needed"},
+          "description": "Returns a string representation of this BigDecimal using engineering notation if an exponent is needed.",
+          "static": false
+        },
+        {
+          "name": "stripTrailingZeros",
+          "signature": "stripTrailingZeros()",
+          "params": [],
+          "returns": {"type": "BigDecimal", "description": "A numerically equal BigDecimal with trailing zeros removed"},
+          "description": "Returns a BigDecimal which is numerically equal to this one but with any trailing zeros removed from the representation.",
+          "static": false
+        },
+        {
+          "name": "movePointLeft",
+          "signature": "movePointLeft(n)",
+          "params": [{"name": "n", "type": "int", "description": "Number of places to move the decimal point to the left"}],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the decimal point moved n places to the left"},
+          "description": "Returns a BigDecimal equivalent to this one with the decimal point moved n places to the left.",
+          "static": false
+        },
+        {
+          "name": "movePointRight",
+          "signature": "movePointRight(n)",
+          "params": [{"name": "n", "type": "int", "description": "Number of places to move the decimal point to the right"}],
+          "returns": {"type": "BigDecimal", "description": "A BigDecimal with the decimal point moved n places to the right"},
+          "description": "Returns a BigDecimal equivalent to this one with the decimal point moved n places to the right.",
+          "static": false
+        },
+        {
+          "name": "signum",
+          "signature": "signum()",
+          "params": [],
+          "returns": {"type": "int", "description": "-1 if negative, 0 if zero, 1 if positive"},
+          "description": "Returns the signum function of this BigDecimal.",
+          "static": false
+        },
+        {
+          "name": "unscaledValue",
+          "signature": "unscaledValue()",
+          "params": [],
+          "returns": {"type": "BigInteger", "description": "The unscaled value of this BigDecimal"},
+          "description": "Returns a BigInteger whose value is the unscaled value of this BigDecimal.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "ZERO", "type": "BigDecimal", "description": "The value 0, with a scale of 0.", "static": true, "final": true},
+        {"name": "ONE", "type": "BigDecimal", "description": "The value 1, with a scale of 0.", "static": true, "final": true},
+        {"name": "TEN", "type": "BigDecimal", "description": "The value 10, with a scale of 0.", "static": true, "final": true},
+        {"name": "ROUND_UP", "type": "int", "description": "Rounding mode to round away from zero. Always increments the digit prior to a nonzero discarded fraction.", "static": true, "final": true},
+        {"name": "ROUND_DOWN", "type": "int", "description": "Rounding mode to round towards zero. Never increments the digit prior to a discarded fraction.", "static": true, "final": true},
+        {"name": "ROUND_CEILING", "type": "int", "description": "Rounding mode to round towards positive infinity.", "static": true, "final": true},
+        {"name": "ROUND_FLOOR", "type": "int", "description": "Rounding mode to round towards negative infinity.", "static": true, "final": true},
+        {"name": "ROUND_HALF_UP", "type": "int", "description": "Rounding mode to round towards the nearest neighbor, rounding up if equidistant. This is the most common rounding mode.", "static": true, "final": true},
+        {"name": "ROUND_HALF_DOWN", "type": "int", "description": "Rounding mode to round towards the nearest neighbor, rounding down if equidistant.", "static": true, "final": true},
+        {"name": "ROUND_HALF_EVEN", "type": "int", "description": "Rounding mode to round towards the nearest neighbor, rounding to even if equidistant (banker's rounding).", "static": true, "final": true},
+        {"name": "ROUND_UNNECESSARY", "type": "int", "description": "Rounding mode to assert that the operation has an exact result, hence no rounding is necessary. Throws ArithmeticException if rounding would be required.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/math/BigDecimal.html"
+    },
+    {
+      "name": "BigInteger",
+      "description": "Immutable arbitrary-precision integers. Provides analogues to all of Java's primitive integer operators and all relevant methods from java.lang.Math.",
+      "constructors": [
+        {
+          "signature": "BigInteger(val)",
+          "params": [{"name": "val", "type": "String", "description": "Decimal string representation of the BigInteger"}],
+          "description": "Translates the decimal string representation of a BigInteger into a BigInteger."
+        },
+        {
+          "signature": "BigInteger(val, radix)",
+          "params": [
+            {"name": "val", "type": "String", "description": "String representation of the BigInteger in the specified radix"},
+            {"name": "radix", "type": "int", "description": "Radix to use for interpreting val"}
+          ],
+          "description": "Translates the string representation of a BigInteger in the specified radix into a BigInteger."
+        },
+        {
+          "signature": "BigInteger(signum, magnitude)",
+          "params": [
+            {"name": "signum", "type": "int", "description": "Signum of the number (-1 for negative, 0 for zero, 1 for positive)"},
+            {"name": "magnitude", "type": "byte[]", "description": "Big-endian magnitude of the number"}
+          ],
+          "description": "Translates the sign-magnitude representation of a BigInteger into a BigInteger."
+        }
+      ],
+      "methods": [
+        {
+          "name": "valueOf",
+          "signature": "valueOf(val)",
+          "params": [{"name": "val", "type": "long", "description": "The long value to convert"}],
+          "returns": {"type": "BigInteger", "description": "A BigInteger with the specified value"},
+          "description": "Returns a BigInteger whose value is equal to that of the specified long.",
+          "static": true
+        },
+        {
+          "name": "probablePrime",
+          "signature": "probablePrime(bitLength, rnd)",
+          "params": [
+            {"name": "bitLength", "type": "int", "description": "Bit length of the returned BigInteger"},
+            {"name": "rnd", "type": "Random", "description": "Source of random bits for selecting a candidate prime"}
+          ],
+          "returns": {"type": "BigInteger", "description": "A positive BigInteger that is probably prime"},
+          "description": "Returns a positive BigInteger that is probably prime, with the specified bitLength.",
+          "static": true
+        },
+        {
+          "name": "add",
+          "signature": "add(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to be added to this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this + val"},
+          "description": "Returns a BigInteger whose value is (this + val).",
+          "static": false
+        },
+        {
+          "name": "subtract",
+          "signature": "subtract(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to be subtracted from this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this - val"},
+          "description": "Returns a BigInteger whose value is (this - val).",
+          "static": false
+        },
+        {
+          "name": "multiply",
+          "signature": "multiply(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to be multiplied by this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this * val"},
+          "description": "Returns a BigInteger whose value is (this * val).",
+          "static": false
+        },
+        {
+          "name": "divide",
+          "signature": "divide(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value by which this BigInteger is to be divided"}],
+          "returns": {"type": "BigInteger", "description": "this / val (integer division)"},
+          "description": "Returns a BigInteger whose value is (this / val). Uses integer division that truncates towards zero.",
+          "static": false
+        },
+        {
+          "name": "remainder",
+          "signature": "remainder(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value by which this BigInteger is to be divided"}],
+          "returns": {"type": "BigInteger", "description": "this % val"},
+          "description": "Returns a BigInteger whose value is (this % val).",
+          "static": false
+        },
+        {
+          "name": "mod",
+          "signature": "mod(m)",
+          "params": [{"name": "m", "type": "BigInteger", "description": "The modulus, which must be positive"}],
+          "returns": {"type": "BigInteger", "description": "this mod m"},
+          "description": "Returns a BigInteger whose value is (this mod m). This method differs from remainder in that it always returns a non-negative BigInteger.",
+          "static": false
+        },
+        {
+          "name": "pow",
+          "signature": "pow(exponent)",
+          "params": [{"name": "exponent", "type": "int", "description": "Exponent to which this BigInteger is to be raised"}],
+          "returns": {"type": "BigInteger", "description": "this^exponent"},
+          "description": "Returns a BigInteger whose value is (this^exponent). The exponent must be non-negative.",
+          "static": false
+        },
+        {
+          "name": "abs",
+          "signature": "abs()",
+          "params": [],
+          "returns": {"type": "BigInteger", "description": "The absolute value of this BigInteger"},
+          "description": "Returns a BigInteger whose value is the absolute value of this BigInteger.",
+          "static": false
+        },
+        {
+          "name": "negate",
+          "signature": "negate()",
+          "params": [],
+          "returns": {"type": "BigInteger", "description": "-this"},
+          "description": "Returns a BigInteger whose value is (-this).",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "BigInteger to compare with"}],
+          "returns": {"type": "int", "description": "-1 if less, 0 if equal, 1 if greater"},
+          "description": "Compares this BigInteger with the specified BigInteger.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(x)",
+          "params": [{"name": "x", "type": "Object", "description": "Object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the object is a BigInteger with the same value"},
+          "description": "Compares this BigInteger with the specified Object for equality.",
+          "static": false
+        },
+        {
+          "name": "min",
+          "signature": "min(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to compare with"}],
+          "returns": {"type": "BigInteger", "description": "The lesser of this and val"},
+          "description": "Returns the minimum of this BigInteger and val.",
+          "static": false
+        },
+        {
+          "name": "max",
+          "signature": "max(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to compare with"}],
+          "returns": {"type": "BigInteger", "description": "The greater of this and val"},
+          "description": "Returns the maximum of this BigInteger and val.",
+          "static": false
+        },
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {"type": "int", "description": "This BigInteger converted to an int"},
+          "description": "Converts this BigInteger to an int, with possible loss of information.",
+          "static": false
+        },
+        {
+          "name": "longValue",
+          "signature": "longValue()",
+          "params": [],
+          "returns": {"type": "long", "description": "This BigInteger converted to a long"},
+          "description": "Converts this BigInteger to a long, with possible loss of information.",
+          "static": false
+        },
+        {
+          "name": "doubleValue",
+          "signature": "doubleValue()",
+          "params": [],
+          "returns": {"type": "double", "description": "This BigInteger converted to a double"},
+          "description": "Converts this BigInteger to a double, with possible loss of precision.",
+          "static": false
+        },
+        {
+          "name": "floatValue",
+          "signature": "floatValue()",
+          "params": [],
+          "returns": {"type": "float", "description": "This BigInteger converted to a float"},
+          "description": "Converts this BigInteger to a float, with possible loss of precision.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "Decimal string representation of this BigInteger"},
+          "description": "Returns the decimal string representation of this BigInteger.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString(radix)",
+          "params": [{"name": "radix", "type": "int", "description": "Radix of the string representation"}],
+          "returns": {"type": "String", "description": "String representation in the specified radix"},
+          "description": "Returns the string representation of this BigInteger in the given radix.",
+          "static": false
+        },
+        {
+          "name": "bitLength",
+          "signature": "bitLength()",
+          "params": [],
+          "returns": {"type": "int", "description": "Number of bits in the minimal two's-complement representation, excluding the sign bit"},
+          "description": "Returns the number of bits in the minimal two's-complement representation of this BigInteger, excluding a sign bit.",
+          "static": false
+        },
+        {
+          "name": "bitCount",
+          "signature": "bitCount()",
+          "params": [],
+          "returns": {"type": "int", "description": "Number of bits that differ from the sign bit"},
+          "description": "Returns the number of bits in the two's complement representation of this BigInteger that differ from its sign bit.",
+          "static": false
+        },
+        {
+          "name": "signum",
+          "signature": "signum()",
+          "params": [],
+          "returns": {"type": "int", "description": "-1 if negative, 0 if zero, 1 if positive"},
+          "description": "Returns the signum function of this BigInteger.",
+          "static": false
+        },
+        {
+          "name": "gcd",
+          "signature": "gcd(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value with which the GCD is to be computed"}],
+          "returns": {"type": "BigInteger", "description": "The greatest common divisor of abs(this) and abs(val)"},
+          "description": "Returns a BigInteger whose value is the greatest common divisor of abs(this) and abs(val).",
+          "static": false
+        },
+        {
+          "name": "isProbablePrime",
+          "signature": "isProbablePrime(certainty)",
+          "params": [{"name": "certainty", "type": "int", "description": "A measure of the uncertainty that the caller is willing to tolerate"}],
+          "returns": {"type": "boolean", "description": "True if this BigInteger is probably prime, false if it is definitely composite"},
+          "description": "Returns true if this BigInteger is probably prime, false if it is definitely composite. The certainty parameter is a measure of the uncertainty; the probability of a false positive is at most (1/2)^certainty.",
+          "static": false
+        },
+        {
+          "name": "and",
+          "signature": "and(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to AND with this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this & val"},
+          "description": "Returns a BigInteger whose value is (this & val). Returns a negative BigInteger if and only if this and val are both negative.",
+          "static": false
+        },
+        {
+          "name": "or",
+          "signature": "or(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to OR with this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this | val"},
+          "description": "Returns a BigInteger whose value is (this | val). Returns a negative BigInteger if and only if either this or val is negative.",
+          "static": false
+        },
+        {
+          "name": "xor",
+          "signature": "xor(val)",
+          "params": [{"name": "val", "type": "BigInteger", "description": "Value to XOR with this BigInteger"}],
+          "returns": {"type": "BigInteger", "description": "this ^ val"},
+          "description": "Returns a BigInteger whose value is (this ^ val). Returns a negative BigInteger if and only if exactly one of this and val is negative.",
+          "static": false
+        },
+        {
+          "name": "not",
+          "signature": "not()",
+          "params": [],
+          "returns": {"type": "BigInteger", "description": "~this"},
+          "description": "Returns a BigInteger whose value is (~this), the bitwise complement.",
+          "static": false
+        },
+        {
+          "name": "shiftLeft",
+          "signature": "shiftLeft(n)",
+          "params": [{"name": "n", "type": "int", "description": "Shift distance, in bits"}],
+          "returns": {"type": "BigInteger", "description": "this << n"},
+          "description": "Returns a BigInteger whose value is (this << n). Computes floor(this * 2^n).",
+          "static": false
+        },
+        {
+          "name": "shiftRight",
+          "signature": "shiftRight(n)",
+          "params": [{"name": "n", "type": "int", "description": "Shift distance, in bits"}],
+          "returns": {"type": "BigInteger", "description": "this >> n"},
+          "description": "Returns a BigInteger whose value is (this >> n). Computes floor(this / 2^n).",
+          "static": false
+        },
+        {
+          "name": "toByteArray",
+          "signature": "toByteArray()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "A byte array containing the two's-complement representation"},
+          "description": "Returns a byte array containing the two's-complement representation of this BigInteger in big-endian byte order.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "ZERO", "type": "BigInteger", "description": "The BigInteger constant zero.", "static": true, "final": true},
+        {"name": "ONE", "type": "BigInteger", "description": "The BigInteger constant one.", "static": true, "final": true},
+        {"name": "TEN", "type": "BigInteger", "description": "The BigInteger constant ten.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html"
+    },
+    {
+      "name": "MathContext",
+      "description": "Immutable objects which encapsulate the context settings that describe certain rules for numerical operators, such as precision and rounding mode.",
+      "constructors": [
+        {
+          "signature": "MathContext(precision)",
+          "params": [{"name": "precision", "type": "int", "description": "The non-negative int precision setting"}],
+          "description": "Constructs a new MathContext with the specified precision and the HALF_UP rounding mode."
+        },
+        {
+          "signature": "MathContext(precision, roundingMode)",
+          "params": [
+            {"name": "precision", "type": "int", "description": "The non-negative int precision setting"},
+            {"name": "roundingMode", "type": "RoundingMode", "description": "The rounding mode to use"}
+          ],
+          "description": "Constructs a new MathContext with the specified precision and rounding mode."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getPrecision",
+          "signature": "getPrecision()",
+          "params": [],
+          "returns": {"type": "int", "description": "The precision setting (0 indicates unlimited precision)"},
+          "description": "Returns the precision setting. A value of 0 indicates unlimited precision.",
+          "static": false
+        },
+        {
+          "name": "getRoundingMode",
+          "signature": "getRoundingMode()",
+          "params": [],
+          "returns": {"type": "RoundingMode", "description": "The rounding mode setting"},
+          "description": "Returns the RoundingMode setting.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(x)",
+          "params": [{"name": "x", "type": "Object", "description": "Object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the specified object is a MathContext with the same settings"},
+          "description": "Compares this MathContext with the specified Object for equality.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this MathContext"},
+          "description": "Returns the string representation of this MathContext.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "UNLIMITED", "type": "MathContext", "description": "A MathContext with unlimited precision and HALF_UP rounding mode.", "static": true, "final": true},
+        {"name": "DECIMAL32", "type": "MathContext", "description": "A MathContext with precision of 7 digits and HALF_EVEN rounding mode, matching IEEE 754R Decimal32 format.", "static": true, "final": true},
+        {"name": "DECIMAL64", "type": "MathContext", "description": "A MathContext with precision of 16 digits and HALF_EVEN rounding mode, matching IEEE 754R Decimal64 format.", "static": true, "final": true},
+        {"name": "DECIMAL128", "type": "MathContext", "description": "A MathContext with precision of 34 digits and HALF_EVEN rounding mode, matching IEEE 754R Decimal128 format.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/math/MathContext.html"
+    },
+    {
+      "name": "RoundingMode",
+      "description": "Specifies a rounding behavior for numerical operations capable of discarding precision. Each rounding mode indicates how the least significant returned digit of a rounded result is to be calculated.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "valueOf",
+          "signature": "valueOf(name)",
+          "params": [{"name": "name", "type": "String", "description": "The name of the rounding mode constant (e.g., \"HALF_UP\")"}],
+          "returns": {"type": "RoundingMode", "description": "The RoundingMode constant with the specified name"},
+          "description": "Returns the RoundingMode constant with the specified name.",
+          "static": true
+        },
+        {
+          "name": "values",
+          "signature": "values()",
+          "params": [],
+          "returns": {"type": "RoundingMode[]", "description": "An array containing all RoundingMode constants"},
+          "description": "Returns an array containing all RoundingMode constants in the order they are declared.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "UP", "type": "RoundingMode", "description": "Rounding mode to round away from zero. Always increments the digit prior to a nonzero discarded fraction.", "static": true, "final": true},
+        {"name": "DOWN", "type": "RoundingMode", "description": "Rounding mode to round towards zero. Never increments the digit prior to a discarded fraction (truncates).", "static": true, "final": true},
+        {"name": "CEILING", "type": "RoundingMode", "description": "Rounding mode to round towards positive infinity. If positive, behaves as UP; if negative, behaves as DOWN.", "static": true, "final": true},
+        {"name": "FLOOR", "type": "RoundingMode", "description": "Rounding mode to round towards negative infinity. If positive, behaves as DOWN; if negative, behaves as UP.", "static": true, "final": true},
+        {"name": "HALF_UP", "type": "RoundingMode", "description": "Rounding mode to round towards nearest neighbor, rounding up if equidistant. This is the most commonly used rounding mode.", "static": true, "final": true},
+        {"name": "HALF_DOWN", "type": "RoundingMode", "description": "Rounding mode to round towards nearest neighbor, rounding down if equidistant.", "static": true, "final": true},
+        {"name": "HALF_EVEN", "type": "RoundingMode", "description": "Rounding mode to round towards nearest neighbor, rounding to even neighbor if equidistant (banker's rounding). Minimizes cumulative error over many calculations.", "static": true, "final": true},
+        {"name": "UNNECESSARY", "type": "RoundingMode", "description": "Rounding mode to assert that the operation has an exact result, hence no rounding is necessary. Throws ArithmeticException if rounding would be required.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/math/RoundingMode.html"
+    }
+  ]
+}

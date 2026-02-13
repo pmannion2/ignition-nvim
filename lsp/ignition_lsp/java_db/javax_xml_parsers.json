@@ -1,0 +1,450 @@
+{
+  "package": "javax.xml.parsers",
+  "classes": [
+    {
+      "name": "DocumentBuilderFactory",
+      "description": "Defines a factory API that enables applications to obtain a parser that produces DOM object trees from XML documents. Use newInstance() to get a factory, configure it, then call newDocumentBuilder() to get a parser.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "newInstance",
+          "signature": "newInstance()",
+          "params": [],
+          "returns": {"type": "DocumentBuilderFactory", "description": "A new instance of a DocumentBuilderFactory"},
+          "description": "Obtains a new instance of a DocumentBuilderFactory. This static method creates a new factory instance using the platform default implementation.",
+          "static": true
+        },
+        {
+          "name": "newDocumentBuilder",
+          "signature": "newDocumentBuilder()",
+          "params": [],
+          "returns": {"type": "DocumentBuilder", "description": "A new instance of a DocumentBuilder"},
+          "description": "Creates a new instance of a DocumentBuilder using the currently configured parameters.",
+          "static": false
+        },
+        {
+          "name": "setNamespaceAware",
+          "signature": "setNamespaceAware(awareness)",
+          "params": [
+            {"name": "awareness", "type": "boolean", "description": "True if the parser produced will provide support for XML namespaces; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will provide support for XML namespaces. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isNamespaceAware",
+          "signature": "isNamespaceAware()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce namespace-aware parsers; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which are namespace aware.",
+          "static": false
+        },
+        {
+          "name": "setValidating",
+          "signature": "setValidating(validating)",
+          "params": [
+            {"name": "validating", "type": "boolean", "description": "True if the parser produced will validate documents as they are parsed; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will validate documents as they are parsed. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isValidating",
+          "signature": "isValidating()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce validating parsers; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which validate the XML content during parse.",
+          "static": false
+        },
+        {
+          "name": "setIgnoringComments",
+          "signature": "setIgnoringComments(ignoreComments)",
+          "params": [
+            {"name": "ignoreComments", "type": "boolean", "description": "True if the parser will ignore comments; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will ignore comments. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isIgnoringComments",
+          "signature": "isIgnoringComments()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce parsers that ignore comments; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which ignore comments.",
+          "static": false
+        },
+        {
+          "name": "setIgnoringElementContentWhitespace",
+          "signature": "setIgnoringElementContentWhitespace(whitespace)",
+          "params": [
+            {"name": "whitespace", "type": "boolean", "description": "True if the parser will ignore element content whitespace; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parsers created by this factory must eliminate whitespace in element content. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isIgnoringElementContentWhitespace",
+          "signature": "isIgnoringElementContentWhitespace()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce parsers that ignore element content whitespace; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which ignore ignorable whitespace in element content.",
+          "static": false
+        },
+        {
+          "name": "setCoalescing",
+          "signature": "setCoalescing(coalescing)",
+          "params": [
+            {"name": "coalescing", "type": "boolean", "description": "True if the parser will convert CDATA nodes to Text nodes and append to an adjacent Text node; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will convert CDATA nodes to Text nodes and append it to the adjacent (if any) text node. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isCoalescing",
+          "signature": "isCoalescing()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce coalescing parsers; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which convert CDATA nodes to Text nodes and append to an adjacent Text node.",
+          "static": false
+        },
+        {
+          "name": "setExpandEntityReferences",
+          "signature": "setExpandEntityReferences(expandEntityRef)",
+          "params": [
+            {"name": "expandEntityRef", "type": "boolean", "description": "True if the parser will expand entity reference nodes; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will expand entity reference nodes. By default the value of this is set to true.",
+          "static": false
+        },
+        {
+          "name": "isExpandEntityReferences",
+          "signature": "isExpandEntityReferences()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce parsers that expand entity references; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which expand entity reference nodes.",
+          "static": false
+        },
+        {
+          "name": "setFeature",
+          "signature": "setFeature(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The feature name (a fully qualified URI)"},
+            {"name": "value", "type": "boolean", "description": "The requested value of the feature (true or false)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets a particular feature in the underlying implementation of DocumentBuilderFactory. Feature names are fully qualified URIs.",
+          "static": false
+        },
+        {
+          "name": "getFeature",
+          "signature": "getFeature(name)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The feature name (a fully qualified URI)"}
+          ],
+          "returns": {"type": "boolean", "description": "The current state of the feature (true or false)"},
+          "description": "Gets the state of the named feature.",
+          "static": false
+        },
+        {
+          "name": "setAttribute",
+          "signature": "setAttribute(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the attribute"},
+            {"name": "value", "type": "Object", "description": "The value of the attribute"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Allows the user to set specific attributes on the underlying implementation. Attribute names are implementation-dependent.",
+          "static": false
+        },
+        {
+          "name": "getAttribute",
+          "signature": "getAttribute(name)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The name of the attribute"}
+          ],
+          "returns": {"type": "Object", "description": "The value of the attribute"},
+          "description": "Allows the user to retrieve specific attributes on the underlying implementation.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/xml/parsers/DocumentBuilderFactory.html"
+    },
+    {
+      "name": "DocumentBuilder",
+      "description": "Defines the API to obtain DOM Document instances from an XML document. An instance of this class can be obtained from the DocumentBuilderFactory.newDocumentBuilder() method.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "parse",
+          "signature": "parse(is)",
+          "params": [
+            {"name": "is", "type": "InputStream", "description": "The InputStream containing the content to be parsed"}
+          ],
+          "returns": {"type": "Document", "description": "A new DOM Document object"},
+          "description": "Parses the content of the given InputStream as an XML document and returns a new DOM Document object.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(file)",
+          "params": [
+            {"name": "file", "type": "File", "description": "The file containing the XML to parse"}
+          ],
+          "returns": {"type": "Document", "description": "A new DOM Document object"},
+          "description": "Parses the content of the given file as an XML document and returns a new DOM Document object.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(uri)",
+          "params": [
+            {"name": "uri", "type": "String", "description": "The location of the content to be parsed as a URI string"}
+          ],
+          "returns": {"type": "Document", "description": "A new DOM Document object"},
+          "description": "Parses the content of the given URI as an XML document and returns a new DOM Document object.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(is, systemId)",
+          "params": [
+            {"name": "is", "type": "InputStream", "description": "The InputStream containing the content to be parsed"},
+            {"name": "systemId", "type": "String", "description": "The systemId which is used for resolving relative URIs within the document"}
+          ],
+          "returns": {"type": "Document", "description": "A new DOM Document object"},
+          "description": "Parses the content of the given InputStream as an XML document and returns a new DOM Document object. The systemId is used to resolve relative URIs in the document.",
+          "static": false
+        },
+        {
+          "name": "newDocument",
+          "signature": "newDocument()",
+          "params": [],
+          "returns": {"type": "Document", "description": "A new instance of a DOM Document object"},
+          "description": "Obtains a new instance of a DOM Document object to build a DOM tree with.",
+          "static": false
+        },
+        {
+          "name": "isNamespaceAware",
+          "signature": "isNamespaceAware()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this parser is namespace aware; false otherwise"},
+          "description": "Indicates whether or not this parser is configured to understand namespaces.",
+          "static": false
+        },
+        {
+          "name": "isValidating",
+          "signature": "isValidating()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this parser is validating; false otherwise"},
+          "description": "Indicates whether or not this parser is configured to validate XML documents.",
+          "static": false
+        },
+        {
+          "name": "setEntityResolver",
+          "signature": "setEntityResolver(er)",
+          "params": [
+            {"name": "er", "type": "EntityResolver", "description": "The EntityResolver to be used to resolve entities present in the XML document"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies the EntityResolver to be used to resolve entities present in the XML document to be parsed.",
+          "static": false
+        },
+        {
+          "name": "setErrorHandler",
+          "signature": "setErrorHandler(eh)",
+          "params": [
+            {"name": "eh", "type": "ErrorHandler", "description": "The ErrorHandler to be used to report errors present in the XML document"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies the ErrorHandler to be used by the parser. Setting this to null will result in the underlying implementation using its own default error handler.",
+          "static": false
+        },
+        {
+          "name": "getDOMImplementation",
+          "signature": "getDOMImplementation()",
+          "params": [],
+          "returns": {"type": "DOMImplementation", "description": "The DOMImplementation object"},
+          "description": "Obtains an instance of a DOMImplementation object.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resets this DocumentBuilder to its original configuration. DocumentBuilder is reset to the same state as when it was created with DocumentBuilderFactory.newDocumentBuilder().",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/xml/parsers/DocumentBuilder.html"
+    },
+    {
+      "name": "SAXParserFactory",
+      "description": "Defines a factory API that enables applications to configure and obtain a SAX-based parser to parse XML documents. Use newInstance() to get a factory, configure it, then call newSAXParser() to get a parser.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "newInstance",
+          "signature": "newInstance()",
+          "params": [],
+          "returns": {"type": "SAXParserFactory", "description": "A new instance of a SAXParserFactory"},
+          "description": "Obtains a new instance of a SAXParserFactory. This static method creates a new factory instance using the platform default implementation.",
+          "static": true
+        },
+        {
+          "name": "newSAXParser",
+          "signature": "newSAXParser()",
+          "params": [],
+          "returns": {"type": "SAXParser", "description": "A new instance of a SAXParser"},
+          "description": "Creates a new instance of a SAXParser using the currently configured factory parameters.",
+          "static": false
+        },
+        {
+          "name": "setNamespaceAware",
+          "signature": "setNamespaceAware(awareness)",
+          "params": [
+            {"name": "awareness", "type": "boolean", "description": "True if the parser produced will provide support for XML namespaces; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will provide support for XML namespaces. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isNamespaceAware",
+          "signature": "isNamespaceAware()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce namespace-aware parsers; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which are namespace aware.",
+          "static": false
+        },
+        {
+          "name": "setValidating",
+          "signature": "setValidating(validating)",
+          "params": [
+            {"name": "validating", "type": "boolean", "description": "True if the parser produced will validate documents as they are parsed; false otherwise"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Specifies that the parser produced by this code will validate documents as they are parsed. By default the value of this is set to false.",
+          "static": false
+        },
+        {
+          "name": "isValidating",
+          "signature": "isValidating()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the factory is configured to produce validating parsers; false otherwise"},
+          "description": "Indicates whether or not the factory is configured to produce parsers which validate the XML content during parse.",
+          "static": false
+        },
+        {
+          "name": "setFeature",
+          "signature": "setFeature(name, value)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The feature name (a fully qualified URI)"},
+            {"name": "value", "type": "boolean", "description": "The requested value of the feature (true or false)"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the particular feature in the underlying implementation of SAXParserFactory. Feature names are fully qualified URIs.",
+          "static": false
+        },
+        {
+          "name": "getFeature",
+          "signature": "getFeature(name)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The feature name (a fully qualified URI)"}
+          ],
+          "returns": {"type": "boolean", "description": "The current state of the feature (true or false)"},
+          "description": "Returns the particular property requested for in the underlying implementation of SAXParserFactory.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/xml/parsers/SAXParserFactory.html"
+    },
+    {
+      "name": "SAXParser",
+      "description": "Defines the API that wraps an XMLReader implementation class. An instance of this class can be obtained from the SAXParserFactory.newSAXParser() method. Provides methods to parse XML documents using event-driven SAX callbacks.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "parse",
+          "signature": "parse(is, dh)",
+          "params": [
+            {"name": "is", "type": "InputStream", "description": "The InputStream containing the content to be parsed"},
+            {"name": "dh", "type": "DefaultHandler", "description": "The SAX DefaultHandler to use for parsing events"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Parses the content of the given InputStream as XML using the specified DefaultHandler.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(file, dh)",
+          "params": [
+            {"name": "file", "type": "File", "description": "The file containing the XML to parse"},
+            {"name": "dh", "type": "DefaultHandler", "description": "The SAX DefaultHandler to use for parsing events"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Parses the content of the given file as XML using the specified DefaultHandler.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(uri, dh)",
+          "params": [
+            {"name": "uri", "type": "String", "description": "The location of the content to be parsed as a URI string"},
+            {"name": "dh", "type": "DefaultHandler", "description": "The SAX DefaultHandler to use for parsing events"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Parses the content described by the given URI as XML using the specified DefaultHandler.",
+          "static": false
+        },
+        {
+          "name": "getXMLReader",
+          "signature": "getXMLReader()",
+          "params": [],
+          "returns": {"type": "XMLReader", "description": "The XMLReader that is encapsulated by this SAXParser"},
+          "description": "Returns the XMLReader that is encapsulated by the implementation of this class.",
+          "static": false
+        },
+        {
+          "name": "isNamespaceAware",
+          "signature": "isNamespaceAware()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this parser is namespace aware; false otherwise"},
+          "description": "Indicates whether or not this parser is configured to understand namespaces.",
+          "static": false
+        },
+        {
+          "name": "isValidating",
+          "signature": "isValidating()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this parser is validating; false otherwise"},
+          "description": "Indicates whether or not this parser is configured to validate XML documents.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resets this SAXParser to its original configuration. SAXParser is reset to the same state as when it was created with SAXParserFactory.newSAXParser().",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/javax/xml/parsers/SAXParser.html"
+    }
+  ]
+}

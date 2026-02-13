@@ -1,0 +1,990 @@
+{
+  "package": "java.sql",
+  "classes": [
+    {
+      "name": "DriverManager",
+      "description": "The basic service for managing a set of JDBC drivers. Provides static methods for obtaining database connections.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getConnection",
+          "signature": "getConnection(url)",
+          "params": [{"name": "url", "type": "String", "description": "A database URL of the form jdbc:subprotocol:subname"}],
+          "returns": {"type": "Connection", "description": "A connection to the URL"},
+          "description": "Attempts to establish a connection to the given database URL.",
+          "static": true
+        },
+        {
+          "name": "getConnection",
+          "signature": "getConnection(url, user, password)",
+          "params": [
+            {"name": "url", "type": "String", "description": "A database URL of the form jdbc:subprotocol:subname"},
+            {"name": "user", "type": "String", "description": "The database user on whose behalf the connection is being made"},
+            {"name": "password", "type": "String", "description": "The user's password"}
+          ],
+          "returns": {"type": "Connection", "description": "A connection to the URL"},
+          "description": "Attempts to establish a connection to the given database URL with the given username and password.",
+          "static": true
+        },
+        {
+          "name": "getConnection",
+          "signature": "getConnection(url, info)",
+          "params": [
+            {"name": "url", "type": "String", "description": "A database URL of the form jdbc:subprotocol:subname"},
+            {"name": "info", "type": "Properties", "description": "A list of arbitrary string tag/value pairs as connection arguments; normally includes user and password properties"}
+          ],
+          "returns": {"type": "Connection", "description": "A connection to the URL"},
+          "description": "Attempts to establish a connection to the given database URL using the given properties for connection arguments.",
+          "static": true
+        },
+        {
+          "name": "getDriver",
+          "signature": "getDriver(url)",
+          "params": [{"name": "url", "type": "String", "description": "A database URL of the form jdbc:subprotocol:subname"}],
+          "returns": {"type": "Driver", "description": "A Driver that can connect to the given URL"},
+          "description": "Attempts to locate a driver that understands the given URL.",
+          "static": true
+        },
+        {
+          "name": "getDrivers",
+          "signature": "getDrivers()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An enumeration of all loaded JDBC drivers"},
+          "description": "Retrieves an enumeration of all currently loaded JDBC drivers to which the current caller has access.",
+          "static": true
+        },
+        {
+          "name": "setLoginTimeout",
+          "signature": "setLoginTimeout(seconds)",
+          "params": [{"name": "seconds", "type": "int", "description": "The login time limit in seconds; zero means no limit"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the maximum time in seconds that a driver will wait while attempting to connect to a database.",
+          "static": true
+        },
+        {
+          "name": "getLoginTimeout",
+          "signature": "getLoginTimeout()",
+          "params": [],
+          "returns": {"type": "int", "description": "The driver login time limit in seconds"},
+          "description": "Gets the maximum time in seconds that a driver can wait when attempting to log in to a database.",
+          "static": true
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html"
+    },
+    {
+      "name": "Connection",
+      "description": "A connection (session) with a specific database. SQL statements are executed and results are returned within the context of a connection.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "prepareStatement",
+          "signature": "prepareStatement(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "An SQL statement that may contain one or more '?' parameter placeholders"}],
+          "returns": {"type": "PreparedStatement", "description": "A new PreparedStatement object containing the pre-compiled SQL statement"},
+          "description": "Creates a PreparedStatement object for sending parameterized SQL statements to the database.",
+          "static": false
+        },
+        {
+          "name": "createStatement",
+          "signature": "createStatement()",
+          "params": [],
+          "returns": {"type": "Statement", "description": "A new Statement object"},
+          "description": "Creates a Statement object for sending SQL statements to the database.",
+          "static": false
+        },
+        {
+          "name": "prepareCall",
+          "signature": "prepareCall(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "An SQL statement that may contain one or more '?' parameter placeholders, typically a JDBC call escape syntax"}],
+          "returns": {"type": "CallableStatement", "description": "A new CallableStatement object containing the pre-compiled SQL statement"},
+          "description": "Creates a CallableStatement object for calling database stored procedures.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Releases this Connection object's database and JDBC resources immediately instead of waiting for them to be automatically released.",
+          "static": false
+        },
+        {
+          "name": "isClosed",
+          "signature": "isClosed()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Connection object is closed; false if it is still open"},
+          "description": "Retrieves whether this Connection object has been closed.",
+          "static": false
+        },
+        {
+          "name": "commit",
+          "signature": "commit()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Makes all changes made since the previous commit/rollback permanent and releases any database locks currently held by this Connection object.",
+          "static": false
+        },
+        {
+          "name": "rollback",
+          "signature": "rollback()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Undoes all changes made in the current transaction and releases any database locks currently held by this Connection object.",
+          "static": false
+        },
+        {
+          "name": "setAutoCommit",
+          "signature": "setAutoCommit(autoCommit)",
+          "params": [{"name": "autoCommit", "type": "boolean", "description": "True to enable auto-commit mode; false to disable it"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this connection's auto-commit mode to the given state.",
+          "static": false
+        },
+        {
+          "name": "getAutoCommit",
+          "signature": "getAutoCommit()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "The current state of this Connection object's auto-commit mode"},
+          "description": "Retrieves the current auto-commit mode for this Connection object.",
+          "static": false
+        },
+        {
+          "name": "getMetaData",
+          "signature": "getMetaData()",
+          "params": [],
+          "returns": {"type": "DatabaseMetaData", "description": "A DatabaseMetaData object for this Connection object"},
+          "description": "Retrieves a DatabaseMetaData object that contains metadata about the database to which this Connection object represents a connection.",
+          "static": false
+        },
+        {
+          "name": "setCatalog",
+          "signature": "setCatalog(catalog)",
+          "params": [{"name": "catalog", "type": "String", "description": "The name of a catalog (subspace in this Connection object's database) in which to work"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the given catalog name in order to select a subspace of this Connection object's database in which to work.",
+          "static": false
+        },
+        {
+          "name": "getCatalog",
+          "signature": "getCatalog()",
+          "params": [],
+          "returns": {"type": "String", "description": "The current catalog name or null if there is none"},
+          "description": "Retrieves this Connection object's current catalog name.",
+          "static": false
+        },
+        {
+          "name": "setSchema",
+          "signature": "setSchema(schema)",
+          "params": [{"name": "schema", "type": "String", "description": "The name of a schema in which to work"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the given schema name to access.",
+          "static": false
+        },
+        {
+          "name": "getSchema",
+          "signature": "getSchema()",
+          "params": [],
+          "returns": {"type": "String", "description": "The current schema name or null if there is none"},
+          "description": "Retrieves this Connection object's current schema name.",
+          "static": false
+        },
+        {
+          "name": "setReadOnly",
+          "signature": "setReadOnly(readOnly)",
+          "params": [{"name": "readOnly", "type": "boolean", "description": "True enables read-only mode; false disables it"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Puts this connection in read-only mode as a hint to the driver to enable database optimizations.",
+          "static": false
+        },
+        {
+          "name": "isReadOnly",
+          "signature": "isReadOnly()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Connection object is read-only; false otherwise"},
+          "description": "Retrieves whether this Connection object is in read-only mode.",
+          "static": false
+        },
+        {
+          "name": "setTransactionIsolation",
+          "signature": "setTransactionIsolation(level)",
+          "params": [{"name": "level", "type": "int", "description": "One of the Connection transaction isolation level constants"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Attempts to change the transaction isolation level for this Connection object to the one given.",
+          "static": false
+        },
+        {
+          "name": "getTransactionIsolation",
+          "signature": "getTransactionIsolation()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current transaction isolation level"},
+          "description": "Retrieves this Connection object's current transaction isolation level.",
+          "static": false
+        },
+        {
+          "name": "isValid",
+          "signature": "isValid(timeout)",
+          "params": [{"name": "timeout", "type": "int", "description": "The time in seconds to wait for the database operation to complete"}],
+          "returns": {"type": "boolean", "description": "True if the connection is valid; false otherwise"},
+          "description": "Returns true if the connection has not been closed and is still valid. The driver submits a query on the connection or uses some other mechanism to verify the connection is still valid.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "TRANSACTION_NONE", "type": "int", "description": "Indicates that transactions are not supported.", "static": true, "final": true},
+        {"name": "TRANSACTION_READ_UNCOMMITTED", "type": "int", "description": "Indicates that dirty reads, non-repeatable reads, and phantom reads can occur.", "static": true, "final": true},
+        {"name": "TRANSACTION_READ_COMMITTED", "type": "int", "description": "Indicates that dirty reads are prevented; non-repeatable reads and phantom reads can occur.", "static": true, "final": true},
+        {"name": "TRANSACTION_REPEATABLE_READ", "type": "int", "description": "Indicates that dirty reads and non-repeatable reads are prevented; phantom reads can occur.", "static": true, "final": true},
+        {"name": "TRANSACTION_SERIALIZABLE", "type": "int", "description": "Indicates that dirty reads, non-repeatable reads, and phantom reads are prevented.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/Connection.html"
+    },
+    {
+      "name": "PreparedStatement",
+      "description": "An object that represents a precompiled SQL statement. A SQL statement is precompiled and stored in a PreparedStatement object, which can then be used to efficiently execute this statement multiple times.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "executeQuery",
+          "signature": "executeQuery()",
+          "params": [],
+          "returns": {"type": "ResultSet", "description": "A ResultSet object that contains the data produced by the query"},
+          "description": "Executes the SQL query in this PreparedStatement object and returns the ResultSet object generated by the query.",
+          "static": false
+        },
+        {
+          "name": "executeUpdate",
+          "signature": "executeUpdate()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of rows affected, or 0 for statements that return nothing"},
+          "description": "Executes the SQL statement in this PreparedStatement object, which must be an INSERT, UPDATE, or DELETE statement, or a statement that returns nothing.",
+          "static": false
+        },
+        {
+          "name": "execute",
+          "signature": "execute()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the first result is a ResultSet object; false if the first result is an update count or there is no result"},
+          "description": "Executes the SQL statement in this PreparedStatement object, which may be any kind of SQL statement.",
+          "static": false
+        },
+        {
+          "name": "setString",
+          "signature": "setString(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "String", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java String value.",
+          "static": false
+        },
+        {
+          "name": "setInt",
+          "signature": "setInt(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "int", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java int value.",
+          "static": false
+        },
+        {
+          "name": "setLong",
+          "signature": "setLong(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "long", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java long value.",
+          "static": false
+        },
+        {
+          "name": "setDouble",
+          "signature": "setDouble(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "double", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java double value.",
+          "static": false
+        },
+        {
+          "name": "setFloat",
+          "signature": "setFloat(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "float", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java float value.",
+          "static": false
+        },
+        {
+          "name": "setBoolean",
+          "signature": "setBoolean(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "boolean", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java boolean value.",
+          "static": false
+        },
+        {
+          "name": "setDate",
+          "signature": "setDate(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "java.sql.Date", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given java.sql.Date value using the default time zone of the virtual machine.",
+          "static": false
+        },
+        {
+          "name": "setTimestamp",
+          "signature": "setTimestamp(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "Timestamp", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given java.sql.Timestamp value.",
+          "static": false
+        },
+        {
+          "name": "setNull",
+          "signature": "setNull(parameterIndex, sqlType)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "sqlType", "type": "int", "description": "The SQL type code defined in java.sql.Types"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to SQL NULL.",
+          "static": false
+        },
+        {
+          "name": "setObject",
+          "signature": "setObject(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "Object", "description": "The object containing the input parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the value of the designated parameter using the given object. The JDBC specification specifies a standard mapping from Java Object types to SQL types.",
+          "static": false
+        },
+        {
+          "name": "setBigDecimal",
+          "signature": "setBigDecimal(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "BigDecimal", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given java.math.BigDecimal value.",
+          "static": false
+        },
+        {
+          "name": "setBytes",
+          "signature": "setBytes(parameterIndex, x)",
+          "params": [
+            {"name": "parameterIndex", "type": "int", "description": "The first parameter is 1, the second is 2, ..."},
+            {"name": "x", "type": "byte[]", "description": "The parameter value"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the designated parameter to the given Java array of bytes.",
+          "static": false
+        },
+        {
+          "name": "addBatch",
+          "signature": "addBatch()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds a set of parameters to this PreparedStatement object's batch of commands.",
+          "static": false
+        },
+        {
+          "name": "executeBatch",
+          "signature": "executeBatch()",
+          "params": [],
+          "returns": {"type": "int[]", "description": "An array of update counts containing one element for each command in the batch"},
+          "description": "Submits a batch of commands to the database for execution and returns an array of update counts if all commands execute successfully.",
+          "static": false
+        },
+        {
+          "name": "clearParameters",
+          "signature": "clearParameters()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Clears the current parameter values immediately.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Releases this Statement object's database and JDBC resources immediately instead of waiting for this to happen when it is automatically closed.",
+          "static": false
+        },
+        {
+          "name": "getResultSet",
+          "signature": "getResultSet()",
+          "params": [],
+          "returns": {"type": "ResultSet", "description": "The current result as a ResultSet object or null if the result is an update count or there are no more results"},
+          "description": "Retrieves the current result as a ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "getUpdateCount",
+          "signature": "getUpdateCount()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current result as an update count; -1 if the current result is a ResultSet object or there are no more results"},
+          "description": "Retrieves the current result as an update count.",
+          "static": false
+        },
+        {
+          "name": "getMetaData",
+          "signature": "getMetaData()",
+          "params": [],
+          "returns": {"type": "ResultSetMetaData", "description": "The description of this PreparedStatement object's columns or null if driver cannot provide this information"},
+          "description": "Retrieves a ResultSetMetaData object that contains information about the columns of the ResultSet object that will be returned when this PreparedStatement object is executed.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/PreparedStatement.html"
+    },
+    {
+      "name": "Statement",
+      "description": "The object used for executing a static SQL statement and returning the results it produces.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "executeQuery",
+          "signature": "executeQuery(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "An SQL statement to be sent to the database, typically a static SQL SELECT statement"}],
+          "returns": {"type": "ResultSet", "description": "A ResultSet object that contains the data produced by the given query"},
+          "description": "Executes the given SQL statement, which returns a single ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "executeUpdate",
+          "signature": "executeUpdate(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "An SQL INSERT, UPDATE, DELETE, or DDL statement"}],
+          "returns": {"type": "int", "description": "The row count for INSERT, UPDATE, or DELETE statements, or 0 for statements that return nothing"},
+          "description": "Executes the given SQL statement, which may be an INSERT, UPDATE, DELETE, or a statement that returns nothing.",
+          "static": false
+        },
+        {
+          "name": "execute",
+          "signature": "execute(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "Any SQL statement"}],
+          "returns": {"type": "boolean", "description": "True if the first result is a ResultSet object; false if it is an update count or there are no results"},
+          "description": "Executes the given SQL statement, which may return multiple results.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Releases this Statement object's database and JDBC resources immediately instead of waiting for this to happen when it is automatically closed.",
+          "static": false
+        },
+        {
+          "name": "getResultSet",
+          "signature": "getResultSet()",
+          "params": [],
+          "returns": {"type": "ResultSet", "description": "The current result as a ResultSet object or null if the result is an update count or there are no more results"},
+          "description": "Retrieves the current result as a ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "getUpdateCount",
+          "signature": "getUpdateCount()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current result as an update count; -1 if the current result is a ResultSet object or there are no more results"},
+          "description": "Retrieves the current result as an update count.",
+          "static": false
+        },
+        {
+          "name": "addBatch",
+          "signature": "addBatch(sql)",
+          "params": [{"name": "sql", "type": "String", "description": "Typically a static SQL INSERT or UPDATE statement"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Adds the given SQL command to the current list of commands for this Statement object.",
+          "static": false
+        },
+        {
+          "name": "executeBatch",
+          "signature": "executeBatch()",
+          "params": [],
+          "returns": {"type": "int[]", "description": "An array of update counts containing one element for each command in the batch"},
+          "description": "Submits a batch of commands to the database for execution and returns an array of update counts if all commands execute successfully.",
+          "static": false
+        },
+        {
+          "name": "clearBatch",
+          "signature": "clearBatch()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Empties this Statement object's current list of SQL commands.",
+          "static": false
+        },
+        {
+          "name": "setMaxRows",
+          "signature": "setMaxRows(max)",
+          "params": [{"name": "max", "type": "int", "description": "The new max rows limit; zero means there is no limit"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the limit for the maximum number of rows that any ResultSet object generated by this Statement object can contain to the given number.",
+          "static": false
+        },
+        {
+          "name": "getMaxRows",
+          "signature": "getMaxRows()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current maximum number of rows; zero means there is no limit"},
+          "description": "Retrieves the maximum number of rows that a ResultSet object produced by this Statement object can contain.",
+          "static": false
+        },
+        {
+          "name": "setQueryTimeout",
+          "signature": "setQueryTimeout(seconds)",
+          "params": [{"name": "seconds", "type": "int", "description": "The new query timeout limit in seconds; zero means there is no limit"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the number of seconds the driver will wait for a Statement object to execute to the given number of seconds.",
+          "static": false
+        },
+        {
+          "name": "getQueryTimeout",
+          "signature": "getQueryTimeout()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current query timeout limit in seconds; zero means there is no limit"},
+          "description": "Retrieves the number of seconds the driver will wait for a Statement object to execute.",
+          "static": false
+        },
+        {
+          "name": "getConnection",
+          "signature": "getConnection()",
+          "params": [],
+          "returns": {"type": "Connection", "description": "The Connection object that produced this Statement object"},
+          "description": "Retrieves the Connection object that produced this Statement object.",
+          "static": false
+        },
+        {
+          "name": "isClosed",
+          "signature": "isClosed()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Statement object is closed; false if it is still open"},
+          "description": "Retrieves whether this Statement object has been closed.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html"
+    },
+    {
+      "name": "ResultSet",
+      "description": "A table of data representing a database result set, which is usually generated by executing a statement that queries the database. A ResultSet object maintains a cursor pointing to its current row of data.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "next",
+          "signature": "next()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the new current row is valid; false if there are no more rows"},
+          "description": "Moves the cursor forward one row from its current position. A ResultSet cursor is initially positioned before the first row.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Releases this ResultSet object's database and JDBC resources immediately instead of waiting for this to happen when it is automatically closed.",
+          "static": false
+        },
+        {
+          "name": "getString",
+          "signature": "getString(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "String", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a String.",
+          "static": false
+        },
+        {
+          "name": "getString",
+          "signature": "getString(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "String", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a String.",
+          "static": false
+        },
+        {
+          "name": "getInt",
+          "signature": "getInt(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "int", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as an int.",
+          "static": false
+        },
+        {
+          "name": "getInt",
+          "signature": "getInt(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "int", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as an int.",
+          "static": false
+        },
+        {
+          "name": "getLong",
+          "signature": "getLong(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "long", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a long.",
+          "static": false
+        },
+        {
+          "name": "getLong",
+          "signature": "getLong(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "long", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a long.",
+          "static": false
+        },
+        {
+          "name": "getDouble",
+          "signature": "getDouble(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "double", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a double.",
+          "static": false
+        },
+        {
+          "name": "getDouble",
+          "signature": "getDouble(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "double", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a double.",
+          "static": false
+        },
+        {
+          "name": "getFloat",
+          "signature": "getFloat(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "float", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a float.",
+          "static": false
+        },
+        {
+          "name": "getFloat",
+          "signature": "getFloat(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "float", "description": "The column value; if the value is SQL NULL, the value returned is 0"},
+          "description": "Retrieves the value of the designated column in the current row as a float.",
+          "static": false
+        },
+        {
+          "name": "getBoolean",
+          "signature": "getBoolean(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "boolean", "description": "The column value; if the value is SQL NULL, the value returned is false"},
+          "description": "Retrieves the value of the designated column in the current row as a boolean.",
+          "static": false
+        },
+        {
+          "name": "getBoolean",
+          "signature": "getBoolean(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "boolean", "description": "The column value; if the value is SQL NULL, the value returned is false"},
+          "description": "Retrieves the value of the designated column in the current row as a boolean.",
+          "static": false
+        },
+        {
+          "name": "getDate",
+          "signature": "getDate(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "Date", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.sql.Date object.",
+          "static": false
+        },
+        {
+          "name": "getDate",
+          "signature": "getDate(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "Date", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.sql.Date object.",
+          "static": false
+        },
+        {
+          "name": "getTimestamp",
+          "signature": "getTimestamp(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "Timestamp", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.sql.Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "getTimestamp",
+          "signature": "getTimestamp(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "Timestamp", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.sql.Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "getObject",
+          "signature": "getObject(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "Object", "description": "A java.lang.Object holding the column value"},
+          "description": "Gets the value of the designated column in the current row as a Java object. The type of the object will be the default Java object type corresponding to the column's SQL type.",
+          "static": false
+        },
+        {
+          "name": "getObject",
+          "signature": "getObject(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "Object", "description": "A java.lang.Object holding the column value"},
+          "description": "Gets the value of the designated column in the current row as a Java object. The type of the object will be the default Java object type corresponding to the column's SQL type.",
+          "static": false
+        },
+        {
+          "name": "getBigDecimal",
+          "signature": "getBigDecimal(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "BigDecimal", "description": "The column value as a BigDecimal with full precision; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.math.BigDecimal with full precision.",
+          "static": false
+        },
+        {
+          "name": "getBigDecimal",
+          "signature": "getBigDecimal(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "BigDecimal", "description": "The column value as a BigDecimal with full precision; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a java.math.BigDecimal with full precision.",
+          "static": false
+        },
+        {
+          "name": "getBytes",
+          "signature": "getBytes(columnIndex)",
+          "params": [{"name": "columnIndex", "type": "int", "description": "The first column is 1, the second is 2, ..."}],
+          "returns": {"type": "byte[]", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a byte array.",
+          "static": false
+        },
+        {
+          "name": "getBytes",
+          "signature": "getBytes(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "byte[]", "description": "The column value; if the value is SQL NULL, the value returned is null"},
+          "description": "Retrieves the value of the designated column in the current row as a byte array.",
+          "static": false
+        },
+        {
+          "name": "wasNull",
+          "signature": "wasNull()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the last column value read was SQL NULL; false otherwise"},
+          "description": "Reports whether the last column read had a value of SQL NULL.",
+          "static": false
+        },
+        {
+          "name": "getMetaData",
+          "signature": "getMetaData()",
+          "params": [],
+          "returns": {"type": "ResultSetMetaData", "description": "The description of this ResultSet object's columns"},
+          "description": "Retrieves the number, types, and properties of this ResultSet object's columns.",
+          "static": false
+        },
+        {
+          "name": "findColumn",
+          "signature": "findColumn(columnLabel)",
+          "params": [{"name": "columnLabel", "type": "String", "description": "The label for the column specified with the SQL AS clause; if not specified, the column name"}],
+          "returns": {"type": "int", "description": "The column index of the given column name"},
+          "description": "Maps the given ResultSet column label to its ResultSet column index.",
+          "static": false
+        },
+        {
+          "name": "getRow",
+          "signature": "getRow()",
+          "params": [],
+          "returns": {"type": "int", "description": "The current row number; 0 if there is no current row"},
+          "description": "Retrieves the current row number.",
+          "static": false
+        },
+        {
+          "name": "isFirst",
+          "signature": "isFirst()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the cursor is on the first row; false otherwise"},
+          "description": "Retrieves whether the cursor is on the first row of this ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "isLast",
+          "signature": "isLast()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the cursor is on the last row; false otherwise"},
+          "description": "Retrieves whether the cursor is on the last row of this ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "isBeforeFirst",
+          "signature": "isBeforeFirst()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the cursor is before the first row; false if the cursor is at any other position or the result set contains no rows"},
+          "description": "Retrieves whether the cursor is before the first row in this ResultSet object.",
+          "static": false
+        },
+        {
+          "name": "isAfterLast",
+          "signature": "isAfterLast()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the cursor is after the last row; false if the cursor is at any other position or the result set contains no rows"},
+          "description": "Retrieves whether the cursor is after the last row in this ResultSet object.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "TYPE_FORWARD_ONLY", "type": "int", "description": "The constant indicating the type for a ResultSet object whose cursor may move only forward.", "static": true, "final": true},
+        {"name": "TYPE_SCROLL_INSENSITIVE", "type": "int", "description": "The constant indicating the type for a ResultSet object that is scrollable but generally not sensitive to changes to the data that underlies the ResultSet.", "static": true, "final": true},
+        {"name": "TYPE_SCROLL_SENSITIVE", "type": "int", "description": "The constant indicating the type for a ResultSet object that is scrollable and generally sensitive to changes to the data that underlies the ResultSet.", "static": true, "final": true},
+        {"name": "CONCUR_READ_ONLY", "type": "int", "description": "The constant indicating the concurrency mode for a ResultSet object that may NOT be updated.", "static": true, "final": true},
+        {"name": "CONCUR_UPDATABLE", "type": "int", "description": "The constant indicating the concurrency mode for a ResultSet object that may be updated.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html"
+    },
+    {
+      "name": "Timestamp",
+      "description": "A thin wrapper around java.util.Date that allows the JDBC API to identify this as an SQL TIMESTAMP value. It adds the ability to hold the SQL TIMESTAMP fractional seconds value, by allowing the specification of fractional seconds to a precision of nanoseconds.",
+      "constructors": [
+        {
+          "signature": "Timestamp(time)",
+          "params": [{"name": "time", "type": "long", "description": "Milliseconds since January 1, 1970, 00:00:00 GMT"}],
+          "description": "Constructs a Timestamp object using a milliseconds time value."
+        }
+      ],
+      "methods": [
+        {
+          "name": "valueOf",
+          "signature": "valueOf(s)",
+          "params": [{"name": "s", "type": "String", "description": "Timestamp in the format \"yyyy-[m]m-[d]d hh:mm:ss[.f...]\""}],
+          "returns": {"type": "Timestamp", "description": "A corresponding Timestamp value"},
+          "description": "Converts a String object in JDBC timestamp escape format to a Timestamp value.",
+          "static": true
+        },
+        {
+          "name": "from",
+          "signature": "from(instant)",
+          "params": [{"name": "instant", "type": "Instant", "description": "The instant to convert"}],
+          "returns": {"type": "Timestamp", "description": "A Timestamp representing the same point on the time-line as the provided instant"},
+          "description": "Obtains an instance of Timestamp from an Instant object.",
+          "static": true
+        },
+        {
+          "name": "getTime",
+          "signature": "getTime()",
+          "params": [],
+          "returns": {"type": "long", "description": "The number of milliseconds since January 1, 1970, 00:00:00 GMT"},
+          "description": "Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT represented by this Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "setTime",
+          "signature": "setTime(time)",
+          "params": [{"name": "time", "type": "long", "description": "Milliseconds since January 1, 1970, 00:00:00 GMT"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this Timestamp object to represent a point in time that is the given number of milliseconds after January 1, 1970 00:00:00 GMT.",
+          "static": false
+        },
+        {
+          "name": "before",
+          "signature": "before(ts)",
+          "params": [{"name": "ts", "type": "Timestamp", "description": "The Timestamp value to compare with"}],
+          "returns": {"type": "boolean", "description": "True if this Timestamp object is earlier; false otherwise"},
+          "description": "Indicates whether this Timestamp object is earlier than the given Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "after",
+          "signature": "after(ts)",
+          "params": [{"name": "ts", "type": "Timestamp", "description": "The Timestamp value to compare with"}],
+          "returns": {"type": "boolean", "description": "True if this Timestamp object is later; false otherwise"},
+          "description": "Indicates whether this Timestamp object is later than the given Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(ts)",
+          "params": [{"name": "ts", "type": "Timestamp", "description": "The Timestamp value to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the given Timestamp object is equal to this Timestamp object; false otherwise"},
+          "description": "Tests to see if this Timestamp object is equal to the given Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "compareTo",
+          "signature": "compareTo(ts)",
+          "params": [{"name": "ts", "type": "Timestamp", "description": "The Timestamp object to be compared to this Timestamp object"}],
+          "returns": {"type": "int", "description": "0 if equal; a value less than 0 if this Timestamp is before; a value greater than 0 if this Timestamp is after"},
+          "description": "Compares this Timestamp object to the given Timestamp object.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String in the format yyyy-mm-dd hh:mm:ss.fffffffff"},
+          "description": "Formats a timestamp in JDBC timestamp escape format.",
+          "static": false
+        },
+        {
+          "name": "toInstant",
+          "signature": "toInstant()",
+          "params": [],
+          "returns": {"type": "Instant", "description": "An Instant representing the same point on the time-line as this Timestamp"},
+          "description": "Converts this Timestamp object to an Instant.",
+          "static": false
+        },
+        {
+          "name": "toLocalDateTime",
+          "signature": "toLocalDateTime()",
+          "params": [],
+          "returns": {"type": "LocalDateTime", "description": "A LocalDateTime representing the same date-time value as this Timestamp"},
+          "description": "Converts this Timestamp object to a LocalDateTime.",
+          "static": false
+        },
+        {
+          "name": "getNanos",
+          "signature": "getNanos()",
+          "params": [],
+          "returns": {"type": "int", "description": "This Timestamp object's fractional seconds component"},
+          "description": "Gets this Timestamp object's nanos value.",
+          "static": false
+        },
+        {
+          "name": "setNanos",
+          "signature": "setNanos(n)",
+          "params": [{"name": "n", "type": "int", "description": "The new fractional seconds component"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this Timestamp object's nanos field to the given value.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/sql/Timestamp.html"
+    }
+  ]
+}

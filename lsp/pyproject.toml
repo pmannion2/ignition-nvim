@@ -28,6 +28,7 @@ classifiers = [
 dependencies = [
     "pygls>=1.3.0",
     "lsprotocol>=2023.0.0",
+    "ignition-lint-toolkit>=0.1.0",
 ]
 
 [project.optional-dependencies]

@@ -1,5 +1,6 @@
 """Main LSP server implementation."""
 
+import asyncio
 import logging
 import sys
 from pathlib import Path
@@ -19,6 +20,7 @@ from lsprotocol.types import (
     WORKSPACE_SYMBOL,
     CompletionItem,
     CompletionList,
+    CompletionOptions,
     CompletionParams,
     DefinitionParams,
     DidOpenTextDocumentParams,
@@ -37,6 +39,10 @@ from lsprotocol.types import (
     DiagnosticSeverity,
     SymbolInformation,
     WorkspaceSymbolParams,
+    WorkDoneProgressBegin,
+    WorkDoneProgressEnd,
+    ProgressParams,
+    ProgressToken,
 )
 from pygls.lsp.server import LanguageServer
 from pygls.workspace import TextDocument
@@ -60,7 +66,10 @@ class IgnitionLanguageServer(LanguageServer):
         super().__init__(*args, **kwargs)
         self.diagnostics_enabled = True
         self.api_loader = None
+        self.java_loader = None
         self.project_index = None
+        self.symbol_cache = None
+        self._scan_in_progress = False
         logger.info("Ignition LSP Server initialized")
 
     def initialize_api_loader(self, version: str = "8.1"):
@@ -73,6 +82,16 @@ class IgnitionLanguageServer(LanguageServer):
             logger.error(f"Failed to initialize API loader: {e}", exc_info=True)
             self.api_loader = None
 
+    def initialize_java_loader(self):
+        """Initialize the Java API loader with Java class definitions."""
+        try:
+            from ignition_lsp.java_loader import JavaAPILoader
+            self.java_loader = JavaAPILoader()
+            logger.info(f"Java loader initialized with {len(self.java_loader.classes)} classes")
+        except Exception as e:
+            logger.error(f"Failed to initialize Java loader: {e}", exc_info=True)
+            self.java_loader = None
+
     def scan_project(self, root_path: str) -> None:
         """Scan an Ignition project directory and build the script index."""
         try:
@@ -80,6 +99,9 @@ class IgnitionLanguageServer(LanguageServer):
             scanner = ProjectScanner(root_path)
             if scanner.is_ignition_project():
                 self.project_index = scanner.scan()
+                # Clear symbol cache on full re-scan (file paths may have changed)
+                if self.symbol_cache is not None:
+                    self.symbol_cache.clear()
                 logger.info(
                     f"Project index built: {self.project_index.script_count} scripts"
                 )
@@ -89,29 +111,97 @@ class IgnitionLanguageServer(LanguageServer):
             logger.error(f"Failed to scan project: {e}", exc_info=True)
             self.project_index = None
 
-    def ensure_project_index(self, uri: str) -> None:
-        """Build project index lazily from a document URI if not yet built."""
-        if self.project_index is not None:
-            return
-
+    def _find_project_root(self, uri: str) -> Optional[str]:
+        """Find Ignition project root by walking up from a URI or workspace root."""
+        # Try from the file's directory
         try:
-            from ignition_lsp.project_scanner import ProjectScanner
-            # Derive project root by walking up from the file to find project.json
             file_path = unquote(urlparse(uri).path)
             current = Path(file_path).parent
             while current != current.parent:
                 if (current / "project.json").is_file():
-                    self.scan_project(str(current))
-                    return
+                    return str(current)
                 current = current.parent
         except Exception as e:
             logger.debug(f"Could not find project root from {uri}: {e}")
 
+        # Fallback: workspace root (important for virtual buffers)
+        try:
+            root_uri = getattr(self.workspace, 'root_uri', None)
+            if root_uri:
+                root_path = unquote(urlparse(root_uri).path)
+                if (Path(root_path) / "project.json").is_file():
+                    return root_path
+                current = Path(root_path)
+                while current != current.parent:
+                    if (current / "project.json").is_file():
+                        return str(current)
+                    current = current.parent
+        except Exception as e:
+            logger.debug(f"Could not find project root from workspace: {e}")
+
+        return None
+
+    async def ensure_project_index_async(self, uri: str) -> None:
+        """Build project index lazily in a background thread.
+
+        Returns immediately so the LSP event loop stays responsive.
+        system.* completions work without the project index; only
+        project.*/shared.* completions need it.
+        """
+        if self.project_index is not None or self._scan_in_progress:
+            return
+
+        root_path = self._find_project_root(uri)
+        if not root_path:
+            return
+
+        self._scan_in_progress = True
+        logger.info(f"Starting background project scan for {root_path}")
+
+        # Send progress notification so the user sees a spinner
+        token = "ignition-project-scan"
+        try:
+            self.progress.create(token)
+        except Exception:
+            pass  # Client may not support progress tokens
+        try:
+            self.progress.begin(
+                token,
+                WorkDoneProgressBegin(
+                    title="Ignition",
+                    message="Indexing project scripts...",
+                ),
+            )
+        except Exception:
+            pass
+
+        loop = asyncio.get_event_loop()
+        try:
+            await loop.run_in_executor(None, self.scan_project, root_path)
+        except Exception as e:
+            logger.error(f"Background project scan failed: {e}", exc_info=True)
+        finally:
+            self._scan_in_progress = False
+            try:
+                count = self.project_index.script_count if self.project_index else 0
+                self.progress.end(
+                    token,
+                    WorkDoneProgressEnd(
+                        message=f"Indexed {count} scripts",
+                    ),
+                )
+            except Exception:
+                pass
+
 
 server = IgnitionLanguageServer("ignition-lsp", "v0.1.0")
 
-# Initialize API loader on server creation
+# Initialize API loaders and symbol cache on server creation
 server.initialize_api_loader()
+server.initialize_java_loader()
+
+from ignition_lsp.script_symbols import SymbolCache
+server.symbol_cache = SymbolCache()
 
 
 # Document Synchronization Handlers
@@ -121,8 +211,10 @@ async def did_open(ls: IgnitionLanguageServer, params: DidOpenTextDocumentParams
     """Handle document open event."""
     logger.info(f"Document opened: {params.text_document.uri}")
 
-    # Lazily build the project index on first document open
-    ls.ensure_project_index(params.text_document.uri)
+    # Kick off project scan in the background (non-blocking).
+    # system.* completions work immediately; project.*/shared.* completions
+    # become available once the scan finishes.
+    asyncio.ensure_future(ls.ensure_project_index_async(params.text_document.uri))
 
     # Run diagnostics on open
     if ls.diagnostics_enabled:
@@ -145,8 +237,12 @@ async def did_save(ls: IgnitionLanguageServer, params: DidSaveTextDocumentParams
     uri = params.text_document.uri
     logger.info(f"Document saved: {uri}")
 
-    # Re-index project when resource/view JSON files change
+    # Invalidate symbol cache when a .py file is saved
     file_path = unquote(urlparse(uri).path)
+    if file_path.endswith(".py") and ls.symbol_cache is not None:
+        ls.symbol_cache.invalidate(file_path)
+
+    # Re-index project when resource/view JSON files change
     basename = Path(file_path).name
     if basename in ("resource.json", "view.json", "tags.json", "data.json"):
         if ls.project_index is not None:
@@ -206,7 +302,7 @@ async def run_diagnostics(ls: IgnitionLanguageServer, uri: str):
 
 # LSP Feature Handlers
 
-@server.feature(TEXT_DOCUMENT_COMPLETION)
+@server.feature(TEXT_DOCUMENT_COMPLETION, CompletionOptions(trigger_characters=["."]))
 def completion(ls: IgnitionLanguageServer, params: CompletionParams) -> Optional[CompletionList]:
     """Provide completion items for Ignition APIs."""
     logger.info(f"Completion requested at {params.position}")
@@ -216,7 +312,7 @@ def completion(ls: IgnitionLanguageServer, params: CompletionParams) -> Optional
         try:
             from ignition_lsp.completion import get_completions
             doc = ls.workspace.get_text_document(params.text_document.uri)
-            return get_completions(doc, params.position, ls.api_loader, ls.project_index)
+            return get_completions(doc, params.position, ls.api_loader, ls.project_index, ls.java_loader, ls.symbol_cache)
         except Exception as e:
             logger.error(f"Error getting completions: {e}", exc_info=True)
 
@@ -242,7 +338,7 @@ def hover(ls: IgnitionLanguageServer, params: HoverParams) -> Optional[Hover]:
         try:
             from ignition_lsp.hover import get_hover_info
             doc = ls.workspace.get_text_document(params.text_document.uri)
-            return get_hover_info(doc, params.position, ls.api_loader)
+            return get_hover_info(doc, params.position, ls.api_loader, ls.java_loader, ls.project_index, ls.symbol_cache)
         except Exception as e:
             logger.error(f"Error getting hover info: {e}", exc_info=True)
 
@@ -263,7 +359,7 @@ def definition(ls: IgnitionLanguageServer, params: DefinitionParams) -> Optional
     try:
         from ignition_lsp.definition import get_definition
         doc = ls.workspace.get_text_document(params.text_document.uri)
-        return get_definition(doc, params.position, ls.api_loader, ls.project_index)
+        return get_definition(doc, params.position, ls.api_loader, ls.project_index, ls.symbol_cache)
     except Exception as e:
         logger.error(f"Error getting definition: {e}", exc_info=True)
         return None

@@ -1,0 +1,116 @@
+{
+  "package": "java.time.format",
+  "classes": [
+    {
+      "name": "DateTimeFormatter",
+      "description": "Formatter for printing and parsing date-time objects. Provides the main application entry point for formatting and parsing, with common implementations available through static factory methods and constants. Immutable and thread-safe.",
+      "constructors": [],
+      "methods": [
+        {"name": "ofPattern", "signature": "ofPattern(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The pattern string, such as 'yyyy-MM-dd HH:mm:ss'"}], "returns": {"type": "DateTimeFormatter", "description": "The formatter based on the pattern"}, "description": "Creates a formatter using the specified pattern. Common patterns: y=year, M=month, d=day, H=hour(0-23), h=hour(1-12), m=minute, s=second, a=AM/PM, z=timezone, X=offset.", "static": true},
+        {"name": "ofPattern", "signature": "ofPattern(pattern, locale)", "params": [{"name": "pattern", "type": "String", "description": "The pattern string"}, {"name": "locale", "type": "Locale", "description": "The locale to use for formatting"}], "returns": {"type": "DateTimeFormatter", "description": "The formatter based on the pattern and locale"}, "description": "Creates a formatter using the specified pattern and locale.", "static": true},
+        {"name": "ofLocalizedDate", "signature": "ofLocalizedDate(dateStyle)", "params": [{"name": "dateStyle", "type": "FormatStyle", "description": "The date format style (FULL, LONG, MEDIUM, SHORT)"}], "returns": {"type": "DateTimeFormatter", "description": "The date formatter"}, "description": "Returns a locale specific date format for the ISO chronology.", "static": true},
+        {"name": "ofLocalizedTime", "signature": "ofLocalizedTime(timeStyle)", "params": [{"name": "timeStyle", "type": "FormatStyle", "description": "The time format style (FULL, LONG, MEDIUM, SHORT)"}], "returns": {"type": "DateTimeFormatter", "description": "The time formatter"}, "description": "Returns a locale specific time format for the ISO chronology.", "static": true},
+        {"name": "ofLocalizedDateTime", "signature": "ofLocalizedDateTime(dateTimeStyle)", "params": [{"name": "dateTimeStyle", "type": "FormatStyle", "description": "The date-time format style (FULL, LONG, MEDIUM, SHORT)"}], "returns": {"type": "DateTimeFormatter", "description": "The date-time formatter"}, "description": "Returns a locale specific date-time format for the ISO chronology. The style is used for both date and time.", "static": true},
+        {"name": "ofLocalizedDateTime", "signature": "ofLocalizedDateTime(dateStyle, timeStyle)", "params": [{"name": "dateStyle", "type": "FormatStyle", "description": "The date format style (FULL, LONG, MEDIUM, SHORT)"}, {"name": "timeStyle", "type": "FormatStyle", "description": "The time format style (FULL, LONG, MEDIUM, SHORT)"}], "returns": {"type": "DateTimeFormatter", "description": "The date-time formatter"}, "description": "Returns a locale specific date-time format for the ISO chronology with separate styles for date and time.", "static": true},
+        {"name": "format", "signature": "format(temporal)", "params": [{"name": "temporal", "type": "TemporalAccessor", "description": "The temporal object to format (e.g., LocalDateTime, ZonedDateTime, LocalDate)"}], "returns": {"type": "String", "description": "The formatted string"}, "description": "Formats a date-time object using this formatter.", "static": false},
+        {"name": "parse", "signature": "parse(text)", "params": [{"name": "text", "type": "CharSequence", "description": "The text to parse"}], "returns": {"type": "TemporalAccessor", "description": "The parsed temporal object"}, "description": "Fully parses the text producing a temporal object. Use LocalDate.from(), LocalDateTime.from(), etc. to convert the result.", "static": false},
+        {"name": "parseBest", "signature": "parseBest(text, queries...)", "params": [{"name": "text", "type": "CharSequence", "description": "The text to parse"}, {"name": "queries", "type": "TemporalQuery...", "description": "The queries defining the types to attempt to parse to"}], "returns": {"type": "TemporalAccessor", "description": "The parsed date-time as the best matching type"}, "description": "Fully parses the text producing a temporal object of one of the specified types. Tries each query in order, returning the first successful result.", "static": false},
+        {"name": "withZone", "signature": "withZone(zone)", "params": [{"name": "zone", "type": "ZoneId", "description": "The zone to use for formatting/parsing"}], "returns": {"type": "DateTimeFormatter", "description": "A copy of this formatter with the zone override set"}, "description": "Returns a copy of this formatter with a new override zone. Useful when formatting an Instant which has no zone information.", "static": false},
+        {"name": "withLocale", "signature": "withLocale(locale)", "params": [{"name": "locale", "type": "Locale", "description": "The locale to use"}], "returns": {"type": "DateTimeFormatter", "description": "A copy of this formatter with the locale set"}, "description": "Returns a copy of this formatter with a new locale.", "static": false},
+        {"name": "getZone", "signature": "getZone()", "params": [], "returns": {"type": "ZoneId", "description": "The override zone, or null if no override"}, "description": "Gets the overriding zone to be used during formatting.", "static": false},
+        {"name": "getLocale", "signature": "getLocale()", "params": [], "returns": {"type": "Locale", "description": "The locale of this formatter"}, "description": "Gets the locale to be used during formatting.", "static": false},
+        {"name": "toString", "signature": "toString()", "params": [], "returns": {"type": "String", "description": "A description of the underlying format"}, "description": "Returns a description of the underlying formatters.", "static": false}
+      ],
+      "fields": [
+        {"name": "ISO_LOCAL_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses a date without an offset, such as '2011-12-03'.", "static": true, "final": true},
+        {"name": "ISO_LOCAL_TIME", "type": "DateTimeFormatter", "description": "The ISO time formatter that formats or parses a time without an offset, such as '10:15:30'.", "static": true, "final": true},
+        {"name": "ISO_LOCAL_DATE_TIME", "type": "DateTimeFormatter", "description": "The ISO date-time formatter that formats or parses a date-time without an offset, such as '2011-12-03T10:15:30'.", "static": true, "final": true},
+        {"name": "ISO_OFFSET_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses a date with an offset, such as '2011-12-03+01:00'.", "static": true, "final": true},
+        {"name": "ISO_OFFSET_TIME", "type": "DateTimeFormatter", "description": "The ISO time formatter that formats or parses a time with an offset, such as '10:15:30+01:00'.", "static": true, "final": true},
+        {"name": "ISO_OFFSET_DATE_TIME", "type": "DateTimeFormatter", "description": "The ISO date-time formatter that formats or parses a date-time with an offset, such as '2011-12-03T10:15:30+01:00'.", "static": true, "final": true},
+        {"name": "ISO_ZONED_DATE_TIME", "type": "DateTimeFormatter", "description": "The ISO-like date-time formatter that formats or parses a date-time with offset and zone, such as '2011-12-03T10:15:30+01:00[Europe/Paris]'.", "static": true, "final": true},
+        {"name": "ISO_INSTANT", "type": "DateTimeFormatter", "description": "The ISO instant formatter that formats or parses an instant in UTC, such as '2011-12-03T10:15:30Z'.", "static": true, "final": true},
+        {"name": "ISO_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses a date with the offset if available, such as '2011-12-03' or '2011-12-03+01:00'.", "static": true, "final": true},
+        {"name": "ISO_TIME", "type": "DateTimeFormatter", "description": "The ISO time formatter that formats or parses a time with the offset if available, such as '10:15:30' or '10:15:30+01:00'.", "static": true, "final": true},
+        {"name": "ISO_DATE_TIME", "type": "DateTimeFormatter", "description": "The ISO-like date-time formatter that formats or parses a date-time with the offset and zone if available.", "static": true, "final": true},
+        {"name": "ISO_ORDINAL_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses the ordinal date without an offset, such as '2012-337'.", "static": true, "final": true},
+        {"name": "ISO_WEEK_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses the week-based date without an offset, such as '2012-W48-6'.", "static": true, "final": true},
+        {"name": "BASIC_ISO_DATE", "type": "DateTimeFormatter", "description": "The ISO date formatter that formats or parses a date without separators, such as '20111203'.", "static": true, "final": true},
+        {"name": "RFC_1123_DATE_TIME", "type": "DateTimeFormatter", "description": "The RFC-1123 date-time formatter, such as 'Tue, 3 Jun 2008 11:05:30 GMT'.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html"
+    },
+    {
+      "name": "DateTimeFormatterBuilder",
+      "description": "Builder to create date-time formatters. Allows a DateTimeFormatter to be created by composing pattern elements, literal text, and other formatters. All builders can be used as sinks for append methods.",
+      "constructors": [
+        {
+          "signature": "DateTimeFormatterBuilder()",
+          "params": [],
+          "description": "Constructs a new instance of the builder."
+        }
+      ],
+      "methods": [
+        {"name": "appendPattern", "signature": "appendPattern(pattern)", "params": [{"name": "pattern", "type": "String", "description": "The pattern to add, such as 'yyyy-MM-dd'"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the elements defined by the specified pattern to the builder. The pattern is parsed as per DateTimeFormatter.ofPattern().", "static": false},
+        {"name": "appendLiteral", "signature": "appendLiteral(literal)", "params": [{"name": "literal", "type": "String", "description": "The literal text to append"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends a string literal to the formatter.", "static": false},
+        {"name": "appendValue", "signature": "appendValue(field)", "params": [{"name": "field", "type": "TemporalField", "description": "The field to append (e.g., ChronoField.YEAR)"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the value of a date-time field to the formatter using a normal output style.", "static": false},
+        {"name": "appendText", "signature": "appendText(field)", "params": [{"name": "field", "type": "TemporalField", "description": "The field to append text for (e.g., ChronoField.MONTH_OF_YEAR)"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the text of a date-time field to the formatter using the full text style.", "static": false},
+        {"name": "appendZoneId", "signature": "appendZoneId()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the time-zone ID, such as 'Europe/Paris' or '+02:00', to the formatter.", "static": false},
+        {"name": "appendZoneText", "signature": "appendZoneText(style)", "params": [{"name": "style", "type": "TextStyle", "description": "The text style to use (FULL, SHORT, NARROW)"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the time-zone name, such as 'British Summer Time', to the formatter.", "static": false},
+        {"name": "appendOffset", "signature": "appendOffset(pattern, noOffsetText)", "params": [{"name": "pattern", "type": "String", "description": "The pattern to use, such as '+HH:MM:ss'"}, {"name": "noOffsetText", "type": "String", "description": "The text to use when the offset is zero, such as 'Z'"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Appends the zone offset, such as '+01:00', to the formatter.", "static": false},
+        {"name": "optionalStart", "signature": "optionalStart()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Mark the start of an optional section. The output of formatting can include all, some, or none of the optional section.", "static": false},
+        {"name": "optionalEnd", "signature": "optionalEnd()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Ends an optional section. Every call to optionalStart() must eventually be matched by a call to optionalEnd().", "static": false},
+        {"name": "padNext", "signature": "padNext(padWidth)", "params": [{"name": "padWidth", "type": "int", "description": "The pad width, must be 1 or greater"}], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Causes the next added printer/parser to pad to a fixed width using a space.", "static": false},
+        {"name": "parseCaseInsensitive", "signature": "parseCaseInsensitive()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Changes the parse style to be case insensitive for the remainder of the formatter.", "static": false},
+        {"name": "parseCaseSensitive", "signature": "parseCaseSensitive()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Changes the parse style to be case sensitive for the remainder of the formatter.", "static": false},
+        {"name": "parseStrict", "signature": "parseStrict()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Changes the parse style to be strict for the remainder of the formatter.", "static": false},
+        {"name": "parseLenient", "signature": "parseLenient()", "params": [], "returns": {"type": "DateTimeFormatterBuilder", "description": "This builder, for chaining"}, "description": "Changes the parse style to be lenient for the remainder of the formatter. Lenient parsing allows the input to not precisely match the format.", "static": false},
+        {"name": "toFormatter", "signature": "toFormatter()", "params": [], "returns": {"type": "DateTimeFormatter", "description": "The created formatter"}, "description": "Completes this builder by creating the DateTimeFormatter using the default locale.", "static": false},
+        {"name": "toFormatter", "signature": "toFormatter(locale)", "params": [{"name": "locale", "type": "Locale", "description": "The locale to use for formatting"}], "returns": {"type": "DateTimeFormatter", "description": "The created formatter with the specified locale"}, "description": "Completes this builder by creating the DateTimeFormatter using the specified locale.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatterBuilder.html"
+    },
+    {
+      "name": "FormatStyle",
+      "description": "Enumeration of the style of a localized date, time, or date-time formatter. These styles are used when obtaining a date-time style from DateTimeFormatter.",
+      "constructors": [],
+      "methods": [
+        {"name": "valueOf", "signature": "valueOf(name)", "params": [{"name": "name", "type": "String", "description": "The name of the enum constant (FULL, LONG, MEDIUM, SHORT)"}], "returns": {"type": "FormatStyle", "description": "The enum constant with the specified name"}, "description": "Returns the enum constant of this type with the specified name.", "static": true},
+        {"name": "values", "signature": "values()", "params": [], "returns": {"type": "FormatStyle[]", "description": "An array containing the constants of this enum type"}, "description": "Returns an array containing the constants of this enum type, in the order they are declared.", "static": true}
+      ],
+      "fields": [
+        {"name": "FULL", "type": "FormatStyle", "description": "Full text style, with the most detail. For example, the format might be 'Tuesday, April 12, 1952 AD' or '3:30:42pm PST'.", "static": true, "final": true},
+        {"name": "LONG", "type": "FormatStyle", "description": "Long text style, with lots of detail. For example, the format might be 'January 12, 1952'.", "static": true, "final": true},
+        {"name": "MEDIUM", "type": "FormatStyle", "description": "Medium text style, with some detail. For example, the format might be 'Jan 12, 1952'.", "static": true, "final": true},
+        {"name": "SHORT", "type": "FormatStyle", "description": "Short text style, typically numeric. For example, the format might be '12.13.52' or '3:30pm'.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/time/format/FormatStyle.html"
+    },
+    {
+      "name": "TextStyle",
+      "description": "Enumeration of the style of text formatting and parsing. Text styles define how text is printed and parsed for date-time fields such as day-of-week and month-of-year.",
+      "constructors": [],
+      "methods": [
+        {"name": "valueOf", "signature": "valueOf(name)", "params": [{"name": "name", "type": "String", "description": "The name of the enum constant"}], "returns": {"type": "TextStyle", "description": "The enum constant with the specified name"}, "description": "Returns the enum constant of this type with the specified name.", "static": true},
+        {"name": "values", "signature": "values()", "params": [], "returns": {"type": "TextStyle[]", "description": "An array containing the constants of this enum type"}, "description": "Returns an array containing the constants of this enum type, in the order they are declared.", "static": true},
+        {"name": "isStandalone", "signature": "isStandalone()", "params": [], "returns": {"type": "boolean", "description": "True if this style is a standalone style"}, "description": "Returns true if the style is a standalone style. Standalone styles are used when the field is displayed alone, such as a month name in a calendar grid.", "static": false},
+        {"name": "asStandalone", "signature": "asStandalone()", "params": [], "returns": {"type": "TextStyle", "description": "The standalone equivalent of this style"}, "description": "Returns the standalone style with the same size as this style. Returns this if already standalone.", "static": false},
+        {"name": "asNormal", "signature": "asNormal()", "params": [], "returns": {"type": "TextStyle", "description": "The normal equivalent of this style"}, "description": "Returns the normal style with the same size as this style. Returns this if already normal.", "static": false}
+      ],
+      "fields": [
+        {"name": "FULL", "type": "TextStyle", "description": "Full text, typically the full description. For example, 'Monday' for day-of-week or 'January' for month-of-year.", "static": true, "final": true},
+        {"name": "FULL_STANDALONE", "type": "TextStyle", "description": "Full text for stand-alone use, typically the full description. Used when the text is displayed alone, such as in a calendar.", "static": true, "final": true},
+        {"name": "SHORT", "type": "TextStyle", "description": "Short text, typically an abbreviation. For example, 'Mon' for day-of-week or 'Jan' for month-of-year.", "static": true, "final": true},
+        {"name": "SHORT_STANDALONE", "type": "TextStyle", "description": "Short text for stand-alone use, typically an abbreviation. Used when the text is displayed alone.", "static": true, "final": true},
+        {"name": "NARROW", "type": "TextStyle", "description": "Narrow text, typically a single letter. For example, 'M' for day-of-week or 'J' for month-of-year.", "static": true, "final": true},
+        {"name": "NARROW_STANDALONE", "type": "TextStyle", "description": "Narrow text for stand-alone use, typically a single letter. Used when the text is displayed alone.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/time/format/TextStyle.html"
+    }
+  ]
+}

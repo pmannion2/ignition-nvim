@@ -1,0 +1,787 @@
+{
+  "package": "java.io",
+  "classes": [
+    {
+      "name": "File",
+      "description": "An abstract representation of file and directory pathnames. Provides methods for examining and manipulating files and directories.",
+      "constructors": [
+        {
+          "signature": "File(pathname)",
+          "params": [{"name": "pathname", "type": "String", "description": "A pathname string"}],
+          "description": "Creates a new File instance by converting the given pathname string into an abstract pathname."
+        },
+        {
+          "signature": "File(parent, child)",
+          "params": [
+            {"name": "parent", "type": "String", "description": "The parent pathname string"},
+            {"name": "child", "type": "String", "description": "The child pathname string"}
+          ],
+          "description": "Creates a new File instance from a parent pathname string and a child pathname string."
+        },
+        {
+          "signature": "File(parent, child)",
+          "params": [
+            {"name": "parent", "type": "File", "description": "The parent abstract pathname"},
+            {"name": "child", "type": "String", "description": "The child pathname string"}
+          ],
+          "description": "Creates a new File instance from a parent abstract pathname and a child pathname string."
+        }
+      ],
+      "methods": [
+        {
+          "name": "exists",
+          "signature": "exists()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the file or directory exists"},
+          "description": "Tests whether the file or directory denoted by this abstract pathname exists.",
+          "static": false
+        },
+        {
+          "name": "isFile",
+          "signature": "isFile()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this pathname denotes a normal file"},
+          "description": "Tests whether the file denoted by this abstract pathname is a normal file.",
+          "static": false
+        },
+        {
+          "name": "isDirectory",
+          "signature": "isDirectory()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this pathname denotes a directory"},
+          "description": "Tests whether the file denoted by this abstract pathname is a directory.",
+          "static": false
+        },
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the file or directory"},
+          "description": "Returns the name of the file or directory denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "getPath",
+          "signature": "getPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The pathname string"},
+          "description": "Converts this abstract pathname into a pathname string.",
+          "static": false
+        },
+        {
+          "name": "getAbsolutePath",
+          "signature": "getAbsolutePath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The absolute pathname string"},
+          "description": "Returns the absolute pathname string of this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "getCanonicalPath",
+          "signature": "getCanonicalPath()",
+          "params": [],
+          "returns": {"type": "String", "description": "The canonical pathname string"},
+          "description": "Returns the canonical pathname string of this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "getParent",
+          "signature": "getParent()",
+          "params": [],
+          "returns": {"type": "String", "description": "The pathname of the parent directory, or null"},
+          "description": "Returns the pathname string of this abstract pathname's parent, or null if it has no parent.",
+          "static": false
+        },
+        {
+          "name": "getParentFile",
+          "signature": "getParentFile()",
+          "params": [],
+          "returns": {"type": "File", "description": "The abstract pathname of the parent directory, or null"},
+          "description": "Returns the abstract pathname of this abstract pathname's parent, or null if it has no parent.",
+          "static": false
+        },
+        {
+          "name": "length",
+          "signature": "length()",
+          "params": [],
+          "returns": {"type": "long", "description": "The length, in bytes, of the file"},
+          "description": "Returns the length of the file denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "lastModified",
+          "signature": "lastModified()",
+          "params": [],
+          "returns": {"type": "long", "description": "The time the file was last modified, in milliseconds since epoch"},
+          "description": "Returns the time that the file was last modified.",
+          "static": false
+        },
+        {
+          "name": "list",
+          "signature": "list()",
+          "params": [],
+          "returns": {"type": "String[]", "description": "An array of strings naming the files and directories, or null"},
+          "description": "Returns an array of strings naming the files and directories in this directory.",
+          "static": false
+        },
+        {
+          "name": "listFiles",
+          "signature": "listFiles()",
+          "params": [],
+          "returns": {"type": "File[]", "description": "An array of abstract pathnames, or null"},
+          "description": "Returns an array of abstract pathnames denoting the files in this directory.",
+          "static": false
+        },
+        {
+          "name": "mkdir",
+          "signature": "mkdir()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the directory was created"},
+          "description": "Creates the directory named by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "mkdirs",
+          "signature": "mkdirs()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the directory was created, along with all necessary parent directories"},
+          "description": "Creates the directory named by this abstract pathname, including any necessary parent directories.",
+          "static": false
+        },
+        {
+          "name": "delete",
+          "signature": "delete()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the file or directory was deleted"},
+          "description": "Deletes the file or directory denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "renameTo",
+          "signature": "renameTo(dest)",
+          "params": [{"name": "dest", "type": "File", "description": "The new abstract pathname"}],
+          "returns": {"type": "boolean", "description": "True if the renaming succeeded"},
+          "description": "Renames the file denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "canRead",
+          "signature": "canRead()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the file can be read"},
+          "description": "Tests whether the application can read the file denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "canWrite",
+          "signature": "canWrite()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the file can be written"},
+          "description": "Tests whether the application can modify the file denoted by this abstract pathname.",
+          "static": false
+        },
+        {
+          "name": "createNewFile",
+          "signature": "createNewFile()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the file was created, false if it already exists"},
+          "description": "Atomically creates a new, empty file named by this abstract pathname if it does not yet exist.",
+          "static": false
+        },
+        {
+          "name": "createTempFile",
+          "signature": "createTempFile(prefix, suffix)",
+          "params": [
+            {"name": "prefix", "type": "String", "description": "The prefix string for the temp file name (at least three characters)"},
+            {"name": "suffix", "type": "String", "description": "The suffix string, or null to use \".tmp\""}
+          ],
+          "returns": {"type": "File", "description": "An abstract pathname denoting a newly created empty file"},
+          "description": "Creates an empty file in the default temporary-file directory.",
+          "static": true
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "The pathname string"},
+          "description": "Returns the pathname string of this abstract pathname.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "separator", "type": "String", "description": "The system-dependent name-separator character as a string.", "static": true, "final": true},
+        {"name": "separatorChar", "type": "char", "description": "The system-dependent name-separator character.", "static": true, "final": true},
+        {"name": "pathSeparator", "type": "String", "description": "The system-dependent path-separator character as a string.", "static": true, "final": true},
+        {"name": "pathSeparatorChar", "type": "char", "description": "The system-dependent path-separator character.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/File.html"
+    },
+    {
+      "name": "InputStream",
+      "description": "Abstract class representing an input stream of bytes. Subclasses must provide an implementation of the read() method.",
+      "constructors": [
+        {
+          "signature": "InputStream()",
+          "params": [],
+          "description": "Constructs an InputStream."
+        }
+      ],
+      "methods": [
+        {
+          "name": "read",
+          "signature": "read()",
+          "params": [],
+          "returns": {"type": "int", "description": "The next byte of data, or -1 if the end of the stream is reached"},
+          "description": "Reads the next byte of data from the input stream.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(b)",
+          "params": [{"name": "b", "type": "byte[]", "description": "The buffer into which the data is read"}],
+          "returns": {"type": "int", "description": "The total number of bytes read, or -1 if end of stream"},
+          "description": "Reads some number of bytes from the input stream and stores them into the buffer array.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The buffer into which the data is read"},
+            {"name": "off", "type": "int", "description": "The start offset in array b"},
+            {"name": "len", "type": "int", "description": "The maximum number of bytes to read"}
+          ],
+          "returns": {"type": "int", "description": "The total number of bytes read, or -1 if end of stream"},
+          "description": "Reads up to len bytes of data from the input stream into an array of bytes.",
+          "static": false
+        },
+        {
+          "name": "available",
+          "signature": "available()",
+          "params": [],
+          "returns": {"type": "int", "description": "An estimate of the number of bytes that can be read without blocking"},
+          "description": "Returns an estimate of the number of bytes that can be read without blocking.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this input stream and releases any system resources associated with the stream.",
+          "static": false
+        },
+        {
+          "name": "skip",
+          "signature": "skip(n)",
+          "params": [{"name": "n", "type": "long", "description": "The number of bytes to be skipped"}],
+          "returns": {"type": "long", "description": "The actual number of bytes skipped"},
+          "description": "Skips over and discards n bytes of data from this input stream.",
+          "static": false
+        },
+        {
+          "name": "mark",
+          "signature": "mark(readlimit)",
+          "params": [{"name": "readlimit", "type": "int", "description": "The maximum limit of bytes that can be read before the mark position becomes invalid"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Marks the current position in this input stream.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Repositions this stream to the position at the time the mark method was last called.",
+          "static": false
+        },
+        {
+          "name": "markSupported",
+          "signature": "markSupported()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this stream supports mark and reset"},
+          "description": "Tests if this input stream supports the mark and reset methods.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html"
+    },
+    {
+      "name": "OutputStream",
+      "description": "Abstract class representing an output stream of bytes. Subclasses must provide an implementation of the write(int) method.",
+      "constructors": [
+        {
+          "signature": "OutputStream()",
+          "params": [],
+          "description": "Constructs an OutputStream."
+        }
+      ],
+      "methods": [
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [{"name": "b", "type": "int", "description": "The byte to write"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes the specified byte to this output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [{"name": "b", "type": "byte[]", "description": "The data to write"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes b.length bytes from the specified byte array to this output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The data"},
+            {"name": "off", "type": "int", "description": "The start offset in the data"},
+            {"name": "len", "type": "int", "description": "The number of bytes to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes len bytes from the specified byte array starting at offset off to this output stream.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Flushes this output stream and forces any buffered output bytes to be written out.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this output stream and releases any system resources associated with this stream.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/OutputStream.html"
+    },
+    {
+      "name": "FileOutputStream",
+      "description": "A file output stream for writing data to a File. Writes raw bytes; for writing characters, consider using OutputStreamWriter.",
+      "constructors": [
+        {
+          "signature": "FileOutputStream(file)",
+          "params": [{"name": "file", "type": "File", "description": "The file to be opened for writing"}],
+          "description": "Creates a file output stream to write to the specified File object."
+        },
+        {
+          "signature": "FileOutputStream(file, append)",
+          "params": [
+            {"name": "file", "type": "File", "description": "The file to be opened for writing"},
+            {"name": "append", "type": "boolean", "description": "If true, bytes are written to the end of the file"}
+          ],
+          "description": "Creates a file output stream to write to the specified File, with the option to append."
+        },
+        {
+          "signature": "FileOutputStream(name)",
+          "params": [{"name": "name", "type": "String", "description": "The system-dependent file name"}],
+          "description": "Creates a file output stream to write to the file with the specified name."
+        },
+        {
+          "signature": "FileOutputStream(name, append)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The system-dependent file name"},
+            {"name": "append", "type": "boolean", "description": "If true, bytes are written to the end of the file"}
+          ],
+          "description": "Creates a file output stream to write to the file with the specified name, with the option to append."
+        }
+      ],
+      "methods": [
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [{"name": "b", "type": "int", "description": "The byte to be written"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes the specified byte to this file output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [{"name": "b", "type": "byte[]", "description": "The data to write"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes b.length bytes from the specified byte array to this file output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The data"},
+            {"name": "off", "type": "int", "description": "The start offset in the data"},
+            {"name": "len", "type": "int", "description": "The number of bytes to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes len bytes from the specified byte array starting at offset off.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Flushes this output stream and forces any buffered output bytes to be written out.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this file output stream and releases any system resources associated with this stream.",
+          "static": false
+        },
+        {
+          "name": "getChannel",
+          "signature": "getChannel()",
+          "params": [],
+          "returns": {"type": "FileChannel", "description": "The file channel associated with this file output stream"},
+          "description": "Returns the unique FileChannel object associated with this file output stream.",
+          "static": false
+        },
+        {
+          "name": "getFD",
+          "signature": "getFD()",
+          "params": [],
+          "returns": {"type": "FileDescriptor", "description": "The file descriptor object associated with this stream"},
+          "description": "Returns the file descriptor associated with this stream.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/FileOutputStream.html"
+    },
+    {
+      "name": "BufferedOutputStream",
+      "description": "Implements a buffered output stream. Writes are buffered in memory and flushed to the underlying output stream in larger blocks for efficiency.",
+      "constructors": [
+        {
+          "signature": "BufferedOutputStream(out)",
+          "params": [{"name": "out", "type": "OutputStream", "description": "The underlying output stream"}],
+          "description": "Creates a new buffered output stream to write data to the specified underlying output stream with a default buffer size of 8192 bytes."
+        },
+        {
+          "signature": "BufferedOutputStream(out, size)",
+          "params": [
+            {"name": "out", "type": "OutputStream", "description": "The underlying output stream"},
+            {"name": "size", "type": "int", "description": "The buffer size"}
+          ],
+          "description": "Creates a new buffered output stream to write data to the specified underlying output stream with the specified buffer size."
+        }
+      ],
+      "methods": [
+        {
+          "name": "write",
+          "signature": "write(b)",
+          "params": [{"name": "b", "type": "int", "description": "The byte to be written"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes the specified byte to this buffered output stream.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(b, off, len)",
+          "params": [
+            {"name": "b", "type": "byte[]", "description": "The data"},
+            {"name": "off", "type": "int", "description": "The start offset in the data"},
+            {"name": "len", "type": "int", "description": "The number of bytes to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes len bytes from the specified byte array starting at offset off to this buffered output stream.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Flushes this buffered output stream, forcing any buffered bytes to be written to the underlying output stream.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes this buffered output stream and releases any system resources associated with the stream.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/BufferedOutputStream.html"
+    },
+    {
+      "name": "InputStreamReader",
+      "description": "A bridge from byte streams to character streams. Reads bytes and decodes them into characters using a specified charset.",
+      "constructors": [
+        {
+          "signature": "InputStreamReader(in)",
+          "params": [{"name": "in", "type": "InputStream", "description": "An InputStream"}],
+          "description": "Creates an InputStreamReader that uses the default charset."
+        },
+        {
+          "signature": "InputStreamReader(in, charsetName)",
+          "params": [
+            {"name": "in", "type": "InputStream", "description": "An InputStream"},
+            {"name": "charsetName", "type": "String", "description": "The name of a supported charset"}
+          ],
+          "description": "Creates an InputStreamReader that uses the named charset."
+        }
+      ],
+      "methods": [
+        {
+          "name": "read",
+          "signature": "read()",
+          "params": [],
+          "returns": {"type": "int", "description": "The character read, or -1 if end of stream"},
+          "description": "Reads a single character.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(cbuf, offset, length)",
+          "params": [
+            {"name": "cbuf", "type": "char[]", "description": "Destination buffer"},
+            {"name": "offset", "type": "int", "description": "Offset at which to start storing characters"},
+            {"name": "length", "type": "int", "description": "Maximum number of characters to read"}
+          ],
+          "returns": {"type": "int", "description": "The number of characters read, or -1 if end of stream"},
+          "description": "Reads characters into a portion of an array.",
+          "static": false
+        },
+        {
+          "name": "ready",
+          "signature": "ready()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the next read() is guaranteed not to block"},
+          "description": "Tells whether this stream is ready to be read.",
+          "static": false
+        },
+        {
+          "name": "getEncoding",
+          "signature": "getEncoding()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the character encoding being used, or null"},
+          "description": "Returns the name of the character encoding being used by this stream.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes the stream and releases any system resources associated with it.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/InputStreamReader.html"
+    },
+    {
+      "name": "OutputStreamWriter",
+      "description": "A bridge from character streams to byte streams. Characters written to it are encoded into bytes using a specified charset.",
+      "constructors": [
+        {
+          "signature": "OutputStreamWriter(out)",
+          "params": [{"name": "out", "type": "OutputStream", "description": "An OutputStream"}],
+          "description": "Creates an OutputStreamWriter that uses the default character encoding."
+        },
+        {
+          "signature": "OutputStreamWriter(out, charsetName)",
+          "params": [
+            {"name": "out", "type": "OutputStream", "description": "An OutputStream"},
+            {"name": "charsetName", "type": "String", "description": "The name of a supported charset"}
+          ],
+          "description": "Creates an OutputStreamWriter that uses the named charset."
+        }
+      ],
+      "methods": [
+        {
+          "name": "write",
+          "signature": "write(c)",
+          "params": [{"name": "c", "type": "int", "description": "The character to write"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes a single character.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(cbuf, off, len)",
+          "params": [
+            {"name": "cbuf", "type": "char[]", "description": "Buffer of characters"},
+            {"name": "off", "type": "int", "description": "Offset from which to start writing characters"},
+            {"name": "len", "type": "int", "description": "Number of characters to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes a portion of an array of characters.",
+          "static": false
+        },
+        {
+          "name": "write",
+          "signature": "write(str, off, len)",
+          "params": [
+            {"name": "str", "type": "String", "description": "A String"},
+            {"name": "off", "type": "int", "description": "Offset from which to start writing characters"},
+            {"name": "len", "type": "int", "description": "Number of characters to write"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Writes a portion of a string.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Flushes the stream.",
+          "static": false
+        },
+        {
+          "name": "getEncoding",
+          "signature": "getEncoding()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the character encoding being used, or null"},
+          "description": "Returns the name of the character encoding being used by this stream.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes the stream, flushing it first.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/OutputStreamWriter.html"
+    },
+    {
+      "name": "BufferedReader",
+      "description": "Reads text from a character-input stream, buffering characters for efficient reading of characters, arrays, and lines.",
+      "constructors": [
+        {
+          "signature": "BufferedReader(in)",
+          "params": [{"name": "in", "type": "Reader", "description": "A Reader"}],
+          "description": "Creates a buffering character-input stream with a default-sized input buffer."
+        },
+        {
+          "signature": "BufferedReader(in, sz)",
+          "params": [
+            {"name": "in", "type": "Reader", "description": "A Reader"},
+            {"name": "sz", "type": "int", "description": "Input-buffer size"}
+          ],
+          "description": "Creates a buffering character-input stream with a buffer of the specified size."
+        }
+      ],
+      "methods": [
+        {
+          "name": "read",
+          "signature": "read()",
+          "params": [],
+          "returns": {"type": "int", "description": "The character read as an integer, or -1 if end of stream"},
+          "description": "Reads a single character.",
+          "static": false
+        },
+        {
+          "name": "read",
+          "signature": "read(cbuf, off, len)",
+          "params": [
+            {"name": "cbuf", "type": "char[]", "description": "Destination buffer"},
+            {"name": "off", "type": "int", "description": "Offset at which to start storing characters"},
+            {"name": "len", "type": "int", "description": "Maximum number of characters to read"}
+          ],
+          "returns": {"type": "int", "description": "The number of characters read, or -1 if end of stream"},
+          "description": "Reads characters into a portion of an array.",
+          "static": false
+        },
+        {
+          "name": "readLine",
+          "signature": "readLine()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String containing the contents of the line, or null if end of stream"},
+          "description": "Reads a line of text. A line is terminated by a line feed, carriage return, or carriage return followed by a line feed.",
+          "static": false
+        },
+        {
+          "name": "ready",
+          "signature": "ready()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the next read() is guaranteed not to block"},
+          "description": "Tells whether this stream is ready to be read.",
+          "static": false
+        },
+        {
+          "name": "mark",
+          "signature": "mark(readAheadLimit)",
+          "params": [{"name": "readAheadLimit", "type": "int", "description": "Limit on the number of characters that may be read while still preserving the mark"}],
+          "returns": {"type": "void", "description": ""},
+          "description": "Marks the present position in the stream.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resets the stream to the most recent mark.",
+          "static": false
+        },
+        {
+          "name": "markSupported",
+          "signature": "markSupported()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "Always returns true for BufferedReader"},
+          "description": "Tells whether this stream supports the mark() operation.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Closes the stream and releases any system resources associated with it.",
+          "static": false
+        },
+        {
+          "name": "skip",
+          "signature": "skip(n)",
+          "params": [{"name": "n", "type": "long", "description": "The number of characters to skip"}],
+          "returns": {"type": "long", "description": "The number of characters actually skipped"},
+          "description": "Skips characters.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html"
+    },
+    {
+      "name": "Serializable",
+      "description": "Marker interface that enables serialization of a class. Classes that implement this interface allow their instances to be serialized and deserialized. Has no methods or fields.",
+      "constructors": [],
+      "methods": [],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/io/Serializable.html"
+    }
+  ]
+}

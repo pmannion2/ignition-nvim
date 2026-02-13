@@ -1,0 +1,875 @@
+{
+  "package": "java.awt",
+  "classes": [
+    {
+      "name": "Color",
+      "description": "Represents an RGBA color. The most commonly used java.awt class in Ignition Vision for dynamic styling of components.",
+      "constructors": [
+        {
+          "signature": "Color(r, g, b)",
+          "params": [
+            {"name": "r", "type": "int", "description": "The red component (0-255)"},
+            {"name": "g", "type": "int", "description": "The green component (0-255)"},
+            {"name": "b", "type": "int", "description": "The blue component (0-255)"}
+          ],
+          "description": "Creates an opaque sRGB color with the specified red, green, and blue values in the range 0-255."
+        },
+        {
+          "signature": "Color(r, g, b, a)",
+          "params": [
+            {"name": "r", "type": "int", "description": "The red component (0-255)"},
+            {"name": "g", "type": "int", "description": "The green component (0-255)"},
+            {"name": "b", "type": "int", "description": "The blue component (0-255)"},
+            {"name": "a", "type": "int", "description": "The alpha component (0-255, where 0 is fully transparent)"}
+          ],
+          "description": "Creates an sRGB color with the specified red, green, blue, and alpha values in the range 0-255."
+        },
+        {
+          "signature": "Color(rgb)",
+          "params": [
+            {"name": "rgb", "type": "int", "description": "The combined RGB value (bits 16-23 red, 8-15 green, 0-7 blue)"}
+          ],
+          "description": "Creates an opaque sRGB color with the specified combined RGB value."
+        },
+        {
+          "signature": "Color(r, g, b)",
+          "params": [
+            {"name": "r", "type": "float", "description": "The red component (0.0-1.0)"},
+            {"name": "g", "type": "float", "description": "The green component (0.0-1.0)"},
+            {"name": "b", "type": "float", "description": "The blue component (0.0-1.0)"}
+          ],
+          "description": "Creates an opaque sRGB color with the specified red, green, and blue values as floats in the range 0.0-1.0."
+        },
+        {
+          "signature": "Color(r, g, b, a)",
+          "params": [
+            {"name": "r", "type": "float", "description": "The red component (0.0-1.0)"},
+            {"name": "g", "type": "float", "description": "The green component (0.0-1.0)"},
+            {"name": "b", "type": "float", "description": "The blue component (0.0-1.0)"},
+            {"name": "a", "type": "float", "description": "The alpha component (0.0-1.0)"}
+          ],
+          "description": "Creates an sRGB color with the specified red, green, blue, and alpha values as floats in the range 0.0-1.0."
+        }
+      ],
+      "methods": [
+        {
+          "name": "decode",
+          "signature": "decode(nm)",
+          "params": [{"name": "nm", "type": "String", "description": "A String that represents an opaque color as a 24-bit integer (e.g., '#RRGGBB', '0xRRGGBB')"}],
+          "returns": {"type": "Color", "description": "The Color object representing the decoded color"},
+          "description": "Converts a String to an integer and returns the specified opaque Color. Supports '#RRGGBB', '0xRRGGBB', and decimal formats.",
+          "static": true
+        },
+        {
+          "name": "getHSBColor",
+          "signature": "getHSBColor(h, s, b)",
+          "params": [
+            {"name": "h", "type": "float", "description": "The hue component (0.0-1.0)"},
+            {"name": "s", "type": "float", "description": "The saturation component (0.0-1.0)"},
+            {"name": "b", "type": "float", "description": "The brightness component (0.0-1.0)"}
+          ],
+          "returns": {"type": "Color", "description": "A Color object with the specified hue, saturation, and brightness"},
+          "description": "Creates a Color object based on the specified values for the HSB color model.",
+          "static": true
+        },
+        {
+          "name": "HSBtoRGB",
+          "signature": "HSBtoRGB(hue, saturation, brightness)",
+          "params": [
+            {"name": "hue", "type": "float", "description": "The hue component (0.0-1.0)"},
+            {"name": "saturation", "type": "float", "description": "The saturation component (0.0-1.0)"},
+            {"name": "brightness", "type": "float", "description": "The brightness component (0.0-1.0)"}
+          ],
+          "returns": {"type": "int", "description": "The RGB value of the color with the indicated hue, saturation, and brightness"},
+          "description": "Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.",
+          "static": true
+        },
+        {
+          "name": "RGBtoHSB",
+          "signature": "RGBtoHSB(r, g, b, hsbvals)",
+          "params": [
+            {"name": "r", "type": "int", "description": "The red component (0-255)"},
+            {"name": "g", "type": "int", "description": "The green component (0-255)"},
+            {"name": "b", "type": "int", "description": "The blue component (0-255)"},
+            {"name": "hsbvals", "type": "float[]", "description": "Array to store HSB values, or null to allocate a new array"}
+          ],
+          "returns": {"type": "float[]", "description": "An array of three floats: hue, saturation, and brightness"},
+          "description": "Converts the components of a color, as specified by the default RGB model, to an equivalent set of values for hue, saturation, and brightness.",
+          "static": true
+        },
+        {
+          "name": "getRed",
+          "signature": "getRed()",
+          "params": [],
+          "returns": {"type": "int", "description": "The red component (0-255)"},
+          "description": "Returns the red component in the range 0-255.",
+          "static": false
+        },
+        {
+          "name": "getGreen",
+          "signature": "getGreen()",
+          "params": [],
+          "returns": {"type": "int", "description": "The green component (0-255)"},
+          "description": "Returns the green component in the range 0-255.",
+          "static": false
+        },
+        {
+          "name": "getBlue",
+          "signature": "getBlue()",
+          "params": [],
+          "returns": {"type": "int", "description": "The blue component (0-255)"},
+          "description": "Returns the blue component in the range 0-255.",
+          "static": false
+        },
+        {
+          "name": "getAlpha",
+          "signature": "getAlpha()",
+          "params": [],
+          "returns": {"type": "int", "description": "The alpha component (0-255)"},
+          "description": "Returns the alpha component in the range 0-255.",
+          "static": false
+        },
+        {
+          "name": "getRGB",
+          "signature": "getRGB()",
+          "params": [],
+          "returns": {"type": "int", "description": "The RGB value of this Color in the default sRGB ColorModel"},
+          "description": "Returns the RGB value representing this Color in the default sRGB ColorModel. Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are blue.",
+          "static": false
+        },
+        {
+          "name": "brighter",
+          "signature": "brighter()",
+          "params": [],
+          "returns": {"type": "Color", "description": "A new Color object that is a brighter version of this Color"},
+          "description": "Creates a new Color that is a brighter version of this Color. Uses a factor of 1/0.7 to increase each component.",
+          "static": false
+        },
+        {
+          "name": "darker",
+          "signature": "darker()",
+          "params": [],
+          "returns": {"type": "Color", "description": "A new Color object that is a darker version of this Color"},
+          "description": "Creates a new Color that is a darker version of this Color. Uses a factor of 0.7 to decrease each component.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to test for equality with this Color"}],
+          "returns": {"type": "boolean", "description": "True if the objects are the same color"},
+          "description": "Determines whether another object is equal to this Color. Returns true if and only if the argument is a Color with the same RGBA values.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this Color"},
+          "description": "Returns a string representation of this Color, including its r, g, b values.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "BLACK", "type": "Color", "description": "The color black (0, 0, 0).", "static": true, "final": true},
+        {"name": "BLUE", "type": "Color", "description": "The color blue (0, 0, 255).", "static": true, "final": true},
+        {"name": "CYAN", "type": "Color", "description": "The color cyan (0, 255, 255).", "static": true, "final": true},
+        {"name": "DARK_GRAY", "type": "Color", "description": "The color dark gray (64, 64, 64).", "static": true, "final": true},
+        {"name": "GRAY", "type": "Color", "description": "The color gray (128, 128, 128).", "static": true, "final": true},
+        {"name": "GREEN", "type": "Color", "description": "The color green (0, 255, 0).", "static": true, "final": true},
+        {"name": "LIGHT_GRAY", "type": "Color", "description": "The color light gray (192, 192, 192).", "static": true, "final": true},
+        {"name": "MAGENTA", "type": "Color", "description": "The color magenta (255, 0, 255).", "static": true, "final": true},
+        {"name": "ORANGE", "type": "Color", "description": "The color orange (255, 200, 0).", "static": true, "final": true},
+        {"name": "PINK", "type": "Color", "description": "The color pink (255, 175, 175).", "static": true, "final": true},
+        {"name": "RED", "type": "Color", "description": "The color red (255, 0, 0).", "static": true, "final": true},
+        {"name": "WHITE", "type": "Color", "description": "The color white (255, 255, 255).", "static": true, "final": true},
+        {"name": "YELLOW", "type": "Color", "description": "The color yellow (255, 255, 0).", "static": true, "final": true},
+        {"name": "black", "type": "Color", "description": "The color black (0, 0, 0). Lowercase alias for BLACK.", "static": true, "final": true},
+        {"name": "blue", "type": "Color", "description": "The color blue (0, 0, 255). Lowercase alias for BLUE.", "static": true, "final": true},
+        {"name": "cyan", "type": "Color", "description": "The color cyan (0, 255, 255). Lowercase alias for CYAN.", "static": true, "final": true},
+        {"name": "darkGray", "type": "Color", "description": "The color dark gray (64, 64, 64). Lowercase alias for DARK_GRAY.", "static": true, "final": true},
+        {"name": "gray", "type": "Color", "description": "The color gray (128, 128, 128). Lowercase alias for GRAY.", "static": true, "final": true},
+        {"name": "green", "type": "Color", "description": "The color green (0, 255, 0). Lowercase alias for GREEN.", "static": true, "final": true},
+        {"name": "lightGray", "type": "Color", "description": "The color light gray (192, 192, 192). Lowercase alias for LIGHT_GRAY.", "static": true, "final": true},
+        {"name": "magenta", "type": "Color", "description": "The color magenta (255, 0, 255). Lowercase alias for MAGENTA.", "static": true, "final": true},
+        {"name": "orange", "type": "Color", "description": "The color orange (255, 200, 0). Lowercase alias for ORANGE.", "static": true, "final": true},
+        {"name": "pink", "type": "Color", "description": "The color pink (255, 175, 175). Lowercase alias for PINK.", "static": true, "final": true},
+        {"name": "red", "type": "Color", "description": "The color red (255, 0, 0). Lowercase alias for RED.", "static": true, "final": true},
+        {"name": "white", "type": "Color", "description": "The color white (255, 255, 255). Lowercase alias for WHITE.", "static": true, "final": true},
+        {"name": "yellow", "type": "Color", "description": "The color yellow (255, 255, 0). Lowercase alias for YELLOW.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html"
+    },
+    {
+      "name": "Font",
+      "description": "Represents fonts used to render text. Commonly used in Ignition Vision for dynamic font styling in scripts.",
+      "constructors": [
+        {
+          "signature": "Font(name, style, size)",
+          "params": [
+            {"name": "name", "type": "String", "description": "The font name (e.g., 'Arial', 'Dialog', 'Serif')"},
+            {"name": "style", "type": "int", "description": "The style constant (Font.PLAIN, Font.BOLD, Font.ITALIC, or Font.BOLD | Font.ITALIC)"},
+            {"name": "size", "type": "int", "description": "The point size of the font"}
+          ],
+          "description": "Creates a new Font from the specified name, style, and point size."
+        }
+      ],
+      "methods": [
+        {
+          "name": "decode",
+          "signature": "decode(str)",
+          "params": [{"name": "str", "type": "String", "description": "The font description string (e.g., 'Arial-BOLD-12', 'Serif-ITALIC-14')"}],
+          "returns": {"type": "Font", "description": "The Font object that str describes"},
+          "description": "Returns the Font that the str argument describes. The string should be in the format 'fontname-style-pointsize' (e.g., 'Arial-BOLD-12').",
+          "static": true
+        },
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The logical name of this Font"},
+          "description": "Returns the logical name of this Font.",
+          "static": false
+        },
+        {
+          "name": "getFamily",
+          "signature": "getFamily()",
+          "params": [],
+          "returns": {"type": "String", "description": "The family name of this Font"},
+          "description": "Returns the family name of this Font.",
+          "static": false
+        },
+        {
+          "name": "getSize",
+          "signature": "getSize()",
+          "params": [],
+          "returns": {"type": "int", "description": "The point size of this Font, rounded to an integer"},
+          "description": "Returns the point size of this Font, rounded to an integer.",
+          "static": false
+        },
+        {
+          "name": "getSize2D",
+          "signature": "getSize2D()",
+          "params": [],
+          "returns": {"type": "float", "description": "The point size of this Font as a float value"},
+          "description": "Returns the point size of this Font as a float value.",
+          "static": false
+        },
+        {
+          "name": "getStyle",
+          "signature": "getStyle()",
+          "params": [],
+          "returns": {"type": "int", "description": "The style of this Font (PLAIN, BOLD, ITALIC, or BOLD|ITALIC)"},
+          "description": "Returns the style of this Font. The style can be PLAIN, BOLD, ITALIC, or BOLD+ITALIC.",
+          "static": false
+        },
+        {
+          "name": "isBold",
+          "signature": "isBold()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Font has the BOLD style"},
+          "description": "Indicates whether this Font object's style is BOLD.",
+          "static": false
+        },
+        {
+          "name": "isItalic",
+          "signature": "isItalic()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Font has the ITALIC style"},
+          "description": "Indicates whether this Font object's style is ITALIC.",
+          "static": false
+        },
+        {
+          "name": "isPlain",
+          "signature": "isPlain()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Font has the PLAIN style"},
+          "description": "Indicates whether this Font object's style is PLAIN.",
+          "static": false
+        },
+        {
+          "name": "deriveFont",
+          "signature": "deriveFont(style)",
+          "params": [{"name": "style", "type": "int", "description": "The style for the new Font (e.g., Font.BOLD)"}],
+          "returns": {"type": "Font", "description": "A new Font object with the specified style"},
+          "description": "Creates a new Font object by replicating this Font with a new style.",
+          "static": false
+        },
+        {
+          "name": "deriveFont",
+          "signature": "deriveFont(size)",
+          "params": [{"name": "size", "type": "float", "description": "The size for the new Font"}],
+          "returns": {"type": "Font", "description": "A new Font object with the specified size"},
+          "description": "Creates a new Font object by replicating this Font with a new size.",
+          "static": false
+        },
+        {
+          "name": "deriveFont",
+          "signature": "deriveFont(style, size)",
+          "params": [
+            {"name": "style", "type": "int", "description": "The style for the new Font"},
+            {"name": "size", "type": "float", "description": "The size for the new Font"}
+          ],
+          "returns": {"type": "Font", "description": "A new Font object with the specified style and size"},
+          "description": "Creates a new Font object by replicating this Font with a new style and size.",
+          "static": false
+        },
+        {
+          "name": "canDisplay",
+          "signature": "canDisplay(c)",
+          "params": [{"name": "c", "type": "char", "description": "The character to check"}],
+          "returns": {"type": "boolean", "description": "True if this Font has a glyph for the specified character"},
+          "description": "Checks if this Font has a glyph for the specified character.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this Font"},
+          "description": "Converts this Font object to a String representation.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "PLAIN", "type": "int", "description": "The plain style constant (0).", "static": true, "final": true},
+        {"name": "BOLD", "type": "int", "description": "The bold style constant (1).", "static": true, "final": true},
+        {"name": "ITALIC", "type": "int", "description": "The italic style constant (2).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Font.html"
+    },
+    {
+      "name": "Dimension",
+      "description": "Encapsulates the width and height of a component in integer precision. Used for component sizing in Ignition Vision.",
+      "constructors": [
+        {
+          "signature": "Dimension()",
+          "params": [],
+          "description": "Creates a Dimension with a width of zero and a height of zero."
+        },
+        {
+          "signature": "Dimension(width, height)",
+          "params": [
+            {"name": "width", "type": "int", "description": "The width"},
+            {"name": "height", "type": "int", "description": "The height"}
+          ],
+          "description": "Constructs a Dimension with the specified width and height."
+        },
+        {
+          "signature": "Dimension(d)",
+          "params": [
+            {"name": "d", "type": "Dimension", "description": "The Dimension to copy"}
+          ],
+          "description": "Creates a Dimension whose width and height are the same as the specified Dimension."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getWidth",
+          "signature": "getWidth()",
+          "params": [],
+          "returns": {"type": "double", "description": "The width of this Dimension as a double"},
+          "description": "Returns the width of this Dimension in double precision.",
+          "static": false
+        },
+        {
+          "name": "getHeight",
+          "signature": "getHeight()",
+          "params": [],
+          "returns": {"type": "double", "description": "The height of this Dimension as a double"},
+          "description": "Returns the height of this Dimension in double precision.",
+          "static": false
+        },
+        {
+          "name": "setSize",
+          "signature": "setSize(width, height)",
+          "params": [
+            {"name": "width", "type": "int", "description": "The new width"},
+            {"name": "height", "type": "int", "description": "The new height"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the size of this Dimension to the specified width and height.",
+          "static": false
+        },
+        {
+          "name": "setSize",
+          "signature": "setSize(d)",
+          "params": [
+            {"name": "d", "type": "Dimension", "description": "The new size for this Dimension"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the size of this Dimension to match the specified Dimension.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the objects are equal"},
+          "description": "Checks whether two Dimension objects have equal values.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this Dimension"},
+          "description": "Returns a string representation of the values of this Dimension object.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "width", "type": "int", "description": "The width dimension. Negative values are undefined.", "static": false, "final": false},
+        {"name": "height", "type": "int", "description": "The height dimension. Negative values are undefined.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Dimension.html"
+    },
+    {
+      "name": "Point",
+      "description": "Represents a location in (x, y) coordinate space, specified in integer precision.",
+      "constructors": [
+        {
+          "signature": "Point()",
+          "params": [],
+          "description": "Constructs a Point at the origin (0, 0) of the coordinate space."
+        },
+        {
+          "signature": "Point(x, y)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The x coordinate"},
+            {"name": "y", "type": "int", "description": "The y coordinate"}
+          ],
+          "description": "Constructs a Point at the specified (x, y) location."
+        },
+        {
+          "signature": "Point(p)",
+          "params": [
+            {"name": "p", "type": "Point", "description": "The Point to copy"}
+          ],
+          "description": "Constructs a Point with the same location as the specified Point."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The x coordinate of this Point as a double"},
+          "description": "Returns the X coordinate of this Point in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The y coordinate of this Point as a double"},
+          "description": "Returns the Y coordinate of this Point in double precision.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(x, y)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The new x coordinate"},
+            {"name": "y", "type": "int", "description": "The new y coordinate"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Changes the point to have the specified location.",
+          "static": false
+        },
+        {
+          "name": "translate",
+          "signature": "translate(dx, dy)",
+          "params": [
+            {"name": "dx", "type": "int", "description": "The distance to move along the x axis"},
+            {"name": "dy", "type": "int", "description": "The distance to move along the y axis"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Translates this point, at location (x, y), by dx along the x axis and dy along the y axis.",
+          "static": false
+        },
+        {
+          "name": "move",
+          "signature": "move(x, y)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The new x coordinate"},
+            {"name": "y", "type": "int", "description": "The new y coordinate"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Moves this point to the specified location in the (x, y) coordinate plane.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the objects are equal"},
+          "description": "Determines whether two points are equal. Two instances of Point are equal if the values of their x and y member fields are the same.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this Point"},
+          "description": "Returns a string representation of this point and its location in the (x, y) coordinate space.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "int", "description": "The x coordinate.", "static": false, "final": false},
+        {"name": "y", "type": "int", "description": "The y coordinate.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Point.html"
+    },
+    {
+      "name": "Rectangle",
+      "description": "Specifies an area in a coordinate space enclosed by the Rectangle object's upper-left point (x, y) and its width and height.",
+      "constructors": [
+        {
+          "signature": "Rectangle()",
+          "params": [],
+          "description": "Constructs a new Rectangle whose upper-left corner is at (0, 0) with width and height both zero."
+        },
+        {
+          "signature": "Rectangle(x, y, width, height)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The x coordinate of the upper-left corner"},
+            {"name": "y", "type": "int", "description": "The y coordinate of the upper-left corner"},
+            {"name": "width", "type": "int", "description": "The width of the Rectangle"},
+            {"name": "height", "type": "int", "description": "The height of the Rectangle"}
+          ],
+          "description": "Constructs a new Rectangle whose upper-left corner is specified as (x, y) and whose width and height are specified by the arguments of the same name."
+        },
+        {
+          "signature": "Rectangle(width, height)",
+          "params": [
+            {"name": "width", "type": "int", "description": "The width of the Rectangle"},
+            {"name": "height", "type": "int", "description": "The height of the Rectangle"}
+          ],
+          "description": "Constructs a new Rectangle whose upper-left corner is at (0, 0) with the specified width and height."
+        },
+        {
+          "signature": "Rectangle(p, d)",
+          "params": [
+            {"name": "p", "type": "Point", "description": "A Point that is the upper-left corner of the Rectangle"},
+            {"name": "d", "type": "Dimension", "description": "A Dimension representing the width and height"}
+          ],
+          "description": "Constructs a new Rectangle whose upper-left corner is the specified Point and whose width and height are specified by the Dimension."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The x coordinate of the upper-left corner"},
+          "description": "Returns the X coordinate of the upper-left corner of this Rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The y coordinate of the upper-left corner"},
+          "description": "Returns the Y coordinate of the upper-left corner of this Rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getWidth",
+          "signature": "getWidth()",
+          "params": [],
+          "returns": {"type": "double", "description": "The width of this Rectangle"},
+          "description": "Returns the width of this Rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getHeight",
+          "signature": "getHeight()",
+          "params": [],
+          "returns": {"type": "double", "description": "The height of this Rectangle"},
+          "description": "Returns the height of this Rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getBounds",
+          "signature": "getBounds()",
+          "params": [],
+          "returns": {"type": "Rectangle", "description": "A new Rectangle identical to this Rectangle"},
+          "description": "Gets the bounding Rectangle of this Rectangle.",
+          "static": false
+        },
+        {
+          "name": "setBounds",
+          "signature": "setBounds(x, y, width, height)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The new x coordinate of the upper-left corner"},
+            {"name": "y", "type": "int", "description": "The new y coordinate of the upper-left corner"},
+            {"name": "width", "type": "int", "description": "The new width"},
+            {"name": "height", "type": "int", "description": "The new height"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the bounding Rectangle of this Rectangle to the specified x, y, width, and height.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y)",
+          "params": [
+            {"name": "x", "type": "int", "description": "The specified x coordinate"},
+            {"name": "y", "type": "int", "description": "The specified y coordinate"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the point (x, y) is inside this Rectangle"},
+          "description": "Checks whether this Rectangle contains the point at the specified location (x, y).",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(p)",
+          "params": [
+            {"name": "p", "type": "Point", "description": "The specified Point"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the Point is inside this Rectangle"},
+          "description": "Checks whether this Rectangle contains the specified Point.",
+          "static": false
+        },
+        {
+          "name": "intersects",
+          "signature": "intersects(r)",
+          "params": [{"name": "r", "type": "Rectangle", "description": "The specified Rectangle"}],
+          "returns": {"type": "boolean", "description": "True if this Rectangle and the specified Rectangle intersect"},
+          "description": "Determines whether this Rectangle and the specified Rectangle intersect. Two rectangles intersect if their intersection is nonempty.",
+          "static": false
+        },
+        {
+          "name": "intersection",
+          "signature": "intersection(r)",
+          "params": [{"name": "r", "type": "Rectangle", "description": "The specified Rectangle"}],
+          "returns": {"type": "Rectangle", "description": "The largest Rectangle contained in both this Rectangle and the specified Rectangle"},
+          "description": "Computes the intersection of this Rectangle with the specified Rectangle. Returns a new Rectangle representing the intersection.",
+          "static": false
+        },
+        {
+          "name": "union",
+          "signature": "union(r)",
+          "params": [{"name": "r", "type": "Rectangle", "description": "The specified Rectangle"}],
+          "returns": {"type": "Rectangle", "description": "The smallest Rectangle containing both this Rectangle and the specified Rectangle"},
+          "description": "Computes the union of this Rectangle with the specified Rectangle. Returns a new Rectangle representing the union.",
+          "static": false
+        },
+        {
+          "name": "isEmpty",
+          "signature": "isEmpty()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Rectangle is empty"},
+          "description": "Determines whether this Rectangle is empty. A Rectangle is empty if its width or height is less than or equal to zero.",
+          "static": false
+        },
+        {
+          "name": "translate",
+          "signature": "translate(dx, dy)",
+          "params": [
+            {"name": "dx", "type": "int", "description": "The distance to move along the x axis"},
+            {"name": "dy", "type": "int", "description": "The distance to move along the y axis"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Translates this Rectangle the indicated distance, to the right along the x axis and downward along the y axis.",
+          "static": false
+        },
+        {
+          "name": "grow",
+          "signature": "grow(h, v)",
+          "params": [
+            {"name": "h", "type": "int", "description": "The horizontal expansion on both left and right sides"},
+            {"name": "v", "type": "int", "description": "The vertical expansion on both top and bottom"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resizes this Rectangle both horizontally and vertically. The left and right edges are moved outward by h, and the top and bottom by v.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [{"name": "obj", "type": "Object", "description": "The object to compare with"}],
+          "returns": {"type": "boolean", "description": "True if the objects are equal"},
+          "description": "Checks whether two rectangles are equal. Two instances of Rectangle are equal if their position and size are the same.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this Rectangle"},
+          "description": "Returns a String representing this Rectangle and its values.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "int", "description": "The x coordinate of the upper-left corner of the Rectangle.", "static": false, "final": false},
+        {"name": "y", "type": "int", "description": "The y coordinate of the upper-left corner of the Rectangle.", "static": false, "final": false},
+        {"name": "width", "type": "int", "description": "The width of the Rectangle.", "static": false, "final": false},
+        {"name": "height", "type": "int", "description": "The height of the Rectangle.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Rectangle.html"
+    },
+    {
+      "name": "Cursor",
+      "description": "Encapsulates the bitmap representation of the mouse cursor. Used in Ignition Vision to change cursor appearance on components.",
+      "constructors": [
+        {
+          "signature": "Cursor(type)",
+          "params": [
+            {"name": "type", "type": "int", "description": "The type of the predefined cursor (e.g., Cursor.HAND_CURSOR)"}
+          ],
+          "description": "Creates a new cursor object with the specified type."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getPredefinedCursor",
+          "signature": "getPredefinedCursor(type)",
+          "params": [{"name": "type", "type": "int", "description": "The type of the predefined cursor"}],
+          "returns": {"type": "Cursor", "description": "The specified predefined cursor"},
+          "description": "Returns a cursor object with the specified predefined type.",
+          "static": true
+        },
+        {
+          "name": "getDefaultCursor",
+          "signature": "getDefaultCursor()",
+          "params": [],
+          "returns": {"type": "Cursor", "description": "The default cursor"},
+          "description": "Returns the system default cursor.",
+          "static": true
+        },
+        {
+          "name": "getType",
+          "signature": "getType()",
+          "params": [],
+          "returns": {"type": "int", "description": "The cursor type"},
+          "description": "Returns the type for this cursor.",
+          "static": false
+        },
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {"type": "String", "description": "The localized description of this cursor"},
+          "description": "Returns the name of this cursor.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this cursor"},
+          "description": "Returns a string representation of this cursor.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "DEFAULT_CURSOR", "type": "int", "description": "The default cursor type (0).", "static": true, "final": true},
+        {"name": "CROSSHAIR_CURSOR", "type": "int", "description": "The crosshair cursor type (1).", "static": true, "final": true},
+        {"name": "TEXT_CURSOR", "type": "int", "description": "The text cursor type (2).", "static": true, "final": true},
+        {"name": "WAIT_CURSOR", "type": "int", "description": "The wait cursor type (3).", "static": true, "final": true},
+        {"name": "HAND_CURSOR", "type": "int", "description": "The hand cursor type (12).", "static": true, "final": true},
+        {"name": "MOVE_CURSOR", "type": "int", "description": "The move cursor type (13).", "static": true, "final": true},
+        {"name": "N_RESIZE_CURSOR", "type": "int", "description": "The north-resize cursor type (8).", "static": true, "final": true},
+        {"name": "S_RESIZE_CURSOR", "type": "int", "description": "The south-resize cursor type (9).", "static": true, "final": true},
+        {"name": "E_RESIZE_CURSOR", "type": "int", "description": "The east-resize cursor type (11).", "static": true, "final": true},
+        {"name": "W_RESIZE_CURSOR", "type": "int", "description": "The west-resize cursor type (10).", "static": true, "final": true},
+        {"name": "NE_RESIZE_CURSOR", "type": "int", "description": "The north-east-resize cursor type (7).", "static": true, "final": true},
+        {"name": "NW_RESIZE_CURSOR", "type": "int", "description": "The north-west-resize cursor type (6).", "static": true, "final": true},
+        {"name": "SE_RESIZE_CURSOR", "type": "int", "description": "The south-east-resize cursor type (5).", "static": true, "final": true},
+        {"name": "SW_RESIZE_CURSOR", "type": "int", "description": "The south-west-resize cursor type (4).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/Cursor.html"
+    },
+    {
+      "name": "BasicStroke",
+      "description": "Defines a basic set of rendering attributes for the outlines of graphics primitives. Used in Ignition Vision for custom drawing operations.",
+      "constructors": [
+        {
+          "signature": "BasicStroke()",
+          "params": [],
+          "description": "Constructs a new BasicStroke with defaults of 1.0 width, CAP_SQUARE, JOIN_MITER, and a miter limit of 10.0."
+        },
+        {
+          "signature": "BasicStroke(width)",
+          "params": [
+            {"name": "width", "type": "float", "description": "The width of the BasicStroke"}
+          ],
+          "description": "Constructs a solid BasicStroke with the specified line width and with default values for CAP_SQUARE, JOIN_MITER, and miter limit of 10.0."
+        },
+        {
+          "signature": "BasicStroke(width, cap, join)",
+          "params": [
+            {"name": "width", "type": "float", "description": "The width of the BasicStroke"},
+            {"name": "cap", "type": "int", "description": "The decoration of the ends of a BasicStroke (CAP_BUTT, CAP_ROUND, or CAP_SQUARE)"},
+            {"name": "join", "type": "int", "description": "The decoration applied where path segments meet (JOIN_BEVEL, JOIN_MITER, or JOIN_ROUND)"}
+          ],
+          "description": "Constructs a solid BasicStroke with the specified attributes."
+        },
+        {
+          "signature": "BasicStroke(width, cap, join, miterlimit)",
+          "params": [
+            {"name": "width", "type": "float", "description": "The width of the BasicStroke"},
+            {"name": "cap", "type": "int", "description": "The decoration of the ends of a BasicStroke"},
+            {"name": "join", "type": "int", "description": "The decoration applied where path segments meet"},
+            {"name": "miterlimit", "type": "float", "description": "The limit to trim the miter join (must be >= 1.0)"}
+          ],
+          "description": "Constructs a solid BasicStroke with the specified attributes including miter limit."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getLineWidth",
+          "signature": "getLineWidth()",
+          "params": [],
+          "returns": {"type": "float", "description": "The line width of this BasicStroke"},
+          "description": "Returns the line width.",
+          "static": false
+        },
+        {
+          "name": "getEndCap",
+          "signature": "getEndCap()",
+          "params": [],
+          "returns": {"type": "int", "description": "The end cap style (CAP_BUTT, CAP_ROUND, or CAP_SQUARE)"},
+          "description": "Returns the end cap style.",
+          "static": false
+        },
+        {
+          "name": "getLineJoin",
+          "signature": "getLineJoin()",
+          "params": [],
+          "returns": {"type": "int", "description": "The line join style (JOIN_BEVEL, JOIN_MITER, or JOIN_ROUND)"},
+          "description": "Returns the line join style.",
+          "static": false
+        },
+        {
+          "name": "getMiterLimit",
+          "signature": "getMiterLimit()",
+          "params": [],
+          "returns": {"type": "float", "description": "The limit of miter joins"},
+          "description": "Returns the limit of miter joins.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "CAP_BUTT", "type": "int", "description": "Ends unclosed subpaths with no added decoration (0).", "static": true, "final": true},
+        {"name": "CAP_ROUND", "type": "int", "description": "Ends unclosed subpaths with a round decoration that has a radius equal to half the width (1).", "static": true, "final": true},
+        {"name": "CAP_SQUARE", "type": "int", "description": "Ends unclosed subpaths with a square projection extending half the line width (2).", "static": true, "final": true},
+        {"name": "JOIN_BEVEL", "type": "int", "description": "Joins path segments by connecting the outer corners with a straight segment (2).", "static": true, "final": true},
+        {"name": "JOIN_MITER", "type": "int", "description": "Joins path segments by extending their outside edges until they meet (0).", "static": true, "final": true},
+        {"name": "JOIN_ROUND", "type": "int", "description": "Joins path segments by rounding off the corner at a radius of half the line width (1).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/BasicStroke.html"
+    }
+  ]
+}

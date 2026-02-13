@@ -1,0 +1,183 @@
+{
+  "package": "java.util.concurrent",
+  "classes": [
+    {
+      "name": "ExecutorService",
+      "description": "An Executor that provides methods to manage termination and methods that can produce a Future for tracking progress of asynchronous tasks.",
+      "constructors": [],
+      "methods": [
+        {"name": "submit", "signature": "submit(task)", "params": [{"name": "task", "type": "Callable", "description": "The task to submit"}], "returns": {"type": "Future", "description": "A Future representing pending completion of the task"}, "description": "Submits a value-returning task for execution and returns a Future representing the pending results.", "static": false},
+        {"name": "submit", "signature": "submit(task)", "params": [{"name": "task", "type": "Runnable", "description": "The task to submit"}], "returns": {"type": "Future", "description": "A Future representing pending completion of the task"}, "description": "Submits a Runnable task for execution and returns a Future representing that task.", "static": false},
+        {"name": "execute", "signature": "execute(command)", "params": [{"name": "command", "type": "Runnable", "description": "The runnable task"}], "returns": {"type": "void", "description": ""}, "description": "Executes the given command at some time in the future.", "static": false},
+        {"name": "shutdown", "signature": "shutdown()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.", "static": false},
+        {"name": "shutdownNow", "signature": "shutdownNow()", "params": [], "returns": {"type": "List", "description": "List of tasks that never commenced execution"}, "description": "Attempts to stop all actively executing tasks, halts the processing of waiting tasks, and returns a list of the tasks that were awaiting execution.", "static": false},
+        {"name": "isShutdown", "signature": "isShutdown()", "params": [], "returns": {"type": "boolean", "description": "True if this executor has been shut down"}, "description": "Returns true if this executor has been shut down.", "static": false},
+        {"name": "isTerminated", "signature": "isTerminated()", "params": [], "returns": {"type": "boolean", "description": "True if all tasks have completed following shut down"}, "description": "Returns true if all tasks have completed following shut down.", "static": false},
+        {"name": "awaitTermination", "signature": "awaitTermination(timeout, unit)", "params": [{"name": "timeout", "type": "long", "description": "The maximum time to wait"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the timeout argument"}], "returns": {"type": "boolean", "description": "True if this executor terminated, false if the timeout elapsed before termination"}, "description": "Blocks until all tasks have completed execution after a shutdown request, or the timeout occurs, or the current thread is interrupted.", "static": false},
+        {"name": "invokeAll", "signature": "invokeAll(tasks)", "params": [{"name": "tasks", "type": "Collection", "description": "The collection of tasks"}], "returns": {"type": "List", "description": "A list of Futures representing the tasks, in the same sequential order as produced by the iterator for the given task list"}, "description": "Executes the given tasks, returning a list of Futures holding their status and results when all complete.", "static": false},
+        {"name": "invokeAny", "signature": "invokeAny(tasks)", "params": [{"name": "tasks", "type": "Collection", "description": "The collection of tasks"}], "returns": {"type": "Object", "description": "The result returned by one of the tasks"}, "description": "Executes the given tasks, returning the result of one that has completed successfully, if any do.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html"
+    },
+    {
+      "name": "ScheduledExecutorService",
+      "description": "An ExecutorService that can schedule commands to run after a given delay, or to execute periodically.",
+      "constructors": [],
+      "methods": [
+        {"name": "schedule", "signature": "schedule(callable, delay, unit)", "params": [{"name": "callable", "type": "Callable", "description": "The function to execute"}, {"name": "delay", "type": "long", "description": "The time from now to delay execution"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the delay parameter"}], "returns": {"type": "ScheduledFuture", "description": "A ScheduledFuture that can be used to extract result or cancel"}, "description": "Creates and executes a ScheduledFuture that becomes enabled after the given delay.", "static": false},
+        {"name": "schedule", "signature": "schedule(command, delay, unit)", "params": [{"name": "command", "type": "Runnable", "description": "The task to execute"}, {"name": "delay", "type": "long", "description": "The time from now to delay execution"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the delay parameter"}], "returns": {"type": "ScheduledFuture", "description": "A ScheduledFuture representing pending completion of the task"}, "description": "Creates and executes a one-shot action that becomes enabled after the given delay.", "static": false},
+        {"name": "scheduleAtFixedRate", "signature": "scheduleAtFixedRate(command, initialDelay, period, unit)", "params": [{"name": "command", "type": "Runnable", "description": "The task to execute"}, {"name": "initialDelay", "type": "long", "description": "The time to delay first execution"}, {"name": "period", "type": "long", "description": "The period between successive executions"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the initialDelay and period parameters"}], "returns": {"type": "ScheduledFuture", "description": "A ScheduledFuture representing pending completion of the task"}, "description": "Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given period.", "static": false},
+        {"name": "scheduleWithFixedDelay", "signature": "scheduleWithFixedDelay(command, initialDelay, delay, unit)", "params": [{"name": "command", "type": "Runnable", "description": "The task to execute"}, {"name": "initialDelay", "type": "long", "description": "The time to delay first execution"}, {"name": "delay", "type": "long", "description": "The delay between the termination of one execution and the commencement of the next"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the initialDelay and delay parameters"}], "returns": {"type": "ScheduledFuture", "description": "A ScheduledFuture representing pending completion of the task"}, "description": "Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given delay between the termination of one execution and the commencement of the next.", "static": false},
+        {"name": "submit", "signature": "submit(task)", "params": [{"name": "task", "type": "Callable", "description": "The task to submit"}], "returns": {"type": "Future", "description": "A Future representing pending completion of the task"}, "description": "Submits a value-returning task for execution and returns a Future representing the pending results.", "static": false},
+        {"name": "execute", "signature": "execute(command)", "params": [{"name": "command", "type": "Runnable", "description": "The runnable task"}], "returns": {"type": "void", "description": ""}, "description": "Executes the given command at some time in the future.", "static": false},
+        {"name": "shutdown", "signature": "shutdown()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted.", "static": false},
+        {"name": "shutdownNow", "signature": "shutdownNow()", "params": [], "returns": {"type": "List", "description": "List of tasks that never commenced execution"}, "description": "Attempts to stop all actively executing tasks and returns a list of the tasks that were awaiting execution.", "static": false},
+        {"name": "isShutdown", "signature": "isShutdown()", "params": [], "returns": {"type": "boolean", "description": "True if this executor has been shut down"}, "description": "Returns true if this executor has been shut down.", "static": false},
+        {"name": "isTerminated", "signature": "isTerminated()", "params": [], "returns": {"type": "boolean", "description": "True if all tasks have completed following shut down"}, "description": "Returns true if all tasks have completed following shut down.", "static": false},
+        {"name": "awaitTermination", "signature": "awaitTermination(timeout, unit)", "params": [{"name": "timeout", "type": "long", "description": "The maximum time to wait"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the timeout argument"}], "returns": {"type": "boolean", "description": "True if this executor terminated, false if the timeout elapsed before termination"}, "description": "Blocks until all tasks have completed execution after a shutdown request, or the timeout occurs, or the current thread is interrupted.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html"
+    },
+    {
+      "name": "Executors",
+      "description": "Factory and utility methods for Executor, ExecutorService, ScheduledExecutorService, ThreadFactory, and Callable classes.",
+      "constructors": [],
+      "methods": [
+        {"name": "newFixedThreadPool", "signature": "newFixedThreadPool(nThreads)", "params": [{"name": "nThreads", "type": "int", "description": "The number of threads in the pool"}], "returns": {"type": "ExecutorService", "description": "The newly created thread pool"}, "description": "Creates a thread pool that reuses a fixed number of threads operating off a shared unbounded queue.", "static": true},
+        {"name": "newSingleThreadExecutor", "signature": "newSingleThreadExecutor()", "params": [], "returns": {"type": "ExecutorService", "description": "The newly created single-threaded executor"}, "description": "Creates an Executor that uses a single worker thread operating off an unbounded queue.", "static": true},
+        {"name": "newCachedThreadPool", "signature": "newCachedThreadPool()", "params": [], "returns": {"type": "ExecutorService", "description": "The newly created thread pool"}, "description": "Creates a thread pool that creates new threads as needed, but will reuse previously constructed threads when they are available.", "static": true},
+        {"name": "newScheduledThreadPool", "signature": "newScheduledThreadPool(corePoolSize)", "params": [{"name": "corePoolSize", "type": "int", "description": "The number of threads to keep in the pool, even if they are idle"}], "returns": {"type": "ScheduledExecutorService", "description": "The newly created scheduled thread pool"}, "description": "Creates a thread pool that can schedule commands to run after a given delay, or to execute periodically.", "static": true},
+        {"name": "newSingleThreadScheduledExecutor", "signature": "newSingleThreadScheduledExecutor()", "params": [], "returns": {"type": "ScheduledExecutorService", "description": "The newly created scheduled executor"}, "description": "Creates a single-threaded executor that can schedule commands to run after a given delay, or to execute periodically.", "static": true},
+        {"name": "newWorkStealingPool", "signature": "newWorkStealingPool()", "params": [], "returns": {"type": "ExecutorService", "description": "The newly created thread pool"}, "description": "Creates a work-stealing thread pool using all available processors as its target parallelism level.", "static": true},
+        {"name": "callable", "signature": "callable(task)", "params": [{"name": "task", "type": "Runnable", "description": "The task to wrap"}], "returns": {"type": "Callable", "description": "A Callable object wrapping the task"}, "description": "Returns a Callable object that, when called, runs the given task and returns null.", "static": true}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Executors.html"
+    },
+    {
+      "name": "Future",
+      "description": "Represents the result of an asynchronous computation. Methods are provided to check if the computation is complete, to wait for its completion, and to retrieve the result.",
+      "constructors": [],
+      "methods": [
+        {"name": "get", "signature": "get()", "params": [], "returns": {"type": "Object", "description": "The computed result"}, "description": "Waits if necessary for the computation to complete, and then retrieves its result.", "static": false},
+        {"name": "get", "signature": "get(timeout, unit)", "params": [{"name": "timeout", "type": "long", "description": "The maximum time to wait"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the timeout argument"}], "returns": {"type": "Object", "description": "The computed result"}, "description": "Waits if necessary for at most the given time for the computation to complete, and then retrieves its result, if available.", "static": false},
+        {"name": "cancel", "signature": "cancel(mayInterruptIfRunning)", "params": [{"name": "mayInterruptIfRunning", "type": "boolean", "description": "True if the thread executing this task should be interrupted; otherwise, in-progress tasks are allowed to complete"}], "returns": {"type": "boolean", "description": "False if the task could not be cancelled, typically because it has already completed; true otherwise"}, "description": "Attempts to cancel execution of this task.", "static": false},
+        {"name": "isCancelled", "signature": "isCancelled()", "params": [], "returns": {"type": "boolean", "description": "True if this task was cancelled before it completed normally"}, "description": "Returns true if this task was cancelled before it completed normally.", "static": false},
+        {"name": "isDone", "signature": "isDone()", "params": [], "returns": {"type": "boolean", "description": "True if this task completed"}, "description": "Returns true if this task completed. Completion may be due to normal termination, an exception, or cancellation.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html"
+    },
+    {
+      "name": "TimeUnit",
+      "description": "Represents time durations at a given unit of granularity and provides utility methods to convert across units and to perform timing and delay operations.",
+      "constructors": [],
+      "methods": [
+        {"name": "convert", "signature": "convert(sourceDuration, sourceUnit)", "params": [{"name": "sourceDuration", "type": "long", "description": "The time duration in the given sourceUnit"}, {"name": "sourceUnit", "type": "TimeUnit", "description": "The unit of the sourceDuration argument"}], "returns": {"type": "long", "description": "The converted duration in this unit"}, "description": "Converts the given time duration in the given unit to this unit.", "static": false},
+        {"name": "toNanos", "signature": "toNanos(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in nanoseconds"}, "description": "Converts the given duration to nanoseconds.", "static": false},
+        {"name": "toMicros", "signature": "toMicros(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in microseconds"}, "description": "Converts the given duration to microseconds.", "static": false},
+        {"name": "toMillis", "signature": "toMillis(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in milliseconds"}, "description": "Converts the given duration to milliseconds.", "static": false},
+        {"name": "toSeconds", "signature": "toSeconds(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in seconds"}, "description": "Converts the given duration to seconds.", "static": false},
+        {"name": "toMinutes", "signature": "toMinutes(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in minutes"}, "description": "Converts the given duration to minutes.", "static": false},
+        {"name": "toHours", "signature": "toHours(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in hours"}, "description": "Converts the given duration to hours.", "static": false},
+        {"name": "toDays", "signature": "toDays(duration)", "params": [{"name": "duration", "type": "long", "description": "The duration"}], "returns": {"type": "long", "description": "The converted duration in days"}, "description": "Converts the given duration to days.", "static": false},
+        {"name": "sleep", "signature": "sleep(timeout)", "params": [{"name": "timeout", "type": "long", "description": "The minimum time to sleep"}], "returns": {"type": "void", "description": ""}, "description": "Performs a Thread.sleep using this time unit. This is a convenience method that converts time arguments into the form required by the Thread.sleep method.", "static": false},
+        {"name": "timedWait", "signature": "timedWait(obj, timeout)", "params": [{"name": "obj", "type": "Object", "description": "The object to wait on"}, {"name": "timeout", "type": "long", "description": "The maximum time to wait"}], "returns": {"type": "void", "description": ""}, "description": "Performs a timed Object.wait using this time unit.", "static": false},
+        {"name": "timedJoin", "signature": "timedJoin(thread, timeout)", "params": [{"name": "thread", "type": "Thread", "description": "The thread to wait for"}, {"name": "timeout", "type": "long", "description": "The maximum time to wait"}], "returns": {"type": "void", "description": ""}, "description": "Performs a timed Thread.join using this time unit.", "static": false},
+        {"name": "valueOf", "signature": "valueOf(name)", "params": [{"name": "name", "type": "String", "description": "The name of the enum constant (e.g., SECONDS)"}], "returns": {"type": "TimeUnit", "description": "The enum constant with the specified name"}, "description": "Returns the enum constant of this type with the specified name.", "static": true},
+        {"name": "values", "signature": "values()", "params": [], "returns": {"type": "TimeUnit[]", "description": "An array containing the constants of this enum type"}, "description": "Returns an array containing the constants of this enum type, in the order they are declared.", "static": true}
+      ],
+      "fields": [
+        {"name": "NANOSECONDS", "type": "TimeUnit", "description": "Time unit representing one thousandth of a microsecond.", "static": true, "final": true},
+        {"name": "MICROSECONDS", "type": "TimeUnit", "description": "Time unit representing one thousandth of a millisecond.", "static": true, "final": true},
+        {"name": "MILLISECONDS", "type": "TimeUnit", "description": "Time unit representing one thousandth of a second.", "static": true, "final": true},
+        {"name": "SECONDS", "type": "TimeUnit", "description": "Time unit representing one second.", "static": true, "final": true},
+        {"name": "MINUTES", "type": "TimeUnit", "description": "Time unit representing sixty seconds.", "static": true, "final": true},
+        {"name": "HOURS", "type": "TimeUnit", "description": "Time unit representing sixty minutes.", "static": true, "final": true},
+        {"name": "DAYS", "type": "TimeUnit", "description": "Time unit representing twenty four hours.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/TimeUnit.html"
+    },
+    {
+      "name": "ConcurrentHashMap",
+      "description": "A hash table supporting full concurrency of retrievals and high expected concurrency for updates. All operations are thread-safe.",
+      "constructors": [
+        {"signature": "ConcurrentHashMap()", "params": [], "description": "Creates a new, empty map with a default initial capacity (16), load factor (0.75) and concurrency level (16)."},
+        {"signature": "ConcurrentHashMap(initialCapacity)", "params": [{"name": "initialCapacity", "type": "int", "description": "The initial capacity"}], "description": "Creates a new, empty map with the specified initial capacity, and with default load factor and concurrency level."},
+        {"signature": "ConcurrentHashMap(map)", "params": [{"name": "map", "type": "Map", "description": "The map whose mappings are to be placed in this map"}], "description": "Creates a new map with the same mappings as the given map."}
+      ],
+      "methods": [
+        {"name": "put", "signature": "put(key, value)", "params": [{"name": "key", "type": "Object", "description": "Key with which the value is to be associated"}, {"name": "value", "type": "Object", "description": "Value to be associated with the key"}], "returns": {"type": "Object", "description": "The previous value associated with key, or null"}, "description": "Maps the specified key to the specified value. Neither the key nor the value can be null.", "static": false},
+        {"name": "get", "signature": "get(key)", "params": [{"name": "key", "type": "Object", "description": "The key whose associated value is to be returned"}], "returns": {"type": "Object", "description": "The value to which the specified key is mapped, or null"}, "description": "Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.", "static": false},
+        {"name": "remove", "signature": "remove(key)", "params": [{"name": "key", "type": "Object", "description": "The key that needs to be removed"}], "returns": {"type": "Object", "description": "The previous value associated with key, or null"}, "description": "Removes the key (and its corresponding value) from this map.", "static": false},
+        {"name": "containsKey", "signature": "containsKey(key)", "params": [{"name": "key", "type": "Object", "description": "Possible key"}], "returns": {"type": "boolean", "description": "True if this map contains a mapping for the specified key"}, "description": "Tests if the specified object is a key in this table.", "static": false},
+        {"name": "containsValue", "signature": "containsValue(value)", "params": [{"name": "value", "type": "Object", "description": "Value to check for"}], "returns": {"type": "boolean", "description": "True if some key maps to the specified value"}, "description": "Returns true if this map maps one or more keys to the specified value.", "static": false},
+        {"name": "size", "signature": "size()", "params": [], "returns": {"type": "int", "description": "The number of key-value mappings"}, "description": "Returns the number of key-value mappings in this map.", "static": false},
+        {"name": "isEmpty", "signature": "isEmpty()", "params": [], "returns": {"type": "boolean", "description": "True if this map contains no key-value mappings"}, "description": "Returns true if this map contains no key-value mappings.", "static": false},
+        {"name": "clear", "signature": "clear()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all of the mappings from this map.", "static": false},
+        {"name": "keySet", "signature": "keySet()", "params": [], "returns": {"type": "Set", "description": "A set view of the keys contained in this map"}, "description": "Returns a Set view of the keys contained in this map.", "static": false},
+        {"name": "values", "signature": "values()", "params": [], "returns": {"type": "Collection", "description": "A collection view of the values contained in this map"}, "description": "Returns a Collection view of the values contained in this map.", "static": false},
+        {"name": "entrySet", "signature": "entrySet()", "params": [], "returns": {"type": "Set", "description": "A set view of the mappings contained in this map"}, "description": "Returns a Set view of the mappings contained in this map.", "static": false},
+        {"name": "putIfAbsent", "signature": "putIfAbsent(key, value)", "params": [{"name": "key", "type": "Object", "description": "Key with which the specified value is to be associated"}, {"name": "value", "type": "Object", "description": "Value to be associated with the specified key"}], "returns": {"type": "Object", "description": "The previous value associated with the specified key, or null if there was no mapping"}, "description": "If the specified key is not already associated with a value, associate it with the given value.", "static": false},
+        {"name": "replace", "signature": "replace(key, value)", "params": [{"name": "key", "type": "Object", "description": "Key with which the specified value is associated"}, {"name": "value", "type": "Object", "description": "Value to be associated with the specified key"}], "returns": {"type": "Object", "description": "The previous value associated with the specified key, or null if there was no mapping"}, "description": "Replaces the entry for a key only if currently mapped to some value.", "static": false},
+        {"name": "replace", "signature": "replace(key, oldValue, newValue)", "params": [{"name": "key", "type": "Object", "description": "Key with which the specified value is associated"}, {"name": "oldValue", "type": "Object", "description": "Value expected to be associated with the specified key"}, {"name": "newValue", "type": "Object", "description": "Value to be associated with the specified key"}], "returns": {"type": "boolean", "description": "True if the value was replaced"}, "description": "Replaces the entry for a key only if currently mapped to a given value.", "static": false},
+        {"name": "remove", "signature": "remove(key, value)", "params": [{"name": "key", "type": "Object", "description": "Key with which the specified value is associated"}, {"name": "value", "type": "Object", "description": "Value expected to be associated with the specified key"}], "returns": {"type": "boolean", "description": "True if the value was removed"}, "description": "Removes the entry for a key only if currently mapped to a given value.", "static": false},
+        {"name": "getOrDefault", "signature": "getOrDefault(key, defaultValue)", "params": [{"name": "key", "type": "Object", "description": "The key"}, {"name": "defaultValue", "type": "Object", "description": "The default mapping of the key"}], "returns": {"type": "Object", "description": "The value to which the specified key is mapped, or the default value"}, "description": "Returns the value to which the specified key is mapped, or the given default value if this map contains no mapping for the key.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html"
+    },
+    {
+      "name": "CountDownLatch",
+      "description": "A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.",
+      "constructors": [
+        {"signature": "CountDownLatch(count)", "params": [{"name": "count", "type": "int", "description": "The number of times countDown must be invoked before threads can pass through await"}], "description": "Constructs a CountDownLatch initialized with the given count."}
+      ],
+      "methods": [
+        {"name": "await", "signature": "await()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Causes the current thread to wait until the latch has counted down to zero, unless the thread is interrupted.", "static": false},
+        {"name": "await", "signature": "await(timeout, unit)", "params": [{"name": "timeout", "type": "long", "description": "The maximum time to wait"}, {"name": "unit", "type": "TimeUnit", "description": "The time unit of the timeout argument"}], "returns": {"type": "boolean", "description": "True if the count reached zero, false if the waiting time elapsed before the count reached zero"}, "description": "Causes the current thread to wait until the latch has counted down to zero, unless the thread is interrupted, or the specified waiting time elapses.", "static": false},
+        {"name": "countDown", "signature": "countDown()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Decrements the count of the latch, releasing all waiting threads if the count reaches zero.", "static": false},
+        {"name": "getCount", "signature": "getCount()", "params": [], "returns": {"type": "long", "description": "The current count"}, "description": "Returns the current count.", "static": false},
+        {"name": "toString", "signature": "toString()", "params": [], "returns": {"type": "String", "description": "A string identifying this latch, as well as its state"}, "description": "Returns a string identifying this latch, as well as its state.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CountDownLatch.html"
+    },
+    {
+      "name": "CopyOnWriteArrayList",
+      "description": "A thread-safe variant of ArrayList in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.",
+      "constructors": [
+        {"signature": "CopyOnWriteArrayList()", "params": [], "description": "Creates an empty list."},
+        {"signature": "CopyOnWriteArrayList(c)", "params": [{"name": "c", "type": "Collection", "description": "The collection of initially held elements"}], "description": "Creates a list containing the elements of the specified collection, in the order they are returned by the collection's iterator."}
+      ],
+      "methods": [
+        {"name": "add", "signature": "add(element)", "params": [{"name": "element", "type": "Object", "description": "Element to be appended to this list"}], "returns": {"type": "boolean", "description": "True (as specified by Collection.add)"}, "description": "Appends the specified element to the end of this list.", "static": false},
+        {"name": "add", "signature": "add(index, element)", "params": [{"name": "index", "type": "int", "description": "Index at which the specified element is to be inserted"}, {"name": "element", "type": "Object", "description": "Element to be inserted"}], "returns": {"type": "void", "description": ""}, "description": "Inserts the specified element at the specified position in this list.", "static": false},
+        {"name": "get", "signature": "get(index)", "params": [{"name": "index", "type": "int", "description": "Index of the element to return"}], "returns": {"type": "Object", "description": "The element at the specified position in this list"}, "description": "Returns the element at the specified position in this list.", "static": false},
+        {"name": "set", "signature": "set(index, element)", "params": [{"name": "index", "type": "int", "description": "Index of the element to replace"}, {"name": "element", "type": "Object", "description": "Element to be stored at the specified position"}], "returns": {"type": "Object", "description": "The element previously at the specified position"}, "description": "Replaces the element at the specified position in this list with the specified element.", "static": false},
+        {"name": "remove", "signature": "remove(index)", "params": [{"name": "index", "type": "int", "description": "The index of the element to be removed"}], "returns": {"type": "Object", "description": "The element that was removed from the list"}, "description": "Removes the element at the specified position in this list.", "static": false},
+        {"name": "remove", "signature": "remove(o)", "params": [{"name": "o", "type": "Object", "description": "Element to be removed from this list, if present"}], "returns": {"type": "boolean", "description": "True if this list contained the specified element"}, "description": "Removes the first occurrence of the specified element from this list, if it is present.", "static": false},
+        {"name": "size", "signature": "size()", "params": [], "returns": {"type": "int", "description": "The number of elements in this list"}, "description": "Returns the number of elements in this list.", "static": false},
+        {"name": "isEmpty", "signature": "isEmpty()", "params": [], "returns": {"type": "boolean", "description": "True if this list contains no elements"}, "description": "Returns true if this list contains no elements.", "static": false},
+        {"name": "contains", "signature": "contains(o)", "params": [{"name": "o", "type": "Object", "description": "Element whose presence in this list is to be tested"}], "returns": {"type": "boolean", "description": "True if this list contains the specified element"}, "description": "Returns true if this list contains the specified element.", "static": false},
+        {"name": "indexOf", "signature": "indexOf(o)", "params": [{"name": "o", "type": "Object", "description": "Element to search for"}], "returns": {"type": "int", "description": "The index of the first occurrence of the element, or -1 if not found"}, "description": "Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.", "static": false},
+        {"name": "clear", "signature": "clear()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all of the elements from this list.", "static": false},
+        {"name": "toArray", "signature": "toArray()", "params": [], "returns": {"type": "Object[]", "description": "An array containing all of the elements in this list in proper sequence"}, "description": "Returns an array containing all of the elements in this list in proper sequence.", "static": false},
+        {"name": "iterator", "signature": "iterator()", "params": [], "returns": {"type": "Iterator", "description": "An iterator over the elements in this list in proper sequence"}, "description": "Returns an iterator over the elements in this list in proper sequence. The returned iterator provides a snapshot of the state of the list when the iterator was constructed.", "static": false},
+        {"name": "addIfAbsent", "signature": "addIfAbsent(e)", "params": [{"name": "e", "type": "Object", "description": "Element to be added to this list, if absent"}], "returns": {"type": "boolean", "description": "True if the element was added"}, "description": "Appends the element, if not present.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CopyOnWriteArrayList.html"
+    }
+  ]
+}

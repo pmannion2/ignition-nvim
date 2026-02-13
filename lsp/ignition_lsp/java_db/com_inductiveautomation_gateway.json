@@ -1,0 +1,34 @@
+{
+  "package": "com.inductiveautomation.ignition.gateway",
+  "classes": [
+    {
+      "name": "IgnitionGateway",
+      "description": "The main gateway context object providing access to all gateway subsystems. Available via SRContext.get() in gateway scope scripts.",
+      "constructors": [],
+      "methods": [
+        {"name": "get", "signature": "get()", "params": [], "returns": {"type": "IgnitionGateway", "description": "The gateway context singleton"}, "description": "Returns the gateway context singleton instance.", "static": true},
+        {"name": "getTagManager", "signature": "getTagManager()", "params": [], "returns": {"type": "GatewayTagManager", "description": "The tag manager"}, "description": "Returns the tag manager for reading, writing, and configuring tags.", "static": false},
+        {"name": "getDatasourceManager", "signature": "getDatasourceManager()", "params": [], "returns": {"type": "DatasourceManager", "description": "The datasource manager"}, "description": "Returns the datasource manager for managing database connections.", "static": false},
+        {"name": "getAlarmManager", "signature": "getAlarmManager()", "params": [], "returns": {"type": "AlarmManager", "description": "The alarm manager"}, "description": "Returns the alarm manager for alarm configuration and state.", "static": false},
+        {"name": "getProjectManager", "signature": "getProjectManager()", "params": [], "returns": {"type": "ProjectManager", "description": "The project manager"}, "description": "Returns the project manager for accessing Ignition projects.", "static": false},
+        {"name": "getSystemProperties", "signature": "getSystemProperties()", "params": [], "returns": {"type": "SystemProperties", "description": "Gateway system properties"}, "description": "Returns the gateway's system properties.", "static": false},
+        {"name": "getEdition", "signature": "getEdition()", "params": [], "returns": {"type": "String", "description": "The Ignition edition (standard, edge, maker)"}, "description": "Returns the edition of this Ignition installation.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/gateway/IgnitionGateway.html"
+    },
+    {
+      "name": "NamedQueryManager",
+      "description": "Provides access to named queries configured in Ignition projects. Allows executing named queries from gateway-scoped scripts.",
+      "constructors": [],
+      "methods": [
+        {"name": "runNamedQuery", "signature": "runNamedQuery(project, path, parameters)", "params": [{"name": "project", "type": "String", "description": "The project name"}, {"name": "path", "type": "String", "description": "The named query path"}, {"name": "parameters", "type": "Map", "description": "Query parameters"}], "returns": {"type": "Dataset", "description": "The query results as a dataset"}, "description": "Executes a named query and returns the result.", "static": false},
+        {"name": "runNamedQuery", "signature": "runNamedQuery(project, path, parameters, operationName)", "params": [{"name": "project", "type": "String", "description": "The project name"}, {"name": "path", "type": "String", "description": "The named query path"}, {"name": "parameters", "type": "Map", "description": "Query parameters"}, {"name": "operationName", "type": "String", "description": "Optional operation name for logging"}], "returns": {"type": "Dataset", "description": "The query results as a dataset"}, "description": "Executes a named query with an operation name for logging context.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://files.inductiveautomation.com/sdk/javadoc/ignition81/8.1.44/com/inductiveautomation/ignition/gateway/datasource/NamedQueryManager.html"
+    }
+  ]
+}

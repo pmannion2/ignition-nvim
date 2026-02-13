@@ -1,0 +1,196 @@
+{
+  "package": "java.util",
+  "classes": [
+    {
+      "name": "Date",
+      "description": "Represents a specific instant in time, with millisecond precision.",
+      "constructors": [
+        {"signature": "Date()", "params": [], "description": "Allocates a Date object representing the current time."},
+        {"signature": "Date(date)", "params": [{"name": "date", "type": "long", "description": "Milliseconds since epoch"}], "description": "Allocates a Date object with the given time."}
+      ],
+      "methods": [
+        {"name": "getTime", "signature": "getTime()", "params": [], "returns": {"type": "long", "description": "Milliseconds since epoch"}, "description": "Returns the number of milliseconds since January 1, 1970.", "static": false},
+        {"name": "setTime", "signature": "setTime(time)", "params": [{"name": "time", "type": "long", "description": "Milliseconds since epoch"}], "returns": {"type": "void", "description": ""}, "description": "Sets this Date object to represent the given time.", "static": false},
+        {"name": "before", "signature": "before(when)", "params": [{"name": "when", "type": "Date", "description": "A date"}], "returns": {"type": "boolean", "description": "True if this date is before the argument"}, "description": "Tests if this date is before the specified date.", "static": false},
+        {"name": "after", "signature": "after(when)", "params": [{"name": "when", "type": "Date", "description": "A date"}], "returns": {"type": "boolean", "description": "True if this date is after the argument"}, "description": "Tests if this date is after the specified date.", "static": false},
+        {"name": "compareTo", "signature": "compareTo(anotherDate)", "params": [{"name": "anotherDate", "type": "Date", "description": "The Date to compare with"}], "returns": {"type": "int", "description": "0 if equal, negative if before, positive if after"}, "description": "Compares two Dates for ordering.", "static": false},
+        {"name": "toString", "signature": "toString()", "params": [], "returns": {"type": "String", "description": "String representation of this date"}, "description": "Converts this Date to a String.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/Date.html"
+    },
+    {
+      "name": "ArrayList",
+      "description": "Resizable-array implementation of the List interface. Permits all elements including null.",
+      "constructors": [
+        {"signature": "ArrayList()", "params": [], "description": "Constructs an empty list with an initial capacity of ten."},
+        {"signature": "ArrayList(initialCapacity)", "params": [{"name": "initialCapacity", "type": "int", "description": "The initial capacity"}], "description": "Constructs an empty list with the specified initial capacity."},
+        {"signature": "ArrayList(c)", "params": [{"name": "c", "type": "Collection", "description": "The collection whose elements are to be placed into this list"}], "description": "Constructs a list containing the elements of the specified collection."}
+      ],
+      "methods": [
+        {"name": "add", "signature": "add(e)", "params": [{"name": "e", "type": "E", "description": "Element to add"}], "returns": {"type": "boolean", "description": "True"}, "description": "Appends the specified element to the end of this list.", "static": false},
+        {"name": "get", "signature": "get(index)", "params": [{"name": "index", "type": "int", "description": "Index of the element"}], "returns": {"type": "E", "description": "The element at the specified position"}, "description": "Returns the element at the specified position.", "static": false},
+        {"name": "set", "signature": "set(index, element)", "params": [{"name": "index", "type": "int", "description": "Index of the element"}, {"name": "element", "type": "E", "description": "Element to store"}], "returns": {"type": "E", "description": "The element previously at the specified position"}, "description": "Replaces the element at the specified position.", "static": false},
+        {"name": "remove", "signature": "remove(index)", "params": [{"name": "index", "type": "int", "description": "Index of the element to remove"}], "returns": {"type": "E", "description": "The element that was removed"}, "description": "Removes the element at the specified position.", "static": false},
+        {"name": "size", "signature": "size()", "params": [], "returns": {"type": "int", "description": "The number of elements"}, "description": "Returns the number of elements in this list.", "static": false},
+        {"name": "isEmpty", "signature": "isEmpty()", "params": [], "returns": {"type": "boolean", "description": "True if this list contains no elements"}, "description": "Returns true if this list contains no elements.", "static": false},
+        {"name": "contains", "signature": "contains(o)", "params": [{"name": "o", "type": "Object", "description": "Element to check for"}], "returns": {"type": "boolean", "description": "True if this list contains the element"}, "description": "Returns true if this list contains the specified element.", "static": false},
+        {"name": "indexOf", "signature": "indexOf(o)", "params": [{"name": "o", "type": "Object", "description": "Element to search for"}], "returns": {"type": "int", "description": "The index of the first occurrence, or -1"}, "description": "Returns the index of the first occurrence of the specified element.", "static": false},
+        {"name": "clear", "signature": "clear()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all of the elements from this list.", "static": false},
+        {"name": "toArray", "signature": "toArray()", "params": [], "returns": {"type": "Object[]", "description": "An array containing all elements"}, "description": "Returns an array containing all elements in proper sequence.", "static": false},
+        {"name": "addAll", "signature": "addAll(c)", "params": [{"name": "c", "type": "Collection", "description": "Collection containing elements to add"}], "returns": {"type": "boolean", "description": "True if list changed"}, "description": "Appends all elements in the specified collection to the end of this list.", "static": false},
+        {"name": "iterator", "signature": "iterator()", "params": [], "returns": {"type": "Iterator", "description": "An iterator over the elements"}, "description": "Returns an iterator over the elements in this list.", "static": false},
+        {"name": "sort", "signature": "sort(c)", "params": [{"name": "c", "type": "Comparator", "description": "The comparator to determine order"}], "returns": {"type": "void", "description": ""}, "description": "Sorts this list according to the order induced by the specified Comparator.", "static": false},
+        {"name": "subList", "signature": "subList(fromIndex, toIndex)", "params": [{"name": "fromIndex", "type": "int", "description": "Low endpoint (inclusive)"}, {"name": "toIndex", "type": "int", "description": "High endpoint (exclusive)"}], "returns": {"type": "List", "description": "A view of the specified range"}, "description": "Returns a view of the portion of this list between the specified indexes.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html"
+    },
+    {
+      "name": "HashMap",
+      "description": "Hash table based implementation of the Map interface. Permits null values and null key.",
+      "constructors": [
+        {"signature": "HashMap()", "params": [], "description": "Constructs an empty HashMap with default initial capacity (16) and load factor (0.75)."},
+        {"signature": "HashMap(initialCapacity)", "params": [{"name": "initialCapacity", "type": "int", "description": "The initial capacity"}], "description": "Constructs an empty HashMap with the specified initial capacity."},
+        {"signature": "HashMap(m)", "params": [{"name": "m", "type": "Map", "description": "The map whose mappings are to be placed in this map"}], "description": "Constructs a new HashMap with the same mappings as the specified Map."}
+      ],
+      "methods": [
+        {"name": "put", "signature": "put(key, value)", "params": [{"name": "key", "type": "K", "description": "Key with which the value is associated"}, {"name": "value", "type": "V", "description": "Value to be associated with the key"}], "returns": {"type": "V", "description": "The previous value associated with key, or null"}, "description": "Associates the specified value with the specified key.", "static": false},
+        {"name": "get", "signature": "get(key)", "params": [{"name": "key", "type": "Object", "description": "The key whose value to return"}], "returns": {"type": "V", "description": "The value mapped to the key, or null"}, "description": "Returns the value to which the specified key is mapped.", "static": false},
+        {"name": "remove", "signature": "remove(key)", "params": [{"name": "key", "type": "Object", "description": "Key whose mapping is to be removed"}], "returns": {"type": "V", "description": "The previous value, or null"}, "description": "Removes the mapping for the specified key.", "static": false},
+        {"name": "containsKey", "signature": "containsKey(key)", "params": [{"name": "key", "type": "Object", "description": "Key to check"}], "returns": {"type": "boolean", "description": "True if the map contains the key"}, "description": "Returns true if this map contains a mapping for the specified key.", "static": false},
+        {"name": "containsValue", "signature": "containsValue(value)", "params": [{"name": "value", "type": "Object", "description": "Value to check"}], "returns": {"type": "boolean", "description": "True if the map contains the value"}, "description": "Returns true if this map maps one or more keys to the specified value.", "static": false},
+        {"name": "size", "signature": "size()", "params": [], "returns": {"type": "int", "description": "The number of key-value mappings"}, "description": "Returns the number of key-value mappings in this map.", "static": false},
+        {"name": "isEmpty", "signature": "isEmpty()", "params": [], "returns": {"type": "boolean", "description": "True if the map is empty"}, "description": "Returns true if this map contains no key-value mappings.", "static": false},
+        {"name": "keySet", "signature": "keySet()", "params": [], "returns": {"type": "Set", "description": "A set view of the keys"}, "description": "Returns a Set view of the keys contained in this map.", "static": false},
+        {"name": "values", "signature": "values()", "params": [], "returns": {"type": "Collection", "description": "A collection view of the values"}, "description": "Returns a Collection view of the values contained in this map.", "static": false},
+        {"name": "entrySet", "signature": "entrySet()", "params": [], "returns": {"type": "Set", "description": "A set view of the mappings"}, "description": "Returns a Set view of the mappings contained in this map.", "static": false},
+        {"name": "clear", "signature": "clear()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all of the mappings from this map.", "static": false},
+        {"name": "putAll", "signature": "putAll(m)", "params": [{"name": "m", "type": "Map", "description": "Mappings to be stored in this map"}], "returns": {"type": "void", "description": ""}, "description": "Copies all of the mappings from the specified map to this map.", "static": false},
+        {"name": "getOrDefault", "signature": "getOrDefault(key, defaultValue)", "params": [{"name": "key", "type": "Object", "description": "The key"}, {"name": "defaultValue", "type": "V", "description": "The default value"}], "returns": {"type": "V", "description": "The value or default"}, "description": "Returns the value mapped to the key, or defaultValue if not present.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html"
+    },
+    {
+      "name": "HashSet",
+      "description": "Implements the Set interface, backed by a HashMap. Makes no guarantees about iteration order.",
+      "constructors": [
+        {"signature": "HashSet()", "params": [], "description": "Constructs a new, empty set."},
+        {"signature": "HashSet(c)", "params": [{"name": "c", "type": "Collection", "description": "The collection whose elements are to be placed into this set"}], "description": "Constructs a new set containing the elements in the specified collection."}
+      ],
+      "methods": [
+        {"name": "add", "signature": "add(e)", "params": [{"name": "e", "type": "E", "description": "Element to add"}], "returns": {"type": "boolean", "description": "True if the set did not already contain the element"}, "description": "Adds the specified element to this set if not already present.", "static": false},
+        {"name": "remove", "signature": "remove(o)", "params": [{"name": "o", "type": "Object", "description": "Element to remove"}], "returns": {"type": "boolean", "description": "True if the set contained the element"}, "description": "Removes the specified element from this set.", "static": false},
+        {"name": "contains", "signature": "contains(o)", "params": [{"name": "o", "type": "Object", "description": "Element to check for"}], "returns": {"type": "boolean", "description": "True if the set contains the element"}, "description": "Returns true if this set contains the specified element.", "static": false},
+        {"name": "size", "signature": "size()", "params": [], "returns": {"type": "int", "description": "The number of elements"}, "description": "Returns the number of elements in this set.", "static": false},
+        {"name": "isEmpty", "signature": "isEmpty()", "params": [], "returns": {"type": "boolean", "description": "True if the set is empty"}, "description": "Returns true if this set contains no elements.", "static": false},
+        {"name": "clear", "signature": "clear()", "params": [], "returns": {"type": "void", "description": ""}, "description": "Removes all of the elements from this set.", "static": false},
+        {"name": "iterator", "signature": "iterator()", "params": [], "returns": {"type": "Iterator", "description": "An iterator over the elements"}, "description": "Returns an iterator over the elements in this set.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html"
+    },
+    {
+      "name": "Collections",
+      "description": "Utility class with static methods for operating on collections. Contains polymorphic algorithms.",
+      "constructors": [],
+      "methods": [
+        {"name": "sort", "signature": "sort(list)", "params": [{"name": "list", "type": "List", "description": "The list to be sorted"}], "returns": {"type": "void", "description": ""}, "description": "Sorts the specified list into ascending natural order.", "static": true},
+        {"name": "reverse", "signature": "reverse(list)", "params": [{"name": "list", "type": "List", "description": "The list to be reversed"}], "returns": {"type": "void", "description": ""}, "description": "Reverses the order of the elements in the specified list.", "static": true},
+        {"name": "shuffle", "signature": "shuffle(list)", "params": [{"name": "list", "type": "List", "description": "The list to be shuffled"}], "returns": {"type": "void", "description": ""}, "description": "Randomly permutes the specified list.", "static": true},
+        {"name": "unmodifiableList", "signature": "unmodifiableList(list)", "params": [{"name": "list", "type": "List", "description": "The list for which an unmodifiable view is returned"}], "returns": {"type": "List", "description": "An unmodifiable view of the list"}, "description": "Returns an unmodifiable view of the specified list.", "static": true},
+        {"name": "unmodifiableMap", "signature": "unmodifiableMap(m)", "params": [{"name": "m", "type": "Map", "description": "The map"}], "returns": {"type": "Map", "description": "An unmodifiable view of the map"}, "description": "Returns an unmodifiable view of the specified map.", "static": true},
+        {"name": "singletonList", "signature": "singletonList(o)", "params": [{"name": "o", "type": "T", "description": "The sole element"}], "returns": {"type": "List", "description": "An immutable list containing only the specified element"}, "description": "Returns an immutable list containing only the specified object.", "static": true},
+        {"name": "emptyList", "signature": "emptyList()", "params": [], "returns": {"type": "List", "description": "An empty immutable list"}, "description": "Returns an empty list (immutable).", "static": true},
+        {"name": "emptyMap", "signature": "emptyMap()", "params": [], "returns": {"type": "Map", "description": "An empty immutable map"}, "description": "Returns an empty map (immutable).", "static": true},
+        {"name": "frequency", "signature": "frequency(c, o)", "params": [{"name": "c", "type": "Collection", "description": "The collection"}, {"name": "o", "type": "Object", "description": "The object to count"}], "returns": {"type": "int", "description": "The number of elements equal to the object"}, "description": "Returns the number of elements in the collection equal to the specified object.", "static": true},
+        {"name": "max", "signature": "max(coll)", "params": [{"name": "coll", "type": "Collection", "description": "The collection"}], "returns": {"type": "T", "description": "The maximum element"}, "description": "Returns the maximum element of the given collection, according to natural ordering.", "static": true},
+        {"name": "min", "signature": "min(coll)", "params": [{"name": "coll", "type": "Collection", "description": "The collection"}], "returns": {"type": "T", "description": "The minimum element"}, "description": "Returns the minimum element of the given collection, according to natural ordering.", "static": true}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html"
+    },
+    {
+      "name": "Arrays",
+      "description": "Utility class for manipulating arrays. Contains static methods to sort, search, compare, and fill arrays.",
+      "constructors": [],
+      "methods": [
+        {"name": "asList", "signature": "asList(a)", "params": [{"name": "a", "type": "T...", "description": "The array or elements"}], "returns": {"type": "List", "description": "A fixed-size list backed by the array"}, "description": "Returns a fixed-size list backed by the specified array.", "static": true},
+        {"name": "sort", "signature": "sort(a)", "params": [{"name": "a", "type": "Object[]", "description": "The array to be sorted"}], "returns": {"type": "void", "description": ""}, "description": "Sorts the specified array into ascending natural order.", "static": true},
+        {"name": "binarySearch", "signature": "binarySearch(a, key)", "params": [{"name": "a", "type": "Object[]", "description": "The array to search"}, {"name": "key", "type": "Object", "description": "The value to search for"}], "returns": {"type": "int", "description": "Index of the search key, or negative value"}, "description": "Searches the specified array for the specified key using binary search.", "static": true},
+        {"name": "fill", "signature": "fill(a, val)", "params": [{"name": "a", "type": "Object[]", "description": "The array to fill"}, {"name": "val", "type": "Object", "description": "The value to store"}], "returns": {"type": "void", "description": ""}, "description": "Assigns the specified value to each element of the specified array.", "static": true},
+        {"name": "copyOf", "signature": "copyOf(original, newLength)", "params": [{"name": "original", "type": "T[]", "description": "The array to copy"}, {"name": "newLength", "type": "int", "description": "The length of the copy"}], "returns": {"type": "T[]", "description": "A copy of the original array"}, "description": "Copies the specified array, truncating or padding with nulls.", "static": true},
+        {"name": "equals", "signature": "equals(a, a2)", "params": [{"name": "a", "type": "Object[]", "description": "First array"}, {"name": "a2", "type": "Object[]", "description": "Second array"}], "returns": {"type": "boolean", "description": "True if the two arrays are equal"}, "description": "Returns true if the two specified arrays are equal to one another.", "static": true},
+        {"name": "toString", "signature": "toString(a)", "params": [{"name": "a", "type": "Object[]", "description": "The array"}], "returns": {"type": "String", "description": "A string representation of the array"}, "description": "Returns a string representation of the contents of the specified array.", "static": true}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html"
+    },
+    {
+      "name": "UUID",
+      "description": "Represents an immutable universally unique identifier (128-bit value).",
+      "constructors": [
+        {"signature": "UUID(mostSigBits, leastSigBits)", "params": [{"name": "mostSigBits", "type": "long", "description": "Most significant bits"}, {"name": "leastSigBits", "type": "long", "description": "Least significant bits"}], "description": "Constructs a new UUID using the specified data."}
+      ],
+      "methods": [
+        {"name": "randomUUID", "signature": "randomUUID()", "params": [], "returns": {"type": "UUID", "description": "A randomly generated UUID"}, "description": "Static factory to retrieve a type 4 (pseudo randomly generated) UUID.", "static": true},
+        {"name": "fromString", "signature": "fromString(name)", "params": [{"name": "name", "type": "String", "description": "A string that specifies a UUID"}], "returns": {"type": "UUID", "description": "A UUID from the specified string"}, "description": "Creates a UUID from the string standard representation.", "static": true},
+        {"name": "toString", "signature": "toString()", "params": [], "returns": {"type": "String", "description": "A string representation of this UUID"}, "description": "Returns a String object representing this UUID.", "static": false},
+        {"name": "getMostSignificantBits", "signature": "getMostSignificantBits()", "params": [], "returns": {"type": "long", "description": "The most significant 64 bits"}, "description": "Returns the most significant 64 bits of this UUID.", "static": false},
+        {"name": "getLeastSignificantBits", "signature": "getLeastSignificantBits()", "params": [], "returns": {"type": "long", "description": "The least significant 64 bits"}, "description": "Returns the least significant 64 bits of this UUID.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html"
+    },
+    {
+      "name": "Properties",
+      "description": "Represents a persistent set of properties. Properties can be loaded from and stored to a stream.",
+      "constructors": [
+        {"signature": "Properties()", "params": [], "description": "Creates an empty property list with no default values."},
+        {"signature": "Properties(defaults)", "params": [{"name": "defaults", "type": "Properties", "description": "The default property values"}], "description": "Creates an empty property list with the specified defaults."}
+      ],
+      "methods": [
+        {"name": "getProperty", "signature": "getProperty(key)", "params": [{"name": "key", "type": "String", "description": "The property key"}], "returns": {"type": "String", "description": "The value, or null"}, "description": "Searches for the property with the specified key.", "static": false},
+        {"name": "getProperty", "signature": "getProperty(key, defaultValue)", "params": [{"name": "key", "type": "String", "description": "The property key"}, {"name": "defaultValue", "type": "String", "description": "Default value"}], "returns": {"type": "String", "description": "The value, or the default"}, "description": "Searches for the property with the specified key, returning the default if not found.", "static": false},
+        {"name": "setProperty", "signature": "setProperty(key, value)", "params": [{"name": "key", "type": "String", "description": "The key"}, {"name": "value", "type": "String", "description": "The value"}], "returns": {"type": "Object", "description": "The previous value, or null"}, "description": "Sets the property value for the specified key.", "static": false},
+        {"name": "propertyNames", "signature": "propertyNames()", "params": [], "returns": {"type": "Enumeration", "description": "An enumeration of all the keys"}, "description": "Returns an enumeration of all the keys in this property list.", "static": false},
+        {"name": "stringPropertyNames", "signature": "stringPropertyNames()", "params": [], "returns": {"type": "Set", "description": "A set of keys where both key and value are strings"}, "description": "Returns a set of keys where both key and value are strings.", "static": false}
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/Properties.html"
+    },
+    {
+      "name": "Calendar",
+      "description": "Abstract class for converting between a Date and a set of integer fields such as YEAR, MONTH, DAY_OF_MONTH, HOUR, etc.",
+      "constructors": [],
+      "methods": [
+        {"name": "getInstance", "signature": "getInstance()", "params": [], "returns": {"type": "Calendar", "description": "A Calendar based on default time zone and locale"}, "description": "Gets a calendar using the default time zone and locale.", "static": true},
+        {"name": "getTime", "signature": "getTime()", "params": [], "returns": {"type": "Date", "description": "A Date representing this Calendar's time value"}, "description": "Returns a Date object representing this Calendar's time value.", "static": false},
+        {"name": "setTime", "signature": "setTime(date)", "params": [{"name": "date", "type": "Date", "description": "The given Date"}], "returns": {"type": "void", "description": ""}, "description": "Sets this Calendar's time with the given Date.", "static": false},
+        {"name": "get", "signature": "get(field)", "params": [{"name": "field", "type": "int", "description": "The calendar field"}], "returns": {"type": "int", "description": "The value for the given calendar field"}, "description": "Returns the value of the given calendar field.", "static": false},
+        {"name": "set", "signature": "set(field, value)", "params": [{"name": "field", "type": "int", "description": "The calendar field"}, {"name": "value", "type": "int", "description": "The value to set"}], "returns": {"type": "void", "description": ""}, "description": "Sets the given calendar field to the given value.", "static": false},
+        {"name": "add", "signature": "add(field, amount)", "params": [{"name": "field", "type": "int", "description": "The calendar field"}, {"name": "amount", "type": "int", "description": "The amount to add"}], "returns": {"type": "void", "description": ""}, "description": "Adds or subtracts the specified amount of time to the given calendar field.", "static": false},
+        {"name": "getTimeInMillis", "signature": "getTimeInMillis()", "params": [], "returns": {"type": "long", "description": "The current time as milliseconds from epoch"}, "description": "Returns this Calendar's time value in milliseconds.", "static": false}
+      ],
+      "fields": [
+        {"name": "YEAR", "type": "int", "description": "Field number for get and set indicating the year.", "static": true, "final": true},
+        {"name": "MONTH", "type": "int", "description": "Field number for get and set indicating the month (0-based).", "static": true, "final": true},
+        {"name": "DAY_OF_MONTH", "type": "int", "description": "Field number for get and set indicating the day of the month.", "static": true, "final": true},
+        {"name": "HOUR_OF_DAY", "type": "int", "description": "Field number for get and set indicating the hour of the day (24-hour).", "static": true, "final": true},
+        {"name": "MINUTE", "type": "int", "description": "Field number for get and set indicating the minute within the hour.", "static": true, "final": true},
+        {"name": "SECOND", "type": "int", "description": "Field number for get and set indicating the second within the minute.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html"
+    }
+  ]
+}

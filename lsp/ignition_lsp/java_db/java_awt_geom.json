@@ -1,0 +1,1357 @@
+{
+  "package": "java.awt.geom",
+  "classes": [
+    {
+      "name": "Point2D",
+      "description": "Abstract class representing a point in 2D coordinate space with double precision. Base class for Point2D.Double and Point2D.Float. Used in Ignition Vision for custom drawing and geometric calculations.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of this Point2D"},
+          "description": "Returns the X coordinate of this Point2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of this Point2D"},
+          "description": "Returns the Y coordinate of this Point2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The new X coordinate of this Point2D"},
+            {"name": "y", "type": "double", "description": "The new Y coordinate of this Point2D"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of this Point2D to the specified double coordinates.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(p)",
+          "params": [
+            {"name": "p", "type": "Point2D", "description": "The specified Point2D to which to set this Point2D"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of this Point2D to the same coordinates as the specified Point2D object.",
+          "static": false
+        },
+        {
+          "name": "distance",
+          "signature": "distance(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the specified point"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the specified point"}
+          ],
+          "returns": {"type": "double", "description": "The distance between this Point2D and the specified point"},
+          "description": "Returns the distance from this Point2D to a specified point.",
+          "static": false
+        },
+        {
+          "name": "distance",
+          "signature": "distance(pt)",
+          "params": [
+            {"name": "pt", "type": "Point2D", "description": "The specified point to be measured against this Point2D"}
+          ],
+          "returns": {"type": "double", "description": "The distance between this Point2D and the specified Point2D"},
+          "description": "Returns the distance from this Point2D to a specified Point2D.",
+          "static": false
+        },
+        {
+          "name": "distanceSq",
+          "signature": "distanceSq(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the specified point"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the specified point"}
+          ],
+          "returns": {"type": "double", "description": "The square of the distance between this Point2D and the specified point"},
+          "description": "Returns the square of the distance from this Point2D to a specified point.",
+          "static": false
+        },
+        {
+          "name": "distanceSq",
+          "signature": "distanceSq(pt)",
+          "params": [
+            {"name": "pt", "type": "Point2D", "description": "The specified point to be measured against this Point2D"}
+          ],
+          "returns": {"type": "double", "description": "The square of the distance between this Point2D and the specified Point2D"},
+          "description": "Returns the square of the distance from this Point2D to a specified Point2D.",
+          "static": false
+        },
+        {
+          "name": "distance",
+          "signature": "distance(x1, y1, x2, y2)",
+          "params": [
+            {"name": "x1", "type": "double", "description": "The X coordinate of the first specified point"},
+            {"name": "y1", "type": "double", "description": "The Y coordinate of the first specified point"},
+            {"name": "x2", "type": "double", "description": "The X coordinate of the second specified point"},
+            {"name": "y2", "type": "double", "description": "The Y coordinate of the second specified point"}
+          ],
+          "returns": {"type": "double", "description": "The distance between the two sets of specified coordinates"},
+          "description": "Returns the distance between two points.",
+          "static": true
+        },
+        {
+          "name": "distanceSq",
+          "signature": "distanceSq(x1, y1, x2, y2)",
+          "params": [
+            {"name": "x1", "type": "double", "description": "The X coordinate of the first specified point"},
+            {"name": "y1", "type": "double", "description": "The Y coordinate of the first specified point"},
+            {"name": "x2", "type": "double", "description": "The X coordinate of the second specified point"},
+            {"name": "y2", "type": "double", "description": "The Y coordinate of the second specified point"}
+          ],
+          "returns": {"type": "double", "description": "The square of the distance between the two sets of specified coordinates"},
+          "description": "Returns the square of the distance between two points.",
+          "static": true
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A copy of this Point2D instance"},
+          "description": "Creates a new object of the same class and with the same contents as this object.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [
+            {"name": "obj", "type": "Object", "description": "An object to be compared with this Point2D"}
+          ],
+          "returns": {"type": "boolean", "description": "True if obj is an instance of Point2D and has the same values"},
+          "description": "Determines whether two points are equal. Two instances of Point2D are equal if the values of their x and y member fields are the same.",
+          "static": false
+        },
+        {
+          "name": "hashCode",
+          "signature": "hashCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "A hash code value for this Point2D"},
+          "description": "Returns the hashcode for this Point2D.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Point2D.html"
+    },
+    {
+      "name": "Point2D.Double",
+      "description": "A point specified in double precision. Concrete implementation of Point2D commonly used in Ignition Vision for precise 2D coordinate positioning.",
+      "constructors": [
+        {
+          "signature": "Double()",
+          "params": [],
+          "description": "Constructs and initializes a Point2D.Double with coordinates (0, 0)."
+        },
+        {
+          "signature": "Double(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the newly constructed Point2D.Double"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the newly constructed Point2D.Double"}
+          ],
+          "description": "Constructs and initializes a Point2D.Double with the specified coordinates."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of this Point2D.Double"},
+          "description": "Returns the X coordinate of this Point2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of this Point2D.Double"},
+          "description": "Returns the Y coordinate of this Point2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The new X coordinate of this Point2D.Double"},
+            {"name": "y", "type": "double", "description": "The new Y coordinate of this Point2D.Double"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of this Point2D.Double to the specified double coordinates.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String representation of this Point2D.Double"},
+          "description": "Returns a String that represents the value of this Point2D.Double.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "double", "description": "The X coordinate of this Point2D.Double.", "static": false, "final": false},
+        {"name": "y", "type": "double", "description": "The Y coordinate of this Point2D.Double.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Point2D.Double.html"
+    },
+    {
+      "name": "Point2D.Float",
+      "description": "A point specified in float precision. Concrete implementation of Point2D with float fields for memory-efficient 2D coordinate storage.",
+      "constructors": [
+        {
+          "signature": "Float()",
+          "params": [],
+          "description": "Constructs and initializes a Point2D.Float with coordinates (0, 0)."
+        },
+        {
+          "signature": "Float(x, y)",
+          "params": [
+            {"name": "x", "type": "float", "description": "The X coordinate of the newly constructed Point2D.Float"},
+            {"name": "y", "type": "float", "description": "The Y coordinate of the newly constructed Point2D.Float"}
+          ],
+          "description": "Constructs and initializes a Point2D.Float with the specified coordinates."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of this Point2D.Float"},
+          "description": "Returns the X coordinate of this Point2D.Float in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of this Point2D.Float"},
+          "description": "Returns the Y coordinate of this Point2D.Float in double precision.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The new X coordinate of this Point2D.Float"},
+            {"name": "y", "type": "double", "description": "The new Y coordinate of this Point2D.Float"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of this Point2D.Float to the specified double coordinates.",
+          "static": false
+        },
+        {
+          "name": "setLocation",
+          "signature": "setLocation(x, y)",
+          "params": [
+            {"name": "x", "type": "float", "description": "The new X coordinate of this Point2D.Float"},
+            {"name": "y", "type": "float", "description": "The new Y coordinate of this Point2D.Float"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of this Point2D.Float to the specified float coordinates.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String representation of this Point2D.Float"},
+          "description": "Returns a String that represents the value of this Point2D.Float.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "float", "description": "The X coordinate of this Point2D.Float.", "static": false, "final": false},
+        {"name": "y", "type": "float", "description": "The Y coordinate of this Point2D.Float.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Point2D.Float.html"
+    },
+    {
+      "name": "Rectangle2D",
+      "description": "Abstract class describing a rectangle defined by a location (x, y) and dimensions (w x h) in double precision. Base class for Rectangle2D.Double. Used in Ignition Vision for bounds calculations and hit testing.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the upper-left corner"},
+          "description": "Returns the X coordinate of the upper-left corner of this Rectangle2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the upper-left corner"},
+          "description": "Returns the Y coordinate of the upper-left corner of this Rectangle2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "getWidth",
+          "signature": "getWidth()",
+          "params": [],
+          "returns": {"type": "double", "description": "The width of this Rectangle2D"},
+          "description": "Returns the width of this Rectangle2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "getHeight",
+          "signature": "getHeight()",
+          "params": [],
+          "returns": {"type": "double", "description": "The height of this Rectangle2D"},
+          "description": "Returns the height of this Rectangle2D in double precision.",
+          "static": false
+        },
+        {
+          "name": "getMinX",
+          "signature": "getMinX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The smallest X coordinate of this Rectangle2D"},
+          "description": "Returns the smallest X coordinate of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "getMinY",
+          "signature": "getMinY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The smallest Y coordinate of this Rectangle2D"},
+          "description": "Returns the smallest Y coordinate of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "getMaxX",
+          "signature": "getMaxX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The largest X coordinate of this Rectangle2D"},
+          "description": "Returns the largest X coordinate of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "getMaxY",
+          "signature": "getMaxY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The largest Y coordinate of this Rectangle2D"},
+          "description": "Returns the largest Y coordinate of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "getCenterX",
+          "signature": "getCenterX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the center of this Rectangle2D"},
+          "description": "Returns the X coordinate of the center of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "getCenterY",
+          "signature": "getCenterY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the center of this Rectangle2D"},
+          "description": "Returns the Y coordinate of the center of the framing rectangle of this Shape.",
+          "static": false
+        },
+        {
+          "name": "isEmpty",
+          "signature": "isEmpty()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D is empty"},
+          "description": "Determines whether this Rectangle2D is empty. A Rectangle2D is empty if its width or height is less than or equal to zero.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The specified X coordinate to be tested"},
+            {"name": "y", "type": "double", "description": "The specified Y coordinate to be tested"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the specified point is inside this Rectangle2D"},
+          "description": "Tests if the specified coordinates are inside the boundary of this Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "w", "type": "double", "description": "The width of the specified rectangular area"},
+            {"name": "h", "type": "double", "description": "The height of the specified rectangular area"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D entirely contains the specified rectangular area"},
+          "description": "Tests if the interior of this Rectangle2D entirely contains the specified rectangular area.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(p)",
+          "params": [
+            {"name": "p", "type": "Point2D", "description": "The specified Point2D to be tested"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D contains the specified Point2D"},
+          "description": "Tests if a specified Point2D is inside the boundary of this Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "intersects",
+          "signature": "intersects(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "w", "type": "double", "description": "The width of the specified rectangular area"},
+            {"name": "h", "type": "double", "description": "The height of the specified rectangular area"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D intersects the specified rectangular area"},
+          "description": "Tests if the interior of this Rectangle2D intersects the interior of a specified rectangular area.",
+          "static": false
+        },
+        {
+          "name": "intersects",
+          "signature": "intersects(r)",
+          "params": [
+            {"name": "r", "type": "Rectangle2D", "description": "The specified Rectangle2D"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D intersects the specified Rectangle2D"},
+          "description": "Tests if the interior of this Rectangle2D intersects the interior of a specified Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "createIntersection",
+          "signature": "createIntersection(r)",
+          "params": [
+            {"name": "r", "type": "Rectangle2D", "description": "The Rectangle2D to be intersected with this Rectangle2D"}
+          ],
+          "returns": {"type": "Rectangle2D", "description": "The largest Rectangle2D contained in both the specified Rectangle2D and this Rectangle2D"},
+          "description": "Returns a new Rectangle2D object representing the intersection of this Rectangle2D with the specified Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "createUnion",
+          "signature": "createUnion(r)",
+          "params": [
+            {"name": "r", "type": "Rectangle2D", "description": "The Rectangle2D to be combined with this Rectangle2D"}
+          ],
+          "returns": {"type": "Rectangle2D", "description": "The smallest Rectangle2D containing both the specified Rectangle2D and this Rectangle2D"},
+          "description": "Returns a new Rectangle2D object representing the union of this Rectangle2D with the specified Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "setRect",
+          "signature": "setRect(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of this Rectangle2D"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of this Rectangle2D"},
+            {"name": "w", "type": "double", "description": "The new width for this Rectangle2D"},
+            {"name": "h", "type": "double", "description": "The new height for this Rectangle2D"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location and size of this Rectangle2D to the specified double values.",
+          "static": false
+        },
+        {
+          "name": "setRect",
+          "signature": "setRect(r)",
+          "params": [
+            {"name": "r", "type": "Rectangle2D", "description": "The specified Rectangle2D"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this Rectangle2D to be the same as the specified Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "setFrame",
+          "signature": "setFrame(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of this framing rectangle"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of this framing rectangle"},
+            {"name": "w", "type": "double", "description": "The width of this framing rectangle"},
+            {"name": "h", "type": "double", "description": "The height of this framing rectangle"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location and size of the framing rectangle of this Shape to the specified rectangular values.",
+          "static": false
+        },
+        {
+          "name": "getBounds2D",
+          "signature": "getBounds2D()",
+          "params": [],
+          "returns": {"type": "Rectangle2D", "description": "The bounding Rectangle2D for this Rectangle2D"},
+          "description": "Returns a high precision and more accurate bounding box of this Rectangle2D.",
+          "static": false
+        },
+        {
+          "name": "getPathIterator",
+          "signature": "getPathIterator(at)",
+          "params": [
+            {"name": "at", "type": "AffineTransform", "description": "An optional AffineTransform to be applied to the coordinates, or null"}
+          ],
+          "returns": {"type": "PathIterator", "description": "A PathIterator object that defines the boundary of this Rectangle2D"},
+          "description": "Returns an iteration object that defines the boundary of this Rectangle2D, transformed by the specified AffineTransform.",
+          "static": false
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A copy of this Rectangle2D instance"},
+          "description": "Creates a new object of the same class and with the same contents as this object.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [
+            {"name": "obj", "type": "Object", "description": "An object to be compared with this Rectangle2D"}
+          ],
+          "returns": {"type": "boolean", "description": "True if obj is an instance of Rectangle2D and has the same values"},
+          "description": "Determines whether the specified Object is equal to this Rectangle2D.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "OUT_LEFT", "type": "int", "description": "The bitmask that indicates that a point lies to the left of this Rectangle2D.", "static": true, "final": true},
+        {"name": "OUT_TOP", "type": "int", "description": "The bitmask that indicates that a point lies above this Rectangle2D.", "static": true, "final": true},
+        {"name": "OUT_RIGHT", "type": "int", "description": "The bitmask that indicates that a point lies to the right of this Rectangle2D.", "static": true, "final": true},
+        {"name": "OUT_BOTTOM", "type": "int", "description": "The bitmask that indicates that a point lies below this Rectangle2D.", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Rectangle2D.html"
+    },
+    {
+      "name": "Rectangle2D.Double",
+      "description": "A rectangle specified in double precision. Concrete implementation of Rectangle2D commonly used in Ignition Vision for precise rectangular bounds.",
+      "constructors": [
+        {
+          "signature": "Double()",
+          "params": [],
+          "description": "Constructs a new Rectangle2D.Double initialized to location (0, 0) and size (0, 0)."
+        },
+        {
+          "signature": "Double(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner"},
+            {"name": "w", "type": "double", "description": "The width of the Rectangle2D.Double"},
+            {"name": "h", "type": "double", "description": "The height of the Rectangle2D.Double"}
+          ],
+          "description": "Constructs and initializes a Rectangle2D.Double from the specified double coordinates."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the upper-left corner"},
+          "description": "Returns the X coordinate of the upper-left corner of this Rectangle2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the upper-left corner"},
+          "description": "Returns the Y coordinate of the upper-left corner of this Rectangle2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "getWidth",
+          "signature": "getWidth()",
+          "params": [],
+          "returns": {"type": "double", "description": "The width of this Rectangle2D.Double"},
+          "description": "Returns the width of this Rectangle2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "getHeight",
+          "signature": "getHeight()",
+          "params": [],
+          "returns": {"type": "double", "description": "The height of this Rectangle2D.Double"},
+          "description": "Returns the height of this Rectangle2D.Double in double precision.",
+          "static": false
+        },
+        {
+          "name": "isEmpty",
+          "signature": "isEmpty()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this Rectangle2D.Double is empty"},
+          "description": "Determines whether this Rectangle2D.Double is empty.",
+          "static": false
+        },
+        {
+          "name": "setRect",
+          "signature": "setRect(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner"},
+            {"name": "w", "type": "double", "description": "The new width for this Rectangle2D.Double"},
+            {"name": "h", "type": "double", "description": "The new height for this Rectangle2D.Double"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location and size of this Rectangle2D.Double to the specified double values.",
+          "static": false
+        },
+        {
+          "name": "getBounds2D",
+          "signature": "getBounds2D()",
+          "params": [],
+          "returns": {"type": "Rectangle2D", "description": "The bounding Rectangle2D for this Rectangle2D.Double"},
+          "description": "Returns the high precision bounding box of this Rectangle2D.Double.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String representation of this Rectangle2D.Double"},
+          "description": "Returns the String representation of this Rectangle2D.Double.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "double", "description": "The X coordinate of this Rectangle2D.Double.", "static": false, "final": false},
+        {"name": "y", "type": "double", "description": "The Y coordinate of this Rectangle2D.Double.", "static": false, "final": false},
+        {"name": "width", "type": "double", "description": "The width of this Rectangle2D.Double.", "static": false, "final": false},
+        {"name": "height", "type": "double", "description": "The height of this Rectangle2D.Double.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Rectangle2D.Double.html"
+    },
+    {
+      "name": "AffineTransform",
+      "description": "Represents a 2D affine transformation that performs a linear mapping from 2D coordinates to other 2D coordinates, preserving the straightness and parallelism of lines. Used in Ignition Vision for rotating, scaling, translating, and shearing custom drawn shapes.",
+      "constructors": [
+        {
+          "signature": "AffineTransform()",
+          "params": [],
+          "description": "Constructs a new AffineTransform representing the Identity transformation."
+        },
+        {
+          "signature": "AffineTransform(m00, m10, m01, m11, m02, m12)",
+          "params": [
+            {"name": "m00", "type": "double", "description": "The X coordinate scaling element of the 3x3 matrix"},
+            {"name": "m10", "type": "double", "description": "The Y coordinate shearing element of the 3x3 matrix"},
+            {"name": "m01", "type": "double", "description": "The X coordinate shearing element of the 3x3 matrix"},
+            {"name": "m11", "type": "double", "description": "The Y coordinate scaling element of the 3x3 matrix"},
+            {"name": "m02", "type": "double", "description": "The X coordinate translation element of the 3x3 matrix"},
+            {"name": "m12", "type": "double", "description": "The Y coordinate translation element of the 3x3 matrix"}
+          ],
+          "description": "Constructs a new AffineTransform from 6 double precision values representing the 6 specifiable entries of the 3x3 transformation matrix."
+        },
+        {
+          "signature": "AffineTransform(Tx)",
+          "params": [
+            {"name": "Tx", "type": "AffineTransform", "description": "The AffineTransform object to copy"}
+          ],
+          "description": "Constructs a new AffineTransform that is a copy of the specified AffineTransform object."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getTranslateInstance",
+          "signature": "getTranslateInstance(tx, ty)",
+          "params": [
+            {"name": "tx", "type": "double", "description": "The distance by which coordinates are translated in the X axis direction"},
+            {"name": "ty", "type": "double", "description": "The distance by which coordinates are translated in the Y axis direction"}
+          ],
+          "returns": {"type": "AffineTransform", "description": "An AffineTransform object that represents a translation transformation"},
+          "description": "Returns a transform representing a translation transformation.",
+          "static": true
+        },
+        {
+          "name": "getRotateInstance",
+          "signature": "getRotateInstance(theta)",
+          "params": [
+            {"name": "theta", "type": "double", "description": "The angle of rotation measured in radians"}
+          ],
+          "returns": {"type": "AffineTransform", "description": "An AffineTransform object that represents a rotation transformation"},
+          "description": "Returns a transform representing a rotation transformation. The rotation is about the origin.",
+          "static": true
+        },
+        {
+          "name": "getRotateInstance",
+          "signature": "getRotateInstance(theta, anchorx, anchory)",
+          "params": [
+            {"name": "theta", "type": "double", "description": "The angle of rotation measured in radians"},
+            {"name": "anchorx", "type": "double", "description": "The X coordinate of the rotation anchor point"},
+            {"name": "anchory", "type": "double", "description": "The Y coordinate of the rotation anchor point"}
+          ],
+          "returns": {"type": "AffineTransform", "description": "An AffineTransform object that rotates coordinates around the specified point"},
+          "description": "Returns a transform that rotates coordinates around an anchor point.",
+          "static": true
+        },
+        {
+          "name": "getScaleInstance",
+          "signature": "getScaleInstance(sx, sy)",
+          "params": [
+            {"name": "sx", "type": "double", "description": "The factor by which coordinates are scaled along the X axis direction"},
+            {"name": "sy", "type": "double", "description": "The factor by which coordinates are scaled along the Y axis direction"}
+          ],
+          "returns": {"type": "AffineTransform", "description": "An AffineTransform object that scales coordinates"},
+          "description": "Returns a transform representing a scaling transformation.",
+          "static": true
+        },
+        {
+          "name": "getShearInstance",
+          "signature": "getShearInstance(shx, shy)",
+          "params": [
+            {"name": "shx", "type": "double", "description": "The multiplier by which coordinates are shifted in the direction of the positive X axis as a factor of their Y coordinate"},
+            {"name": "shy", "type": "double", "description": "The multiplier by which coordinates are shifted in the direction of the positive Y axis as a factor of their X coordinate"}
+          ],
+          "returns": {"type": "AffineTransform", "description": "An AffineTransform object that shears coordinates"},
+          "description": "Returns a transform representing a shearing transformation.",
+          "static": true
+        },
+        {
+          "name": "translate",
+          "signature": "translate(tx, ty)",
+          "params": [
+            {"name": "tx", "type": "double", "description": "The distance by which to translate in the X direction"},
+            {"name": "ty", "type": "double", "description": "The distance by which to translate in the Y direction"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates this transform with a translation transformation.",
+          "static": false
+        },
+        {
+          "name": "rotate",
+          "signature": "rotate(theta)",
+          "params": [
+            {"name": "theta", "type": "double", "description": "The angle of rotation measured in radians"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates this transform with a rotation transformation. The rotation is about the origin.",
+          "static": false
+        },
+        {
+          "name": "rotate",
+          "signature": "rotate(theta, anchorx, anchory)",
+          "params": [
+            {"name": "theta", "type": "double", "description": "The angle of rotation measured in radians"},
+            {"name": "anchorx", "type": "double", "description": "The X coordinate of the rotation anchor point"},
+            {"name": "anchory", "type": "double", "description": "The Y coordinate of the rotation anchor point"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates this transform with a rotation transformation that rotates around the specified anchor point.",
+          "static": false
+        },
+        {
+          "name": "scale",
+          "signature": "scale(sx, sy)",
+          "params": [
+            {"name": "sx", "type": "double", "description": "The factor by which to scale in the X direction"},
+            {"name": "sy", "type": "double", "description": "The factor by which to scale in the Y direction"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates this transform with a scaling transformation.",
+          "static": false
+        },
+        {
+          "name": "shear",
+          "signature": "shear(shx, shy)",
+          "params": [
+            {"name": "shx", "type": "double", "description": "The multiplier by which X coordinates are shifted as a factor of Y coordinates"},
+            {"name": "shy", "type": "double", "description": "The multiplier by which Y coordinates are shifted as a factor of X coordinates"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates this transform with a shearing transformation.",
+          "static": false
+        },
+        {
+          "name": "concatenate",
+          "signature": "concatenate(Tx)",
+          "params": [
+            {"name": "Tx", "type": "AffineTransform", "description": "The AffineTransform object to be concatenated with this AffineTransform"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates an AffineTransform Tx to this AffineTransform in a most commonly useful way, such that Tx modifies the coordinate transformation relative to the existing user space.",
+          "static": false
+        },
+        {
+          "name": "preConcatenate",
+          "signature": "preConcatenate(Tx)",
+          "params": [
+            {"name": "Tx", "type": "AffineTransform", "description": "The AffineTransform object to be concatenated with this AffineTransform"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Concatenates an AffineTransform Tx to this AffineTransform in a less commonly used way, such that Tx modifies the coordinate transformation relative to the absolute pixel space rather than relative to the existing user space.",
+          "static": false
+        },
+        {
+          "name": "setToIdentity",
+          "signature": "setToIdentity()",
+          "params": [],
+          "returns": {"type": "void", "description": ""},
+          "description": "Resets this transform to the Identity transform.",
+          "static": false
+        },
+        {
+          "name": "setToTranslation",
+          "signature": "setToTranslation(tx, ty)",
+          "params": [
+            {"name": "tx", "type": "double", "description": "The distance by which to translate in the X direction"},
+            {"name": "ty", "type": "double", "description": "The distance by which to translate in the Y direction"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this transform to a translation transformation.",
+          "static": false
+        },
+        {
+          "name": "setToRotation",
+          "signature": "setToRotation(theta)",
+          "params": [
+            {"name": "theta", "type": "double", "description": "The angle of rotation measured in radians"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this transform to a rotation transformation.",
+          "static": false
+        },
+        {
+          "name": "setToScale",
+          "signature": "setToScale(sx, sy)",
+          "params": [
+            {"name": "sx", "type": "double", "description": "The factor by which to scale in the X direction"},
+            {"name": "sy", "type": "double", "description": "The factor by which to scale in the Y direction"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets this transform to a scaling transformation.",
+          "static": false
+        },
+        {
+          "name": "getTranslateX",
+          "signature": "getTranslateX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the translation element"},
+          "description": "Returns the X coordinate of the translation element (m02) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getTranslateY",
+          "signature": "getTranslateY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the translation element"},
+          "description": "Returns the Y coordinate of the translation element (m12) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getScaleX",
+          "signature": "getScaleX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate scaling element"},
+          "description": "Returns the X coordinate scaling element (m00) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getScaleY",
+          "signature": "getScaleY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate scaling element"},
+          "description": "Returns the Y coordinate scaling element (m11) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getShearX",
+          "signature": "getShearX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate shearing element"},
+          "description": "Returns the X coordinate shearing element (m01) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getShearY",
+          "signature": "getShearY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate shearing element"},
+          "description": "Returns the Y coordinate shearing element (m10) of the 3x3 affine transformation matrix.",
+          "static": false
+        },
+        {
+          "name": "getType",
+          "signature": "getType()",
+          "params": [],
+          "returns": {"type": "int", "description": "The type of this transform as a combination of TYPE_* flag bits"},
+          "description": "Retrieves the flag bits describing the conversion properties of this transform. The return value is a combination of the TYPE_* constants.",
+          "static": false
+        },
+        {
+          "name": "isIdentity",
+          "signature": "isIdentity()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this AffineTransform is an identity transform"},
+          "description": "Returns true if this AffineTransform is an identity transform.",
+          "static": false
+        },
+        {
+          "name": "createInverse",
+          "signature": "createInverse()",
+          "params": [],
+          "returns": {"type": "AffineTransform", "description": "A new AffineTransform object representing the inverse transformation"},
+          "description": "Returns an AffineTransform object representing the inverse transformation. Throws NoninvertibleTransformException if this transform cannot be inverted.",
+          "static": false
+        },
+        {
+          "name": "transform",
+          "signature": "transform(ptSrc, ptDst)",
+          "params": [
+            {"name": "ptSrc", "type": "Point2D", "description": "The specified Point2D to be transformed"},
+            {"name": "ptDst", "type": "Point2D", "description": "The specified Point2D that stores the result of transforming ptSrc, or null"}
+          ],
+          "returns": {"type": "Point2D", "description": "The ptDst after transforming ptSrc and storing the result in ptDst"},
+          "description": "Transforms the specified Point2D using this AffineTransform and stores the result in the specified destination Point2D.",
+          "static": false
+        },
+        {
+          "name": "inverseTransform",
+          "signature": "inverseTransform(ptSrc, ptDst)",
+          "params": [
+            {"name": "ptSrc", "type": "Point2D", "description": "The point to be inverse transformed"},
+            {"name": "ptDst", "type": "Point2D", "description": "The resulting transformed point, or null"}
+          ],
+          "returns": {"type": "Point2D", "description": "The ptDst after inverse transforming ptSrc"},
+          "description": "Inverse transforms the specified Point2D using this AffineTransform and stores the result in the specified destination Point2D.",
+          "static": false
+        },
+        {
+          "name": "createTransformedShape",
+          "signature": "createTransformedShape(pSrc)",
+          "params": [
+            {"name": "pSrc", "type": "Shape", "description": "The Shape object to be transformed, or null"}
+          ],
+          "returns": {"type": "Shape", "description": "A new Shape object representing the transformed geometry, or null"},
+          "description": "Returns a new Shape object defined by the geometry of the specified Shape after it has been transformed by this transform.",
+          "static": false
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A copy of this AffineTransform object"},
+          "description": "Returns a copy of this AffineTransform object.",
+          "static": false
+        },
+        {
+          "name": "equals",
+          "signature": "equals(obj)",
+          "params": [
+            {"name": "obj", "type": "Object", "description": "The Object to test for equality with this AffineTransform"}
+          ],
+          "returns": {"type": "boolean", "description": "True if obj equals this AffineTransform"},
+          "description": "Returns true if this AffineTransform represents the same affine coordinate transform as the specified argument.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A String representing this AffineTransform"},
+          "description": "Returns a String that represents the value of this AffineTransform.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "TYPE_IDENTITY", "type": "int", "description": "This constant indicates that the transform defined by this object is an identity transform (0).", "static": true, "final": true},
+        {"name": "TYPE_TRANSLATION", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a translation (1).", "static": true, "final": true},
+        {"name": "TYPE_UNIFORM_SCALE", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a uniform scale (2).", "static": true, "final": true},
+        {"name": "TYPE_GENERAL_SCALE", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a general scale (4).", "static": true, "final": true},
+        {"name": "TYPE_MASK_SCALE", "type": "int", "description": "This constant is a bit mask for any of the scale flag bits (6).", "static": true, "final": true},
+        {"name": "TYPE_FLIP", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a mirror image flip (64).", "static": true, "final": true},
+        {"name": "TYPE_QUADRANT_ROTATION", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a quadrant rotation (8).", "static": true, "final": true},
+        {"name": "TYPE_GENERAL_ROTATION", "type": "int", "description": "This flag bit indicates that the transform defined by this object performs a rotation by an arbitrary angle (16).", "static": true, "final": true},
+        {"name": "TYPE_MASK_ROTATION", "type": "int", "description": "This constant is a bit mask for any of the rotation flag bits (24).", "static": true, "final": true},
+        {"name": "TYPE_GENERAL_TRANSFORM", "type": "int", "description": "This constant indicates that the transform defined by this object performs an arbitrary conversion of the input coordinates (32).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/AffineTransform.html"
+    },
+    {
+      "name": "Ellipse2D.Double",
+      "description": "A double-precision implementation of an ellipse defined by a framing rectangle. Used in Ignition Vision for drawing circles and ovals in custom paintable components.",
+      "constructors": [
+        {
+          "signature": "Double()",
+          "params": [],
+          "description": "Constructs a new Ellipse2D.Double initialized to location (0, 0) and size (0, 0)."
+        },
+        {
+          "signature": "Double(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the framing rectangle"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the framing rectangle"},
+            {"name": "w", "type": "double", "description": "The width of the framing rectangle"},
+            {"name": "h", "type": "double", "description": "The height of the framing rectangle"}
+          ],
+          "description": "Constructs and initializes an Ellipse2D.Double from the specified coordinates."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the upper-left corner of the framing rectangle"},
+          "description": "Returns the X coordinate of the upper-left corner of the framing rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the upper-left corner of the framing rectangle"},
+          "description": "Returns the Y coordinate of the upper-left corner of the framing rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getWidth",
+          "signature": "getWidth()",
+          "params": [],
+          "returns": {"type": "double", "description": "The width of the framing rectangle"},
+          "description": "Returns the width of the framing rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "getHeight",
+          "signature": "getHeight()",
+          "params": [],
+          "returns": {"type": "double", "description": "The height of the framing rectangle"},
+          "description": "Returns the height of the framing rectangle in double precision.",
+          "static": false
+        },
+        {
+          "name": "isEmpty",
+          "signature": "isEmpty()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the framing rectangle is empty"},
+          "description": "Determines whether the RectangularShape is empty. When the width or the height is zero or negative, the ellipse is empty.",
+          "static": false
+        },
+        {
+          "name": "setFrame",
+          "signature": "setFrame(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the specified rectangular shape"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the specified rectangular shape"},
+            {"name": "w", "type": "double", "description": "The width of the specified rectangular shape"},
+            {"name": "h", "type": "double", "description": "The height of the specified rectangular shape"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location and size of the framing rectangle of this Shape to the specified rectangular values.",
+          "static": false
+        },
+        {
+          "name": "getBounds2D",
+          "signature": "getBounds2D()",
+          "params": [],
+          "returns": {"type": "Rectangle2D", "description": "The framing rectangle of this Ellipse2D.Double"},
+          "description": "Returns the high precision bounding box of this Ellipse2D.Double.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The specified X coordinate to be tested"},
+            {"name": "y", "type": "double", "description": "The specified Y coordinate to be tested"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the specified point is inside this Ellipse2D"},
+          "description": "Tests if the specified coordinates are inside the boundary of this Ellipse2D.",
+          "static": false
+        },
+        {
+          "name": "intersects",
+          "signature": "intersects(x, y, w, h)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the specified rectangular area"},
+            {"name": "w", "type": "double", "description": "The width of the specified rectangular area"},
+            {"name": "h", "type": "double", "description": "The height of the specified rectangular area"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this Ellipse2D intersects the specified rectangular area"},
+          "description": "Tests if the interior of this Ellipse2D intersects the interior of a specified rectangular area.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the framing rectangle of this Ellipse2D.Double.", "static": false, "final": false},
+        {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the framing rectangle of this Ellipse2D.Double.", "static": false, "final": false},
+        {"name": "width", "type": "double", "description": "The overall width of this Ellipse2D.Double.", "static": false, "final": false},
+        {"name": "height", "type": "double", "description": "The overall height of this Ellipse2D.Double.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Ellipse2D.Double.html"
+    },
+    {
+      "name": "Line2D.Double",
+      "description": "A line segment in (x, y) coordinate space specified in double precision. Used in Ignition Vision for drawing line segments in custom paintable components.",
+      "constructors": [
+        {
+          "signature": "Double()",
+          "params": [],
+          "description": "Constructs and initializes a Line2D.Double with coordinates (0, 0) to (0, 0)."
+        },
+        {
+          "signature": "Double(x1, y1, x2, y2)",
+          "params": [
+            {"name": "x1", "type": "double", "description": "The X coordinate of the start point"},
+            {"name": "y1", "type": "double", "description": "The Y coordinate of the start point"},
+            {"name": "x2", "type": "double", "description": "The X coordinate of the end point"},
+            {"name": "y2", "type": "double", "description": "The Y coordinate of the end point"}
+          ],
+          "description": "Constructs and initializes a Line2D.Double from the specified coordinates."
+        },
+        {
+          "signature": "Double(p1, p2)",
+          "params": [
+            {"name": "p1", "type": "Point2D", "description": "The start Point2D of this line segment"},
+            {"name": "p2", "type": "Point2D", "description": "The end Point2D of this line segment"}
+          ],
+          "description": "Constructs and initializes a Line2D.Double from the specified Point2D objects."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX1",
+          "signature": "getX1()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the start point of this Line2D.Double"},
+          "description": "Returns the X coordinate of the start point in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY1",
+          "signature": "getY1()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the start point of this Line2D.Double"},
+          "description": "Returns the Y coordinate of the start point in double precision.",
+          "static": false
+        },
+        {
+          "name": "getX2",
+          "signature": "getX2()",
+          "params": [],
+          "returns": {"type": "double", "description": "The X coordinate of the end point of this Line2D.Double"},
+          "description": "Returns the X coordinate of the end point in double precision.",
+          "static": false
+        },
+        {
+          "name": "getY2",
+          "signature": "getY2()",
+          "params": [],
+          "returns": {"type": "double", "description": "The Y coordinate of the end point of this Line2D.Double"},
+          "description": "Returns the Y coordinate of the end point in double precision.",
+          "static": false
+        },
+        {
+          "name": "getP1",
+          "signature": "getP1()",
+          "params": [],
+          "returns": {"type": "Point2D", "description": "The start Point2D of this Line2D.Double"},
+          "description": "Returns the start Point2D of this Line2D.Double.",
+          "static": false
+        },
+        {
+          "name": "getP2",
+          "signature": "getP2()",
+          "params": [],
+          "returns": {"type": "Point2D", "description": "The end Point2D of this Line2D.Double"},
+          "description": "Returns the end Point2D of this Line2D.Double.",
+          "static": false
+        },
+        {
+          "name": "setLine",
+          "signature": "setLine(x1, y1, x2, y2)",
+          "params": [
+            {"name": "x1", "type": "double", "description": "The X coordinate of the start point of the line segment"},
+            {"name": "y1", "type": "double", "description": "The Y coordinate of the start point of the line segment"},
+            {"name": "x2", "type": "double", "description": "The X coordinate of the end point of the line segment"},
+            {"name": "y2", "type": "double", "description": "The Y coordinate of the end point of the line segment"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location of the end points of this Line2D to the specified double coordinates.",
+          "static": false
+        },
+        {
+          "name": "getBounds2D",
+          "signature": "getBounds2D()",
+          "params": [],
+          "returns": {"type": "Rectangle2D", "description": "A Rectangle2D that is the bounding box of this Line2D.Double"},
+          "description": "Returns a high precision and more accurate bounding box of this Line2D.Double.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the specified point"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the specified point"}
+          ],
+          "returns": {"type": "boolean", "description": "Always returns false since a line contains no area"},
+          "description": "Tests if a specified coordinate is inside the boundary of this Line2D. Since a line has no interior, this method always returns false.",
+          "static": false
+        },
+        {
+          "name": "intersectsLine",
+          "signature": "intersectsLine(x1, y1, x2, y2)",
+          "params": [
+            {"name": "x1", "type": "double", "description": "The X coordinate of the start point of the specified line segment"},
+            {"name": "y1", "type": "double", "description": "The Y coordinate of the start point of the specified line segment"},
+            {"name": "x2", "type": "double", "description": "The X coordinate of the end point of the specified line segment"},
+            {"name": "y2", "type": "double", "description": "The Y coordinate of the end point of the specified line segment"}
+          ],
+          "returns": {"type": "boolean", "description": "True if this line segment and the specified line segment intersect each other"},
+          "description": "Tests if the line segment from (x1, y1) to (x2, y2) intersects this line segment.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "x1", "type": "double", "description": "The X coordinate of the start point of the line segment.", "static": false, "final": false},
+        {"name": "y1", "type": "double", "description": "The Y coordinate of the start point of the line segment.", "static": false, "final": false},
+        {"name": "x2", "type": "double", "description": "The X coordinate of the end point of the line segment.", "static": false, "final": false},
+        {"name": "y2", "type": "double", "description": "The Y coordinate of the end point of the line segment.", "static": false, "final": false}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Line2D.Double.html"
+    },
+    {
+      "name": "Arc2D.Double",
+      "description": "A double-precision arc defined by a framing rectangle, start angle, angular extent, and a closure type. Used in Ignition Vision for drawing arc shapes, pie slices, and chord segments in custom paintable components.",
+      "constructors": [
+        {
+          "signature": "Double()",
+          "params": [],
+          "description": "Constructs a new OPEN arc initialized to location (0, 0), size (0, 0), angular extents (start = 0, extent = 0)."
+        },
+        {
+          "signature": "Double(x, y, w, h, start, extent, type)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the arc's framing rectangle"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the arc's framing rectangle"},
+            {"name": "w", "type": "double", "description": "The overall width of the full ellipse of which this arc is a partial section"},
+            {"name": "h", "type": "double", "description": "The overall height of the full ellipse of which this arc is a partial section"},
+            {"name": "start", "type": "double", "description": "The starting angle of the arc in degrees"},
+            {"name": "extent", "type": "double", "description": "The angular extent of the arc in degrees"},
+            {"name": "type", "type": "int", "description": "The closure type for the arc: Arc2D.OPEN, Arc2D.CHORD, or Arc2D.PIE"}
+          ],
+          "description": "Constructs a new arc initialized to the specified location, size, angular extents, and closure type."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getAngleStart",
+          "signature": "getAngleStart()",
+          "params": [],
+          "returns": {"type": "double", "description": "The starting angle of this arc in degrees"},
+          "description": "Returns the starting angle of the arc.",
+          "static": false
+        },
+        {
+          "name": "getAngleExtent",
+          "signature": "getAngleExtent()",
+          "params": [],
+          "returns": {"type": "double", "description": "The angular extent of this arc in degrees"},
+          "description": "Returns the angular extent of the arc.",
+          "static": false
+        },
+        {
+          "name": "setArc",
+          "signature": "setArc(x, y, w, h, angSt, angExt, closure)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the upper-left corner of the arc's framing rectangle"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the upper-left corner of the arc's framing rectangle"},
+            {"name": "w", "type": "double", "description": "The overall width of the full ellipse of which this arc is a partial section"},
+            {"name": "h", "type": "double", "description": "The overall height of the full ellipse of which this arc is a partial section"},
+            {"name": "angSt", "type": "double", "description": "The starting angle of the arc in degrees"},
+            {"name": "angExt", "type": "double", "description": "The angular extent of the arc in degrees"},
+            {"name": "closure", "type": "int", "description": "The closure type for the arc: Arc2D.OPEN, Arc2D.CHORD, or Arc2D.PIE"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the location, size, angular extents, and closure type of this arc to the specified double values.",
+          "static": false
+        },
+        {
+          "name": "setAngleStart",
+          "signature": "setAngleStart(angSt)",
+          "params": [
+            {"name": "angSt", "type": "double", "description": "The starting angle of the arc in degrees"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the starting angle of this arc to the specified double value.",
+          "static": false
+        },
+        {
+          "name": "setAngleExtent",
+          "signature": "setAngleExtent(angExt)",
+          "params": [
+            {"name": "angExt", "type": "double", "description": "The angular extent of the arc in degrees"}
+          ],
+          "returns": {"type": "void", "description": ""},
+          "description": "Sets the angular extent of this arc to the specified double value.",
+          "static": false
+        },
+        {
+          "name": "getStartPoint",
+          "signature": "getStartPoint()",
+          "params": [],
+          "returns": {"type": "Point2D", "description": "A Point2D representing the starting point of the arc"},
+          "description": "Returns the starting point of the arc, which is the point where the ray from the center defined by the starting angle intersects the elliptical boundary of the arc.",
+          "static": false
+        },
+        {
+          "name": "getEndPoint",
+          "signature": "getEndPoint()",
+          "params": [],
+          "returns": {"type": "Point2D", "description": "A Point2D representing the ending point of the arc"},
+          "description": "Returns the ending point of the arc, which is the point where the ray from the center defined by the starting angle plus the angular extent intersects the elliptical boundary of the arc.",
+          "static": false
+        },
+        {
+          "name": "containsAngle",
+          "signature": "containsAngle(angle)",
+          "params": [
+            {"name": "angle", "type": "double", "description": "The angle to test, in degrees"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the arc contains the specified angle"},
+          "description": "Determines whether the specified angle is within the angular extents of the arc.",
+          "static": false
+        },
+        {
+          "name": "getBounds2D",
+          "signature": "getBounds2D()",
+          "params": [],
+          "returns": {"type": "Rectangle2D", "description": "The bounding rectangle of this Arc2D.Double"},
+          "description": "Returns the high precision framing rectangle of the arc.",
+          "static": false
+        },
+        {
+          "name": "contains",
+          "signature": "contains(x, y)",
+          "params": [
+            {"name": "x", "type": "double", "description": "The X coordinate of the point to test"},
+            {"name": "y", "type": "double", "description": "The Y coordinate of the point to test"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the point is contained in the arc"},
+          "description": "Determines whether the specified point is inside the boundary of the arc.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "OPEN", "type": "int", "description": "The closure type for an open arc with no path segments connecting the two ends of the arc segment (0).", "static": true, "final": true},
+        {"name": "CHORD", "type": "int", "description": "The closure type for an arc closed by drawing a straight line segment from the start of the arc segment to the end of the arc segment (1).", "static": true, "final": true},
+        {"name": "PIE", "type": "int", "description": "The closure type for an arc closed by drawing straight line segments from the start and end of the arc segment to the center of the full ellipse (2).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/geom/Arc2D.Double.html"
+    }
+  ]
+}

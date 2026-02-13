@@ -1,0 +1,549 @@
+{
+  "package": "java.security",
+  "classes": [
+    {
+      "name": "MessageDigest",
+      "description": "Provides the functionality of a message digest algorithm such as SHA-256 or MD5. Used in Ignition scripts for hashing passwords, verifying data integrity, and generating checksums.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The name of the algorithm requested (e.g., \"SHA-256\", \"MD5\", \"SHA-1\", \"SHA-512\")"}],
+          "returns": {"type": "MessageDigest", "description": "A MessageDigest object implementing the specified algorithm"},
+          "description": "Returns a MessageDigest object that implements the specified digest algorithm. Common algorithms: MD5, SHA-1, SHA-256, SHA-384, SHA-512.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm, provider)",
+          "params": [
+            {"name": "algorithm", "type": "String", "description": "The name of the algorithm requested"},
+            {"name": "provider", "type": "String", "description": "The name of the provider (e.g., \"SUN\")"}
+          ],
+          "returns": {"type": "MessageDigest", "description": "A MessageDigest object implementing the specified algorithm from the specified provider"},
+          "description": "Returns a MessageDigest object that implements the specified digest algorithm from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "isEqual",
+          "signature": "isEqual(digesta, digestb)",
+          "params": [
+            {"name": "digesta", "type": "byte[]", "description": "One of the digests to compare"},
+            {"name": "digestb", "type": "byte[]", "description": "The other digest to compare"}
+          ],
+          "returns": {"type": "boolean", "description": "True if the two digests are equal, false otherwise"},
+          "description": "Compares two digests for equality. Does a simple byte comparison. Uses a constant-time comparison to prevent timing attacks.",
+          "static": true
+        },
+        {
+          "name": "update",
+          "signature": "update(input)",
+          "params": [{"name": "input", "type": "byte", "description": "The byte with which to update the digest"}],
+          "description": "Updates the digest using the specified byte.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input)",
+          "params": [{"name": "input", "type": "byte[]", "description": "The array of bytes with which to update the digest"}],
+          "description": "Updates the digest using the specified array of bytes.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(input, offset, len)",
+          "params": [
+            {"name": "input", "type": "byte[]", "description": "The array of bytes"},
+            {"name": "offset", "type": "int", "description": "The offset to start from in the array of bytes"},
+            {"name": "len", "type": "int", "description": "The number of bytes to use, starting at offset"}
+          ],
+          "description": "Updates the digest using the specified subarray of bytes, starting at the specified offset.",
+          "static": false
+        },
+        {
+          "name": "digest",
+          "signature": "digest()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "The array of bytes for the resulting hash value"},
+          "description": "Completes the hash computation by performing final operations such as padding. The digest is reset after this call is made.",
+          "static": false
+        },
+        {
+          "name": "digest",
+          "signature": "digest(input)",
+          "params": [{"name": "input", "type": "byte[]", "description": "The input to be updated before the digest is completed"}],
+          "returns": {"type": "byte[]", "description": "The array of bytes for the resulting hash value"},
+          "description": "Performs a final update on the digest using the specified array of bytes, then completes the digest computation.",
+          "static": false
+        },
+        {
+          "name": "reset",
+          "signature": "reset()",
+          "params": [],
+          "description": "Resets the digest for further use.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the algorithm (e.g., \"SHA-256\")"},
+          "description": "Returns a string that identifies the algorithm, independent of implementation details.",
+          "static": false
+        },
+        {
+          "name": "getDigestLength",
+          "signature": "getDigestLength()",
+          "params": [],
+          "returns": {"type": "int", "description": "The digest length in bytes, or 0 if the operation is not supported"},
+          "description": "Returns the length of the digest in bytes, or 0 if this operation is not supported by the provider.",
+          "static": false
+        },
+        {
+          "name": "clone",
+          "signature": "clone()",
+          "params": [],
+          "returns": {"type": "Object", "description": "A clone of this MessageDigest object"},
+          "description": "Returns a clone if the implementation is cloneable.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/security/MessageDigest.html"
+    },
+    {
+      "name": "SecureRandom",
+      "description": "Provides a cryptographically strong random number generator (RNG). Used in Ignition scripts for generating secure tokens, nonces, and random values where predictability must be avoided.",
+      "constructors": [
+        {
+          "signature": "SecureRandom()",
+          "params": [],
+          "description": "Constructs a new SecureRandom using the default random number algorithm."
+        },
+        {
+          "signature": "SecureRandom(seed)",
+          "params": [{"name": "seed", "type": "byte[]", "description": "The seed bytes"}],
+          "description": "Constructs a new SecureRandom using the specified seed bytes."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The name of the RNG algorithm (e.g., \"SHA1PRNG\", \"NativePRNG\")"}],
+          "returns": {"type": "SecureRandom", "description": "A SecureRandom object implementing the specified algorithm"},
+          "description": "Returns a SecureRandom object that implements the specified random number generator algorithm.",
+          "static": true
+        },
+        {
+          "name": "getInstanceStrong",
+          "signature": "getInstanceStrong()",
+          "params": [],
+          "returns": {"type": "SecureRandom", "description": "A strong SecureRandom instance as indicated by the securerandom.strongAlgorithms Security property"},
+          "description": "Returns a SecureRandom object that was selected using the algorithms/providers specified in the securerandom.strongAlgorithms Security property.",
+          "static": true
+        },
+        {
+          "name": "getSeed",
+          "signature": "getSeed(numBytes)",
+          "params": [{"name": "numBytes", "type": "int", "description": "The number of seed bytes to generate"}],
+          "returns": {"type": "byte[]", "description": "The seed bytes"},
+          "description": "Returns the given number of seed bytes, computed using the seed generation algorithm that this class uses to seed itself.",
+          "static": true
+        },
+        {
+          "name": "nextBytes",
+          "signature": "nextBytes(bytes)",
+          "params": [{"name": "bytes", "type": "byte[]", "description": "The byte array to fill with random bytes"}],
+          "description": "Generates a user-specified number of random bytes and places them into the supplied byte array.",
+          "static": false
+        },
+        {
+          "name": "nextInt",
+          "signature": "nextInt()",
+          "params": [],
+          "returns": {"type": "int", "description": "A random int value"},
+          "description": "Returns the next pseudorandom, uniformly distributed int value from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "nextInt",
+          "signature": "nextInt(bound)",
+          "params": [{"name": "bound", "type": "int", "description": "The upper bound (exclusive), must be positive"}],
+          "returns": {"type": "int", "description": "A random int value between 0 (inclusive) and bound (exclusive)"},
+          "description": "Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive).",
+          "static": false
+        },
+        {
+          "name": "nextLong",
+          "signature": "nextLong()",
+          "params": [],
+          "returns": {"type": "long", "description": "A random long value"},
+          "description": "Returns the next pseudorandom, uniformly distributed long value from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "nextDouble",
+          "signature": "nextDouble()",
+          "params": [],
+          "returns": {"type": "double", "description": "A random double value between 0.0 (inclusive) and 1.0 (exclusive)"},
+          "description": "Returns the next pseudorandom, uniformly distributed double value between 0.0 and 1.0 from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "nextBoolean",
+          "signature": "nextBoolean()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "A random boolean value"},
+          "description": "Returns the next pseudorandom, uniformly distributed boolean value from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "nextFloat",
+          "signature": "nextFloat()",
+          "params": [],
+          "returns": {"type": "float", "description": "A random float value between 0.0 (inclusive) and 1.0 (exclusive)"},
+          "description": "Returns the next pseudorandom, uniformly distributed float value between 0.0 and 1.0 from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "nextGaussian",
+          "signature": "nextGaussian()",
+          "params": [],
+          "returns": {"type": "double", "description": "A random double value with Gaussian distribution, mean 0.0 and standard deviation 1.0"},
+          "description": "Returns the next pseudorandom, Gaussian distributed double value with mean 0.0 and standard deviation 1.0 from this random number generator's sequence.",
+          "static": false
+        },
+        {
+          "name": "setSeed",
+          "signature": "setSeed(seed)",
+          "params": [{"name": "seed", "type": "long", "description": "The seed value"}],
+          "description": "Reseeds this random object using the given long seed. The given seed supplements, rather than replaces, the existing seed.",
+          "static": false
+        },
+        {
+          "name": "setSeed",
+          "signature": "setSeed(seed)",
+          "params": [{"name": "seed", "type": "byte[]", "description": "The seed bytes"}],
+          "description": "Reseeds this random object using the given seed bytes. The given seed supplements, rather than replaces, the existing seed.",
+          "static": false
+        },
+        {
+          "name": "generateSeed",
+          "signature": "generateSeed(numBytes)",
+          "params": [{"name": "numBytes", "type": "int", "description": "The number of seed bytes to generate"}],
+          "returns": {"type": "byte[]", "description": "The seed bytes"},
+          "description": "Returns the given number of seed bytes, computed using the seed generation algorithm that this class uses to seed itself.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the algorithm"},
+          "description": "Returns the name of the algorithm implemented by this SecureRandom object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/security/SecureRandom.html"
+    },
+    {
+      "name": "KeyStore",
+      "description": "Represents a storage facility for cryptographic keys and certificates. Used in Ignition for managing SSL/TLS certificates, trusted CA certificates, and private keys for secure communications.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(type)",
+          "params": [{"name": "type", "type": "String", "description": "The type of keystore (e.g., \"JKS\", \"PKCS12\", \"JCEKS\")"}],
+          "returns": {"type": "KeyStore", "description": "A KeyStore object of the specified type"},
+          "description": "Returns a KeyStore object of the specified type. Common types: JKS (Java KeyStore), PKCS12, JCEKS.",
+          "static": true
+        },
+        {
+          "name": "getInstance",
+          "signature": "getInstance(type, provider)",
+          "params": [
+            {"name": "type", "type": "String", "description": "The type of keystore"},
+            {"name": "provider", "type": "String", "description": "The name of the provider"}
+          ],
+          "returns": {"type": "KeyStore", "description": "A KeyStore object of the specified type from the specified provider"},
+          "description": "Returns a KeyStore object of the specified type from the specified provider.",
+          "static": true
+        },
+        {
+          "name": "getDefaultType",
+          "signature": "getDefaultType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The default keystore type as specified by the keystore.type security property, or \"jks\" if no such property exists"},
+          "description": "Returns the default keystore type as specified by the keystore.type security property, or the string \"jks\" if no such property exists.",
+          "static": true
+        },
+        {
+          "name": "load",
+          "signature": "load(stream, password)",
+          "params": [
+            {"name": "stream", "type": "InputStream", "description": "The input stream from which the keystore is loaded, or null for an empty keystore"},
+            {"name": "password", "type": "char[]", "description": "The password used to check the integrity of the keystore, or null"}
+          ],
+          "description": "Loads this KeyStore from the given input stream. A password may be given to unlock the keystore (e.g., the keystore resides on a hardware token device) or to check the integrity of the keystore data.",
+          "static": false
+        },
+        {
+          "name": "store",
+          "signature": "store(stream, password)",
+          "params": [
+            {"name": "stream", "type": "OutputStream", "description": "The output stream to which this keystore is written"},
+            {"name": "password", "type": "char[]", "description": "The password to generate the keystore integrity check"}
+          ],
+          "description": "Stores this keystore to the given output stream, and protects its integrity with the given password.",
+          "static": false
+        },
+        {
+          "name": "getKey",
+          "signature": "getKey(alias, password)",
+          "params": [
+            {"name": "alias", "type": "String", "description": "The alias name"},
+            {"name": "password", "type": "char[]", "description": "The password for recovering the key"}
+          ],
+          "returns": {"type": "Key", "description": "The requested key, or null if the given alias does not exist or does not identify a key-related entry"},
+          "description": "Returns the key associated with the given alias, using the given password to recover it.",
+          "static": false
+        },
+        {
+          "name": "getCertificate",
+          "signature": "getCertificate(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias name"}],
+          "returns": {"type": "Certificate", "description": "The certificate, or null if the given alias does not exist or does not contain a certificate"},
+          "description": "Returns the certificate associated with the given alias. If the given alias identifies a trusted certificate entry, the certificate associated with that entry is returned. If the given alias identifies a key entry, the first element of the certificate chain is returned.",
+          "static": false
+        },
+        {
+          "name": "getCertificateChain",
+          "signature": "getCertificateChain(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias name"}],
+          "returns": {"type": "Certificate[]", "description": "The certificate chain (ordered from the entity cert to the root CA), or null if the alias does not exist or does not contain a certificate chain"},
+          "description": "Returns the certificate chain associated with the given alias. The certificate chain must have been associated with the alias by a call to setKeyEntry.",
+          "static": false
+        },
+        {
+          "name": "setKeyEntry",
+          "signature": "setKeyEntry(alias, key, password, chain)",
+          "params": [
+            {"name": "alias", "type": "String", "description": "The alias name"},
+            {"name": "key", "type": "Key", "description": "The key to be associated with the alias"},
+            {"name": "password", "type": "char[]", "description": "The password to protect the key"},
+            {"name": "chain", "type": "Certificate[]", "description": "The certificate chain for the corresponding public key (only required if the key is of type PrivateKey)"}
+          ],
+          "description": "Assigns the given key to the given alias, protecting it with the given password. If the given alias already exists, the keystore information associated with it is overridden.",
+          "static": false
+        },
+        {
+          "name": "setCertificateEntry",
+          "signature": "setCertificateEntry(alias, cert)",
+          "params": [
+            {"name": "alias", "type": "String", "description": "The alias name"},
+            {"name": "cert", "type": "Certificate", "description": "The certificate"}
+          ],
+          "description": "Assigns the given trusted certificate to the given alias. If the given alias already exists, the keystore information associated with it is overridden.",
+          "static": false
+        },
+        {
+          "name": "deleteEntry",
+          "signature": "deleteEntry(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias name"}],
+          "description": "Deletes the entry identified by the given alias from this keystore.",
+          "static": false
+        },
+        {
+          "name": "containsAlias",
+          "signature": "containsAlias(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias name"}],
+          "returns": {"type": "boolean", "description": "True if this keystore contains an entry for the specified alias, false otherwise"},
+          "description": "Checks if the given alias exists in this keystore.",
+          "static": false
+        },
+        {
+          "name": "size",
+          "signature": "size()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of entries in this keystore"},
+          "description": "Retrieves the number of entries in this keystore.",
+          "static": false
+        },
+        {
+          "name": "aliases",
+          "signature": "aliases()",
+          "params": [],
+          "returns": {"type": "Enumeration", "description": "An enumeration of the alias names in this keystore"},
+          "description": "Lists all the alias names of this keystore.",
+          "static": false
+        },
+        {
+          "name": "isKeyEntry",
+          "signature": "isKeyEntry(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias for the keystore entry to be checked"}],
+          "returns": {"type": "boolean", "description": "True if the entry identified by the given alias is a key-related entry, false otherwise"},
+          "description": "Returns true if the entry identified by the given alias was created by a call to setKeyEntry.",
+          "static": false
+        },
+        {
+          "name": "isCertificateEntry",
+          "signature": "isCertificateEntry(alias)",
+          "params": [{"name": "alias", "type": "String", "description": "The alias for the keystore entry to be checked"}],
+          "returns": {"type": "boolean", "description": "True if the entry identified by the given alias is a trusted certificate entry, false otherwise"},
+          "description": "Returns true if the entry identified by the given alias was created by a call to setCertificateEntry.",
+          "static": false
+        },
+        {
+          "name": "getType",
+          "signature": "getType()",
+          "params": [],
+          "returns": {"type": "String", "description": "The type of this keystore"},
+          "description": "Returns the type of this keystore.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/security/KeyStore.html"
+    },
+    {
+      "name": "KeyPairGenerator",
+      "description": "Generates pairs of public and private keys for asymmetric cryptography algorithms such as RSA, DSA, and EC. Used in Ignition for generating key pairs for digital signatures and encryption.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The standard string name of the algorithm (e.g., \"RSA\", \"DSA\", \"EC\")"}],
+          "returns": {"type": "KeyPairGenerator", "description": "A KeyPairGenerator object that generates public/private key pairs for the specified algorithm"},
+          "description": "Returns a KeyPairGenerator object that generates public/private key pairs for the specified algorithm.",
+          "static": true
+        },
+        {
+          "name": "initialize",
+          "signature": "initialize(keysize)",
+          "params": [{"name": "keysize", "type": "int", "description": "The keysize in bits (e.g., 1024, 2048, 4096 for RSA)"}],
+          "description": "Initializes the key pair generator for a certain keysize using a default source of randomness.",
+          "static": false
+        },
+        {
+          "name": "initialize",
+          "signature": "initialize(keysize, random)",
+          "params": [
+            {"name": "keysize", "type": "int", "description": "The keysize in bits"},
+            {"name": "random", "type": "SecureRandom", "description": "The source of randomness"}
+          ],
+          "description": "Initializes the key pair generator for a certain keysize with the given source of randomness.",
+          "static": false
+        },
+        {
+          "name": "generateKeyPair",
+          "signature": "generateKeyPair()",
+          "params": [],
+          "returns": {"type": "KeyPair", "description": "The generated key pair"},
+          "description": "Generates a key pair. If this KeyPairGenerator has not been initialized explicitly, provider-specific defaults will be used for the size and other values of the generated keys.",
+          "static": false
+        },
+        {
+          "name": "genKeyPair",
+          "signature": "genKeyPair()",
+          "params": [],
+          "returns": {"type": "KeyPair", "description": "The generated key pair"},
+          "description": "Generates a key pair. This is a convenience method, equivalent to generateKeyPair().",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The standard string name of the algorithm"},
+          "description": "Returns the standard name of the algorithm for this key pair generator.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/security/KeyPairGenerator.html"
+    },
+    {
+      "name": "Signature",
+      "description": "Provides the functionality of a digital signature algorithm such as SHA256withRSA or SHA1withDSA. Used in Ignition for signing data to ensure authenticity and integrity, and for verifying digital signatures.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getInstance",
+          "signature": "getInstance(algorithm)",
+          "params": [{"name": "algorithm", "type": "String", "description": "The standard name of the algorithm (e.g., \"SHA256withRSA\", \"SHA1withDSA\", \"SHA256withECDSA\")"}],
+          "returns": {"type": "Signature", "description": "A Signature object implementing the specified algorithm"},
+          "description": "Returns a Signature object that implements the specified signature algorithm.",
+          "static": true
+        },
+        {
+          "name": "initSign",
+          "signature": "initSign(privateKey)",
+          "params": [{"name": "privateKey", "type": "PrivateKey", "description": "The private key of the identity whose signature is going to be generated"}],
+          "description": "Initializes this object for signing. If this method is called again with a different argument, it negates the effect of this call.",
+          "static": false
+        },
+        {
+          "name": "initVerify",
+          "signature": "initVerify(publicKey)",
+          "params": [{"name": "publicKey", "type": "PublicKey", "description": "The public key of the identity whose signature is going to be verified"}],
+          "description": "Initializes this object for verification. If this method is called again with a different argument, it negates the effect of this call.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(data)",
+          "params": [{"name": "data", "type": "byte[]", "description": "The array of bytes to use for the update"}],
+          "description": "Updates the data to be signed or verified, using the specified array of bytes.",
+          "static": false
+        },
+        {
+          "name": "update",
+          "signature": "update(data, off, len)",
+          "params": [
+            {"name": "data", "type": "byte[]", "description": "The array of bytes"},
+            {"name": "off", "type": "int", "description": "The offset to start from in the array of bytes"},
+            {"name": "len", "type": "int", "description": "The number of bytes to use, starting at offset"}
+          ],
+          "description": "Updates the data to be signed or verified, using the specified subarray of bytes.",
+          "static": false
+        },
+        {
+          "name": "sign",
+          "signature": "sign()",
+          "params": [],
+          "returns": {"type": "byte[]", "description": "The signature bytes of the signing operation's result"},
+          "description": "Returns the signature bytes of all the data updated. The signature is reset after this call and the object can be reused to generate further signatures.",
+          "static": false
+        },
+        {
+          "name": "verify",
+          "signature": "verify(signature)",
+          "params": [{"name": "signature", "type": "byte[]", "description": "The signature bytes to be verified"}],
+          "returns": {"type": "boolean", "description": "True if the signature was verified, false if not"},
+          "description": "Verifies the passed-in signature. The signature is reset after this call and the object can be reused to verify further signatures.",
+          "static": false
+        },
+        {
+          "name": "getAlgorithm",
+          "signature": "getAlgorithm()",
+          "params": [],
+          "returns": {"type": "String", "description": "The name of the algorithm for this Signature object"},
+          "description": "Returns the name of the algorithm for this signature object.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/security/Signature.html"
+    }
+  ]
+}

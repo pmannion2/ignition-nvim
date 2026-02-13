@@ -1,0 +1,620 @@
+{
+  "package": "java.awt.event",
+  "classes": [
+    {
+      "name": "ActionEvent",
+      "description": "A semantic event indicating that a component-defined action occurred. Generated when a button is clicked, a menu item is selected, or a list item is double-clicked. Heavily used in Ignition Vision event handlers.",
+      "constructors": [
+        {
+          "signature": "ActionEvent(source, id, command)",
+          "params": [
+            {"name": "source", "type": "Object", "description": "The object that originated the event"},
+            {"name": "id", "type": "int", "description": "An integer that identifies the event type (ACTION_PERFORMED)"},
+            {"name": "command", "type": "String", "description": "A string that may specify a command associated with the event"}
+          ],
+          "description": "Constructs an ActionEvent object with the specified source, type, and command string."
+        },
+        {
+          "signature": "ActionEvent(source, id, command, modifiers)",
+          "params": [
+            {"name": "source", "type": "Object", "description": "The object that originated the event"},
+            {"name": "id", "type": "int", "description": "An integer that identifies the event type (ACTION_PERFORMED)"},
+            {"name": "command", "type": "String", "description": "A string that may specify a command associated with the event"},
+            {"name": "modifiers", "type": "int", "description": "The modifier keys held down during this action (bitwise OR of SHIFT_MASK, CTRL_MASK, META_MASK, ALT_MASK)"}
+          ],
+          "description": "Constructs an ActionEvent object with the specified source, type, command string, and modifier keys."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getActionCommand",
+          "signature": "getActionCommand()",
+          "params": [],
+          "returns": {"type": "String", "description": "The command string associated with this action event"},
+          "description": "Returns the command string associated with this action. For a button, this is typically the button's label text.",
+          "static": false
+        },
+        {
+          "name": "getModifiers",
+          "signature": "getModifiers()",
+          "params": [],
+          "returns": {"type": "int", "description": "The bitwise OR of the modifier constants"},
+          "description": "Returns the modifier keys held down during this action event. The value is a bitwise OR of SHIFT_MASK, CTRL_MASK, META_MASK, and ALT_MASK.",
+          "static": false
+        },
+        {
+          "name": "getWhen",
+          "signature": "getWhen()",
+          "params": [],
+          "returns": {"type": "long", "description": "The timestamp of when this event occurred, in milliseconds since epoch"},
+          "description": "Returns the timestamp of when this event occurred.",
+          "static": false
+        },
+        {
+          "name": "getSource",
+          "signature": "getSource()",
+          "params": [],
+          "returns": {"type": "Object", "description": "The object on which the event initially occurred"},
+          "description": "Returns the object on which the event initially occurred. Inherited from EventObject.",
+          "static": false
+        },
+        {
+          "name": "paramString",
+          "signature": "paramString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string identifying the event and its attributes"},
+          "description": "Returns a parameter string identifying this action event. Useful for event logging and debugging.",
+          "static": false
+        },
+        {
+          "name": "toString",
+          "signature": "toString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string representation of this ActionEvent"},
+          "description": "Returns a string representation of this ActionEvent.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "ACTION_PERFORMED", "type": "int", "description": "An event ID indicating that a meaningful action occurred (1001).", "static": true, "final": true},
+        {"name": "SHIFT_MASK", "type": "int", "description": "The Shift key modifier constant (1).", "static": true, "final": true},
+        {"name": "CTRL_MASK", "type": "int", "description": "The Control key modifier constant (2).", "static": true, "final": true},
+        {"name": "META_MASK", "type": "int", "description": "The Meta key modifier constant (4).", "static": true, "final": true},
+        {"name": "ALT_MASK", "type": "int", "description": "The Alt key modifier constant (8).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html"
+    },
+    {
+      "name": "MouseEvent",
+      "description": "An event indicating that a mouse action occurred in a component. Mouse events include clicks, presses, releases, movement, enter/exit, and dragging. One of the most commonly handled events in Ignition Vision client scripts.",
+      "constructors": [
+        {
+          "signature": "MouseEvent(source, id, when, modifiers, x, y, clickCount, popupTrigger)",
+          "params": [
+            {"name": "source", "type": "Component", "description": "The Component that originated the event"},
+            {"name": "id", "type": "int", "description": "The integer event type (e.g., MOUSE_CLICKED, MOUSE_PRESSED)"},
+            {"name": "when", "type": "long", "description": "A long integer that gives the time the event occurred, in milliseconds since epoch"},
+            {"name": "modifiers", "type": "int", "description": "The modifier keys held down during this event (bitwise OR of modifier constants)"},
+            {"name": "x", "type": "int", "description": "The horizontal x coordinate for the mouse location relative to the source component"},
+            {"name": "y", "type": "int", "description": "The vertical y coordinate for the mouse location relative to the source component"},
+            {"name": "clickCount", "type": "int", "description": "The number of mouse clicks associated with this event"},
+            {"name": "popupTrigger", "type": "boolean", "description": "True if this event is a popup menu trigger"}
+          ],
+          "description": "Constructs a MouseEvent object with the specified source component, type, time, modifiers, coordinates, click count, and popup trigger flag."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getX",
+          "signature": "getX()",
+          "params": [],
+          "returns": {"type": "int", "description": "The horizontal x position of the event relative to the source component"},
+          "description": "Returns the horizontal x position of the event relative to the source component.",
+          "static": false
+        },
+        {
+          "name": "getY",
+          "signature": "getY()",
+          "params": [],
+          "returns": {"type": "int", "description": "The vertical y position of the event relative to the source component"},
+          "description": "Returns the vertical y position of the event relative to the source component.",
+          "static": false
+        },
+        {
+          "name": "getPoint",
+          "signature": "getPoint()",
+          "params": [],
+          "returns": {"type": "Point", "description": "A Point object containing the x and y coordinates relative to the source component"},
+          "description": "Returns the x,y position of the event relative to the source component as a Point object.",
+          "static": false
+        },
+        {
+          "name": "getClickCount",
+          "signature": "getClickCount()",
+          "params": [],
+          "returns": {"type": "int", "description": "The number of mouse clicks associated with this event"},
+          "description": "Returns the number of mouse clicks associated with this event. For MOUSE_CLICKED events, this distinguishes single, double, and triple clicks.",
+          "static": false
+        },
+        {
+          "name": "getButton",
+          "signature": "getButton()",
+          "params": [],
+          "returns": {"type": "int", "description": "One of NOBUTTON, BUTTON1, BUTTON2, or BUTTON3"},
+          "description": "Returns which mouse button has changed state. Returns NOBUTTON for events not associated with a specific button change (e.g., MOUSE_MOVED).",
+          "static": false
+        },
+        {
+          "name": "isPopupTrigger",
+          "signature": "isPopupTrigger()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this mouse event is the popup menu trigger event for the platform"},
+          "description": "Returns whether this mouse event is the popup menu trigger event for the platform. The popup trigger varies by platform; on Windows it is typically a right-click release.",
+          "static": false
+        },
+        {
+          "name": "getModifiers",
+          "signature": "getModifiers()",
+          "params": [],
+          "returns": {"type": "int", "description": "The modifier mask for this event"},
+          "description": "Returns the modifier mask for this event. Use getModifiersEx() for the extended modifier mask.",
+          "static": false
+        },
+        {
+          "name": "getModifiersEx",
+          "signature": "getModifiersEx()",
+          "params": [],
+          "returns": {"type": "int", "description": "The extended modifier mask for this event"},
+          "description": "Returns the extended modifier mask for this event. Extended modifiers represent the state of all modal keys and mouse buttons at the time of the event.",
+          "static": false
+        },
+        {
+          "name": "isShiftDown",
+          "signature": "isShiftDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Shift key was held down during this event"},
+          "description": "Returns whether the Shift modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isControlDown",
+          "signature": "isControlDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Control key was held down during this event"},
+          "description": "Returns whether the Control modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isAltDown",
+          "signature": "isAltDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Alt key was held down during this event"},
+          "description": "Returns whether the Alt modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isMetaDown",
+          "signature": "isMetaDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Meta key was held down during this event"},
+          "description": "Returns whether the Meta modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "getSource",
+          "signature": "getSource()",
+          "params": [],
+          "returns": {"type": "Object", "description": "The object on which the event initially occurred"},
+          "description": "Returns the object on which the event initially occurred. Inherited from EventObject.",
+          "static": false
+        },
+        {
+          "name": "getComponent",
+          "signature": "getComponent()",
+          "params": [],
+          "returns": {"type": "Component", "description": "The Component that originated the event"},
+          "description": "Returns the originator of the event. Inherited from ComponentEvent.",
+          "static": false
+        },
+        {
+          "name": "getID",
+          "signature": "getID()",
+          "params": [],
+          "returns": {"type": "int", "description": "The integer event type"},
+          "description": "Returns the event type identifier (e.g., MOUSE_CLICKED, MOUSE_PRESSED).",
+          "static": false
+        },
+        {
+          "name": "getWhen",
+          "signature": "getWhen()",
+          "params": [],
+          "returns": {"type": "long", "description": "The timestamp of when this event occurred, in milliseconds since epoch"},
+          "description": "Returns the timestamp of when this event occurred. Inherited from InputEvent.",
+          "static": false
+        },
+        {
+          "name": "paramString",
+          "signature": "paramString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string identifying the event and its attributes"},
+          "description": "Returns a parameter string identifying this event. Useful for event logging and debugging.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "MOUSE_CLICKED", "type": "int", "description": "An event ID indicating that a mouse button was clicked (pressed and released) on a component (500).", "static": true, "final": true},
+        {"name": "MOUSE_PRESSED", "type": "int", "description": "An event ID indicating that a mouse button was pressed on a component (501).", "static": true, "final": true},
+        {"name": "MOUSE_RELEASED", "type": "int", "description": "An event ID indicating that a mouse button was released on a component (502).", "static": true, "final": true},
+        {"name": "MOUSE_MOVED", "type": "int", "description": "An event ID indicating that the mouse cursor was moved on a component with no buttons pressed (503).", "static": true, "final": true},
+        {"name": "MOUSE_ENTERED", "type": "int", "description": "An event ID indicating that the mouse cursor entered a component (504).", "static": true, "final": true},
+        {"name": "MOUSE_EXITED", "type": "int", "description": "An event ID indicating that the mouse cursor exited a component (505).", "static": true, "final": true},
+        {"name": "MOUSE_DRAGGED", "type": "int", "description": "An event ID indicating that the mouse button was pressed on a component and then dragged (506).", "static": true, "final": true},
+        {"name": "MOUSE_WHEEL", "type": "int", "description": "An event ID indicating that the mouse wheel was rotated on a component (507).", "static": true, "final": true},
+        {"name": "BUTTON1", "type": "int", "description": "Indicates mouse button 1 (typically the left button) (1).", "static": true, "final": true},
+        {"name": "BUTTON2", "type": "int", "description": "Indicates mouse button 2 (typically the middle button or scroll wheel click) (2).", "static": true, "final": true},
+        {"name": "BUTTON3", "type": "int", "description": "Indicates mouse button 3 (typically the right button) (3).", "static": true, "final": true},
+        {"name": "NOBUTTON", "type": "int", "description": "Indicates no mouse buttons; used for mouse movement events (0).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/event/MouseEvent.html"
+    },
+    {
+      "name": "KeyEvent",
+      "description": "An event indicating that a keystroke occurred in a component. Key events are generated when a key is pressed, released, or typed. Commonly used in Ignition Vision for keyboard shortcuts and input validation.",
+      "constructors": [
+        {
+          "signature": "KeyEvent(source, id, when, modifiers, keyCode, keyChar)",
+          "params": [
+            {"name": "source", "type": "Component", "description": "The Component that originated the event"},
+            {"name": "id", "type": "int", "description": "The integer event type (KEY_PRESSED, KEY_RELEASED, or KEY_TYPED)"},
+            {"name": "when", "type": "long", "description": "A long integer that gives the time the event occurred, in milliseconds since epoch"},
+            {"name": "modifiers", "type": "int", "description": "The modifier keys held down during this event (bitwise OR of modifier constants)"},
+            {"name": "keyCode", "type": "int", "description": "The integer code for an actual key (VK_* constants), or VK_UNDEFINED for KEY_TYPED events"},
+            {"name": "keyChar", "type": "char", "description": "The Unicode character generated by this event, or CHAR_UNDEFINED"}
+          ],
+          "description": "Constructs a KeyEvent object with the specified source component, type, time, modifiers, key code, and key character."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getKeyCode",
+          "signature": "getKeyCode()",
+          "params": [],
+          "returns": {"type": "int", "description": "The integer key code associated with the key in this event (one of the VK_* constants)"},
+          "description": "Returns the integer keyCode associated with the key in this event. For KEY_TYPED events, the keyCode is VK_UNDEFINED.",
+          "static": false
+        },
+        {
+          "name": "getKeyChar",
+          "signature": "getKeyChar()",
+          "params": [],
+          "returns": {"type": "char", "description": "The Unicode character associated with the key in this event"},
+          "description": "Returns the character associated with the key in this event. For KEY_PRESSED and KEY_RELEASED events of action keys, returns CHAR_UNDEFINED.",
+          "static": false
+        },
+        {
+          "name": "isShiftDown",
+          "signature": "isShiftDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Shift key was held down during this event"},
+          "description": "Returns whether the Shift modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isControlDown",
+          "signature": "isControlDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Control key was held down during this event"},
+          "description": "Returns whether the Control modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isAltDown",
+          "signature": "isAltDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Alt key was held down during this event"},
+          "description": "Returns whether the Alt modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isMetaDown",
+          "signature": "isMetaDown()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the Meta key was held down during this event"},
+          "description": "Returns whether the Meta modifier key was down during this event.",
+          "static": false
+        },
+        {
+          "name": "isActionKey",
+          "signature": "isActionKey()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if the key is an action key (e.g., arrow keys, function keys)"},
+          "description": "Returns whether the key in this event is an action key. Action keys include function keys, arrow keys, Home, End, Page Up, Page Down, and similar keys that do not produce a Unicode character.",
+          "static": false
+        },
+        {
+          "name": "getModifiers",
+          "signature": "getModifiers()",
+          "params": [],
+          "returns": {"type": "int", "description": "The modifier mask for this event"},
+          "description": "Returns the modifier mask for this event. Use getModifiersEx() for the extended modifier mask.",
+          "static": false
+        },
+        {
+          "name": "getModifiersEx",
+          "signature": "getModifiersEx()",
+          "params": [],
+          "returns": {"type": "int", "description": "The extended modifier mask for this event"},
+          "description": "Returns the extended modifier mask for this event. Extended modifiers represent the state of all modal keys and mouse buttons at the time of the event.",
+          "static": false
+        },
+        {
+          "name": "getSource",
+          "signature": "getSource()",
+          "params": [],
+          "returns": {"type": "Object", "description": "The object on which the event initially occurred"},
+          "description": "Returns the object on which the event initially occurred. Inherited from EventObject.",
+          "static": false
+        },
+        {
+          "name": "getComponent",
+          "signature": "getComponent()",
+          "params": [],
+          "returns": {"type": "Component", "description": "The Component that originated the event"},
+          "description": "Returns the originator of the event. Inherited from ComponentEvent.",
+          "static": false
+        },
+        {
+          "name": "getID",
+          "signature": "getID()",
+          "params": [],
+          "returns": {"type": "int", "description": "The integer event type"},
+          "description": "Returns the event type identifier (KEY_PRESSED, KEY_RELEASED, or KEY_TYPED).",
+          "static": false
+        },
+        {
+          "name": "getWhen",
+          "signature": "getWhen()",
+          "params": [],
+          "returns": {"type": "long", "description": "The timestamp of when this event occurred, in milliseconds since epoch"},
+          "description": "Returns the timestamp of when this event occurred. Inherited from InputEvent.",
+          "static": false
+        },
+        {
+          "name": "paramString",
+          "signature": "paramString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string identifying the event and its attributes"},
+          "description": "Returns a parameter string identifying this event. Useful for event logging and debugging.",
+          "static": false
+        },
+        {
+          "name": "getKeyText",
+          "signature": "getKeyText(keyCode)",
+          "params": [
+            {"name": "keyCode", "type": "int", "description": "The key code to get text for (one of the VK_* constants)"}
+          ],
+          "returns": {"type": "String", "description": "A string describing the key code, such as \"HOME\", \"F1\", or \"A\""},
+          "description": "Returns a String describing the keyCode, such as \"HOME\", \"F1\", or \"A\". Useful for displaying key bindings to users.",
+          "static": true
+        },
+        {
+          "name": "getKeyModifiersText",
+          "signature": "getKeyModifiersText(modifiers)",
+          "params": [
+            {"name": "modifiers", "type": "int", "description": "The modifier mask to convert to text"}
+          ],
+          "returns": {"type": "String", "description": "A string describing the modifier keys, such as \"Shift\" or \"Ctrl+Shift\""},
+          "description": "Returns a String describing the modifier key(s), such as \"Shift\" or \"Ctrl+Shift\".",
+          "static": true
+        }
+      ],
+      "fields": [
+        {"name": "KEY_PRESSED", "type": "int", "description": "An event ID indicating that a key was pressed (401).", "static": true, "final": true},
+        {"name": "KEY_RELEASED", "type": "int", "description": "An event ID indicating that a key was released (402).", "static": true, "final": true},
+        {"name": "KEY_TYPED", "type": "int", "description": "An event ID indicating that a key was typed (pressed and released, generating a character) (400).", "static": true, "final": true},
+        {"name": "VK_ENTER", "type": "int", "description": "Constant for the Enter key (10).", "static": true, "final": true},
+        {"name": "VK_TAB", "type": "int", "description": "Constant for the Tab key (9).", "static": true, "final": true},
+        {"name": "VK_ESCAPE", "type": "int", "description": "Constant for the Escape key (27).", "static": true, "final": true},
+        {"name": "VK_SPACE", "type": "int", "description": "Constant for the Space key (32).", "static": true, "final": true},
+        {"name": "VK_BACK_SPACE", "type": "int", "description": "Constant for the Backspace key (8).", "static": true, "final": true},
+        {"name": "VK_DELETE", "type": "int", "description": "Constant for the Delete key (127).", "static": true, "final": true},
+        {"name": "VK_LEFT", "type": "int", "description": "Constant for the Left arrow key (37).", "static": true, "final": true},
+        {"name": "VK_RIGHT", "type": "int", "description": "Constant for the Right arrow key (39).", "static": true, "final": true},
+        {"name": "VK_UP", "type": "int", "description": "Constant for the Up arrow key (38).", "static": true, "final": true},
+        {"name": "VK_DOWN", "type": "int", "description": "Constant for the Down arrow key (40).", "static": true, "final": true},
+        {"name": "VK_HOME", "type": "int", "description": "Constant for the Home key (36).", "static": true, "final": true},
+        {"name": "VK_END", "type": "int", "description": "Constant for the End key (35).", "static": true, "final": true},
+        {"name": "VK_PAGE_UP", "type": "int", "description": "Constant for the Page Up key (33).", "static": true, "final": true},
+        {"name": "VK_PAGE_DOWN", "type": "int", "description": "Constant for the Page Down key (34).", "static": true, "final": true},
+        {"name": "VK_F1", "type": "int", "description": "Constant for the F1 function key (112).", "static": true, "final": true},
+        {"name": "VK_F2", "type": "int", "description": "Constant for the F2 function key (113).", "static": true, "final": true},
+        {"name": "VK_F3", "type": "int", "description": "Constant for the F3 function key (114).", "static": true, "final": true},
+        {"name": "VK_F4", "type": "int", "description": "Constant for the F4 function key (115).", "static": true, "final": true},
+        {"name": "VK_F5", "type": "int", "description": "Constant for the F5 function key (116).", "static": true, "final": true},
+        {"name": "VK_F6", "type": "int", "description": "Constant for the F6 function key (117).", "static": true, "final": true},
+        {"name": "VK_F7", "type": "int", "description": "Constant for the F7 function key (118).", "static": true, "final": true},
+        {"name": "VK_F8", "type": "int", "description": "Constant for the F8 function key (119).", "static": true, "final": true},
+        {"name": "VK_F9", "type": "int", "description": "Constant for the F9 function key (120).", "static": true, "final": true},
+        {"name": "VK_F10", "type": "int", "description": "Constant for the F10 function key (121).", "static": true, "final": true},
+        {"name": "VK_F11", "type": "int", "description": "Constant for the F11 function key (122).", "static": true, "final": true},
+        {"name": "VK_F12", "type": "int", "description": "Constant for the F12 function key (123).", "static": true, "final": true},
+        {"name": "VK_A", "type": "int", "description": "Constant for the A key (65).", "static": true, "final": true},
+        {"name": "VK_Z", "type": "int", "description": "Constant for the Z key (90).", "static": true, "final": true},
+        {"name": "VK_0", "type": "int", "description": "Constant for the 0 key (48).", "static": true, "final": true},
+        {"name": "VK_9", "type": "int", "description": "Constant for the 9 key (57).", "static": true, "final": true},
+        {"name": "VK_SHIFT", "type": "int", "description": "Constant for the Shift key (16).", "static": true, "final": true},
+        {"name": "VK_CONTROL", "type": "int", "description": "Constant for the Control key (17).", "static": true, "final": true},
+        {"name": "VK_ALT", "type": "int", "description": "Constant for the Alt key (18).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html"
+    },
+    {
+      "name": "FocusEvent",
+      "description": "An event indicating that a component has gained or lost the input focus. Used in Ignition Vision for input validation on focus loss and UI state management.",
+      "constructors": [
+        {
+          "signature": "FocusEvent(source, id)",
+          "params": [
+            {"name": "source", "type": "Component", "description": "The Component that originated the event"},
+            {"name": "id", "type": "int", "description": "The integer event type (FOCUS_GAINED or FOCUS_LOST)"}
+          ],
+          "description": "Constructs a FocusEvent object with the specified source and type."
+        },
+        {
+          "signature": "FocusEvent(source, id, temporary)",
+          "params": [
+            {"name": "source", "type": "Component", "description": "The Component that originated the event"},
+            {"name": "id", "type": "int", "description": "The integer event type (FOCUS_GAINED or FOCUS_LOST)"},
+            {"name": "temporary", "type": "boolean", "description": "True if the focus change is temporary (e.g., when a window is deactivated)"}
+          ],
+          "description": "Constructs a FocusEvent object with the specified source, type, and whether the focus change is temporary."
+        }
+      ],
+      "methods": [
+        {
+          "name": "isTemporary",
+          "signature": "isTemporary()",
+          "params": [],
+          "returns": {"type": "boolean", "description": "True if this focus change is temporary"},
+          "description": "Identifies whether the focus change is temporary or permanent. Temporary focus changes occur when a window loses focus; the original focus owner regains focus when the window is reactivated.",
+          "static": false
+        },
+        {
+          "name": "getOppositeComponent",
+          "signature": "getOppositeComponent()",
+          "params": [],
+          "returns": {"type": "Component", "description": "The other Component involved in the focus change, or null"},
+          "description": "Returns the other Component involved in the focus change. For FOCUS_GAINED, returns the Component that lost focus. For FOCUS_LOST, returns the Component that gained focus. May return null if the other Component is not a Java Component.",
+          "static": false
+        },
+        {
+          "name": "getSource",
+          "signature": "getSource()",
+          "params": [],
+          "returns": {"type": "Object", "description": "The object on which the event initially occurred"},
+          "description": "Returns the object on which the event initially occurred. Inherited from EventObject.",
+          "static": false
+        },
+        {
+          "name": "getComponent",
+          "signature": "getComponent()",
+          "params": [],
+          "returns": {"type": "Component", "description": "The Component that originated the event"},
+          "description": "Returns the originator of the event. Inherited from ComponentEvent.",
+          "static": false
+        },
+        {
+          "name": "getID",
+          "signature": "getID()",
+          "params": [],
+          "returns": {"type": "int", "description": "The integer event type"},
+          "description": "Returns the event type identifier (FOCUS_GAINED or FOCUS_LOST).",
+          "static": false
+        },
+        {
+          "name": "paramString",
+          "signature": "paramString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string identifying the event and its attributes"},
+          "description": "Returns a parameter string identifying this event. Useful for event logging and debugging.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "FOCUS_GAINED", "type": "int", "description": "An event ID indicating that a Component gained the input focus (1004).", "static": true, "final": true},
+        {"name": "FOCUS_LOST", "type": "int", "description": "An event ID indicating that a Component lost the input focus (1005).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/event/FocusEvent.html"
+    },
+    {
+      "name": "WindowEvent",
+      "description": "An event indicating that a window has changed its status. Window events include opening, closing, activation, deactivation, iconification, and focus changes. Used in Ignition Vision for window lifecycle management.",
+      "constructors": [
+        {
+          "signature": "WindowEvent(source, id)",
+          "params": [
+            {"name": "source", "type": "Window", "description": "The Window that originated the event"},
+            {"name": "id", "type": "int", "description": "The integer event type (e.g., WINDOW_OPENED, WINDOW_CLOSING)"}
+          ],
+          "description": "Constructs a WindowEvent object with the specified source window and event type."
+        }
+      ],
+      "methods": [
+        {
+          "name": "getWindow",
+          "signature": "getWindow()",
+          "params": [],
+          "returns": {"type": "Window", "description": "The Window that originated the event"},
+          "description": "Returns the originator of the event as a Window.",
+          "static": false
+        },
+        {
+          "name": "getOppositeWindow",
+          "signature": "getOppositeWindow()",
+          "params": [],
+          "returns": {"type": "Window", "description": "The other Window involved in the focus or activation change, or null"},
+          "description": "Returns the other Window involved in this focus or activation change. For WINDOW_ACTIVATED or WINDOW_GAINED_FOCUS, returns the Window that lost activation or focus. For WINDOW_DEACTIVATED or WINDOW_LOST_FOCUS, returns the Window that gained activation or focus. May return null.",
+          "static": false
+        },
+        {
+          "name": "getOldState",
+          "signature": "getOldState()",
+          "params": [],
+          "returns": {"type": "int", "description": "The previous state of the window for WINDOW_STATE_CHANGED events"},
+          "description": "Returns the previous state of the window for WINDOW_STATE_CHANGED events. The state is a bitwise mask of Frame.NORMAL, Frame.ICONIFIED, Frame.MAXIMIZED_HORIZ, Frame.MAXIMIZED_VERT, or Frame.MAXIMIZED_BOTH.",
+          "static": false
+        },
+        {
+          "name": "getNewState",
+          "signature": "getNewState()",
+          "params": [],
+          "returns": {"type": "int", "description": "The new state of the window for WINDOW_STATE_CHANGED events"},
+          "description": "Returns the new state of the window for WINDOW_STATE_CHANGED events. The state is a bitwise mask of Frame.NORMAL, Frame.ICONIFIED, Frame.MAXIMIZED_HORIZ, Frame.MAXIMIZED_VERT, or Frame.MAXIMIZED_BOTH.",
+          "static": false
+        },
+        {
+          "name": "getSource",
+          "signature": "getSource()",
+          "params": [],
+          "returns": {"type": "Object", "description": "The object on which the event initially occurred"},
+          "description": "Returns the object on which the event initially occurred. Inherited from EventObject.",
+          "static": false
+        },
+        {
+          "name": "getID",
+          "signature": "getID()",
+          "params": [],
+          "returns": {"type": "int", "description": "The integer event type"},
+          "description": "Returns the event type identifier.",
+          "static": false
+        },
+        {
+          "name": "paramString",
+          "signature": "paramString()",
+          "params": [],
+          "returns": {"type": "String", "description": "A string identifying the event and its attributes"},
+          "description": "Returns a parameter string identifying this event. Useful for event logging and debugging.",
+          "static": false
+        }
+      ],
+      "fields": [
+        {"name": "WINDOW_OPENED", "type": "int", "description": "An event ID indicating that a window was opened (200).", "static": true, "final": true},
+        {"name": "WINDOW_CLOSING", "type": "int", "description": "An event ID indicating that the user is attempting to close the window from the window's system menu (201).", "static": true, "final": true},
+        {"name": "WINDOW_CLOSED", "type": "int", "description": "An event ID indicating that a window has been closed as the result of calling dispose on the window (202).", "static": true, "final": true},
+        {"name": "WINDOW_ACTIVATED", "type": "int", "description": "An event ID indicating that a window was activated (set as the active window) (205).", "static": true, "final": true},
+        {"name": "WINDOW_DEACTIVATED", "type": "int", "description": "An event ID indicating that a window is no longer the active window (206).", "static": true, "final": true},
+        {"name": "WINDOW_ICONIFIED", "type": "int", "description": "An event ID indicating that a window was minimized (iconified) (203).", "static": true, "final": true},
+        {"name": "WINDOW_DEICONIFIED", "type": "int", "description": "An event ID indicating that a window was restored from a minimized state (204).", "static": true, "final": true},
+        {"name": "WINDOW_GAINED_FOCUS", "type": "int", "description": "An event ID indicating that a window gained input focus (207).", "static": true, "final": true},
+        {"name": "WINDOW_LOST_FOCUS", "type": "int", "description": "An event ID indicating that a window lost input focus (208).", "static": true, "final": true},
+        {"name": "WINDOW_STATE_CHANGED", "type": "int", "description": "An event ID indicating that a window's state changed (its iconified/maximized state) (209).", "static": true, "final": true}
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/awt/event/WindowEvent.html"
+    }
+  ]
+}
