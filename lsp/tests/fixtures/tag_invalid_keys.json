@@ -1,0 +1,9 @@
+{
+  "name": "BadTag",
+  "tagType": "AtomicTag",
+  "dataType": "Int4",
+  "valueSource": "memory",
+  "taqGroup": "Default",
+  "dataTpye": "Int4",
+  "valeuSource": "opc"
+}

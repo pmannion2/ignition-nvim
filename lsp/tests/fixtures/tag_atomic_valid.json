@@ -1,0 +1,10 @@
+{
+  "name": "ValidTag",
+  "tagType": "AtomicTag",
+  "dataType": "Int4",
+  "valueSource": "memory",
+  "value": 42,
+  "documentation": "A valid atomic tag with all required fields",
+  "enabled": true,
+  "tagGroup": "Default"
+}
