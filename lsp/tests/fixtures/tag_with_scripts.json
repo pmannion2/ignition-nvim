@@ -1,0 +1,60 @@
+{
+  "name": "MyFolder",
+  "tagType": "Folder",
+  "tags": [
+    {
+      "name": "GoodTag",
+      "tagType": "AtomicTag",
+      "dataType": "Int4",
+      "eventScripts": {
+        "valueChanged": {
+          "eventScript": "logger \u003d system.util.getLogger(\"TagEvents\")\nlogger.info(\"Value changed\")\n",
+          "enabled": true
+        }
+      }
+    },
+    {
+      "name": "BadTag",
+      "tagType": "AtomicTag",
+      "dataType": "Float8",
+      "eventScripts": {
+        "valueChanged": {
+          "eventScript": "def broken(\n    pass\n",
+          "enabled": true
+        }
+      }
+    },
+    {
+      "name": "MultiEventTag",
+      "tagType": "AtomicTag",
+      "dataType": "Boolean",
+      "eventScripts": {
+        "valueChanged": {
+          "eventScript": "logger \u003d system.util.getLogger(\"Multi\")\nlogger.info(\"value changed\")\n",
+          "enabled": true
+        },
+        "qualityChanged": {
+          "eventScript": "logger \u003d system.util.getLogger(\"Multi\")\nlogger.info(\"quality changed\")\n",
+          "enabled": true
+        }
+      }
+    },
+    {
+      "name": "EmptyScriptTag",
+      "tagType": "AtomicTag",
+      "dataType": "Int4",
+      "eventScripts": {
+        "valueChanged": {
+          "eventScript": "",
+          "enabled": false
+        }
+      }
+    },
+    {
+      "name": "NoScriptTag",
+      "tagType": "AtomicTag",
+      "dataType": "Int4",
+      "value": 42
+    }
+  ]
+}

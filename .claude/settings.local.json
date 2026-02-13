@@ -64,7 +64,13 @@
       "WebFetch(domain:docs.github.com)",
       "Bash(/tmp/test-ignition-lsp/bin/pip install:*)",
       "Bash(git -C /Users/pmannion/whiskeyhouse/ignition-git-module log --oneline --all)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(gh pr view:*)",
+      "Bash(git stash:*)",
+      "Bash(gh pr list:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: align tests with implementation to fix CI failures\n\n- lsp_spec: remove test for system python fallback \\(not in find_lsp_server\\)\n- lsp_spec: fix venv preference test to check venv binary \\(step 1\\), not\n  venv python \\(step 3\\) which runs after system ignition-lsp \\(step 2\\)\n- lsp_spec: remove register_lsp_config test \\(function doesn''t exist,\n  setup uses vim.lsp.config + vim.lsp.enable directly\\)\n- filetype_spec: fix expected values to match ftplugin/ignition.lua\n  \\(2-space indent, // comments for JSON, not 4-space/# for Python\\)\n- pyproject.toml: gate ignition-lint-toolkit on python_version >= 3.10\n  since it requires 3.10+ but CI matrix includes 3.9\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(mypy:*)",
+      "Bash(venv/bin/python -m mypy:*)"
     ],
     "deny": [],
     "ask": []

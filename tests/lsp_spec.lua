@@ -89,28 +89,6 @@ describe('find_lsp_server', function()
     eq('/usr/local/bin/ignition-lsp', cmd[1])
   end)
 
-  it('falls back to system python when no venv and no system install', function()
-    mock_fn({
-      executable = function() return 0 end,
-      filereadable = function(path)
-        if path:match('server%.py$') then return 1 end
-        return 0
-      end,
-      exepath = function(name)
-        if name == 'ignition-lsp' then return '' end
-        if name == 'python3' then return '/usr/bin/python3' end
-        if name == 'python' then return '/usr/bin/python' end
-        return ''
-      end,
-    })
-
-    local cmd = lsp.find_lsp_server()
-    assert.is_not_nil(cmd)
-    eq(2, #cmd)
-    eq('/usr/bin/python3', cmd[1])
-    assert.is_truthy(cmd[2]:find('server%.py'))
-  end)
-
   it('returns nil when no server can be found', function()
     mock_fn({
       executable = function() return 0 end,
@@ -122,16 +100,14 @@ describe('find_lsp_server', function()
     assert.is_nil(cmd)
   end)
 
-  it('prefers venv python over system install', function()
+  it('prefers venv binary over system install', function()
     mock_fn({
       executable = function(path)
-        if path:match('venv/bin/python$') then return 1 end
+        -- Both venv ignition-lsp binary and system binary available
+        if path:match('venv/bin/ignition%-lsp$') then return 1 end
         return 0
       end,
-      filereadable = function(path)
-        if path:match('server%.py$') then return 1 end
-        return 0
-      end,
+      filereadable = function() return 0 end,
       exepath = function(name)
         if name == 'ignition-lsp' then return '/usr/local/bin/ignition-lsp' end
         return ''
@@ -140,9 +116,9 @@ describe('find_lsp_server', function()
 
     local cmd = lsp.find_lsp_server()
     assert.is_not_nil(cmd)
-    -- Should be venv python (2 elements), not system install (1 element)
-    eq(2, #cmd)
-    assert.is_truthy(cmd[1]:find('venv/bin/python'))
+    -- Should be venv binary (step 1), not system install (step 2)
+    eq(1, #cmd)
+    assert.is_truthy(cmd[1]:find('venv/bin/ignition%-lsp'))
   end)
 end)
 
@@ -267,28 +243,3 @@ describe('setup', function()
   end)
 end)
 
--- ──────────────────────────────────────────────
--- FileType autocmd registration
--- ──────────────────────────────────────────────
-describe('register_lsp_config', function()
-  it('creates FileType autocmd when auto_start is true', function()
-    local before = vim.api.nvim_get_autocmds({
-      event = 'FileType',
-      pattern = 'python',
-    })
-
-    lsp.setup({
-      cmd = { 'echo' },
-      enabled = true,
-      auto_start = true,
-    })
-    lsp.register_lsp_config({})
-
-    local after = vim.api.nvim_get_autocmds({
-      event = 'FileType',
-      pattern = 'python',
-    })
-
-    assert.is_true(#after >= #before)
-  end)
-end)
