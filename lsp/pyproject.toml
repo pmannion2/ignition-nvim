@@ -54,6 +54,7 @@ include = ["ignition_lsp*"]
 [tool.setuptools.package-data]
 ignition_lsp = ["py.typed"]
 "ignition_lsp.api_db" = ["*.json"]
+"ignition_lsp.java_db" = ["*.json"]
 
 [tool.black]
 line-length = 100
