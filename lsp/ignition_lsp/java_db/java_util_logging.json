@@ -1,0 +1,588 @@
+{
+  "package": "java.util.logging",
+  "classes": [
+    {
+      "name": "Logger",
+      "description": "A Logger object is used to log messages for a specific system or application component. Loggers are normally named using a hierarchical dot-separated namespace. Logger names can be arbitrary strings, but should normally be based on the package name or class name.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getLogger",
+          "signature": "getLogger(name)",
+          "params": [
+            {
+              "name": "name",
+              "type": "String",
+              "description": "A name for the logger"
+            }
+          ],
+          "returns": {
+            "type": "Logger",
+            "description": "A suitable Logger"
+          },
+          "description": "Find or create a logger for a named subsystem. If a logger has already been created with the given name it is returned. Otherwise a new logger is created.",
+          "static": true
+        },
+        {
+          "name": "getLogger",
+          "signature": "getLogger(name, resourceBundleName)",
+          "params": [
+            {
+              "name": "name",
+              "type": "String",
+              "description": "A name for the logger"
+            },
+            {
+              "name": "resourceBundleName",
+              "type": "String",
+              "description": "Name of ResourceBundle to be used for localizing messages"
+            }
+          ],
+          "returns": {
+            "type": "Logger",
+            "description": "A suitable Logger"
+          },
+          "description": "Find or create a logger for a named subsystem with a resource bundle.",
+          "static": true
+        },
+        {
+          "name": "info",
+          "signature": "info(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log an INFO message. If the logger is currently enabled for the INFO message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "warning",
+          "signature": "warning(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a WARNING message. If the logger is currently enabled for the WARNING message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "severe",
+          "signature": "severe(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a SEVERE message. If the logger is currently enabled for the SEVERE message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "config",
+          "signature": "config(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a CONFIG message. If the logger is currently enabled for the CONFIG message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "fine",
+          "signature": "fine(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a FINE message. FINE is a message level providing tracing information. If the logger is currently enabled for the FINE message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "finer",
+          "signature": "finer(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a FINER message. FINER indicates a fairly detailed tracing message. If the logger is currently enabled for the FINER message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "finest",
+          "signature": "finest(msg)",
+          "params": [
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a FINEST message. FINEST indicates a highly detailed tracing message. If the logger is currently enabled for the FINEST message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "log",
+          "signature": "log(level, msg)",
+          "params": [
+            {
+              "name": "level",
+              "type": "Level",
+              "description": "One of the message level identifiers, e.g., SEVERE"
+            },
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a message at a specified level. If the logger is currently enabled for the given message level then the given message is forwarded to all the registered output Handler objects.",
+          "static": false
+        },
+        {
+          "name": "log",
+          "signature": "log(level, msg, thrown)",
+          "params": [
+            {
+              "name": "level",
+              "type": "Level",
+              "description": "One of the message level identifiers"
+            },
+            {
+              "name": "msg",
+              "type": "String",
+              "description": "The string message to log"
+            },
+            {
+              "name": "thrown",
+              "type": "Throwable",
+              "description": "Throwable associated with log message"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Log a message, with associated Throwable information.",
+          "static": false
+        },
+        {
+          "name": "setLevel",
+          "signature": "setLevel(newLevel)",
+          "params": [
+            {
+              "name": "newLevel",
+              "type": "Level",
+              "description": "The new value for the log level (may be null)"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Set the log level specifying which message levels will be logged by this logger. Message levels lower than this value will be discarded.",
+          "static": false
+        },
+        {
+          "name": "getLevel",
+          "signature": "getLevel()",
+          "params": [],
+          "returns": {
+            "type": "Level",
+            "description": "The effective level for this logger"
+          },
+          "description": "Get the log Level that has been specified for this Logger. The result may be null, which means that this logger's effective level will be inherited from its parent.",
+          "static": false
+        },
+        {
+          "name": "isLoggable",
+          "signature": "isLoggable(level)",
+          "params": [
+            {
+              "name": "level",
+              "type": "Level",
+              "description": "A message logging level"
+            }
+          ],
+          "returns": {
+            "type": "boolean",
+            "description": "True if the given message level is currently being logged"
+          },
+          "description": "Check if a message of the given level would actually be logged by this logger. This check is based on the Logger's effective level, which may be inherited from its parent.",
+          "static": false
+        },
+        {
+          "name": "addHandler",
+          "signature": "addHandler(handler)",
+          "params": [
+            {
+              "name": "handler",
+              "type": "Handler",
+              "description": "A logging Handler"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Add a log Handler to receive logging messages.",
+          "static": false
+        },
+        {
+          "name": "removeHandler",
+          "signature": "removeHandler(handler)",
+          "params": [
+            {
+              "name": "handler",
+              "type": "Handler",
+              "description": "A logging Handler"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Remove a log Handler.",
+          "static": false
+        },
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {
+            "type": "String",
+            "description": "Logger name"
+          },
+          "description": "Get the name for this logger.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/logging/Logger.html"
+    },
+    {
+      "name": "Level",
+      "description": "The Level class defines a set of standard logging levels that can be used to control logging output. The logging Level objects are ordered and specified by ordered integers.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "getName",
+          "signature": "getName()",
+          "params": [],
+          "returns": {
+            "type": "String",
+            "description": "The name of this Level"
+          },
+          "description": "Return the non-localized string name of the Level.",
+          "static": false
+        },
+        {
+          "name": "intValue",
+          "signature": "intValue()",
+          "params": [],
+          "returns": {
+            "type": "int",
+            "description": "Integer representation of this level"
+          },
+          "description": "Get the integer value for this level. This integer value can be used for efficient ordering comparisons between Level objects.",
+          "static": false
+        },
+        {
+          "name": "parse",
+          "signature": "parse(name)",
+          "params": [
+            {
+              "name": "name",
+              "type": "String",
+              "description": "String name of the level"
+            }
+          ],
+          "returns": {
+            "type": "Level",
+            "description": "The parsed Level"
+          },
+          "description": "Parse a level name string into a Level. The argument may be either a level name or an integer value.",
+          "static": true
+        }
+      ],
+      "fields": [
+        {
+          "name": "OFF",
+          "type": "Level",
+          "description": "OFF is a special level that can be used to turn off logging. This level is initialized to Integer.MAX_VALUE.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "SEVERE",
+          "type": "Level",
+          "description": "SEVERE is a message level indicating a serious failure. In general SEVERE messages should describe events that are of considerable importance and which will prevent normal program execution.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "WARNING",
+          "type": "Level",
+          "description": "WARNING is a message level indicating a potential problem.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "INFO",
+          "type": "Level",
+          "description": "INFO is a message level for informational messages.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "CONFIG",
+          "type": "Level",
+          "description": "CONFIG is a message level for static configuration messages.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "FINE",
+          "type": "Level",
+          "description": "FINE is a message level providing tracing information.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "FINER",
+          "type": "Level",
+          "description": "FINER indicates a fairly detailed tracing message.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "FINEST",
+          "type": "Level",
+          "description": "FINEST indicates a highly detailed tracing message.",
+          "static": true,
+          "final": true
+        },
+        {
+          "name": "ALL",
+          "type": "Level",
+          "description": "ALL indicates that all messages should be logged. This level is initialized to Integer.MIN_VALUE.",
+          "static": true,
+          "final": true
+        }
+      ],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/logging/Level.html"
+    },
+    {
+      "name": "Handler",
+      "description": "A Handler object takes log messages from a Logger and exports them. It might for example, write them to a console or write them to a file, or send them to a network logging service, or forward them to an OS log, or whatever.",
+      "constructors": [],
+      "methods": [
+        {
+          "name": "publish",
+          "signature": "publish(record)",
+          "params": [
+            {
+              "name": "record",
+              "type": "LogRecord",
+              "description": "Description of the log event"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Publish a LogRecord. The logging request was made initially to a Logger object, which initialized the LogRecord and forwarded it here.",
+          "static": false
+        },
+        {
+          "name": "flush",
+          "signature": "flush()",
+          "params": [],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Flush any buffered output.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Close the Handler and free all associated resources.",
+          "static": false
+        },
+        {
+          "name": "setLevel",
+          "signature": "setLevel(newLevel)",
+          "params": [
+            {
+              "name": "newLevel",
+              "type": "Level",
+              "description": "The new value for the log level"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Set the log level specifying which message levels will be logged by this Handler. Message levels lower than this value will be discarded.",
+          "static": false
+        },
+        {
+          "name": "getLevel",
+          "signature": "getLevel()",
+          "params": [],
+          "returns": {
+            "type": "Level",
+            "description": "The level of messages being logged"
+          },
+          "description": "Get the log level specifying which messages will be logged by this Handler.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/logging/Handler.html"
+    },
+    {
+      "name": "ConsoleHandler",
+      "description": "This Handler publishes log records to System.err. By default the SimpleFormatter is used to generate brief summaries.",
+      "constructors": [
+        {
+          "signature": "ConsoleHandler()",
+          "params": [],
+          "description": "Create a ConsoleHandler for System.err."
+        }
+      ],
+      "methods": [
+        {
+          "name": "publish",
+          "signature": "publish(record)",
+          "params": [
+            {
+              "name": "record",
+              "type": "LogRecord",
+              "description": "Description of the log event"
+            }
+          ],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Publish a LogRecord. The logging request was made initially to a Logger object, which initialized the LogRecord and forwarded it here.",
+          "static": false
+        },
+        {
+          "name": "close",
+          "signature": "close()",
+          "params": [],
+          "returns": {
+            "type": "void",
+            "description": ""
+          },
+          "description": "Override StreamHandler.close to do a flush but not to close the output stream. That is, we do not close System.err.",
+          "static": false
+        }
+      ],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/logging/ConsoleHandler.html"
+    },
+    {
+      "name": "FileHandler",
+      "description": "Simple file logging Handler. The FileHandler can either write to a specified file, or it can write to a rotating set of files.",
+      "constructors": [
+        {
+          "signature": "FileHandler()",
+          "params": [],
+          "description": "Construct a default FileHandler."
+        },
+        {
+          "signature": "FileHandler(pattern)",
+          "params": [
+            {
+              "name": "pattern",
+              "type": "String",
+              "description": "The pattern for naming the output file"
+            }
+          ],
+          "description": "Initialize a FileHandler to write to the given filename."
+        },
+        {
+          "signature": "FileHandler(pattern, append)",
+          "params": [
+            {
+              "name": "pattern",
+              "type": "String",
+              "description": "The pattern for naming the output file"
+            },
+            {
+              "name": "append",
+              "type": "boolean",
+              "description": "Specifies append mode"
+            }
+          ],
+          "description": "Initialize a FileHandler to write to the given filename, with optional append."
+        }
+      ],
+      "methods": [],
+      "fields": [],
+      "deprecated": false,
+      "docs_url": "https://docs.oracle.com/javase/8/docs/api/java/util/logging/FileHandler.html"
+    }
+  ]
+}
