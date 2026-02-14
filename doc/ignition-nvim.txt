@@ -1,0 +1,300 @@
+*ignition-nvim.txt*  Neovim plugin for Ignition SCADA development
+
+Author: Whiskey House E&T <https://github.com/whiskeyhouse>
+License: MIT
+Repository: https://github.com/whiskeyhouse/ignition-nvim
+
+==============================================================================
+CONTENTS                                              *ignition-nvim-contents*
+
+1. Introduction ............................ |ignition-nvim-introduction|
+2. Installation ............................ |ignition-nvim-installation|
+3. Quick Start ............................. |ignition-nvim-quickstart|
+4. Commands ................................ |ignition-nvim-commands|
+5. Keymaps ................................. |ignition-nvim-keymaps|
+6. Configuration ........................... |ignition-nvim-configuration|
+7. LSP Features ............................ |ignition-nvim-lsp|
+8. Troubleshooting ......................... |ignition-nvim-troubleshooting|
+9. API ..................................... |ignition-nvim-api|
+
+==============================================================================
+INTRODUCTION                                      *ignition-nvim-introduction*
+
+ignition-nvim provides comprehensive development support for Ignition SCADA
+platform projects in Neovim. It decodes embedded Python scripts from JSON
+into editable virtual buffers with full Language Server Protocol support.
+
+Features:~
+  • Script decode/encode workflow (Ignition Flint format)
+  • LSP completions for system.* APIs (239+ functions across 14 modules)
+  • Hover documentation with function signatures and descriptions
+  • Go-to-definition for system.* and project scripts
+  • Project indexing and workspace symbols
+  • Diagnostics integration with ignition-lint
+  • Kindling integration for .gwbk files
+  • Virtual buffer system with auto-save
+
+==============================================================================
+INSTALLATION                                      *ignition-nvim-installation*
+
+Requirements:~
+  • Neovim >= 0.11.0
+  • Python >= 3.8
+  • ignition-lsp server (auto-installed with lazy.nvim)
+
+Using lazy.nvim (recommended):~
+>lua
+    { 'whiskeyhouse/ignition-nvim' }
+<
+
+The plugin lazy-loads on Ignition filetypes and commands. The LSP server is
+automatically installed via the `build` step.
+
+Manual LSP installation:~
+>bash
+    pip install ignition-lsp
+<
+
+See README.md for other package managers (packer, vim-plug).
+
+==============================================================================
+QUICK START                                        *ignition-nvim-quickstart*
+
+1. Open an Ignition JSON file containing embedded Python scripts
+2. Run |:IgnitionDecode| or press `<localleader>id`
+3. Edit the decoded script in the virtual buffer with LSP support
+4. Save (`:w`) to automatically encode back to JSON
+5. Save the source JSON file to persist changes
+
+==============================================================================
+COMMANDS                                            *ignition-nvim-commands*
+
+:IgnitionDecode                                          *:IgnitionDecode*
+    Decode embedded Python scripts from the current buffer. If multiple
+    scripts are found, displays an interactive selection menu with previews.
+
+:IgnitionDecodeAll                                    *:IgnitionDecodeAll*
+    Decode all embedded scripts into separate virtual buffers simultaneously.
+
+:IgnitionEncode                                          *:IgnitionEncode*
+    Encode the current virtual buffer back to JSON format. This is
+    automatically called when saving a virtual buffer.
+
+:IgnitionListScripts                                *:IgnitionListScripts*
+    Display all scripts in the current buffer in a floating window with
+    previews and navigation.
+
+:IgnitionOpenKindling [file]                      *:IgnitionOpenKindling*
+    Open a .gwbk (Gateway Backup) file with Kindling. If no file is
+    specified, opens the current buffer file.
+
+    Requires Kindling to be installed and configured.
+
+:IgnitionInfo                                              *:IgnitionInfo*
+    Display plugin information, current configuration, and LSP status.
+
+==============================================================================
+KEYMAPS                                              *ignition-nvim-keymaps*
+
+Default keymaps in Ignition file buffers:~
+
+    <localleader>id     Decode scripts (|:IgnitionDecode|)
+    <localleader>ia     Decode all scripts (|:IgnitionDecodeAll|)
+    <localleader>il     List all scripts (|:IgnitionListScripts|)
+    <localleader>ie     Encode script back to JSON (|:IgnitionEncode|)
+    <localleader>ii     Show plugin info (|:IgnitionInfo|)
+    <localleader>ik     Open in Kindling (|:IgnitionOpenKindling|)
+
+Keymaps can be disabled via configuration:
+>lua
+    require('ignition').setup({
+      keymaps = { enabled = false }
+    })
+<
+
+==============================================================================
+CONFIGURATION                                  *ignition-nvim-configuration*
+
+Default configuration:~
+>lua
+    require('ignition').setup({
+      lsp = {
+        enabled = true,
+        auto_start = true,
+        cmd = nil,  -- Auto-detected
+        settings = {
+          ignition = {
+            version = "8.1",
+            sdk_path = nil,
+          },
+        },
+      },
+      kindling = {
+        enabled = true,
+        path = nil,  -- Auto-detected
+      },
+      decoder = {
+        auto_decode = true,
+        auto_encode = true,
+        create_scratch_buffer = true,
+      },
+      ui = {
+        show_notifications = true,
+        show_statusline = true,
+      },
+      keymaps = {
+        enabled = true,
+      },
+    })
+<
+
+See |ignition-nvim-lsp| for LSP-specific configuration.
+
+==============================================================================
+LSP FEATURES                                            *ignition-nvim-lsp*
+
+The ignition-lsp server provides comprehensive code intelligence for Ignition
+development, including Python/Jython APIs, Java classes, and JSON schemas.
+
+Completions~
+
+System API Completions:~
+    Type `system.` to get completions for all Ignition API modules (14 modules,
+    239+ functions):
+    • system.tag — Tag operations
+    • system.db — Database queries
+    • system.perspective — Perspective API
+    • system.util — Utilities
+    • system.net — HTTP/Email
+    • system.alarm — Alarm management
+    • system.dataset — Dataset operations
+    • system.date — Date/time functions
+    • And 6 more modules...
+
+Java API Completions:~
+    Full support for Java/Jython class imports and methods (27 modules):
+    • Standard Java: java.lang, java.util, java.io, java.math, java.nio
+    • Java GUI: java.awt, javax.swing and related packages
+    • Java networking: java.net, java.security, javax.crypto, javax.net.ssl
+    • Java data: java.sql, java.time, java.text, java.util.regex
+    • Ignition SDK: com.inductiveautomation.common, .gateway
+
+    Example: Type `from java.util import ` to see ArrayList, HashMap, etc.
+
+Project Script Completions:~
+    Access project and shared script modules:
+    • project.* — Project-level script modules
+    • shared.* — Shared script modules
+    • Supports inherited modules from parent projects
+    • Cross-file navigation and go-to-definition
+
+JSON Schema Completions (Perspective):~
+    When editing Perspective view.json files:
+    • Component types: ia.container.flex, ia.display.label, ia.input.button
+    • Structural keys: root, custom, meta, propConfig, position, events
+    • Props specific to each component type
+    • Event handlers: onActionPerformed, onValueChange, etc.
+
+Hover Documentation~
+    Press `K` over any system.* function to see:
+    • Function signature with parameter types
+    • Parameter descriptions
+    • Return type and description
+    • Usage notes (scope, version requirements)
+
+Go-to-Definition~
+    Press `gd` to jump to:
+    • system.* function definitions in API database
+    • Project script definitions in your workspace
+
+Diagnostics~
+    Integrates with ignition-lint for:
+    • Syntax errors
+    • Hardcoded localhost warnings
+    • Print statement detection
+    • HTTP error handling checks
+
+Workspace Symbols~
+    Use `:LspWorkspaceSymbol` to search across all project scripts.
+
+LSP Server Detection~
+    The plugin auto-detects the LSP server in this order:
+    1. Plugin venv — `lsp/venv/bin/ignition-lsp` (development)
+    2. System install — `ignition-lsp` on your $PATH
+    3. System Python — `python -m ignition_lsp` (fallback)
+
+    Override detection by setting `lsp.cmd`:
+>lua
+    require('ignition').setup({
+      lsp = {
+        cmd = { '/path/to/ignition-lsp' },
+      },
+    })
+<
+
+==============================================================================
+TROUBLESHOOTING                              *ignition-nvim-troubleshooting*
+
+LSP not starting:~
+    Check if LSP server is installed:
+>bash
+        pip list | grep ignition-lsp
+<
+
+    Manually install:
+>bash
+        pip install ignition-lsp
+<
+
+    Check LSP status:
+>vim
+        :LspInfo
+<
+
+Hover not working:~
+    Verify keybinding (default is `K` in normal mode):
+>vim
+        :lua vim.lsp.buf.hover()
+<
+
+"system is not defined" errors:~
+    These may come from other Python LSP clients. Check diagnostic sources:
+>vim
+        :lua vim.print(vim.diagnostic.get(0))
+<
+
+    See TROUBLESHOOTING.md for filtering or disabling other LSPs.
+
+Virtual buffers not saving:~
+    Ensure you're saving the virtual buffer (`:w`), then save the source
+    JSON file. Check logs:
+>vim
+        :LspLog
+<
+
+For more help, see TROUBLESHOOTING.md or open an issue:
+https://github.com/whiskeyhouse/ignition-nvim/issues
+
+==============================================================================
+API                                                  *ignition-nvim-api*
+
+require('ignition').setup({config})                    *ignition.setup()*
+    Initialize the plugin with optional configuration.
+
+    Parameters:~
+        {config}  (table) Configuration table (see |ignition-nvim-configuration|)
+
+require('ignition').decode()                           *ignition.decode()*
+    Decode scripts from the current buffer. Same as |:IgnitionDecode|.
+
+require('ignition').decode_all()                   *ignition.decode_all()*
+    Decode all scripts from the current buffer. Same as |:IgnitionDecodeAll|.
+
+require('ignition').encode()                           *ignition.encode()*
+    Encode current virtual buffer back to JSON. Same as |:IgnitionEncode|.
+
+require('ignition').list_scripts()               *ignition.list_scripts()*
+    Show all scripts in floating window. Same as |:IgnitionListScripts|.
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
