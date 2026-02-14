@@ -1,4 +1,5 @@
 # ignition.nvim
+[![Release](https://github.com/TheThoughtagen/ignition-nvim/actions/workflows/release.yml/badge.svg)](https://github.com/TheThoughtagen/ignition-nvim/actions/workflows/release.yml)
 
 A comprehensive Neovim plugin providing development support for **Ignition by Inductive Automation** projects.
 
