@@ -5,9 +5,16 @@ A comprehensive Neovim plugin providing development support for **Ignition by In
 ## Features
 
 - **Automatic Script Decoding/Encoding**: Seamlessly work with Python scripts embedded in JSON configurations
-- **LSP Integration**: Code intelligence with autocompletion, diagnostics, and navigation for Ignition APIs
+- **Comprehensive LSP Integration**: Full code intelligence for Ignition development
+  - **System API completions** — All 14 `system.*` modules (239+ functions)
+  - **Java/Jython completions** — 27 modules covering standard Java libraries and Ignition SDK
+  - **Project script completions** — `project.*` and `shared.*` modules with inheritance support
+  - **Perspective JSON completions** — Component types, props, and event handlers for view.json files
+  - **Hover documentation** — Inline docs for system APIs, Java classes, and project scripts
+  - **Go-to-definition** — Navigate to API definitions and cross-file script references
+  - **Diagnostics** — Integration with ignition-lint for code quality checks
 - **Gateway Backup Management**: Direct integration with Kindling for `.gwbk` file handling
-- **Project Navigation**: Efficient navigation through Ignition project hierarchies
+- **Project Navigation**: Workspace symbols and efficient navigation through Ignition project hierarchies
 - **File Type Detection**: Automatic recognition of Ignition file formats
 
 ## Architecture
@@ -15,6 +22,15 @@ A comprehensive Neovim plugin providing development support for **Ignition by In
 This plugin uses a hybrid approach:
 - **Lua Plugin**: Core functionality, file handlers, commands, and UI integration
 - **Python LSP Server**: Advanced code intelligence and project analysis
+
+## Documentation
+
+- **User Guide**: See `docs/` directory or [online documentation](https://whiskeyhouse.github.io/ignition-nvim)
+- **Vim Help**: `:help ignition-nvim`
+- **Developer Guide**: [CLAUDE.md](CLAUDE.md)
+- **Contributing**: [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Troubleshooting**: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
 ## Installation
 
@@ -200,12 +216,18 @@ This plugin is under active development. See our [Linear project](https://linear
 - [x] Go-to-definition for system.* and project scripts
 - [x] Kindling integration for .gwbk files
 - [x] Comprehensive testing suite (162 Python + 107 Lua tests)
-- [ ] Full documentation and examples
-- [ ] CI workflow (GitHub Actions)
+- [x] Full documentation (Docusaurus, Vim help, guides)
+- [x] CI workflow (GitHub Actions)
 
 ## Contributing
 
-Contributions are welcome! Please see the Linear project for current tasks and priorities.
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Development setup
+- Testing guidelines
+- Code style requirements
+- Pull request process
+
+For current tasks and priorities, check the [GitHub issues](https://github.com/whiskeyhouse/ignition-nvim/issues).
 
 ## License
 

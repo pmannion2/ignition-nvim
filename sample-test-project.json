@@ -1,0 +1,18 @@
+{
+  "name": "TestProject",
+  "enabled": true,
+  "scripts": {
+    "MyScript": {
+      "code": "def main():\n\t# Test the LSP completions\n\tsystem.tag.readBlocking([\"[default]MyTag\"])\n\tsystem.db.runPrepQuery(\"SELECT * FROM table\")\n\tprint(\"Hello from Ignition!\")\n",
+      "description": "Sample script to test decode/encode and LSP features"
+    },
+    "AnotherScript": {
+      "code": "# Simple tag read example\nvalue \u003d system.tag.readBlocking([\"[default]TestTag\"])[0].value\nprint(\"Tag value: \" + str(value))\n"
+    }
+  },
+  "resources": {
+    "config": {
+      "setting": "value"
+    }
+  }
+}
