@@ -7,7 +7,7 @@ sidebar_position: 3
 ignition-nvim includes a comprehensive Language Server Protocol (LSP) server providing intelligent code completion, documentation, and navigation for:
 
 - **Ignition System APIs** — All `system.*` modules (14 modules, 239+ functions)
-- **Java/Jython APIs** — Standard Java libraries and Ignition SDK (27 modules)
+- **Java/Jython APIs** — Standard Java libraries and Ignition SDK (26 packages, 146 classes)
 - **Project Scripts** — `project.*` and `shared.*` module completions with inheritance
 - **Perspective JSON** — Component types, props, and event handlers for view.json files
 
@@ -39,7 +39,7 @@ Each completion includes:
 
 ## Java API Completions
 
-Full support for Java/Jython class imports and methods (27 modules with comprehensive coverage):
+Full support for Java/Jython class imports and methods (26 packages, 146 classes with comprehensive coverage):
 
 ### Standard Java Libraries
 

@@ -22,8 +22,8 @@ ignition-nvim decodes embedded scripts into virtual buffers with full Python edi
 ## Features
 
 - **Script Decode/Encode** — Extract embedded Python from JSON, edit with full syntax highlighting, save back seamlessly
-- **LSP Completions** — `system.tag.read`, `system.db.runQuery`, and 200+ functions with signatures and docs
-- **Hover Documentation** — Inline parameter info and return types for all Ignition API calls
+- **LSP Completions** — `system.tag.read`, `system.db.runQuery`, and 239+ Ignition API functions plus 146 Java classes with signatures and docs
+- **Hover Documentation** — Inline parameter info and return types for all Ignition and Java API calls
 - **Diagnostics** — Catch errors in your scripts before deploying to the gateway
 - **Kindling Integration** — Open `.gwbk` gateway backup files directly from Neovim
 - **File Type Detection** — Automatic recognition of Ignition project files by extension, filename, path, and content

@@ -8,7 +8,7 @@ A comprehensive Neovim plugin providing development support for **Ignition by In
 - **Automatic Script Decoding/Encoding**: Seamlessly work with Python scripts embedded in JSON configurations
 - **Comprehensive LSP Integration**: Full code intelligence for Ignition development
   - **System API completions** — All 14 `system.*` modules (239+ functions)
-  - **Java/Jython completions** — 27 modules covering standard Java libraries and Ignition SDK
+  - **Java/Jython completions** — 26 packages (146 classes) covering standard Java libraries and Ignition SDK
   - **Project script completions** — `project.*` and `shared.*` modules with inheritance support
   - **Perspective JSON completions** — Component types, props, and event handlers for view.json files
   - **Hover documentation** — Inline docs for system APIs, Java classes, and project scripts
@@ -40,14 +40,14 @@ This plugin uses a hybrid approach:
 Minimal (uses defaults from `lazy.lua` — lazy-loads on filetype + commands, auto-installs LSP):
 
 ```lua
-{ 'whiskeyhouse/ignition-nvim' }
+{ 'TheThoughtagen/ignition-nvim' }
 ```
 
 With custom options:
 
 ```lua
 {
-  'whiskeyhouse/ignition-nvim',
+  'TheThoughtagen/ignition-nvim',
   opts = {
     lsp = {
       enabled = true,
