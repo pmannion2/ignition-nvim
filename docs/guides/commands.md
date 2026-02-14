@@ -17,6 +17,14 @@ All commands are available globally once the plugin loads.
 | `:IgnitionEncode` | Encode the current virtual buffer back into the source JSON. Called automatically on `:w`. |
 | `:IgnitionListScripts` | Show all detected scripts in a floating window with previews. |
 
+### Perspective Tools
+
+| Command | Description |
+|---------|-------------|
+| `:IgnitionComponentTree` | Open an interactive tree view of Perspective components in the current view.json file. |
+| `:IgnitionFormat` | Format the current buffer's JSON using Neovim's built-in formatter. |
+| `:IgnitionTabify` | Convert spaces to tabs in JSON files (Ignition Designer uses tabs). |
+
 ### Integration
 
 | Command | Description |
@@ -28,18 +36,43 @@ All commands are available globally once the plugin loads.
 
 These keymaps are set for buffers with the `ignition` filetype.
 
+### Script Management
+
 | Keymap | Command | Description |
 |--------|---------|-------------|
 | `<localleader>id` | `:IgnitionDecode` | Decode scripts |
 | `<localleader>ia` | `:IgnitionDecodeAll` | Decode all scripts |
 | `<localleader>il` | `:IgnitionListScripts` | List scripts |
 | `<localleader>ie` | `:IgnitionEncode` | Encode back to JSON |
+
+### Perspective Tools
+
+| Keymap | Command | Description |
+|--------|---------|-------------|
+| `<localleader>it` | `:IgnitionComponentTree` | Open component tree |
+| `<localleader>if` | `:IgnitionFormat` | Format JSON |
+
+### Integration
+
+| Keymap | Command | Description |
+|--------|---------|-------------|
 | `<localleader>ii` | `:IgnitionInfo` | Plugin info |
 | `<localleader>ik` | `:IgnitionOpenKindling` | Open in Kindling |
 
 :::tip
 The default `<localleader>` is `\` (backslash). So `<localleader>id` means pressing `\` then `i` then `d`.
 :::
+
+### Component Tree Keymaps
+
+When the component tree is open (`:IgnitionComponentTree`), these keymaps are available:
+
+| Keymap | Description |
+|--------|-------------|
+| `<CR>` | Navigate into selected component or toggle fold |
+| `d` | Delete/remove component from view |
+| `q` | Close the component tree |
+| `R` | Refresh the tree from the source file |
 
 ## Virtual Buffer Behavior
 

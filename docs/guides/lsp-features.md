@@ -4,304 +4,248 @@ sidebar_position: 3
 
 # LSP Features
 
-ignition-nvim includes a comprehensive Language Server Protocol (LSP) server providing intelligent code completion, documentation, and navigation for:
+ignition-nvim includes a comprehensive Language Server Protocol (LSP) implementation providing intelligent code completion, documentation, navigation, and validation for Ignition development.
 
-- **Ignition System APIs** — All `system.*` modules (14 modules, 239+ functions)
-- **Java/Jython APIs** — Standard Java libraries and Ignition SDK (26 packages, 146 classes)
-- **Project Scripts** — `project.*` and `shared.*` module completions with inheritance
-- **Perspective JSON** — Component types, props, and event handlers for view.json files
+## Overview
 
-## System API Completions
+The LSP server provides four major feature areas:
 
-Type `system.` in any decoded Python script to get completions for all Ignition API modules:
+### 🎯 [System API Completions](lsp/system-apis)
 
-### Available Modules (14 total)
+Complete IDE support for all Ignition `system.*` modules — 14 modules with 239+ functions.
 
-- `system.tag` — Tag read/write operations, browsing, quality codes
-- `system.db` — Database queries, transactions, named queries
-- `system.perspective` — Perspective session control, component messaging
-- `system.util` — Utility functions (timers, threading, exports, logging)
-- `system.alarm` — Alarm management, querying, acknowledgment
-- `system.dataset` — Dataset creation, manipulation, conversion
-- `system.date` — Date/time manipulation, formatting, parsing
-- `system.file` — File I/O operations, CSV/JSON handling
-- `system.gui` — GUI interactions (client scope only)
-- `system.nav` — Navigation functions (Vision client)
-- `system.net` — HTTP requests, email, webhooks
-- `system.opc` — OPC operations, browsing, read/write
-- `system.security` — Authentication, authorization, user roles
-- `system.user` — User management, sessions, preferences
+- Tag operations (`system.tag.*`)
+- Database queries (`system.db.*`)
+- Perspective messaging (`system.perspective.*`)
+- Date/time utilities (`system.date.*`)
+- And 10 more modules
 
-Each completion includes:
-- Function signature with parameter names and types
-- Brief description
-- Scope information (client, gateway, or both)
+**[Read detailed guide →](lsp/system-apis)**
 
-## Java API Completions
+### ☕ [Java & Jython Support](lsp/java-jython)
 
-Full support for Java/Jython class imports and methods (26 packages, 146 classes with comprehensive coverage):
+Full type-aware completions for Java/Jython development — 26 packages with 146 classes.
 
-### Standard Java Libraries
+- Standard Java libraries (`java.util`, `java.io`, `java.net`)
+- GUI frameworks (`javax.swing`, `java.awt`)
+- Database connectivity (`java.sql`)
+- Ignition SDK (`com.inductiveautomation.*`)
 
-- **java.lang** — String, Integer, Double, Math, System, Thread, etc.
-- **java.util** — ArrayList, HashMap, Date, Collections, UUID, etc.
-- **java.io** — File, FileInputStream, BufferedReader, PrintWriter, etc.
-- **java.math** — BigDecimal, BigInteger for precise calculations
-- **java.nio.file** — Modern file I/O with Path, Files, etc.
+**[Read detailed guide →](lsp/java-jython)**
 
-### Java GUI Frameworks
+### 📦 [Project Script Completions](lsp/project-scripts)
 
-- **java.awt** — Graphics, Color, Dimension, Font, etc.
-- **java.awt.event** — Event listeners and handlers
-- **java.awt.geom** — Geometric shapes and transformations
-- **javax.swing** — GUI components (JFrame, JButton, JTable, etc.)
-- **javax.swing.table** — Table models and renderers
+Intelligent completions for your project's custom scripts.
 
-### Java Networking & Security
+- Cross-file completions for `project.*` and `shared.*`
+- Function and class member completions
+- Go-to-definition across your entire project
+- Workspace symbol search
 
-- **java.net** — URL, URLConnection, HttpURLConnection, InetAddress
-- **java.security** — MessageDigest, SecureRandom, cryptographic operations
-- **javax.crypto** — Cipher, encryption/decryption utilities
-- **javax.net.ssl** — SSL/TLS for secure connections
+**[Read detailed guide →](lsp/project-scripts)**
 
-### Java Data & Time
+### 📐 [Perspective JSON Support](lsp/perspective-json)
 
-- **java.sql** — Database connectivity (Connection, PreparedStatement, ResultSet)
-- **java.time** — Modern date/time API (LocalDateTime, Instant, Duration)
-- **java.time.format** — DateTimeFormatter for parsing/formatting
-- **java.time.temporal** — Temporal adjusters and fields
-- **java.text** — Legacy text formatting (SimpleDateFormat, DecimalFormat)
+Schema-aware completions for Perspective view.json files.
 
-### Java Utilities
+- Component type completions (all `ia.*` components)
+- Property completions per component type
+- Event handler completions
+- Binding type completions
+- Style property completions
 
-- **java.util.concurrent** — Executor, Future, concurrent collections
-- **java.util.logging** — Logger, Level, Handler for logging
-- **java.util.regex** — Pattern, Matcher for regular expressions
+**[Read detailed guide →](lsp/perspective-json)**
 
-### Ignition SDK
+## Core Features
 
-- **com.inductiveautomation.common** — Common Ignition utilities and types
-- **com.inductiveautomation.gateway** — Gateway-scoped SDK functions
+### Completions
 
-### Web & XML
+Context-aware autocompletion triggered by `.` for:
+- **System APIs** - All `system.*` functions with signatures
+- **Java classes** - Methods, fields, and constructors
+- **Project scripts** - Functions and classes from your project
+- **Perspective** - Component types, props, events, bindings
 
-- **javax.servlet.http** — HttpServletRequest, HttpServletResponse
-- **javax.xml.parsers** — DocumentBuilder, SAXParser for XML
+Completions include:
+- Full signatures with parameter names and types
+- Brief descriptions
+- Return type information
+- Deprecation warnings
+- Scope information (client/gateway/designer)
 
-### Usage Example
+### Hover Documentation
 
-```python
-# Import completions
-from java.util import ArrayList, HashMap
-from java.io import File, BufferedReader
-from com.inductiveautomation.common import Dataset
+Press `K` (or your configured hover key) over any symbol to see:
+- Complete function/method signature
+- Detailed description with examples
+- Parameter documentation
+- Return value information
+- Links to official documentation
 
-# Class member completions
-files = ArrayList()  # Type '.' after files to see add(), remove(), etc.
-map = HashMap()      # Type '.' to see put(), get(), keySet(), etc.
+Works for:
+- `system.*` API functions
+- Java class methods and fields
+- Project script functions and classes
+- Perspective component properties
+
+### Go-to-Definition
+
+Jump to definition with `gd` (or your configured key):
+- **System APIs** - Jump to API definition in the database
+- **Java classes** - Navigate to class/method definitions
+- **Project scripts** - Jump to function/class implementation across files
+- **Cross-file references** - Follow imports and references
+
+### Diagnostics
+
+Real-time error and warning detection:
+- **Syntax errors** - Python syntax validation via [ignition-lint](https://github.com/ia-eknorr/ignition-lint)
+- **Type errors** - Basic type checking for Jython
+- **Import errors** - Detect missing or invalid imports
+- **Perspective schema** - Validate view.json against component schemas
+
+Diagnostics appear inline in the editor with:
+- Error messages and locations
+- Suggested fixes (when available)
+- Severity levels (error, warning, info)
+
+### Workspace Symbols
+
+Search for symbols across your entire project:
+```
+:LspWorkspaceSymbols validate
 ```
 
-## Project Script Completions
+Results include:
+- Functions and classes from project scripts
+- System API functions
+- Java class methods
+- Locations in file paths
 
-Access project-level and shared script modules with full inheritance support:
+## LSP Configuration
 
-### Project Modules
+### Auto-Start
 
-Type `project.` to access scripts defined in your Ignition project:
-
-```python
-# Project script completions
-project.utils.formatValue(value)
-project.database.getConnection()
-project.tags.readSafely(tagPath)
-```
-
-### Shared Modules
-
-Type `shared.` to access shared scripts:
-
-```python
-# Shared script completions
-shared.common.logger
-shared.calculations.computeTotals(data)
-```
-
-### Inherited Projects
-
-The LSP server supports inherited projects. Scripts from parent projects are automatically indexed and available for completion, even if they're defined in a parent project hierarchy.
-
-## Perspective JSON Completions
-
-When editing Perspective `view.json` files, the LSP provides context-aware completions for:
-
-### Component Types
-
-Start typing a component type to get completions:
-
-```json
-{
-  "type": "ia.container.flex",  // Completions for all ia.* components
-  "props": { ... }
-}
-```
-
-**Available component families:**
-- `ia.container.*` — Flex, Coord, Column, Row, Tab, Carousel, Split
-- `ia.display.*` — Label, Icon, Image, Markdown, Progress Bar, LED Display, Gauge, Table, etc.
-- `ia.input.*` — Button, Toggle Switch, Checkbox, Radio Group, Dropdown, Text Field, etc.
-- `ia.chart.*` — Time Series Chart, XY Chart, Pie Chart, Power Chart
-- `ia.navigation.*` — Breadcrumb, Dropdown, Tree, Vertical Menu
-- And many more...
-
-### Structural Keys
-
-Completions for view structure:
-
-```json
-{
-  "root": { ... },          // Root component definition
-  "custom": { ... },        // Custom properties
-  "meta": { ... },          // View metadata
-  "propConfig": { ... },    // Prop configuration
-  "position": { ... },      // Component positioning
-  "events": { ... }         // Event handler scripts
-}
-```
-
-### Component Props
-
-After specifying a component type, get completions for props specific to that component:
-
-```json
-{
-  "type": "ia.input.button",
-  "props": {
-    "text": "",           // Text to display
-    "style": { ... },     // Style configuration
-    "enabled": true,      // Enable/disable
-    "variant": "primary"  // primary, secondary, etc.
-  }
-}
-```
-
-### Event Handlers
-
-Completions for common event handlers:
-
-```json
-{
-  "events": {
-    "onActionPerformed": { ... },  // Button click, etc.
-    "onValueChange": { ... },      // Input value changed
-    "onStartup": { ... },          // Component mounted
-    "onShutdown": { ... }          // Component unmounted
-  }
-}
-```
-
-## Hover Documentation
-
-Press `K` (or your configured hover keymap) over any `system.*` function call to see:
-
-- **Full function signature** with parameter names and types
-- **Parameter descriptions** — what each argument does
-- **Return type** — what the function returns
-- **Usage notes** — scope restrictions, version requirements, common patterns
-
-## Diagnostics
-
-The LSP server reports issues in your scripts:
-
-- Unknown `system.*` function calls
-- Incorrect argument counts
-- Scope violations (e.g., using a client-scoped function in a gateway script)
-
-Diagnostics appear as inline warnings and in the quickfix list.
-
-## Go-to-Definition
-
-Jump to definitions with `gd` or `:lua vim.lsp.buf.definition()`:
-
-**For `system.*` functions:**
-Opens the API database entry showing the full function definition, parameters, and documentation.
-
-**For project scripts:**
-Jumps to the script definition in your workspace. Works across files using the project indexer.
-
-## Workspace Symbols
-
-Search all scripts in your project with `:LspWorkspaceSymbol <query>`:
-
-- Find functions across multiple files
-- Navigate project structure quickly
-- Powered by the project indexer
-
-The LSP server scans your Ignition project directory and indexes all Python scripts, making them searchable and navigable.
-
-## API Databases
-
-The LSP server's knowledge comes from curated JSON databases:
-
-### Ignition System API Database
-
-Located at `lsp/ignition_lsp/api_db/`, with one file per module:
-
-- `system_tag.json`, `system_db.json`, `system_perspective.json`, etc.
-- Each follows `schema.json` structure
-- Includes function signatures, parameters, return types, scope information
-
-### Java API Database
-
-Located at `lsp/ignition_lsp/java_db/`, with 27 modules:
-
-- Standard Java libraries (java.*, javax.*)
-- Ignition SDK modules (com.inductiveautomation.*)
-- Follows `java_schema.json` structure
-- Includes class definitions, methods, constructors, fields
-
-### Adding New APIs
-
-To extend the LSP with additional APIs:
-
-1. Add a new JSON file to the appropriate database directory
-2. Follow the existing schema structure
-3. Include comprehensive documentation
-4. Add corresponding tests in `lsp/tests/`
-
-See [CONTRIBUTING.md](../../CONTRIBUTING.md) for detailed instructions.
-
-## Configuration
-
-LSP behavior is controlled through the `lsp` section of your plugin config:
+The LSP starts automatically when you open any Python file in an Ignition project. To disable:
 
 ```lua
 require('ignition').setup({
   lsp = {
-    enabled = true,       -- Enable/disable the LSP server
-    auto_start = true,    -- Auto-attach to Ignition buffers
-    cmd = nil,            -- Custom command (auto-detected by default)
+    auto_start = false,  -- Manual start only
+  }
+})
+```
+
+### Manual Control
+
+Start/stop the LSP manually:
+```
+:LspStart ignition-lsp
+:LspStop
+:LspRestart
+```
+
+### Check Status
+
+View LSP status and configuration:
+```
+:IgnitionInfo
+:LspInfo
+```
+
+### Server Settings
+
+Configure Ignition version and other settings:
+
+```lua
+require('ignition').setup({
+  lsp = {
     settings = {
       ignition = {
-        version = "8.1",  -- Target Ignition version
-        sdk_path = nil,   -- Path to Ignition SDK (optional)
+        version = "8.1",  -- Your Ignition version
       },
     },
   },
 })
 ```
 
-## Server Detection
+## Performance
 
-The plugin auto-detects the LSP server in this order:
+The LSP is optimized for large Ignition projects:
 
-1. **Plugin venv** — `lsp/venv/bin/ignition-lsp` (used during development)
-2. **System install** — `ignition-lsp` on your `$PATH`
-3. **System Python** — `python -m ignition_lsp` as a fallback
+- **Lazy loading** - API definitions loaded on-demand
+- **Incremental updates** - Only rescans modified files
+- **Symbol caching** - In-memory cache for fast lookups
+- **Async operations** - Non-blocking background work
+- **Efficient indexing** - Optimized project scanning
 
-You can override detection by setting `lsp.cmd` explicitly:
+## Troubleshooting
 
-```lua
-lsp = {
-  cmd = { '/path/to/ignition-lsp' },
-}
+### LSP Not Starting
+
+1. Check if the LSP is installed:
+   ```bash
+   which ignition-lsp
+   # or
+   python -m ignition_lsp --version
+   ```
+
+2. Check for errors:
+   ```
+   :LspLog
+   ```
+
+3. Restart the LSP:
+   ```
+   :LspRestart
+   ```
+
+### No Completions
+
+1. Verify the LSP is running:
+   ```
+   :LspInfo  # Should show ignition-lsp as active
+   ```
+
+2. Check file type:
+   ```
+   :set filetype?  # Should be 'python' or 'json'
+   ```
+
+3. Trigger manually:
+   - Press `Ctrl-X Ctrl-O` for omnifunc completion
+   - Or use your completion plugin's manual trigger
+
+### Slow Completions
+
+Large projects may take time to index. Check progress:
 ```
+:IgnitionInfo  # See "Project index: X scripts"
+```
+
+To improve performance:
+- Exclude large non-Ignition directories from workspace
+- Reduce project size by splitting into multiple repos
+
+### Outdated Completions
+
+Force a full rescan:
+```
+:LspRestart
+```
+
+Or rebuild the project index by saving any project script file.
+
+## Related Guides
+
+- **[Commands & Keymaps](commands)** - All available commands
+- **[Script Editing](script-editing)** - Decode/encode workflow
+- **[Configuration](../configuration/options)** - Full configuration options
+
+## Further Reading
+
+For detailed examples and use cases, see the specific feature guides:
+- [System API Completions](lsp/system-apis)
+- [Java & Jython Support](lsp/java-jython)
+- [Project Script Completions](lsp/project-scripts)
+- [Perspective JSON Support](lsp/perspective-json)
