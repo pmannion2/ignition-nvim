@@ -37,6 +37,12 @@ function M.setup(config)
   vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'ignition', 'python' },
     callback = function(args)
+      -- Check if already attached to avoid duplicate clients
+      local clients = vim.lsp.get_clients({ bufnr = args.buf, name = 'ignition_lsp' })
+      if #clients > 0 then
+        return
+      end
+
       -- Get the registered config
       local config = vim.lsp.config.ignition_lsp
       if config then
