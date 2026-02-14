@@ -18,7 +18,11 @@ The LSP server is built on [pygls](https://github.com/openlawlibrary/pygls) (Pyt
 
 ### Kindling
 
-Gateway backup (`.gwbk`) support is powered by [Kindling](https://github.com/ia-eknorr/kindling) by Eric Knorr.
+Gateway backup (`.gwbk`) support is powered by [Kindling](https://github.com/ia-eknorr/kindling) by [Eric Knorr](https://github.com/ia-eknorr).
+
+### ignition-lint
+
+Code quality diagnostics are provided by integrating [ignition-lint](https://github.com/ia-eknorr/ignition-lint) by [Eric Knorr](https://github.com/ia-eknorr) — a Jython linter and static analyzer specifically designed for Ignition projects.
 
 ### Inductive Automation
 

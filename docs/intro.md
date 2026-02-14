@@ -5,19 +5,27 @@ slug: /
 
 # Introduction
 
-**ignition-nvim** is a Neovim plugin for developers working with [Ignition by Inductive Automation](https://inductiveautomation.com/). It brings first-class editing support for Ignition projects directly into your terminal workflow.
+**ignition-nvim** is a Neovim plugin for developers working with [Ignition by Inductive Automation](https://inductiveautomation.com/). It brings first-class IDE support for Ignition development directly into your terminal workflow.
 
 ## The Problem
 
-Ignition stores Python scripts inside JSON configuration files using a custom encoding format. Editing these scripts means either:
+Developing Ignition projects outside the Designer is painful:
 
-- Using the Ignition Designer's built-in editor (no Vim motions, no LSP, no plugins)
-- Manually decoding/encoding scripts by hand (error-prone and tedious)
-- Using VS Code with Ignition Flint (works, but it's not Neovim)
+- **No IDE support** — Generic Python editors don't understand Ignition's `system.*` APIs, Java/Jython interop, or project structure
+- **No type awareness** — Jython's dynamic typing combined with Java imports means zero autocomplete in most editors
+- **No schema validation** — Tag JSON and Perspective component definitions have strict schemas that generic editors can't validate
+- **Embedded scripts** — Python code is stored inside JSON files using Ignition's custom encoding format, making editing tedious
+- **Limited tooling** — The Designer's built-in editor lacks modern IDE features (LSP, plugins, advanced motions)
 
 ## The Solution
 
-ignition-nvim decodes embedded scripts into virtual buffers with full Python editing support, then encodes them back when you save. Combined with a purpose-built LSP server that understands Ignition's `system.*` API, you get completions, hover docs, and diagnostics — all without leaving Neovim.
+ignition-nvim brings modern IDE capabilities to Ignition development:
+
+- **Full LSP integration** — Context-aware completions for all `system.*` APIs (239+ functions), Java/Jython classes (146 classes), and project scripts
+- **Schema validation** — Built-in validation for Tag JSON and Perspective component definitions with inline error reporting
+- **Intelligent decode/encode** — Seamlessly edit embedded Python scripts with full syntax highlighting and LSP support, auto-encoded on save
+- **Type-aware completions** — Understands Jython's Java interop, providing accurate completions for `java.util.*`, `javax.swing.*`, and Ignition SDK classes
+- **Project navigation** — Workspace symbols, go-to-definition, and cross-file script references
 
 ## Features
 
