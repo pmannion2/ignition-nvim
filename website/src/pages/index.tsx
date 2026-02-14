@@ -86,7 +86,7 @@ export default function Home(): React.JSX.Element {
           <code>
             <span className="comment">-- lazy.nvim</span>
             {'\n'}
-            <span className="prompt">{'{'}</span> <span className="string">'whiskeyhouse/ignition-nvim'</span> <span className="prompt">{'}'}</span>
+            <span className="prompt">{'{'}</span> <span className="string">'TheThoughtagen/ignition-nvim'</span> <span className="prompt">{'}'}</span>
             {'\n\n'}
             <span className="comment">-- open an ignition file and decode</span>
             {'\n'}
@@ -103,7 +103,7 @@ export default function Home(): React.JSX.Element {
           </Link>
           <Link
             className="secondary"
-            href="https://github.com/pmannion2/ignition-nvim"
+            href="https://github.com/TheThoughtagen/ignition-nvim"
           >
             View on GitHub
           </Link>
