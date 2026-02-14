@@ -1,10 +1,13 @@
 -- lazy.nvim plugin spec for ignition.nvim
--- Users can install with just: { 'pmannion2/ignition-nvim' }
+-- Users can install with just: { 'TheThoughtagen/ignition-nvim' }
 -- and get sensible defaults. All options are overridable in the user spec.
 
 ---@type LazyPluginSpec
 return {
-  'pmannion2/ignition-nvim',
+  'TheThoughtagen/ignition-nvim',
+
+  -- Track releases via git tags (v0.3.1, v0.3.2, etc.)
+  version = '*', -- Use latest stable release tag
 
   -- Lazy-load on Ignition file types and commands
   ft = { 'ignition', 'python' },
@@ -21,7 +24,8 @@ return {
   },
 
   -- Install the Python LSP server after cloning
-  build = 'cd lsp && python3 -m venv venv && venv/bin/pip install ignition-lsp',
+  -- Always upgrade to latest version from PyPI
+  build = 'cd lsp && python3 -m venv venv && venv/bin/pip install --upgrade ignition-lsp',
 
   opts = {},
 
