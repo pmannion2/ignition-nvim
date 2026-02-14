@@ -201,7 +201,7 @@ This plugin is under active development. See our [Linear project](https://linear
 - [x] Kindling integration for .gwbk files
 - [x] Comprehensive testing suite (162 Python + 107 Lua tests)
 - [ ] Full documentation and examples
-- [ ] CI workflow (GitHub Actions)
+- [x] CI workflow (GitHub Actions)
 
 ## Contributing
 
