@@ -11,16 +11,19 @@ sidebar_position: 1
 The simplest install — lazy.nvim auto-discovers the plugin spec from `lazy.lua`:
 
 ```lua
-{ 'whiskeyhouse/ignition-nvim' }
+{ 'TheThoughtagen/ignition-nvim' }
 ```
 
-This gives you sensible defaults: lazy-loading on the `ignition` filetype and all commands, plus automatic LSP server installation via `pip install -e .` in the `lsp/` directory.
+This gives you sensible defaults:
+- Lazy-loading on the `ignition` filetype and all commands
+- Automatic LSP server installation from PyPI (latest version)
+- Version tracking via git tags (automatically updates when new releases are published)
 
 To customize options:
 
 ```lua
 {
-  'whiskeyhouse/ignition-nvim',
+  'TheThoughtagen/ignition-nvim',
   opts = {
     lsp = {
       enabled = true,
@@ -46,7 +49,7 @@ To customize options:
 
 ```lua
 use {
-  'whiskeyhouse/ignition-nvim',
+  'TheThoughtagen/ignition-nvim',
   config = function()
     require('ignition').setup()
   end,
@@ -60,7 +63,7 @@ After installing, you'll need to manually install the LSP server (see below).
 Clone the repository into your Neovim packages directory:
 
 ```bash
-git clone https://github.com/WhiskeyHouse/ignition-nvim.git \
+git clone https://github.com/TheThoughtagen/ignition-nvim.git \
   ~/.local/share/nvim/site/pack/plugins/start/ignition-nvim
 ```
 
@@ -72,20 +75,21 @@ require('ignition').setup()
 
 ## LSP Server Installation
 
-The Python LSP server provides completions, hover docs, and diagnostics for Ignition's `system.*` API.
+The Python LSP server provides completions, hover docs, and diagnostics for Ignition's `system.*` and Java APIs.
 
 ### Automatic (lazy.nvim)
 
-If you're using lazy.nvim with the default spec, the LSP server installs automatically via the `build` step. No extra action needed.
+If you're using lazy.nvim with the default spec, the LSP server installs automatically from PyPI via the `build` step. The latest version is automatically downloaded and kept up to date. No extra action needed.
 
 ### Manual
 
+Install the latest version from PyPI:
+
 ```bash
-cd ~/.local/share/nvim/lazy/ignition-nvim/lsp
-pip install -e .
+pip install --upgrade ignition-lsp
 ```
 
-Or install from any checkout of the repository:
+Or for development, install in editable mode from a local checkout:
 
 ```bash
 cd /path/to/ignition-nvim/lsp
