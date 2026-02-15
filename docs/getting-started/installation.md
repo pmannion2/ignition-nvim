@@ -110,4 +110,4 @@ The plugin auto-detects the LSP server location in this order:
 
 ### Optional
 
-- [Kindling](https://github.com/ia-eknorr/kindling) — for `.gwbk` gateway backup file support
+- [Kindling](https://github.com/paul-griffith/kindling) — for `.gwbk` gateway backup file support

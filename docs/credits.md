@@ -18,7 +18,7 @@ The LSP server is built on [pygls](https://github.com/openlawlibrary/pygls) (Pyt
 
 ### Kindling
 
-Gateway backup (`.gwbk`) support is powered by [Kindling](https://github.com/ia-eknorr/kindling) by [Eric Knorr](https://github.com/ia-eknorr).
+Gateway backup (`.gwbk`) support is powered by [Kindling](https://github.com/paul-griffith/kindling) by [Paul Griffith](https://github.com/paul-griffith) — a standalone collection of utilities to help work with Ignition's custom data export formats.
 
 ### ignition-lint
 

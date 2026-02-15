@@ -4,7 +4,7 @@ local M = {}
 local kindling_path = nil
 
 -- Known installation URLs for install instructions
-local KINDLING_REPO = 'https://github.com/keith-gamble/kindling'
+local KINDLING_REPO = 'https://github.com/paul-griffith/kindling'
 
 -- Detect Kindling installation
 function M.detect_installation()

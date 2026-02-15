@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Kindling Integration
 
-[Kindling](https://github.com/ia-eknorr/kindling) is a utility for working with Ignition gateway backup (`.gwbk`) files. ignition-nvim integrates with Kindling to let you open and manage backups directly from Neovim.
+[Kindling](https://github.com/paul-griffith/kindling) is a utility for working with Ignition gateway backup (`.gwbk`) files. ignition-nvim integrates with Kindling to let you open and manage backups directly from Neovim.
 
 ## What is a .gwbk File?
 

@@ -198,7 +198,7 @@ Default configuration:
 - Neovim >= 0.8.0
 - Python >= 3.8 (for LSP server)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) (optional, for LSP features)
-- [Kindling](https://github.com/ia-eknorr/kindling) (optional, for `.gwbk` support)
+- [Kindling](https://github.com/paul-griffith/kindling) (optional, for `.gwbk` support)
 
 ## Development Status
 
